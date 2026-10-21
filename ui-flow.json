@@ -675,6 +675,83 @@
           "title": "Cancel restores the saved arrangement and dimensions"
         }
       ]
+    },
+    {
+      "id": "editor-neutral-borders",
+      "title": "Customize hover and neutral editing boundaries",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "wide-overview",
+          "title": "1440px LIVE Console"
+        },
+        {
+          "action": "hover",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "customize-hover",
+          "title": "Customize layout hover"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "balanced-neutral",
+          "title": "Balanced editor with 60px Products heading and neutral boundaries"
+        },
+        {
+          "action": "hover",
+          "target": {
+            "role": "separator",
+            "name": "Resize products and live columns"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "neutral-resize-hover",
+          "title": "Neutral resize affordance"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Layout mode: Balanced"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Chat focus"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "focus-neutral",
+          "title": "Chat focus editor with 60px Products heading and neutral boundaries"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        }
+      ]
     }
   ]
 }
