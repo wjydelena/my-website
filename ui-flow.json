@@ -678,7 +678,7 @@
     },
     {
       "id": "editor-neutral-borders",
-      "title": "Customize hover, neutral static boundaries and original resize feedback",
+      "title": "Customize hover, neutral static boundaries and 3px edit resize feedback",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -723,7 +723,7 @@
         {
           "action": "capture",
           "id": "neutral-resize-hover",
-          "title": "Original teal resize feedback without static green module borders"
+          "title": "3px #089B93 resize feedback in editing mode"
         },
         {
           "action": "click",

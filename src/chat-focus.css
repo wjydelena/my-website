@@ -8,7 +8,6 @@
 .chat-focus .event-feed { grid-column: 1; grid-row: 5; }
 .chat-focus .chat { grid-column: 3; grid-row: 1 / -1; min-width: 0; }
 .chat-focus::before { content: ''; position: absolute; z-index: 2; top: 0; bottom: 0; left: calc(var(--live-edge) - 1px); width: 1px; background: #ffffff16; pointer-events: none; }
-.chat-focus .video-label-text { display: none; }
 .chat-focus .chat-title { height: 54px; }
 .chat-focus .previous-message { display: none; }
 .chat-focus .chat-scroll { padding-top: 8px; }

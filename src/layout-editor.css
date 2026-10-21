@@ -26,3 +26,6 @@
 .layout-editing .analytics-title > span, .layout-editing .chat-title > svg, .layout-editing .video-control-bar { opacity: .3; pointer-events: none; }
 .layout-editing .video-control-bar > svg:first-child { visibility: hidden; }
 .layout-editing .pin-button.muted { background: var(--color-teal); color: white; }
+.layout-editing .resize-handle:hover::after,
+.layout-editing .resize-handle:focus-visible::after,
+.layout-editing .resize-handle.is-dragging::after { background: #089B93; }
