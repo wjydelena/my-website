@@ -234,6 +234,322 @@
           "title": "Column size limits at 1120px"
         }
       ]
+    },
+    {
+      "id": "customize-layout",
+      "title": "Choose, cancel and apply layout presets",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "overview",
+          "title": "Static three-column LIVE Console"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "edit-balanced",
+          "title": "Layout editing with Balanced selected"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Layout mode: Balanced"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "layout-dropdown",
+          "title": "Layout mode options, Balanced selected"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Chat focus"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "draft-chat-focus",
+          "title": "Chat focus draft"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "cancelled-layout",
+          "title": "Original layout restored on Cancel"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Layout mode: Balanced"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Chat focus"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Apply"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "chat-focus-applied",
+          "title": "Chat focus applied"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Layout mode: Chat focus"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "chat-focus-selected",
+          "title": "Applied preset remains selected"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Balanced"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Apply"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "balanced-applied",
+          "title": "Balanced layout applied"
+        }
+      ]
+    },
+    {
+      "id": "custom-layout",
+      "title": "Custom sizing and transaction behavior",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "overview",
+          "title": "Static three-column LIVE Console"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Layout mode: Balanced"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Custom Layout"
+          }
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "separator",
+            "name": "Resize products and live columns"
+          },
+          "key": "Shift+ArrowRight"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "separator",
+            "name": "Resize live preview and chat"
+          },
+          "key": "Shift+ArrowUp"
+        },
+        {
+          "action": "capture",
+          "id": "custom-draft",
+          "title": "Custom Layout with manual sizing"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "custom-cancelled",
+          "title": "Manual sizing cancelled"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "separator",
+            "name": "Resize live preview and chat"
+          },
+          "key": "Shift+ArrowUp"
+        },
+        {
+          "action": "capture",
+          "id": "auto-custom-mode",
+          "title": "Manual resize switches mode to Custom Layout"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Apply"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Layout mode: Custom Layout"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "custom-applied",
+          "title": "Applied custom size and selected mode"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Custom Layout"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        }
+      ]
+    },
+    {
+      "id": "customize-narrow",
+      "title": "Layout editor at 1120px minimum width",
+      "viewport": {
+        "width": 1120,
+        "height": 800
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "page-1120",
+          "title": "1120px layout with original column minimums"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Layout mode: Balanced"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "editor-1120",
+          "title": "Layout mode dropdown at 1120px"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Chat focus"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Apply"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "chat-focus-1120",
+          "title": "Chat focus at minimum width"
+        }
+      ]
     }
   ]
 }
