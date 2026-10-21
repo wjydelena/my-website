@@ -1,0 +1,28 @@
+.resizable-columns { position: relative; }
+.resize-handle { position: absolute; z-index: 20; touch-action: none; outline: none; }
+.resize-handle.vertical { top: 0; bottom: 0; width: 8px; transform: translateX(-4px); cursor: col-resize; }
+.resize-products { left: var(--products-edge); }
+.resize-live { left: var(--live-edge); }
+.resize-handle.horizontal { left: 0; right: 0; bottom: -4px; height: 8px; cursor: row-resize; }
+.resize-handle.resize-feed { top: -4px; bottom: auto; }
+.resize-handle:hover, .resize-handle:focus-visible, .resize-handle.is-dragging { background: #13b5ac55; }
+.resize-handle:focus-visible::after, .resize-handle.is-dragging::after { content: ''; position: absolute; background: #13b5ac; }
+.resize-handle.vertical::after { width: 1px; top: 0; bottom: 0; left: 4px; }
+.resize-handle.horizontal::after { height: 1px; left: 0; right: 0; top: 4px; }
+.console-shell:has(.is-dragging) { user-select: none; }
+.console-shell:has(.vertical.is-dragging) * { cursor: col-resize !important; }
+.console-shell:has(.horizontal.is-dragging) * { cursor: row-resize !important; }
+.resizable-columns .video-preview { height: var(--video-height); }
+.resizable-columns .analytics { position: relative; height: var(--analytics-height); }
+.resizable-columns .event-feed { position: relative; height: var(--feed-height); overflow: visible; }
+.feed-scroll { height: 100%; overflow-y: auto; }
+.resizable-columns .chat-scroll, .resizable-columns .activity-list, .resizable-columns .products { overflow-y: auto; }
+.resizable-columns .name-line { overflow: hidden; }
+.resizable-columns .name-line > span:first-child { overflow: hidden; text-overflow: ellipsis; flex-shrink: 1; min-width: 0; }
+.resizable-columns .chat-tag, .resizable-columns .customer-tag { flex-shrink: 0; }
+.resizable-columns .promotion-bar { position: relative; }
+.resizable-columns .promo-more { position: absolute; right: 16px; height: 36px; display: flex; align-items: center; }
+.resizable-columns .product-actions { gap: 6px; }
+.resizable-columns .product-bottom { flex-wrap: wrap; }
+.resizable-columns .product-description { position: relative; }
+.resizable-columns .product-title { flex-shrink: 0; }

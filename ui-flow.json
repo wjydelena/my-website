@@ -1,1 +1,171 @@
-{"flows":[{"id":"visual-review","title":"Static LIVE Console reference","viewport":{"width":1280,"height":900},"steps":[{"action":"capture","id":"overview","title":"Static three-column LIVE Console"}]}]}
+{
+  "flows": [
+    {
+      "id": "visual-review",
+      "title": "Static LIVE Console reference",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "overview",
+          "title": "Static three-column LIVE Console"
+        }
+      ]
+    },
+    {
+      "id": "resize-layout",
+      "title": "Resize columns and stacked panels",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "overview",
+          "title": "Static three-column LIVE Console"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "separator",
+            "name": "Resize products and live columns"
+          },
+          "key": "Shift+ArrowRight"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "separator",
+            "name": "Resize live and analytics columns"
+          },
+          "key": "Shift+ArrowRight"
+        },
+        {
+          "action": "capture",
+          "id": "column-widths",
+          "title": "Adjusted column widths"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "separator",
+            "name": "Resize live preview and chat"
+          },
+          "key": "Shift+ArrowDown"
+        },
+        {
+          "action": "capture",
+          "id": "preview-height",
+          "title": "Adjusted live preview height"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "separator",
+            "name": "Resize analytics and activity"
+          },
+          "key": "Shift+ArrowDown"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "separator",
+            "name": "Resize activity and event feed"
+          },
+          "key": "Shift+ArrowUp"
+        },
+        {
+          "action": "capture",
+          "id": "right-stack",
+          "title": "Adjusted analytics and activity heights"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "separator",
+            "name": "Resize products and live columns"
+          },
+          "key": "Home"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "separator",
+            "name": "Resize live and analytics columns"
+          },
+          "key": "End"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "separator",
+            "name": "Resize live preview and chat"
+          },
+          "key": "End"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "separator",
+            "name": "Resize analytics and activity"
+          },
+          "key": "Home"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "separator",
+            "name": "Resize activity and event feed"
+          },
+          "key": "End"
+        },
+        {
+          "action": "capture",
+          "id": "minimum-panels",
+          "title": "Constrained layout at size limits"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "separator",
+            "name": "Resize products and live columns"
+          },
+          "key": "Enter"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "separator",
+            "name": "Resize live preview and chat"
+          },
+          "key": "Enter"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "separator",
+            "name": "Resize activity and event feed"
+          },
+          "key": "Enter"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "separator",
+            "name": "Resize analytics and activity"
+          },
+          "key": "Enter"
+        },
+        {
+          "action": "capture",
+          "id": "layout-restored",
+          "title": "Default layout restored"
+        }
+      ]
+    }
+  ]
+}
