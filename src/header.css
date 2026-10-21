@@ -1,0 +1,30 @@
+/* Annotation 12–15: preserve existing text styling and static behavior. */
+.topbar .assistant {
+  display: flex;
+  box-sizing: border-box;
+  height: 28px;
+  padding: 2px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border-radius: 99px;
+  border: 1px solid #0BE09B;
+  background: linear-gradient(266deg, var(--UI-Shape-Secondary, rgba(32, 213, 236, 0.10)) 4.49%, rgba(16, 187, 219, 0.10) 48.52%, var(--UI-Shape-Success, rgba(11, 224, 155, 0.10)) 94.92%);
+}
+.assistant-icon {
+  display: block;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  object-fit: contain;
+}
+.topbar .assistant strong {
+  line-height: 20px;
+}
+.topbar .customize {
+  box-sizing: border-box;
+  height: 28px;
+  justify-content: center;
+  align-items: center;
+  line-height: 20px;
+}
