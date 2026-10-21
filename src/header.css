@@ -8,7 +8,7 @@
   align-items: center;
   gap: 4px;
   border-radius: 99px;
-  border: 1px solid #0BE09B;
+  border: 1px solid rgba(11, 224, 155, 0.7);
   background: linear-gradient(266deg, var(--UI-Shape-Secondary, rgba(32, 213, 236, 0.10)) 4.49%, rgba(16, 187, 219, 0.10) 48.52%, var(--UI-Shape-Success, rgba(11, 224, 155, 0.10)) 94.92%);
 }
 .assistant-icon {
