@@ -28,3 +28,5 @@
 .layout-editing .search-row, .layout-editing .product-actions, .layout-editing .product-footer > *, .layout-editing .comment-box { opacity: .3; pointer-events: none; }
 .layout-editing .analytics-title > span, .layout-editing .chat-title > svg, .layout-editing .video-control-bar { opacity: .3; pointer-events: none; }
 .layout-editing .video-control-bar > svg:first-child { visibility: hidden; }
+.layout-editing .pin-button.muted { background: var(--color-teal); color: white; }
+.layout-editing .video-preview::after { content: ''; position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; height: 1px; background: #315552; pointer-events: none; }
