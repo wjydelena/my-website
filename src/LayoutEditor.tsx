@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Check, ChevronDown, GripVertical } from 'lucide-react';
+import { ChevronDown, GripVertical } from 'lucide-react';
 import { LayoutMode, useConsoleLayout } from './ResizableLayout';
 import './layout-editor.css';
 
@@ -63,7 +63,7 @@ export function EditingHeader() {
         {modes.map((value, index) => <button key={value} type="button" role="option" aria-selected={mode === value}
           ref={node => { options.current[index] = node; }} tabIndex={focused === index ? 0 : -1}
           className={mode === value ? 'is-selected' : ''} onClick={() => choose(value)}>
-          <span>{value}</span>{mode === value && <Check size={16} aria-hidden="true"/>}
+          <span>{value}</span>
         </button>)}
       </div>}
     </div>

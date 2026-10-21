@@ -7,6 +7,7 @@ const MIN_PRODUCTS_WIDTH = 400;
 const MIN_LIVE_WIDTH = 324;
 const MIN_ANALYTICS_WIDTH = 324;
 export type LayoutMode = 'Balanced' | 'Chat focus' | 'Custom Layout';
+type Arrangement = 'balanced' | 'chat-focus';
 type Heights = { video: number; analytics: number; feed: number };
 type LayoutState = {
   values: Record<Kind, number>;
@@ -15,6 +16,7 @@ type LayoutState = {
   reset: (kind: Kind) => void;
   editing: boolean;
   mode: LayoutMode;
+  arrangement: Arrangement;
   beginEdit: () => void;
   applyEdit: () => void;
   cancelEdit: () => void;
@@ -34,9 +36,11 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
   const [heights, setHeights] = useState({ video: 340, analytics: 194, feed: 272 });
   const [editing, setEditing] = useState(false);
   const [mode, setMode] = useState<LayoutMode>('Balanced');
-  const saved = useRef<{ ratios: number[]; heights: Heights; mode: LayoutMode } | null>(null);
+  const [arrangement, setArrangement] = useState<Arrangement>('balanced');
+  const focusedChat = arrangement === 'chat-focus';
+  const saved = useRef<{ ratios: number[]; heights: Heights; mode: LayoutMode; arrangement: Arrangement } | null>(null);
   const beginEdit = () => {
-    saved.current = { ratios: [...ratios], heights: { ...heights }, mode };
+    saved.current = { ratios: [...ratios], heights: { ...heights }, mode, arrangement };
     setEditing(true);
   };
   const applyEdit = () => { saved.current = null; setEditing(false); };
@@ -45,6 +49,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
       setRatios(saved.current.ratios);
       setHeights(saved.current.heights);
       setMode(saved.current.mode);
+      setArrangement(saved.current.arrangement);
     }
     saved.current = null;
     setEditing(false);
@@ -52,11 +57,13 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
   const chooseMode = (next: LayoutMode) => {
     setMode(next);
     if (next === 'Balanced') {
+      setArrangement('balanced');
       setRatios([.38, .31, .31]);
       setHeights({ video: 340, analytics: 194, feed: 272 });
     } else if (next === 'Chat focus') {
-      setRatios([.34, .39, .27]);
-      setHeights({ video: 240, analytics: 194, feed: 272 });
+      setArrangement('chat-focus');
+      setRatios([.38, .31, .31]);
+      setHeights({ video: 240, analytics: 198, feed: 206 });
     }
   };
   useLayoutEffect(() => {
@@ -71,40 +78,47 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
   const products = clamp(ratios[0] * box.width, MIN_PRODUCTS_WIDTH, box.width - MIN_LIVE_WIDTH - MIN_ANALYTICS_WIDTH);
   const live = clamp(ratios[1] * box.width, MIN_LIVE_WIDTH, box.width - products - MIN_ANALYTICS_WIDTH);
   const widths = [products, live, box.width - products - live];
-  const video = clamp(heights.video, 200, box.height - 200);
-  const analytics = clamp(heights.analytics, 194, box.height - 310);
-  const feed = clamp(heights.feed, 160, box.height - analytics - 150);
+  // In Chat focus the video shares a stack with analytics and activity.
+  // Reserve 110px for the activity heading and a readable first row.
+  const video = clamp(heights.video, 200, focusedChat ? box.height - 194 - 160 - 110 : box.height - 200);
+  const analytics = clamp(heights.analytics, 194, focusedChat ? box.height - video - 160 - 110 : box.height - 310);
+  const feed = clamp(heights.feed, 160, focusedChat ? box.height - video - analytics - 110 : box.height - analytics - 150);
   const values = { products, live, video, analytics, feed };
   const ranges = {
-    products: [MIN_PRODUCTS_WIDTH, products + live - MIN_LIVE_WIDTH],
-    live: [MIN_LIVE_WIDTH, live + widths[2] - MIN_ANALYTICS_WIDTH],
-    video: [200, box.height - 200],
-    analytics: [194, box.height - feed - 150],
-    feed: [160, box.height - analytics - 150],
+    products: [MIN_PRODUCTS_WIDTH, focusedChat ? products + widths[2] - MIN_ANALYTICS_WIDTH : products + live - MIN_LIVE_WIDTH],
+    live: [MIN_LIVE_WIDTH, focusedChat ? live + products - MIN_PRODUCTS_WIDTH : live + widths[2] - MIN_ANALYTICS_WIDTH],
+    video: [200, focusedChat ? box.height - analytics - feed - 110 : box.height - 200],
+    analytics: [194, focusedChat ? box.height - video - feed - 110 : box.height - feed - 150],
+    feed: [160, focusedChat ? box.height - video - analytics - 110 : box.height - analytics - 150],
   };
   const change = (kind: Kind, input: number) => {
     const [min, max] = ranges[kind];
     const next = clamp(input, min, max);
     if (Math.abs(next - values[kind]) > 0.01) setMode('Custom Layout');
-    if (kind === 'products') setRatios([next / box.width, (products + live - next) / box.width, widths[2] / box.width]);
-    else if (kind === 'live') setRatios([products / box.width, next / box.width, (live + widths[2] - next) / box.width]);
+    if (kind === 'products') setRatios(focusedChat
+      ? [next / box.width, live / box.width, (products + widths[2] - next) / box.width]
+      : [next / box.width, (products + live - next) / box.width, widths[2] / box.width]);
+    else if (kind === 'live') setRatios(focusedChat
+      ? [(products + live - next) / box.width, next / box.width, widths[2] / box.width]
+      : [products / box.width, next / box.width, (live + widths[2] - next) / box.width]);
     else setHeights(previous => ({ ...previous, [kind]: next }));
   };
   const reset = (kind: Kind) => {
     if (kind === 'products' || kind === 'live') { setRatios([.38, .31, .31]); setMode('Custom Layout'); }
-    else change(kind, { video: 340, analytics: 194, feed: 272 }[kind]);
+    else change(kind, (focusedChat ? { video: 240, analytics: 198, feed: 206 } : { video: 340, analytics: 194, feed: 272 })[kind]);
   };
   const style = {
-    gridTemplateColumns: widths.map(width => `${width}px`).join(' '),
-    '--products-edge': `${products}px`, '--live-edge': `${products + live}px`,
+    gridTemplateColumns: (focusedChat ? [live, products, widths[2]] : widths).map(width => `${width}px`).join(' '),
+    gridTemplateRows: focusedChat ? `${video}px ${analytics}px 54px minmax(0, 1fr) ${feed}px` : undefined,
+    '--products-edge': `${focusedChat ? live + products : products}px`, '--live-edge': `${focusedChat ? live : products + live}px`,
     '--video-height': `${video}px`, '--analytics-height': `${analytics}px`, '--feed-height': `${feed}px`,
   } as React.CSSProperties;
-  return <LayoutContext.Provider value={{ values, ranges, change, reset, editing, mode, beginEdit, applyEdit, cancelEdit, chooseMode }}>
+  return <LayoutContext.Provider value={{ values, ranges, change, reset, editing, mode, arrangement, beginEdit, applyEdit, cancelEdit, chooseMode }}>
     {header}
-    <div className={`columns resizable-columns${editing ? ' layout-editing' : ''}`} ref={ref} style={style}>
+    <div className={`columns resizable-columns${editing ? ' layout-editing' : ''}${focusedChat ? ' chat-focus' : ''}`} ref={ref} style={style}>
       {children}
-      <ResizeHandle kind="products" label="Resize products and live columns" />
-      <ResizeHandle kind="live" label="Resize live and analytics columns" />
+      <ResizeHandle kind="products" label={focusedChat ? 'Resize products and chat columns' : 'Resize products and live columns'} />
+      <ResizeHandle kind="live" label={focusedChat ? 'Resize live and products columns' : 'Resize live and analytics columns'} />
     </div>
   </LayoutContext.Provider>;
 }

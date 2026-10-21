@@ -538,6 +538,11 @@
           }
         },
         {
+          "action": "capture",
+          "id": "focus-editor-1120",
+          "title": "Chat focus editor with 324 / 400 / 324 minimum columns"
+        },
+        {
           "action": "click",
           "target": {
             "role": "button",
@@ -548,6 +553,126 @@
           "action": "capture",
           "id": "chat-focus-1120",
           "title": "Chat focus at minimum width"
+        }
+      ]
+    },
+    {
+      "id": "chat-focus-structure",
+      "title": "Chat focus module placement, custom resize and cancel",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "wide-overview",
+          "title": "1440px LIVE Console"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Layout mode: Balanced"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Chat focus"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "focus-columns",
+          "title": "Left media stack, centered products, independent chat"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "separator",
+            "name": "Resize live and products columns"
+          },
+          "key": "ArrowRight"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "separator",
+            "name": "Resize products and chat columns"
+          },
+          "key": "ArrowRight"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "separator",
+            "name": "Resize live preview and analytics"
+          },
+          "key": "ArrowUp"
+        },
+        {
+          "action": "capture",
+          "id": "focus-custom",
+          "title": "Custom sizing preserves the Chat focus arrangement"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Apply"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "focus-custom-applied",
+          "title": "Applied custom Chat focus layout"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Layout mode: Custom Layout"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Balanced"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "balanced-draft-from-focus",
+          "title": "Balanced draft from saved Chat focus"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "focus-restored",
+          "title": "Cancel restores the saved arrangement and dimensions"
         }
       ]
     }
