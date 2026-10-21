@@ -3,6 +3,9 @@ import './resize.css';
 
 type Kind = 'products' | 'live' | 'video' | 'analytics' | 'feed';
 const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value));
+const MIN_PRODUCTS_WIDTH = 400;
+const MIN_LIVE_WIDTH = 324;
+const MIN_ANALYTICS_WIDTH = 324;
 const LayoutContext = createContext<any>(null);
 
 export function ResizableColumns({ children }: { children: React.ReactNode }) {
@@ -19,16 +22,16 @@ export function ResizableColumns({ children }: { children: React.ReactNode }) {
     return () => observer.disconnect();
   }, []);
   // On viewport changes, keep all three columns within their readable minimums.
-  const products = clamp(ratios[0] * box.width, 400, box.width - 600);
-  const live = clamp(ratios[1] * box.width, 300, box.width - products - 300);
+  const products = clamp(ratios[0] * box.width, MIN_PRODUCTS_WIDTH, box.width - MIN_LIVE_WIDTH - MIN_ANALYTICS_WIDTH);
+  const live = clamp(ratios[1] * box.width, MIN_LIVE_WIDTH, box.width - products - MIN_ANALYTICS_WIDTH);
   const widths = [products, live, box.width - products - live];
   const video = clamp(heights.video, 200, box.height - 200);
   const analytics = clamp(heights.analytics, 194, box.height - 310);
   const feed = clamp(heights.feed, 160, box.height - analytics - 150);
   const values = { products, live, video, analytics, feed };
   const ranges = {
-    products: [400, products + live - 300],
-    live: [300, live + widths[2] - 300],
+    products: [MIN_PRODUCTS_WIDTH, products + live - MIN_LIVE_WIDTH],
+    live: [MIN_LIVE_WIDTH, live + widths[2] - MIN_ANALYTICS_WIDTH],
     video: [200, box.height - 200],
     analytics: [194, box.height - feed - 150],
     feed: [160, box.height - analytics - 150],
