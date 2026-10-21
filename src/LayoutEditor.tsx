@@ -7,7 +7,7 @@ const modes: LayoutMode[] = ['Balanced', 'Chat focus', 'Custom Layout'];
 
 export function ModuleTitle({ children }: { children: React.ReactNode }) {
   const { editing } = useConsoleLayout();
-  return <h2 className="module-title">{editing && <GripVertical size={16} aria-hidden="true"/>}{children}</h2>;
+  return <h2 className="module-title" style={{ fontSize: "17px" }}>{editing && <GripVertical size={16} aria-hidden="true"/>}{children}</h2>;
 }
 
 export function EditingHeader() {
