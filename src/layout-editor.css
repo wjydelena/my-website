@@ -6,6 +6,7 @@
 }
 .customize-title { font-size: 16px; line-height: 21px; white-space: nowrap; }
 .layout-mode-field { display: flex; align-items: center; gap: 8px; position: relative; white-space: nowrap; font-size: 14px; }
+#layout-mode-label { opacity: .6; }
 .layout-mode-trigger { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 200px; height: 28px; padding: 2px 8px; border: 0; border-radius: 4px; background: #ffffff21; color: var(--color-text); font: inherit; text-align: left; cursor: pointer; }
 .layout-mode-trigger svg { color: #b1c0bf; }
 .layout-mode-trigger[aria-expanded="true"] { box-shadow: inset 0 0 0 1px #FFFFFF; }
