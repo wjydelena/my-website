@@ -1,0 +1,8 @@
+/* 400 + 324 + 324 columns, 52px navigation and 2px outer border.
+   At 1120px, horizontal workspace gutters total 18px instead of 36px. */
+.console-shell { min-width: 1120px; }
+.workspace {
+  --compact-gutter: clamp(0px, calc(1138px - 100vw), 18px);
+  margin-left: calc(16px - var(--compact-gutter) * 4 / 9);
+  margin-right: calc(20px - var(--compact-gutter) * 5 / 9);
+}

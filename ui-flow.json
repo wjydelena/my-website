@@ -206,6 +206,34 @@
           "title": "Toolbar restored"
         }
       ]
+    },
+    {
+      "id": "minimum-page-width",
+      "title": "1120px minimum page width",
+      "viewport": {
+        "width": 1120,
+        "height": 800
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "page-1120",
+          "title": "1120px layout with original column minimums"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "separator",
+            "name": "Resize live and analytics columns"
+          },
+          "key": "End"
+        },
+        {
+          "action": "capture",
+          "id": "page-1120-limits",
+          "title": "Column size limits at 1120px"
+        }
+      ]
     }
   ]
 }
