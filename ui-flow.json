@@ -166,6 +166,46 @@
           "title": "Default layout restored"
         }
       ]
+    },
+    {
+      "id": "promotion-tools",
+      "title": "Complete promotion tool content",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "overview",
+          "title": "Static three-column LIVE Console"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "More promotions"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "all-promotions",
+          "title": "All ten promotion tools"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "More promotions"
+          },
+          "key": "Escape"
+        },
+        {
+          "action": "capture",
+          "id": "promotions-closed",
+          "title": "Toolbar restored"
+        }
+      ]
     }
   ]
 }
