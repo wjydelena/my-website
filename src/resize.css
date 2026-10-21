@@ -5,10 +5,10 @@
 .resize-live { left: var(--live-edge); }
 .resize-handle.horizontal { left: 0; right: 0; bottom: -4px; height: 8px; cursor: row-resize; }
 .resize-handle.resize-feed { top: -4px; bottom: auto; }
-.resize-handle:hover, .resize-handle:focus-visible, .resize-handle.is-dragging { background: #13b5ac55; }
-.resize-handle:focus-visible::after, .resize-handle.is-dragging::after { content: ''; position: absolute; background: #13b5ac; }
-.resize-handle.vertical::after { width: 1px; top: 0; bottom: 0; left: 4px; }
-.resize-handle.horizontal::after { height: 1px; left: 0; right: 0; top: 4px; }
+.resize-handle:hover::after, .resize-handle:focus-visible::after, .resize-handle.is-dragging::after { content: ''; position: absolute; background: #13b5ac55; pointer-events: none; }
+.resize-handle:focus-visible::after, .resize-handle.is-dragging::after { background: #13b5ac; }
+.resize-handle.vertical::after { width: 3px; top: 0; bottom: 0; left: 50%; transform: translateX(-50%); }
+.resize-handle.horizontal::after { height: 3px; left: 0; right: 0; top: 50%; transform: translateY(-50%); }
 .console-shell:has(.is-dragging) { user-select: none; }
 .console-shell:has(.vertical.is-dragging) * { cursor: col-resize !important; }
 .console-shell:has(.horizontal.is-dragging) * { cursor: row-resize !important; }
