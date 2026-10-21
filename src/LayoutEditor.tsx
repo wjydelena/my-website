@@ -11,7 +11,7 @@ export function ModuleTitle({ children }: { children: React.ReactNode }) {
 }
 
 export function EditingHeader() {
-  const { mode, chooseMode, applyEdit, cancelEdit } = useConsoleLayout();
+  const { mode, chooseMode, applyEdit, cancelEdit, applyDisabled } = useConsoleLayout();
   const [open, setOpen] = useState(false);
   const [focused, setFocused] = useState(modes.indexOf(mode));
   const root = useRef<HTMLDivElement>(null);
@@ -68,7 +68,7 @@ export function EditingHeader() {
       </div>}
     </div>
     <div className="layout-editor-actions">
-      <button className="layout-apply" type="button" onClick={applyEdit}>Apply</button>
+      <button className="layout-apply" type="button" disabled={applyDisabled} onClick={applyEdit}>Apply</button>
       <button className="layout-cancel" type="button" onClick={cancelEdit}>Cancel</button>
     </div>
   </header>;

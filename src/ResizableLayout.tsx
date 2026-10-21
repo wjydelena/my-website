@@ -9,6 +9,17 @@ const MIN_ANALYTICS_WIDTH = 324;
 export type LayoutMode = 'Balanced' | 'Chat focus' | 'Custom Layout';
 type Arrangement = 'balanced' | 'chat-focus';
 type Heights = { video: number; analytics: number; feed: number };
+type GeometrySource = { ratios: number[]; heights: Heights; arrangement: Arrangement };
+function resolveValues(source: GeometrySource, box: { width: number; height: number }) {
+  const { ratios, heights, arrangement } = source;
+  const focusedChat = arrangement === 'chat-focus';
+  const products = clamp(ratios[0] * box.width, MIN_PRODUCTS_WIDTH, box.width - MIN_LIVE_WIDTH - MIN_ANALYTICS_WIDTH);
+  const live = clamp(ratios[1] * box.width, MIN_LIVE_WIDTH, box.width - products - MIN_ANALYTICS_WIDTH);
+  const video = clamp(heights.video, 200, focusedChat ? box.height - 194 - 160 - 110 : box.height - 200);
+  const analytics = clamp(heights.analytics, 194, focusedChat ? box.height - video - 160 - 110 : box.height - 310);
+  const feed = clamp(heights.feed, 160, focusedChat ? box.height - video - analytics - 110 : box.height - analytics - 150);
+  return { products, live, video, analytics, feed };
+}
 type LayoutState = {
   values: Record<Kind, number>;
   ranges: Record<Kind, number[]>;
@@ -17,6 +28,7 @@ type LayoutState = {
   editing: boolean;
   mode: LayoutMode;
   arrangement: Arrangement;
+  applyDisabled: boolean;
   beginEdit: () => void;
   applyEdit: () => void;
   cancelEdit: () => void;
@@ -38,12 +50,20 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
   const [mode, setMode] = useState<LayoutMode>('Balanced');
   const [arrangement, setArrangement] = useState<Arrangement>('balanced');
   const focusedChat = arrangement === 'chat-focus';
+  const customBaseline = useRef<GeometrySource | null>(null);
+  const currentGeometry = (): GeometrySource => ({ ratios: [...ratios], heights: { ...heights }, arrangement });
   const saved = useRef<{ ratios: number[]; heights: Heights; mode: LayoutMode; arrangement: Arrangement } | null>(null);
   const beginEdit = () => {
     saved.current = { ratios: [...ratios], heights: { ...heights }, mode, arrangement };
+    customBaseline.current = mode === 'Custom Layout' ? currentGeometry() : null;
     setEditing(true);
   };
-  const applyEdit = () => { saved.current = null; setEditing(false); };
+  const applyEdit = () => {
+    if (applyDisabled) return;
+    saved.current = null;
+    customBaseline.current = null;
+    setEditing(false);
+  };
   const cancelEdit = () => {
     if (saved.current) {
       setRatios(saved.current.ratios);
@@ -52,9 +72,13 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
       setArrangement(saved.current.arrangement);
     }
     saved.current = null;
+    customBaseline.current = null;
     setEditing(false);
   };
   const chooseMode = (next: LayoutMode) => {
+    if (next === 'Custom Layout') {
+      if (mode !== 'Custom Layout') customBaseline.current = currentGeometry();
+    } else customBaseline.current = null;
     setMode(next);
     if (next === 'Balanced') {
       setArrangement('balanced');
@@ -74,16 +98,18 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     observer.observe(element);
     return () => observer.disconnect();
   }, []);
-  // On viewport changes, keep all three columns within their readable minimums.
-  const products = clamp(ratios[0] * box.width, MIN_PRODUCTS_WIDTH, box.width - MIN_LIVE_WIDTH - MIN_ANALYTICS_WIDTH);
-  const live = clamp(ratios[1] * box.width, MIN_LIVE_WIDTH, box.width - products - MIN_ANALYTICS_WIDTH);
+  // Resolve the draft and its baseline at the same viewport, so viewport resizing
+  // alone never counts as a custom edit. Keep all existing size constraints.
+  const values = resolveValues({ ratios, heights, arrangement }, box);
+  const { products, live, video, analytics, feed } = values;
   const widths = [products, live, box.width - products - live];
-  // In Chat focus the video shares a stack with analytics and activity.
-  // Reserve 110px for the activity heading and a readable first row.
-  const video = clamp(heights.video, 200, focusedChat ? box.height - 194 - 160 - 110 : box.height - 200);
-  const analytics = clamp(heights.analytics, 194, focusedChat ? box.height - video - 160 - 110 : box.height - 310);
-  const feed = clamp(heights.feed, 160, focusedChat ? box.height - video - analytics - 110 : box.height - analytics - 150);
-  const values = { products, live, video, analytics, feed };
+  const baselineValues = customBaseline.current ? resolveValues(customBaseline.current, box) : values;
+  const customChanged = (Object.keys(values) as Kind[]).some(kind => Math.abs(values[kind] - baselineValues[kind]) > 0.01);
+  const applyDisabled = editing && mode === 'Custom Layout' && !customChanged;
+  const markCustom = () => {
+    if (mode !== 'Custom Layout') customBaseline.current = currentGeometry();
+    setMode('Custom Layout');
+  };
   const ranges = {
     products: [MIN_PRODUCTS_WIDTH, focusedChat ? products + widths[2] - MIN_ANALYTICS_WIDTH : products + live - MIN_LIVE_WIDTH],
     live: [MIN_LIVE_WIDTH, focusedChat ? live + products - MIN_PRODUCTS_WIDTH : live + widths[2] - MIN_ANALYTICS_WIDTH],
@@ -94,7 +120,8 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
   const change = (kind: Kind, input: number) => {
     const [min, max] = ranges[kind];
     const next = clamp(input, min, max);
-    if (Math.abs(next - values[kind]) > 0.01) setMode('Custom Layout');
+    if (Math.abs(next - values[kind]) <= 0.01) return;
+    markCustom();
     if (kind === 'products') setRatios(focusedChat
       ? [next / box.width, live / box.width, (products + widths[2] - next) / box.width]
       : [next / box.width, (products + live - next) / box.width, widths[2] / box.width]);
@@ -104,7 +131,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     else setHeights(previous => ({ ...previous, [kind]: next }));
   };
   const reset = (kind: Kind) => {
-    if (kind === 'products' || kind === 'live') { setRatios([.38, .31, .31]); setMode('Custom Layout'); }
+    if (kind === 'products' || kind === 'live') { markCustom(); setRatios([.38, .31, .31]); }
     else change(kind, (focusedChat ? { video: 240, analytics: 198, feed: 206 } : { video: 340, analytics: 194, feed: 272 })[kind]);
   };
   const style = {
@@ -113,7 +140,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     '--products-edge': `${focusedChat ? live + products : products}px`, '--live-edge': `${focusedChat ? live : products + live}px`,
     '--video-height': `${video}px`, '--analytics-height': `${analytics}px`, '--feed-height': `${feed}px`,
   } as React.CSSProperties;
-  return <LayoutContext.Provider value={{ values, ranges, change, reset, editing, mode, arrangement, beginEdit, applyEdit, cancelEdit, chooseMode }}>
+  return <LayoutContext.Provider value={{ values, ranges, change, reset, editing, mode, arrangement, applyDisabled, beginEdit, applyEdit, cancelEdit, chooseMode }}>
     {header}
     <div className={`columns resizable-columns${editing ? ' layout-editing' : ''}${focusedChat ? ' chat-focus' : ''}`} ref={ref} style={style}>
       {children}

@@ -404,6 +404,11 @@
           }
         },
         {
+          "action": "capture",
+          "id": "custom-unchanged-balanced",
+          "title": "Unchanged Custom Layout from Balanced; Apply disabled"
+        },
+        {
           "action": "press",
           "target": {
             "role": "separator",
@@ -596,6 +601,25 @@
           "title": "Left media stack, centered products, independent chat"
         },
         {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Layout mode: Chat focus"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Custom Layout"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "custom-unchanged-focus",
+          "title": "Unchanged Custom Layout from Chat focus; Apply disabled"
+        },
+        {
           "action": "press",
           "target": {
             "role": "separator",
@@ -750,6 +774,85 @@
             "role": "button",
             "name": "Cancel"
           }
+        }
+      ]
+    },
+    {
+      "id": "custom-apply-guard",
+      "title": "Custom Apply enables only for actual changes",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "wide-overview",
+          "title": "1440px LIVE Console"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Layout mode: Balanced"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Custom Layout"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "custom-guard-disabled",
+          "title": "No changes: Apply disabled at 30% opacity"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "separator",
+            "name": "Resize live preview and chat"
+          },
+          "key": "ArrowUp"
+        },
+        {
+          "action": "capture",
+          "id": "custom-guard-enabled",
+          "title": "Actual resize enables Apply"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "separator",
+            "name": "Resize live preview and chat"
+          },
+          "key": "ArrowDown"
+        },
+        {
+          "action": "capture",
+          "id": "custom-guard-restored",
+          "title": "Restoring original dimensions disables Apply again"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "custom-guard-cancelled",
+          "title": "Cancel returns to original layout"
         }
       ]
     }

@@ -17,6 +17,7 @@
 .layout-editor-actions { display: flex; justify-content: flex-end; gap: 8px; }
 .layout-editor-actions button { display: flex; align-items: center; justify-content: center; min-width: 64px; height: 28px; padding: 2px 14px; border: 0; border-radius: 99px; color: white; font: inherit; font-size: 13px; font-weight: 600; line-height: 18px; cursor: pointer; }
 .layout-apply { background: var(--color-teal); }
+.layout-editor-actions .layout-apply:disabled { opacity: .3; cursor: not-allowed; }
 .layout-cancel { background: #ffffff30; }
 .layout-editor-actions button:focus-visible, .layout-mode-trigger:focus-visible { outline: 2px solid #20d5c3; outline-offset: 2px; }
 .module-title { display: flex; align-items: center; gap: 8px; }
