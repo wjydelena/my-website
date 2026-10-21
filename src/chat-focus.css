@@ -14,7 +14,6 @@
 .chat-focus .previous-message { display: none; }
 .chat-focus .chat-scroll { padding-top: 8px; }
 .chat-focus .message { margin-bottom: 18px; }
-.chat-focus .message p { font-size: var(--text-body); }
-.chat-focus .name-line { font-size: var(--text-body); }
 .chat-focus .buyer-tag { color: #f7e8c8; background: #695632; }
 .chat-focus.layout-editing .search-row { opacity: 1; }
+.chat-focus.layout-editing .event-feed { border-top-color: #315552; }
