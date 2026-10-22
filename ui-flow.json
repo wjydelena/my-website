@@ -545,7 +545,7 @@
         {
           "action": "capture",
           "id": "focus-editor-1120",
-          "title": "Chat focus editor with 324 / 400 / 324 minimum columns"
+          "title": "Chat focus editor with 400 / 324 / 324 minimum columns"
         },
         {
           "action": "click",
@@ -598,7 +598,7 @@
         {
           "action": "capture",
           "id": "focus-columns",
-          "title": "Left media stack, centered products, independent chat"
+          "title": "Products on the left, Chat in the center, media and activity stack on the right"
         },
         {
           "action": "click",
@@ -623,7 +623,7 @@
           "action": "press",
           "target": {
             "role": "separator",
-            "name": "Resize live and products columns"
+            "name": "Resize chat and live columns"
           },
           "key": "ArrowRight"
         },

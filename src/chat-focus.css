@@ -1,12 +1,12 @@
 /* Keep the same mounted modules; only their grid placement changes. */
 .chat-focus .live-column, .chat-focus .analytics-column { display: contents; }
-.chat-focus .product-column { grid-column: 2; grid-row: 1 / -1; }
-.chat-focus .video-preview { grid-column: 1; grid-row: 1; }
-.chat-focus .analytics { grid-column: 1; grid-row: 2; }
-.chat-focus .activity-tabs { grid-column: 1; grid-row: 3; height: 54px; }
-.chat-focus .activity-list { grid-column: 1; grid-row: 4; }
-.chat-focus .event-feed { grid-column: 1; grid-row: 5; }
-.chat-focus .chat { grid-column: 3; grid-row: 1 / -1; min-width: 0; }
+.chat-focus .product-column { grid-column: 1; grid-row: 1 / -1; }
+.chat-focus .video-preview { grid-column: 3; grid-row: 1; }
+.chat-focus .analytics { grid-column: 3; grid-row: 2; }
+.chat-focus .activity-tabs { grid-column: 3; grid-row: 3; height: 54px; }
+.chat-focus .activity-list { grid-column: 3; grid-row: 4; }
+.chat-focus .event-feed { grid-column: 3; grid-row: 5; }
+.chat-focus .chat { grid-column: 2; grid-row: 1 / -1; min-width: 0; }
 .chat-focus::before { content: ''; position: absolute; z-index: 2; top: 0; bottom: 0; left: calc(var(--live-edge) - 1px); width: 1px; background: #ffffff16; pointer-events: none; }
 .chat-focus .chat-title { height: 54px; }
 .chat-focus .previous-message { display: none; }

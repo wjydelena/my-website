@@ -27,9 +27,9 @@ function sourceBoard(source: GeometrySource, box: { width: number; height: numbe
   if (source.board) return source.board;
   const v = resolveValues(source, box), third = box.width - v.products - v.live;
   return { columns: source.arrangement === 'chat-focus' ? [
-    { modules: ['video', 'analytics', 'activity'], width: v.live, heights: [v.video, v.analytics, box.height - v.video - v.analytics] },
     { modules: ['products'], width: v.products, heights: [box.height] },
     { modules: ['chat'], width: third, heights: [box.height] },
+    { modules: ['video', 'analytics', 'activity'], width: v.live, heights: [v.video, v.analytics, box.height - v.video - v.analytics] },
   ] : [
     { modules: ['products'], width: v.products, heights: [box.height] },
     { modules: ['video', 'chat'], width: v.live, heights: [v.video, box.height - v.video] },
@@ -140,7 +140,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
   };
   const ranges = {
     products: [MIN_PRODUCTS_WIDTH, focusedChat ? products + widths[2] - MIN_ANALYTICS_WIDTH : products + live - MIN_LIVE_WIDTH],
-    live: [MIN_LIVE_WIDTH, focusedChat ? live + products - MIN_PRODUCTS_WIDTH : live + widths[2] - MIN_ANALYTICS_WIDTH],
+    live: [MIN_LIVE_WIDTH, live + widths[2] - MIN_ANALYTICS_WIDTH],
     video: [200, focusedChat ? box.height - analytics - feed - 110 : box.height - 200],
     analytics: [194, focusedChat ? box.height - video - feed - 110 : box.height - feed - 150],
     feed: [160, board ? boardGeometry.rects.activity.height - 110 : focusedChat ? box.height - video - analytics - 110 : box.height - analytics - 150],
@@ -153,9 +153,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     if (kind === 'products') setRatios(focusedChat
       ? [next / box.width, live / box.width, (products + widths[2] - next) / box.width]
       : [next / box.width, (products + live - next) / box.width, widths[2] / box.width]);
-    else if (kind === 'live') setRatios(focusedChat
-      ? [(products + live - next) / box.width, next / box.width, widths[2] / box.width]
-      : [products / box.width, next / box.width, (live + widths[2] - next) / box.width]);
+    else if (kind === 'live') setRatios([products / box.width, next / box.width, (live + widths[2] - next) / box.width]);
     else setHeights(previous => ({ ...previous, [kind]: next }));
   };
   const reset = (kind: Kind) => {
@@ -186,9 +184,9 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
   };
   const moduleStyle = (id: ModuleId): React.CSSProperties | undefined => board ? { ...boardGeometry.rects[id], position: 'absolute' } : undefined;
   const style = {
-    gridTemplateColumns: (focusedChat ? [live, products, widths[2]] : widths).map(width => `${width}px`).join(' '),
+    gridTemplateColumns: (focusedChat ? [products, widths[2], live] : widths).map(width => `${width}px`).join(' '),
     gridTemplateRows: focusedChat ? `${video}px ${analytics}px 54px minmax(0, 1fr) ${feed}px` : undefined,
-    '--products-edge': `${focusedChat ? live + products : products}px`, '--live-edge': `${focusedChat ? live : products + live}px`,
+    '--products-edge': `${products}px`, '--live-edge': `${focusedChat ? products + widths[2] : products + live}px`,
     '--video-height': `${video}px`, '--analytics-height': `${analytics}px`, '--feed-height': `${feed}px`,
   } as React.CSSProperties;
   if (board) style.minWidth = boardMinWidth(board);
@@ -200,7 +198,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
       {children}
       {board ? <BoardResizeHandles board={board} box={box} resize={resizeBoard}/> : <>
         <ResizeHandle kind="products" label={focusedChat ? 'Resize products and chat columns' : 'Resize products and live columns'} />
-        <ResizeHandle kind="live" label={focusedChat ? 'Resize live and products columns' : 'Resize live and analytics columns'} />
+        <ResizeHandle kind="live" label={focusedChat ? 'Resize chat and live columns' : 'Resize live and analytics columns'} />
       </>}
     </div>
     </div>
@@ -209,9 +207,9 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
 }
 
 export function ResizeHandle({ kind, label }: { kind: Kind; label: string }) {
-  const { values, ranges, change, reset, docked } = useConsoleLayout();
+  const { values, ranges, change, reset, docked, arrangement } = useConsoleLayout();
   const vertical = kind === 'products' || kind === 'live';
-  const direction = kind === 'feed' ? -1 : 1;
+  const direction = kind === 'feed' || (kind === 'live' && arrangement === 'chat-focus') ? -1 : 1;
   const drag = useRef<{ id: number; origin: number; value: number } | null>(null);
   const [active, setActive] = useState(false);
   const finish = () => { drag.current = null; setActive(false); };
