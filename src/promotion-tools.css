@@ -1,6 +1,9 @@
 .promotion-bar.promotion-tools { overflow: visible; }
 .promotion-content { display: flex; align-items: center; gap: 8px; width: 100%; min-width: 0; overflow-x: auto; scrollbar-width: none; padding-right: 36px; }
 .promotion-content .promo-pill { flex-shrink: 0; }
+.promotion-content .promo-pill, .promotion-tools-list .promotion-list-item { background: rgba(255, 255, 255, 0.13); color: rgba(255, 255, 255, 0.8); }
+.promotion-tools .badge-icon { filter: brightness(0) invert(1); opacity: .8; }
+.promotion-content .promo-pill > svg, .promotion-tools-list .promotion-list-item > svg { color: rgba(255, 255, 255, 0.8); }
 .promotion-content:focus-visible { outline: 1px solid var(--color-teal); outline-offset: 2px; }
 .promotion-tools .promo-more { z-index: 2; border: 0; color: inherit; cursor: pointer; padding-top: 0; padding-right: 0; padding-bottom: 0; }
 .promotion-tools .promo-more:focus-visible { outline: 1px solid var(--color-teal); outline-offset: 2px; }
