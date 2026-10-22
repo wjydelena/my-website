@@ -6,3 +6,8 @@
   margin-left: calc(16px - var(--compact-gutter) * 4 / 9);
   margin-right: calc(20px - var(--compact-gutter) * 5 / 9);
 }
+/* Four tracks need 1372px. Compress only outer gutters first, then scroll
+   the workspace horizontally when even zero gutters cannot fit them. */
+.workspace:has(.docked-layout[data-column-count="4"]) {
+  --compact-gutter: clamp(0px, calc(1462px - 100vw), 36px);
+}

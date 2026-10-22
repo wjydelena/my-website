@@ -855,6 +855,370 @@
           "title": "Cancel returns to original layout"
         }
       ]
+    },
+    {
+      "id": "module-four-columns",
+      "title": "Move a module into a fourth column and save",
+      "viewport": {
+        "width": 1600,
+        "height": 900
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "wide-1600",
+          "title": "LIVE Console at 1600px"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Video"
+          },
+          "key": "Space"
+        },
+        {
+          "action": "capture",
+          "id": "module-vertical-target",
+          "title": "Video picked up; vertical insertion line"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Video"
+          },
+          "key": "Enter"
+        },
+        {
+          "action": "capture",
+          "id": "module-four-columns-draft",
+          "title": "Video forms its own column; maximum four columns"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Apply"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "module-four-columns-applied",
+          "title": "Four-column layout applied"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Products"
+          },
+          "key": "Space"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Products"
+          },
+          "key": "Enter"
+        },
+        {
+          "action": "capture",
+          "id": "module-products-reordered",
+          "title": "Products moved as its own column"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "module-four-columns-restored",
+          "title": "Cancel restores the saved four-column layout"
+        }
+      ]
+    },
+    {
+      "id": "module-stack-three",
+      "title": "Stack a third module using the same drop targets",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "wide-overview",
+          "title": "1440px LIVE Console"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Chat"
+          },
+          "key": "Space"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Chat"
+          },
+          "key": "ArrowRight"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Chat"
+          },
+          "key": "ArrowRight"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Chat"
+          },
+          "key": "ArrowRight"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Chat"
+          },
+          "key": "ArrowRight"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Chat"
+          },
+          "key": "ArrowRight"
+        },
+        {
+          "action": "capture",
+          "id": "module-horizontal-target",
+          "title": "Chat picked up; horizontal insertion line"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Chat"
+          },
+          "key": "Enter"
+        },
+        {
+          "action": "capture",
+          "id": "module-three-stack",
+          "title": "Chat, Analytics and Activity stacked in one column"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Apply"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "module-three-stack-applied",
+          "title": "Three-module stack applied"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Activity"
+          },
+          "key": "Space"
+        },
+        {
+          "action": "capture",
+          "id": "module-activity-picked",
+          "title": "Activity can also form its own column"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Activity"
+          },
+          "key": "Escape"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "module-stack-cancelled",
+          "title": "Escape cancels the active move without changing layout"
+        }
+      ]
+    },
+    {
+      "id": "module-narrow-four",
+      "title": "Four columns preserve minimum widths on a narrow page",
+      "viewport": {
+        "width": 1120,
+        "height": 800
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "narrow-overview",
+          "title": "1120px LIVE Console"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Video"
+          },
+          "key": "Space"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Video"
+          },
+          "key": "Enter"
+        },
+        {
+          "action": "capture",
+          "id": "module-four-narrow",
+          "title": "Four columns retain minimum widths with horizontal scrolling"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "module-narrow-restored",
+          "title": "Cancel restores original three columns"
+        }
+      ]
+    },
+    {
+      "id": "module-activity-column",
+      "title": "Move Activity and its event feed together from Chat focus",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "wide-overview",
+          "title": "1440px LIVE Console"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Layout mode: Balanced"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Chat focus"
+          }
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Activity"
+          },
+          "key": "Space"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Activity"
+          },
+          "key": "Enter"
+        },
+        {
+          "action": "capture",
+          "id": "module-activity-alone",
+          "title": "Activity and event feed together in a standalone column"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Apply"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "module-activity-applied",
+          "title": "Activity column applied"
+        }
+      ]
     }
   ]
 }
