@@ -114,8 +114,8 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
           left: origin.left + Math.min(Math.max(line.left - (line.width === 3 ? 1.5 : 0), 0), geometry.width - line.width),
           top: origin.top + Math.min(Math.max(line.top - (line.height === 3 ? 1.5 : 0), 0), geometry.height - line.height), width: line.width, height: line.height,
         }}/>}
-        <div className={`module-drag-ghost${view.reason ? ' unavailable' : ''}`} style={{ left: Math.max(8, Math.min(view.x + 18, window.innerWidth - 278)), top: Math.max(8, Math.min(view.y + 18, window.innerHeight - 80)) }}>
-          <GripVertical size={16}/><div><strong>{moduleNames[view.id]}</strong><small>{view.reason || (view.target ? targetLabel(view.target) : 'Drag to a column or module edge')}</small></div>
+        <div className="module-drag-ghost" style={{ left: Math.max(8, Math.min(view.x + 18, window.innerWidth - 248)), top: Math.max(8, Math.min(view.y + 18, window.innerHeight - 62)) }}>
+          <div className="module-drag-ghost-title"><GripVertical size={16}/><strong>{moduleNames[view.id]}</strong></div>
         </div>
       </>}
     </div>
