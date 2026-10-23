@@ -7,7 +7,7 @@ type DragView = { id: ModuleId; x: number; y: number; target?: DropTarget; reaso
 type HeaderProps = React.HTMLAttributes<HTMLDivElement>;
 const DragContext = createContext<(id: ModuleId) => HeaderProps>(() => ({}));
 const HoverContext = createContext<{ id: ModuleId; rect: Rect } | null>(null);
-const BlockedContext = createContext<{ column: number; rect: Rect } | null>(null);
+const BlockedContext = createContext<{ column: number; rect: Rect; message: string } | null>(null);
 export const useModuleHeader = (id: ModuleId) => useContext(DragContext)(id);
 
 export function ModuleHoverOverlay() {
@@ -15,7 +15,7 @@ export function ModuleHoverOverlay() {
   const blocked = useContext(BlockedContext);
   return <>
     {hovered && <div className="module-hover-overlay" data-hover-module={hovered.id} aria-hidden="true" style={hovered.rect}/>}
-    {blocked && <div className="module-blocked-overlay" data-blocked-column={blocked.column} style={blocked.rect}><span>Products can’t be stacked with other modules</span></div>}
+    {blocked && <div className="module-blocked-overlay" data-blocked-column={blocked.column} style={blocked.rect}><span>{blocked.message}</span></div>}
   </>;
 }
 
@@ -96,15 +96,18 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
       const origin = container.current!.getBoundingClientRect();
       const x = event.clientX - origin.left, y = event.clientY - origin.top;
       let blockedColumn: number | undefined;
-      if (current.id === 'products' && target?.type !== 'column' && y >= 0 && y <= geometry.height) {
+      if (target?.type !== 'column' && y >= 0 && y <= geometry.height) {
         const column = board.columns.findIndex(col => {
           const r = geometry.rects[col.modules[0]];
           return x >= r.left && x < r.left + r.width;
         });
-        if (column >= 0 && !board.columns[column].modules.includes('products')) blockedColumn = column;
+        if (column >= 0) {
+          const containsProducts = board.columns[column].modules.includes('products');
+          if (current.id === 'products' ? !containsProducts : containsProducts) blockedColumn = column;
+        }
       }
       update({ id: current.id, x: event.clientX, y: event.clientY, target, blockedColumn,
-        reason: blockedColumn !== undefined ? 'Products can’t be stacked with other modules' : result?.reason || (result && !result.changed ? 'Already in this position' : undefined), keyboard: false });
+        reason: blockedColumn !== undefined ? (current.id === 'products' ? 'Products can’t be stacked with other modules' : 'Modules can’t share a column with Products.') : result?.reason || (result && !result.changed ? 'Already in this position' : undefined), keyboard: false });
     },
     onPointerUp: event => {
       if (session.current?.pointer === event.pointerId) {
@@ -154,6 +157,7 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
   const origin = container.current?.getBoundingClientRect();
   const blocked = view?.blockedColumn !== undefined ? {
     column: view.blockedColumn,
+    message: view.reason ?? '',
     rect: { left: geometry.rects[board.columns[view.blockedColumn].modules[0]].left, top: 0, width: geometry.widths[view.blockedColumn], height: geometry.height },
   } : null;
   return <DragContext.Provider value={headerProps}>
