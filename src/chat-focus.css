@@ -14,3 +14,8 @@
 .chat-focus .message { margin-bottom: 18px; }
 .chat-focus .buyer-tag { color: #f7e8c8; background: #695632; }
 .chat-focus.layout-editing .search-row { opacity: 1; }
+.host-focus .live-image { width: 100%; height: 100%; object-fit: cover; }
+.host-focus .previous-message { display: none; }
+.host-focus .chat-scroll { padding-top: 8px; }
+.host-focus .chat-title { height: 54px; }
+.host-focus .message { margin-bottom: 18px; }

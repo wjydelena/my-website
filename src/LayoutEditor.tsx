@@ -3,7 +3,13 @@ import { ChevronDown, GripVertical } from 'lucide-react';
 import { LayoutMode, useConsoleLayout } from './ResizableLayout';
 import './layout-editor.css';
 
-const modes: LayoutMode[] = ['Balanced', 'Chat focus', 'Custom Layout'];
+const modes: LayoutMode[] = ['Standard', 'Chat focus', 'Host focus', 'Custom'];
+const descriptions: Record<LayoutMode, string> = {
+  Standard: 'View all panels in the default layout',
+  'Chat focus': 'Give chat more space',
+  'Host focus': 'Focus on video and chat, without the product list.',
+  Custom: 'Arrange modules and resize columns to fit your workflow',
+};
 
 export function ModuleTitle({ children }: { children: React.ReactNode }) {
   const { editing } = useConsoleLayout();
@@ -55,15 +61,16 @@ export function EditingHeader() {
       {open && <div className="layout-mode-options" id="layout-mode-options" role="listbox" aria-labelledby="layout-mode-label"
         onKeyDown={event => {
           if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
-            event.preventDefault(); setFocused(index => (index + (event.key === 'ArrowDown' ? 1 : 2)) % modes.length);
+            event.preventDefault(); setFocused(index => (index + (event.key === 'ArrowDown' ? 1 : modes.length - 1)) % modes.length);
           } else if (event.key === 'Home' || event.key === 'End') {
-            event.preventDefault(); setFocused(event.key === 'Home' ? 0 : 2);
+            event.preventDefault(); setFocused(event.key === 'Home' ? 0 : modes.length - 1);
           } else if (event.key === 'Tab') setOpen(false);
         }}>
-        {modes.map((value, index) => <button key={value} type="button" role="option" aria-selected={mode === value}
+        {modes.map((value, index) => <button key={value} type="button" role="option" aria-label={value} aria-describedby={`layout-description-${index}`} aria-selected={mode === value}
           ref={node => { options.current[index] = node; }} tabIndex={focused === index ? 0 : -1}
           className={mode === value ? 'is-selected' : ''} onClick={() => choose(value)}>
           <span>{value}</span>
+          <span className="layout-mode-description" id={`layout-description-${index}`}>{descriptions[value]}</span>
         </button>)}
       </div>}
     </div>

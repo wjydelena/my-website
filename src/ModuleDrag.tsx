@@ -161,7 +161,7 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
     rect: { left: geometry.rects[board.columns[view.blockedColumn].modules[0]].left, top: 0, width: geometry.widths[view.blockedColumn], height: geometry.height },
   } : null;
   return <DragContext.Provider value={headerProps}>
-    <HoverContext.Provider value={editing && hovered && !view ? { id: hovered, rect: geometry.rects[hovered] } : null}>
+    <HoverContext.Provider value={editing && hovered && geometry.rects[hovered] && !view ? { id: hovered, rect: geometry.rects[hovered] } : null}>
     <BlockedContext.Provider value={blocked}>
     <div className="module-dnd-scope" data-moving={view?.id} data-drop-blocked={blocked ? 'true' : undefined} {...pointerProps}
       onPointerMoveCapture={event => {

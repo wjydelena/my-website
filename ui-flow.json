@@ -258,19 +258,19 @@
         {
           "action": "capture",
           "id": "edit-balanced",
-          "title": "Layout editing with Balanced selected"
+          "title": "Layout editing with Standard selected"
         },
         {
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Layout mode: Balanced"
+            "name": "Layout mode: Standard"
           }
         },
         {
           "action": "capture",
           "id": "layout-dropdown",
-          "title": "Layout mode options, Balanced selected"
+          "title": "Layout mode options, Standard selected"
         },
         {
           "action": "click",
@@ -307,7 +307,7 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Layout mode: Balanced"
+            "name": "Layout mode: Standard"
           }
         },
         {
@@ -352,7 +352,7 @@
           "action": "click",
           "target": {
             "role": "option",
-            "name": "Balanced"
+            "name": "Standard"
           }
         },
         {
@@ -365,7 +365,7 @@
         {
           "action": "capture",
           "id": "balanced-applied",
-          "title": "Balanced layout applied"
+          "title": "Standard layout applied"
         }
       ]
     },
@@ -393,20 +393,20 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Layout mode: Balanced"
+            "name": "Layout mode: Standard"
           }
         },
         {
           "action": "click",
           "target": {
             "role": "option",
-            "name": "Custom Layout"
+            "name": "Custom"
           }
         },
         {
           "action": "capture",
           "id": "custom-unchanged-balanced",
-          "title": "Unchanged Custom Layout from Balanced; Apply disabled"
+          "title": "Unchanged Custom from Standard; Apply disabled"
         },
         {
           "action": "press",
@@ -427,7 +427,7 @@
         {
           "action": "capture",
           "id": "custom-draft",
-          "title": "Custom Layout with manual sizing"
+          "title": "Custom with manual sizing"
         },
         {
           "action": "click",
@@ -459,7 +459,7 @@
         {
           "action": "capture",
           "id": "auto-custom-mode",
-          "title": "Manual resize switches mode to Custom Layout"
+          "title": "Manual resize switches mode to Custom"
         },
         {
           "action": "click",
@@ -479,7 +479,7 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Layout mode: Custom Layout"
+            "name": "Layout mode: Custom"
           }
         },
         {
@@ -491,7 +491,7 @@
           "action": "click",
           "target": {
             "role": "option",
-            "name": "Custom Layout"
+            "name": "Custom"
           }
         },
         {
@@ -527,7 +527,7 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Layout mode: Balanced"
+            "name": "Layout mode: Standard"
           }
         },
         {
@@ -585,7 +585,7 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Layout mode: Balanced"
+            "name": "Layout mode: Standard"
           }
         },
         {
@@ -611,13 +611,13 @@
           "action": "click",
           "target": {
             "role": "option",
-            "name": "Custom Layout"
+            "name": "Custom"
           }
         },
         {
           "action": "capture",
           "id": "custom-unchanged-focus",
-          "title": "Unchanged Custom Layout from Chat focus; Apply disabled"
+          "title": "Unchanged Custom from Chat focus; Apply disabled"
         },
         {
           "action": "press",
@@ -671,20 +671,20 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Layout mode: Custom Layout"
+            "name": "Layout mode: Custom"
           }
         },
         {
           "action": "click",
           "target": {
             "role": "option",
-            "name": "Balanced"
+            "name": "Standard"
           }
         },
         {
           "action": "capture",
           "id": "balanced-draft-from-focus",
-          "title": "Balanced draft from saved Chat focus"
+          "title": "Standard draft from saved Chat focus"
         },
         {
           "action": "click",
@@ -735,7 +735,7 @@
         {
           "action": "capture",
           "id": "balanced-neutral",
-          "title": "Balanced editor with 60px Products heading and neutral boundaries"
+          "title": "Standard editor with 60px Products heading and neutral boundaries"
         },
         {
           "action": "hover",
@@ -753,7 +753,7 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Layout mode: Balanced"
+            "name": "Layout mode: Standard"
           }
         },
         {
@@ -801,14 +801,14 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Layout mode: Balanced"
+            "name": "Layout mode: Standard"
           }
         },
         {
           "action": "click",
           "target": {
             "role": "option",
-            "name": "Custom Layout"
+            "name": "Custom"
           }
         },
         {
@@ -1175,7 +1175,7 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Layout mode: Balanced"
+            "name": "Layout mode: Standard"
           }
         },
         {
@@ -1382,6 +1382,200 @@
           "action": "capture",
           "id": "module-body-drag-cancelled",
           "title": "Normal mode restored"
+        }
+      ]
+    },
+    {
+      "id": "host-focus-save-restore",
+      "title": "Select Host focus, save, and cancel a later preset change",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "wide-overview",
+          "title": "1440px LIVE Console"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Layout mode: Standard"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "layout-four-options",
+          "title": "Four layout modes with descriptions"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Host focus"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "host-focus-edit",
+          "title": "Host focus: Video, Chat, Analytics and Activity, no Products"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Apply"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "host-focus-applied",
+          "title": "Host focus saved"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Layout mode: Host focus"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Standard"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "host-to-standard",
+          "title": "Standard restores Products and original layout"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "host-focus-restored",
+          "title": "Cancel restores saved Host focus"
+        }
+      ]
+    },
+    {
+      "id": "host-focus-custom",
+      "title": "Customize Host focus without restoring Products",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "wide-overview",
+          "title": "1440px LIVE Console"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Layout mode: Standard"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "layout-four-options",
+          "title": "Four layout modes with descriptions"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Host focus"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "host-focus-edit",
+          "title": "Host focus: Video, Chat, Analytics and Activity, no Products"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Layout mode: Host focus"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Custom"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "host-custom-unchanged",
+          "title": "Custom inherits Host focus; Apply disabled until a change"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Video"
+          },
+          "key": "Space"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Video"
+          },
+          "key": "Enter"
+        },
+        {
+          "action": "capture",
+          "id": "host-custom-moved",
+          "title": "Four visible modules remain draggable in Custom"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Apply"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "host-custom-applied",
+          "title": "Custom arrangement saved without Products"
         }
       ]
     }

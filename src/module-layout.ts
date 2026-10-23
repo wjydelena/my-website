@@ -3,12 +3,12 @@ export type ModuleId = typeof MODULES[number];
 export const moduleNames: Record<ModuleId, string> = { products: 'Products', video: 'Video', chat: 'Chat', analytics: 'Analytics', activity: 'Activity' };
 export const minHeight: Record<ModuleId, number> = { products: 270, video: 200, chat: 200, analytics: 194, activity: 270 };
 export type ModuleColumn = { modules: ModuleId[]; width: number; heights: number[] };
-export type ModuleBoard = { columns: ModuleColumn[] };
+export type ModuleBoard = { columns: ModuleColumn[]; productsHidden?: boolean };
 export type DropTarget = { type: 'column'; index: number } | { type: 'stack'; column: number; index: number };
 export type Rect = { left: number; top: number; width: number; height: number };
 export const columnMin = (column: ModuleColumn) => column.modules.includes('products') ? 400 : 324;
 export const boardMinWidth = (board: ModuleBoard) => board.columns.reduce((sum, col) => sum + columnMin(col), 0);
-export const cloneBoard = (board: ModuleBoard): ModuleBoard => ({ columns: board.columns.map(col => ({ ...col, modules: [...col.modules], heights: [...col.heights] })) });
+export const cloneBoard = (board: ModuleBoard): ModuleBoard => ({ ...board, columns: board.columns.map(col => ({ ...col, modules: [...col.modules], heights: [...col.heights] })) });
 export const sameStructure = (a: ModuleBoard, b: ModuleBoard) => JSON.stringify(a.columns.map(c => c.modules)) === JSON.stringify(b.columns.map(c => c.modules));
 
 /** Proportional tracks, freezing tracks at their minimum without overflowing. */
@@ -44,8 +44,9 @@ export function resolveBoard(board: ModuleBoard, box: { width: number; height: n
 
 export function validBoard(board: ModuleBoard) {
   const all = board.columns.flatMap(c => c.modules);
-  return board.columns.length <= 4 && board.columns.length > 0 && all.length === MODULES.length &&
-    MODULES.every(id => all.filter(m => m === id).length === 1) &&
+  const expected = board.productsHidden ? MODULES.filter(id => id !== 'products') : MODULES;
+  return board.columns.length <= 4 && board.columns.length > 0 && all.length === expected.length &&
+    expected.every(id => all.filter(m => m === id).length === 1) &&
     board.columns.every(c => c.modules.length > 0 && c.modules.length <= 3 && (!c.modules.includes('products') || c.modules.length === 1));
 }
 
