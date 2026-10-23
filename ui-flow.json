@@ -1318,6 +1318,72 @@
           "title": "Normal mode without editing heading or hover overlays"
         }
       ]
+    },
+    {
+      "id": "module-body-hover-and-ghost",
+      "title": "Module content hover and updated drag card",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "wide-overview",
+          "title": "1440px LIVE Console"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "hover",
+          "target": {
+            "text": "Buy now"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "products-content-hover",
+          "title": "Products highlighted from its content area"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Products"
+          },
+          "key": "Space"
+        },
+        {
+          "action": "capture",
+          "id": "products-teal-drag-card",
+          "title": "Products drag card with teal border and dark teal background"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Products"
+          },
+          "key": "Escape"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "module-body-drag-cancelled",
+          "title": "Normal mode restored"
+        }
+      ]
     }
   ]
 }

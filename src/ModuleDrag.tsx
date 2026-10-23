@@ -3,15 +3,20 @@ import { GripVertical } from 'lucide-react';
 import { DropTarget, ModuleBoard, ModuleId, Rect, dropTargets, moduleNames, moveModule, resolveBoard, targetLabel, targetRect } from './module-layout';
 import './module-drag.css';
 
-type DragView = { id: ModuleId; x: number; y: number; target?: DropTarget; reason?: string; keyboard: boolean };
+type DragView = { id: ModuleId; x: number; y: number; target?: DropTarget; reason?: string; keyboard: boolean; blockedColumn?: number };
 type HeaderProps = React.HTMLAttributes<HTMLDivElement>;
 const DragContext = createContext<(id: ModuleId) => HeaderProps>(() => ({}));
 const HoverContext = createContext<{ id: ModuleId; rect: Rect } | null>(null);
+const BlockedContext = createContext<{ column: number; rect: Rect } | null>(null);
 export const useModuleHeader = (id: ModuleId) => useContext(DragContext)(id);
 
 export function ModuleHoverOverlay() {
   const hovered = useContext(HoverContext);
-  return hovered ? <div className="module-hover-overlay" data-hover-module={hovered.id} aria-hidden="true" style={hovered.rect}/> : null;
+  const blocked = useContext(BlockedContext);
+  return <>
+    {hovered && <div className="module-hover-overlay" data-hover-module={hovered.id} aria-hidden="true" style={hovered.rect}/>}
+    {blocked && <div className="module-blocked-overlay" data-blocked-column={blocked.column} style={blocked.rect}><span>Products can’t be stacked with other modules</span></div>}
+  </>;
 }
 
 export function ModuleDragProvider({ board, box, editing, container, onMove, children }: {
@@ -22,10 +27,13 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
   const [view, setView] = useState<DragView | null>(null);
   const [hovered, setHovered] = useState<ModuleId | null>(null);
   const [announcement, announce] = useState('');
+  const suppressClick = useRef(false);
   const geometry = resolveBoard(board, box);
   const update = (next: DragView) => { if (session.current) session.current.view = next; setView(next); };
   const clear = () => {
-    const current = session.current; session.current = null; setView(null); setHovered(null);
+    const current = session.current;
+    if (current) suppressClick.current = false;
+    session.current = null; setView(null); setHovered(null);
     if (current?.pointer !== undefined && current.element?.hasPointerCapture(current.pointer)) current.element.releasePointerCapture(current.pointer);
   };
   const finish = () => {
@@ -35,6 +43,7 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
       if (result.changed) { onMove(current.id, current.view.target); announce(`${moduleNames[current.id]} moved. ${targetLabel(current.view.target)}.`); }
     }
     clear();
+    suppressClick.current = !!current?.active && current.pointer !== undefined;
   };
   React.useEffect(() => {
     if (!editing) { clear(); setHovered(null); }
@@ -56,21 +65,26 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
     return all.find(t => t.type === 'column' && Math.abs(localX - targetRect(t, board, geometry).left) <= 22) ||
       all.find(t => { if (t.type !== 'stack') return false; const r = targetRect(t, board, geometry); return localX > r.left + 22 && localX < r.left + r.width - 22 && Math.abs(localY - r.top) <= 32; });
   };
-  const headerProps = (id: ModuleId): HeaderProps => !editing ? {} : {
-    role: 'button', tabIndex: 0, 'aria-label': `Move ${moduleNames[id]}`,
-    'aria-describedby': 'module-move-instructions', 'aria-pressed': view?.id === id,
-    title: 'Drag to move · Space to pick up · Arrow keys to choose a position · Enter to drop · Esc to cancel',
+  const pointerProps: React.HTMLAttributes<HTMLDivElement> = {
     onPointerDown: event => {
-      if (event.button !== 0 || (event.target as HTMLElement).closest('button,a,input,[role="separator"]')) return;
-      event.preventDefault(); event.currentTarget.focus();
-      event.currentTarget.setPointerCapture(event.pointerId);
+      suppressClick.current = false;
+      const target = event.target as Element;
+      const module = target.closest('[data-module-id]');
+      if (!editing || event.button !== 0 || !module || target.closest('[role="separator"]') || session.current) return;
+      const id = module.getAttribute('data-module-id') as ModuleId;
       session.current = { id, x: event.clientX, y: event.clientY, pointer: event.pointerId, element: event.currentTarget, active: false };
     },
     onPointerMove: event => {
       const current = session.current;
       if (!current || current.pointer !== event.pointerId) return;
       if (!current.active && Math.hypot(event.clientX - current.x, event.clientY - current.y) < 6) return;
+      if (!current.active) {
+        current.element?.setPointerCapture(event.pointerId);
+        container.current?.querySelector<HTMLElement>(`[aria-label="Move ${moduleNames[current.id]}"]`)?.focus({ preventScroll: true });
+      }
       current.active = true;
+      suppressClick.current = true;
+      event.preventDefault();
       const scroller = container.current?.parentElement;
       if (scroller) {
         const bounds = scroller.getBoundingClientRect();
@@ -78,12 +92,39 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
         else if (event.clientX < bounds.left + 36) scroller.scrollLeft -= 20;
       }
       const target = hit(event.clientX, event.clientY);
-      const result = target ? moveModule(board, id, target) : undefined;
-      update({ id, x: event.clientX, y: event.clientY, target, reason: result?.reason || (result && !result.changed ? 'Already in this position' : undefined), keyboard: false });
+      const result = target ? moveModule(board, current.id, target) : undefined;
+      const origin = container.current!.getBoundingClientRect();
+      const x = event.clientX - origin.left, y = event.clientY - origin.top;
+      let blockedColumn: number | undefined;
+      if (current.id === 'products' && target?.type !== 'column' && y >= 0 && y <= geometry.height) {
+        const column = board.columns.findIndex(col => {
+          const r = geometry.rects[col.modules[0]];
+          return x >= r.left && x < r.left + r.width;
+        });
+        if (column >= 0 && !board.columns[column].modules.includes('products')) blockedColumn = column;
+      }
+      update({ id: current.id, x: event.clientX, y: event.clientY, target, blockedColumn,
+        reason: blockedColumn !== undefined ? 'Products can’t be stacked with other modules' : result?.reason || (result && !result.changed ? 'Already in this position' : undefined), keyboard: false });
     },
-    onPointerUp: event => { if (session.current?.pointer === event.pointerId) finish(); },
+    onPointerUp: event => {
+      if (session.current?.pointer === event.pointerId) {
+        finish();
+        window.setTimeout(() => { suppressClick.current = false; }, 0);
+      }
+    },
     onPointerCancel: clear,
     onLostPointerCapture: () => { if (session.current?.pointer !== undefined) clear(); },
+    onClickCapture: event => {
+      if (suppressClick.current) { event.preventDefault(); event.stopPropagation(); suppressClick.current = false; }
+    },
+    onDragStartCapture: event => {
+      if (editing && (event.target as Element).closest('[data-module-id]')) event.preventDefault();
+    },
+  };
+  const headerProps = (id: ModuleId): HeaderProps => !editing ? {} : {
+    role: 'button', tabIndex: 0, 'aria-label': `Move ${moduleNames[id]}`,
+    'aria-describedby': 'module-move-instructions', 'aria-pressed': view?.id === id,
+    title: 'Drag anywhere in this module · Space to pick up · Arrow keys to choose a position · Enter to drop · Esc to cancel',
     onKeyDown: event => {
       if (event.key === 'Tab') { clear(); return; }
       if (![' ', 'Enter', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Escape'].includes(event.key)) return;
@@ -111,16 +152,21 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
   };
   const line = view?.target && !view.reason ? targetRect(view.target, board, geometry) : undefined;
   const origin = container.current?.getBoundingClientRect();
+  const blocked = view?.blockedColumn !== undefined ? {
+    column: view.blockedColumn,
+    rect: { left: geometry.rects[board.columns[view.blockedColumn].modules[0]].left, top: 0, width: geometry.widths[view.blockedColumn], height: geometry.height },
+  } : null;
   return <DragContext.Provider value={headerProps}>
     <HoverContext.Provider value={editing && hovered && !view ? { id: hovered, rect: geometry.rects[hovered] } : null}>
-    <div className="module-dnd-scope" data-moving={view?.id}
+    <BlockedContext.Provider value={blocked}>
+    <div className="module-dnd-scope" data-moving={view?.id} data-drop-blocked={blocked ? 'true' : undefined} {...pointerProps}
       onPointerMoveCapture={event => {
         const module = (event.target as Element).closest('[data-module-id]');
         setHovered(editing && !session.current?.active && module ? module.getAttribute('data-module-id') as ModuleId : null);
       }}
-      onPointerLeave={() => setHovered(null)}>
+      onPointerLeave={() => { setHovered(null); if (session.current && !session.current.active) clear(); }}>
       {children}
-      <span id="module-move-instructions" className="move-sr-only">Drag the header to move. Maximum 4 columns and 3 modules per column. Products must be alone. Space picks up, arrows choose a position, Enter drops, Escape cancels.</span>
+      <span id="module-move-instructions" className="move-sr-only">Drag anywhere in a module to move it. Maximum 4 columns and 3 modules per column. Products must be alone. Space picks up, arrows choose a position, Enter drops, Escape cancels.</span>
       <span className="move-sr-only" role="status" aria-live="polite">{announcement}</span>
       {view && <>
         {line && origin && <div className={`module-drop-line ${view.target!.type === 'column' ? 'vertical' : 'horizontal'}`} data-testid="module-drop-line" style={{
@@ -132,6 +178,7 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
         </div>
       </>}
     </div>
+    </BlockedContext.Provider>
     </HoverContext.Provider>
   </DragContext.Provider>;
 }
