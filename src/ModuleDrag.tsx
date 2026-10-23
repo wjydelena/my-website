@@ -1,12 +1,18 @@
 import React, { createContext, useContext, useRef, useState } from 'react';
 import { GripVertical } from 'lucide-react';
-import { DropTarget, ModuleBoard, ModuleId, dropTargets, moduleNames, moveModule, resolveBoard, targetLabel, targetRect } from './module-layout';
+import { DropTarget, ModuleBoard, ModuleId, Rect, dropTargets, moduleNames, moveModule, resolveBoard, targetLabel, targetRect } from './module-layout';
 import './module-drag.css';
 
 type DragView = { id: ModuleId; x: number; y: number; target?: DropTarget; reason?: string; keyboard: boolean };
 type HeaderProps = React.HTMLAttributes<HTMLDivElement>;
 const DragContext = createContext<(id: ModuleId) => HeaderProps>(() => ({}));
+const HoverContext = createContext<{ id: ModuleId; rect: Rect } | null>(null);
 export const useModuleHeader = (id: ModuleId) => useContext(DragContext)(id);
+
+export function ModuleHoverOverlay() {
+  const hovered = useContext(HoverContext);
+  return hovered ? <div className="module-hover-overlay" data-hover-module={hovered.id} aria-hidden="true" style={hovered.rect}/> : null;
+}
 
 export function ModuleDragProvider({ board, box, editing, container, onMove, children }: {
   board: ModuleBoard; box: { width: number; height: number }; editing: boolean;
@@ -14,11 +20,12 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
 }) {
   const session = useRef<{ id: ModuleId; x: number; y: number; pointer?: number; element?: HTMLElement; active: boolean; view?: DragView } | null>(null);
   const [view, setView] = useState<DragView | null>(null);
+  const [hovered, setHovered] = useState<ModuleId | null>(null);
   const [announcement, announce] = useState('');
   const geometry = resolveBoard(board, box);
   const update = (next: DragView) => { if (session.current) session.current.view = next; setView(next); };
   const clear = () => {
-    const current = session.current; session.current = null; setView(null);
+    const current = session.current; session.current = null; setView(null); setHovered(null);
     if (current?.pointer !== undefined && current.element?.hasPointerCapture(current.pointer)) current.element.releasePointerCapture(current.pointer);
   };
   const finish = () => {
@@ -30,7 +37,7 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
     clear();
   };
   React.useEffect(() => {
-    if (!editing) clear();
+    if (!editing) { clear(); setHovered(null); }
   }, [editing]);
   React.useEffect(() => { clear(); }, [board]);
   React.useEffect(() => {
@@ -105,7 +112,13 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
   const line = view?.target && !view.reason ? targetRect(view.target, board, geometry) : undefined;
   const origin = container.current?.getBoundingClientRect();
   return <DragContext.Provider value={headerProps}>
-    <div className="module-dnd-scope" data-moving={view?.id}>
+    <HoverContext.Provider value={editing && hovered && !view ? { id: hovered, rect: geometry.rects[hovered] } : null}>
+    <div className="module-dnd-scope" data-moving={view?.id}
+      onPointerMoveCapture={event => {
+        const module = (event.target as Element).closest('[data-module-id]');
+        setHovered(editing && !session.current?.active && module ? module.getAttribute('data-module-id') as ModuleId : null);
+      }}
+      onPointerLeave={() => setHovered(null)}>
       {children}
       <span id="module-move-instructions" className="move-sr-only">Drag the header to move. Maximum 4 columns and 3 modules per column. Products must be alone. Space picks up, arrows choose a position, Enter drops, Escape cancels.</span>
       <span className="move-sr-only" role="status" aria-live="polite">{announcement}</span>
@@ -119,5 +132,6 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
         </div>
       </>}
     </div>
+    </HoverContext.Provider>
   </DragContext.Provider>;
 }

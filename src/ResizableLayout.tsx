@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useLayoutEffect, useRef, useState } from 'react';
 import './resize.css';
 import { ModuleBoard, ModuleId, DropTarget, MODULES, boardMinWidth, cloneBoard, moveModule, resolveBoard } from './module-layout';
-import { ModuleDragProvider } from './ModuleDrag';
+import { ModuleDragProvider, ModuleHoverOverlay } from './ModuleDrag';
 import { BoardResizeHandles } from './BoardResizeHandles';
 
 type Kind = 'products' | 'live' | 'video' | 'analytics' | 'feed';
@@ -196,6 +196,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     <div className="layout-viewport">
     <div className={`columns resizable-columns${editing ? ' layout-editing' : ''}${focusedChat ? ' chat-focus' : ''}${board ? ' docked-layout' : ''}`} data-column-count={visibleBoard.columns.length} ref={ref} style={style}>
       {children}
+      <ModuleHoverOverlay/>
       {board ? <BoardResizeHandles board={board} box={box} resize={resizeBoard}/> : <>
         <ResizeHandle kind="products" label={focusedChat ? 'Resize products and chat columns' : 'Resize products and live columns'} />
         <ResizeHandle kind="live" label={focusedChat ? 'Resize chat and live columns' : 'Resize live and analytics columns'} />

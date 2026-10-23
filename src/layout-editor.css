@@ -2,7 +2,7 @@
 .topbar button.customize { border: 0; cursor: pointer; font-family: inherit; }
 .topbar.customize-header {
   display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px;
-  height: 48px; background: #254341; border-bottom-color: var(--color-border);
+  height: 48px; background: #474747; border-bottom-color: var(--color-border);
 }
 .customize-title { font-size: 16px; line-height: 21px; white-space: nowrap; }
 .layout-mode-field { display: flex; align-items: center; gap: 8px; position: relative; white-space: nowrap; font-size: 14px; }
