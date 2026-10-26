@@ -1,8 +1,12 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { Gift, Ticket, Layers, Megaphone, ChevronDown, X, Zap, BriefcaseBusiness, Pin, ArrowLeft } from 'lucide-react';
+import { Ticket, Layers, Megaphone, ChevronDown, X, Zap, BriefcaseBusiness, Pin, ArrowLeft } from 'lucide-react';
 import priceIcon from './assets/promotion-tools/01-price-cut.png';
 import groupIcon from './assets/promotion-tools/02-group.png';
+import rushIcon from './assets/promotion-tools/rush-reward.png';
+import surpriseIcon from './assets/promotion-tools/surprise-set.png';
+import giveawayIcon from './assets/promotion-tools/giveaway.png';
+import billboardIcon from './assets/promotion-tools/billboard.png';
 import { useConsoleLayout } from './ResizableLayout';
 import './promotion-tools.css';
 
@@ -10,10 +14,10 @@ const common = 'Let viewers team up to buy your products at a great price.';
 const items = [
   { label: 'Group Deal', image: groupIcon, description: common },
   { label: 'Price Cut', image: priceIcon, description: common },
-  { label: 'Rush reward', icon: Gift, description: common },
-  { label: 'Surprise set', icon: Gift, description: common },
-  { label: 'Giveaway', icon: Zap, description: 'Reward viewers and encourage participation in your LIVE.' },
-  { label: 'Billboard', icon: Zap, description: 'Highlight important messages and products during your LIVE.' },
+  { label: 'Rush reward', image: rushIcon, description: common },
+  { label: 'Surprise set', image: surpriseIcon, description: common },
+  { label: 'Giveaway', image: giveawayIcon, description: 'Reward viewers and encourage participation in your LIVE.' },
+  { label: 'Billboard', image: billboardIcon, description: 'Highlight important messages and products during your LIVE.' },
   { label: 'Flashsale', icon: Zap, description: 'Drive instant purchases by offering limited-time deals' },
   { label: 'Coupon', icon: Ticket, description: common },
   { label: 'Reward ladder', icon: BriefcaseBusiness, description: 'Offer higher-value rewards when shoppers buy more items.' },
@@ -69,13 +73,13 @@ export default function PromotionTools() {
       {pinned.map(label => { const item = items.find(value => value.label === label)!; return <button type="button" className="promo-pill" key={label} onClick={() => showTool(label)}>{graphic(item)}{label}</button>; })}
     </div>
     <button className="promo-more" ref={trigger} type="button" aria-label="More promotions" aria-expanded={open} aria-controls="promotion-tools-list" onClick={() => { if (open) close(); else { setSelected(null); setOpen(true); } }}><ChevronDown size={18}/></button>
-    {open && host && createPortal(<div className="promotion-tools-list" id="promotion-tools-list" ref={panel} role="region" aria-label="All promotions" onPointerDown={event => event.stopPropagation()}>
+    {open && host && createPortal(<div className="promotion-panel-viewport"><div className="promotion-tools-list" id="promotion-tools-list" ref={panel} role="region" aria-label="All promotions" onPointerDown={event => event.stopPropagation()}>
       <div className="promotion-panel-scroll">
         <div className="promotion-panel-heading"><h2>Pinned</h2><button className="promotion-customize" onClick={() => { setCustomizing(!customizing); setSelected(null); }}>{customizing ? 'Done' : 'Customize'}</button><span className="promotion-heading-divider"/><button className="promotion-close" ref={closeButton} aria-label="Close promotions" onClick={close}><X size={18}/></button></div>
         <div className="promotion-pinned">{pinned.map(label => { const item = items.find(value => value.label === label)!; return <button type="button" className="promo-pill" key={label} aria-label={customizing ? `Unpin ${label}` : label} onClick={() => customizing ? togglePin(label) : setSelected(label)}>{graphic(item)}{label}{customizing && <X size={12}/>}</button>; })}{!pinned.length && <span className="promotion-empty">Choose tools below to pin them here.</span>}</div>
         <div className="promotion-all-heading"><h2>All tools</h2><span>{customizing ? 'Select tools to pin or unpin' : 'Click to open and pin tools'}</span></div>
         {active && !customizing ? <section className="promotion-tool-detail"><button className="promotion-back" onClick={() => setSelected(null)}><ArrowLeft size={16}/>All tools</button><h3>{graphic(active)}{active.label}</h3><p>{active.description}</p><button className="promo-pill" onClick={() => togglePin(active.label)}><Pin size={16}/>{pinned.includes(active.label) ? 'Unpin tool' : 'Pin tool'}</button></section> : groups.map(group => <section className="promotion-tool-group" key={group.title}><h3>{group.title}</h3><div className="promotion-tool-grid">{group.labels.map(label => { const item = items.find(value => value.label === label)!; return <button type="button" className="promotion-tool-card" key={label} aria-label={customizing ? `${pinned.includes(label) ? 'Unpin' : 'Pin'} ${label}` : `Open ${label}`} aria-pressed={customizing ? pinned.includes(label) : undefined} onClick={() => customizing ? togglePin(label) : setSelected(label)}><span className="promotion-tool-name">{graphic(item)}{label === 'Rush reward' ? 'Rush Reward' : label}{customizing && <Pin className={pinned.includes(label) ? 'is-pinned' : ''} size={14}/>}</span><span className="promotion-tool-description">{item.description}</span></button>; })}</div></section>)}
       </div>
-    </div>, host)}
+    </div></div>, host)}
   </div>;
 }
