@@ -43,6 +43,7 @@ export default function PromotionTools() {
   const [open, setOpen] = useState(false);
   const [customizing, setCustomizing] = useState(false);
   const [couponActive, setCouponActive] = useState(false);
+  const [couponEntry, setCouponEntry] = useState(0);
   const [couponTab, setCouponTab] = useState('My shop');
   const toolbar = useRef<HTMLDivElement>(null);
   const couponButton = useRef<HTMLButtonElement>(null);
@@ -73,6 +74,7 @@ export default function PromotionTools() {
     if (label !== 'Coupon') return;
     scrollCoupon.current = true;
     setPinned(previous => [...previous.filter(value => value !== 'Coupon'), 'Coupon']);
+    setCouponEntry(previous => previous + 1);
     setOpen(false); setCustomizing(false); setCouponActive(true); setCouponTab('My shop');
   };
   useLayoutEffect(() => {
@@ -93,14 +95,14 @@ export default function PromotionTools() {
       {pinned.map(label => { const item = items.find(value => value.label === label)!; return <button type="button" className={`promo-pill${couponActive && label === 'Coupon' ? ' is-active' : ''}`} ref={label === 'Coupon' ? couponButton : undefined} aria-pressed={label === 'Coupon' ? couponActive : undefined} key={label} onClick={() => showTool(label)}>{graphic(item)}{label}</button>; })}
     </div>
     <button className="promo-more" ref={trigger} type="button" aria-label="More promotions" aria-expanded={open} aria-controls="promotion-tools-list" onClick={() => { if (open) close(); else { setOpen(true); } }}><ChevronDown size={18}/></button>
-    {couponActive && host && createPortal(<section className="coupon-panel" aria-label="Coupon panel" onPointerDown={event => event.stopPropagation()}>
+    {couponActive && host && createPortal(<div className="coupon-panel-viewport"><section key={couponEntry} className="coupon-panel" aria-label="Coupon panel" onPointerDown={event => event.stopPropagation()}>
       <div className="coupon-heading"><h2>Coupon</h2><button type="button" aria-label="Close Coupon" onClick={closeCoupon}><X size={18}/></button></div>
       <div className="coupon-tabs" role="tablist" aria-label="Coupon source">{['My shop', 'Co-funded'].map(tab => <button type="button" key={tab} role="tab" aria-selected={couponTab === tab} onClick={() => setCouponTab(tab)}>{tab}</button>)}</div>
       <div className="coupon-body" role="tabpanel" aria-label={couponTab}>
         <div className="coupon-empty"><img src={couponEmpty} width={224} height={172} alt="20% off coupon illustration"/><h3>Attract customers through coupons!</h3><p>Create coupons to attract new customers to your store, encourage them to purchase, and boost your conversion rate.</p><div className="coupon-actions"><button type="button" className="coupon-primary">Create now</button><button type="button">Check guides</button></div></div>
       </div>
       <footer className="coupon-footer"><button type="button"><Plus size={20}/>Create new</button></footer>
-    </section>, host)}
+    </section></div>, host)}
     {open && host && createPortal(<div className="promotion-panel-viewport"><div className="promotion-tools-list" id="promotion-tools-list" ref={panel} role="region" aria-label="All promotions" onPointerDown={event => event.stopPropagation()}>
       <div className="promotion-panel-scroll">
         <div className="promotion-panel-heading"><h2>Pinned</h2><button className="promotion-customize" onClick={() => { setCustomizing(!customizing); }}>{customizing ? 'Done' : 'Customize'}</button><span className="promotion-heading-divider"/><button className="promotion-close" ref={closeButton} aria-label="Close promotions" onClick={close}><X size={18}/></button></div>

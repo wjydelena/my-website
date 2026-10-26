@@ -45,8 +45,10 @@
 .promotion-tool-card:hover .promotion-tool-name { color: inherit; }
 .promotion-content .promo-pill.is-active { box-shadow: inset 0 0 0 1px #fff; }
 .promotion-content .promo-pill.is-active:focus-visible { outline: none; }
-.product-column > .coupon-panel { position: absolute; z-index: 30; inset: 60px 0 0; background: #2b2b2b; display: flex; flex-direction: column; min-height: 0; }
-.layout-editing .product-column > .coupon-panel { top: 120px; }
+.product-column > .coupon-panel-viewport { position: absolute; z-index: 30; inset: 60px 0 0; overflow: hidden; pointer-events: none; }
+.coupon-panel-viewport > .coupon-panel { position: absolute; inset: 0; background: #2b2b2b; display: flex; flex-direction: column; min-height: 0; pointer-events: auto; animation: promotion-panel-slide 180ms cubic-bezier(.16,1,.3,1); }
+.layout-editing .product-column > .coupon-panel-viewport { top: 120px; }
+@media (prefers-reduced-motion: reduce) { .coupon-panel-viewport > .coupon-panel { animation: none; } }
 .coupon-panel button { font: inherit; color: inherit; cursor: pointer; border: 0; }
 .coupon-panel button:focus-visible { outline: 1px solid #00b2ae; outline-offset: 3px; }
 .coupon-heading { height: 56px; flex: none; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; }
