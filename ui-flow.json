@@ -190,7 +190,7 @@
         {
           "action": "capture",
           "id": "all-promotions",
-          "title": "All ten promotion tools"
+          "title": "All categorized promotion tools"
         },
         {
           "action": "press",
@@ -1663,14 +1663,14 @@
         },
         {
           "action": "capture",
-          "id": "promotion-tool-detail",
-          "title": "Tool description and pin action"
+          "id": "promotion-tool-click-disabled",
+          "title": "Other tools keep the catalog open without detail navigation"
         },
         {
           "action": "press",
           "target": {
             "role": "button",
-            "name": "Unpin tool"
+            "name": "Close promotions"
           },
           "key": "Escape"
         },
@@ -1678,6 +1678,114 @@
           "action": "capture",
           "id": "promotion-panel-dismissed",
           "title": "Escape closes the overlay"
+        }
+      ]
+    },
+    {
+      "id": "coupon-pin-and-open",
+      "title": "Coupon pinning, automatic toolbar positioning and panel",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "wide-overview",
+          "title": "1440px LIVE Console"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "More promotions"
+          }
+        },
+        {
+          "action": "hover",
+          "target": {
+            "role": "button",
+            "name": "Open Coupon"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "coupon-tool-hover",
+          "title": "Coupon card hover surface"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Open Coupon"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "coupon-active-panel",
+          "title": "Coupon pinned at end and selected; catalog closes"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "tab",
+            "name": "Co-funded"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "coupon-co-funded",
+          "title": "Co-funded selected"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "tab",
+            "name": "My shop"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Close Coupon"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "coupon-panel-closed",
+          "title": "Products restored; Coupon stays pinned"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Coupon"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "coupon-reopened",
+          "title": "Pinned Coupon reopens its panel"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "More promotions"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Open Coupon"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "coupon-no-duplicate",
+          "title": "Coupon remains a single last tab"
         }
       ]
     }
