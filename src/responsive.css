@@ -1,13 +1,3 @@
-/* 400 + 324 + 324 columns, 52px navigation and 2px outer border.
-   At 1120px, horizontal workspace gutters total 18px instead of 36px. */
+/* Preserve the minimum desktop width; the workspace stays flush to the
+   navigation and outer frame in every layout mode. */
 .console-shell { min-width: 1120px; }
-.workspace {
-  --compact-gutter: clamp(0px, calc(1138px - 100vw), 18px);
-  margin-left: calc(16px - var(--compact-gutter) * 4 / 9);
-  margin-right: calc(20px - var(--compact-gutter) * 5 / 9);
-}
-/* Four tracks need 1372px. Compress only outer gutters first, then scroll
-   the workspace horizontally when even zero gutters cannot fit them. */
-.workspace:has(.docked-layout[data-column-count="4"]) {
-  --compact-gutter: clamp(0px, calc(1462px - 100vw), 36px);
-}
