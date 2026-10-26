@@ -1,12 +1,16 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { Ticket, Layers, Megaphone, ChevronDown, X, Zap, BriefcaseBusiness, Pin, ArrowLeft } from 'lucide-react';
+import { ChevronDown, X, Pin, ArrowLeft } from 'lucide-react';
 import priceIcon from './assets/promotion-tools/01-price-cut.png';
 import groupIcon from './assets/promotion-tools/02-group.png';
 import rushIcon from './assets/promotion-tools/rush-reward.png';
 import surpriseIcon from './assets/promotion-tools/surprise-set.png';
 import giveawayIcon from './assets/promotion-tools/giveaway.png';
 import billboardIcon from './assets/promotion-tools/billboard.png';
+import boltIcon from './assets/promotion-tools/bolt-fill.png';
+import toolboxIcon from './assets/promotion-tools/toolbox-fill.png';
+import cardsIcon from './assets/promotion-tools/templates-cards-fill.png';
+import adsIcon from './assets/promotion-tools/advertisement-fill.png';
 import { useConsoleLayout } from './ResizableLayout';
 import './promotion-tools.css';
 
@@ -18,12 +22,12 @@ const items = [
   { label: 'Surprise set', image: surpriseIcon, description: common },
   { label: 'Giveaway', image: giveawayIcon, description: 'Reward viewers and encourage participation in your LIVE.' },
   { label: 'Billboard', image: billboardIcon, description: 'Highlight important messages and products during your LIVE.' },
-  { label: 'Flashsale', icon: Zap, description: 'Drive instant purchases by offering limited-time deals' },
-  { label: 'Coupon', icon: Ticket, description: common },
-  { label: 'Reward ladder', icon: BriefcaseBusiness, description: 'Offer higher-value rewards when shoppers buy more items.' },
-  { label: 'Buy more save more', icon: BriefcaseBusiness, description: 'Offer bigger discounts when buyers buy more items.' },
-  { label: 'Card Break', icon: Layers, description: 'Lower the barrier to buying and keep viewers watching with team-based card breaks.' },
-  { label: 'Shop ads', icon: Megaphone, description: 'Reach more shoppers and bring viewers to your LIVE.' },
+  { label: 'Flashsale', image: boltIcon, description: 'Drive instant purchases by offering limited-time deals' },
+  { label: 'Coupon', image: boltIcon, description: common },
+  { label: 'Reward ladder', image: toolboxIcon, description: 'Offer higher-value rewards when shoppers buy more items.' },
+  { label: 'Buy more save more', image: toolboxIcon, description: 'Offer bigger discounts when buyers buy more items.' },
+  { label: 'Card Break', image: cardsIcon, description: 'Lower the barrier to buying and keep viewers watching with team-based card breaks.' },
+  { label: 'Shop ads', image: adsIcon, description: 'Reach more shoppers and bring viewers to your LIVE.' },
 ];
 const groups = [
   { title: 'Promote hero products', labels: ['Group Deal', 'Price Cut', 'Flashsale'] },
@@ -58,9 +62,7 @@ export default function PromotionTools() {
     return () => { document.removeEventListener('pointerdown', dismiss); document.removeEventListener('keydown', escape); };
   }, [open]);
   const togglePin = (label: string) => setPinned(previous => previous.includes(label) ? previous.filter(value => value !== label) : [...previous, label]);
-  const graphic = (item: typeof items[number]) => item.image
-    ? <img className="badge-icon" src={item.image} alt="" width={16} height={16}/>
-    : item.icon ? <item.icon size={16} aria-hidden="true"/> : null;
+  const graphic = (item: typeof items[number]) => <img className="badge-icon" src={item.image} alt="" width={16} height={16}/>;
   const active = items.find(item => item.label === selected);
   const showTool = (label: string) => { setSelected(label); setOpen(true); };
   return <div className="promotion-bar promotion-tools" ref={root}>
