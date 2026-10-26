@@ -1627,7 +1627,14 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Done"
+            "name": "Close promotions"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "More promotions"
           }
         },
         {
@@ -1786,6 +1793,108 @@
           "action": "capture",
           "id": "coupon-no-duplicate",
           "title": "Coupon remains a single last tab"
+        }
+      ]
+    },
+    {
+      "id": "customize-pinned-order",
+      "title": "Customize pin status and save reordered tools",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "wide-overview",
+          "title": "1440px LIVE Console"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "More promotions"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "pinned-sort-edit",
+          "title": "Drag handles and card pin states"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Group Deal"
+          },
+          "key": "ArrowRight"
+        },
+        {
+          "action": "capture",
+          "id": "pinned-reordered",
+          "title": "Group Deal moved after Price Cut via accessible reorder"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Pin Flashsale"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "flashsale-pinned",
+          "title": "Flashsale pinned and reflected in Pinned tools"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Unpin Surprise set"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "surprise-unpinned",
+          "title": "Surprise set unpinned from both views"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Close promotions"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "customized-toolbar",
+          "title": "Saved order shown in toolbar"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "More promotions"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "customized-order-retained",
+          "title": "Order and pin states retained when reopened"
         }
       ]
     }

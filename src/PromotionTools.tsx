@@ -13,6 +13,7 @@ import cardsIcon from './assets/promotion-tools/templates-cards-fill.png';
 import adsIcon from './assets/promotion-tools/advertisement-fill.png';
 import { useConsoleLayout } from './ResizableLayout';
 import couponEmpty from './assets/promotion-tools/coupon-empty.png';
+import PinnedTools from './PinnedTools';
 import './promotion-tools.css';
 
 const common = 'Let viewers team up to buy your products at a great price.';
@@ -38,6 +39,16 @@ const groups = [
   { title: 'Decorate LIVE room', labels: ['Billboard'] },
 ];
 
+const pinnedStorageKey = 'live-console.pinned-tools.v199';
+const initialPinned = () => {
+  const fallback = items.slice(0, 6).map(item => item.label);
+  try {
+    const saved = JSON.parse(localStorage.getItem(pinnedStorageKey) || 'null');
+    if (!Array.isArray(saved)) return fallback;
+    return [...new Set(saved.filter((label: unknown): label is string => typeof label === 'string' && items.some(item => item.label === label)))];
+  } catch { return fallback; }
+};
+
 export default function PromotionTools() {
   const { editing, mode } = useConsoleLayout();
   const [open, setOpen] = useState(false);
@@ -48,7 +59,10 @@ export default function PromotionTools() {
   const toolbar = useRef<HTMLDivElement>(null);
   const couponButton = useRef<HTMLButtonElement>(null);
   const scrollCoupon = useRef(false);
-  const [pinned, setPinned] = useState(items.slice(0, 6).map(item => item.label));
+  const [pinned, setPinned] = useState<string[]>(initialPinned);
+  useEffect(() => {
+    if (!open) { try { localStorage.setItem(pinnedStorageKey, JSON.stringify(pinned)); } catch { /* Keep the current-session order if storage is unavailable. */ } }
+  }, [pinned, open]);
   const [host, setHost] = useState<HTMLElement | null>(null);
   const root = useRef<HTMLDivElement>(null);
   const panel = useRef<HTMLDivElement>(null);
@@ -69,20 +83,24 @@ export default function PromotionTools() {
     return () => { document.removeEventListener('pointerdown', dismiss); document.removeEventListener('keydown', escape); };
   }, [open]);
   const togglePin = (label: string) => setPinned(previous => previous.includes(label) ? previous.filter(value => value !== label) : [...previous, label]);
-  const graphic = (item: typeof items[number]) => <img className="badge-icon" src={item.image} alt="" width={16} height={16}/>;
+  const graphic = (item: typeof items[number]) => <img className="badge-icon" src={item.image} alt="" width={16} height={16} draggable={false}/>;
   const showTool = (label: string) => {
     if (label !== 'Coupon') return;
     scrollCoupon.current = true;
-    setPinned(previous => [...previous.filter(value => value !== 'Coupon'), 'Coupon']);
+    setPinned(previous => previous.includes('Coupon') ? previous : [...previous, 'Coupon']);
     setCouponEntry(previous => previous + 1);
     setOpen(false); setCustomizing(false); setCouponActive(true); setCouponTab('My shop');
   };
   useLayoutEffect(() => {
     if (!scrollCoupon.current || !couponActive) return;
     scrollCoupon.current = false;
-    if (toolbar.current) toolbar.current.scrollLeft = toolbar.current.scrollWidth;
+    if (toolbar.current && couponButton.current) {
+      const row = toolbar.current.getBoundingClientRect(), tab = couponButton.current.getBoundingClientRect();
+      if (tab.right > row.right - 36) toolbar.current.scrollLeft += tab.right - row.right + 36;
+      else if (tab.left < row.left) toolbar.current.scrollLeft -= row.left - tab.left;
+    }
     couponButton.current?.focus({ preventScroll: true });
-  }, [pinned, couponActive]);
+  }, [pinned, couponActive, couponEntry]);
   const closeCoupon = () => { setCouponActive(false); couponButton.current?.focus({ preventScroll: true }); };
 
   return <div className="promotion-bar promotion-tools" ref={root}>
@@ -103,12 +121,12 @@ export default function PromotionTools() {
       </div>
       <footer className="coupon-footer"><button type="button"><Plus size={20}/>Create new</button></footer>
     </section></div>, host)}
-    {open && host && createPortal(<div className="promotion-panel-viewport"><div className="promotion-tools-list" id="promotion-tools-list" ref={panel} role="region" aria-label="All promotions" onPointerDown={event => event.stopPropagation()}>
+    {open && host && createPortal(<div className="promotion-panel-viewport"><div className={`promotion-tools-list${customizing ? ' is-customizing' : ''}`} id="promotion-tools-list" ref={panel} role="region" aria-label="All promotions" onPointerDown={event => event.stopPropagation()}>
       <div className="promotion-panel-scroll">
-        <div className="promotion-panel-heading"><h2>Pinned</h2><button className="promotion-customize" onClick={() => { setCustomizing(!customizing); }}>{customizing ? 'Done' : 'Customize'}</button><span className="promotion-heading-divider"/><button className="promotion-close" ref={closeButton} aria-label="Close promotions" onClick={close}><X size={18}/></button></div>
-        <div className="promotion-pinned">{pinned.map(label => { const item = items.find(value => value.label === label)!; return <button type="button" className="promo-pill" key={label} aria-label={customizing ? `Unpin ${label}` : label} onClick={() => customizing ? togglePin(label) : showTool(label)}>{graphic(item)}{label}{customizing && <X size={12}/>}</button>; })}{!pinned.length && <span className="promotion-empty">Choose tools below to pin them here.</span>}</div>
-        <div className="promotion-all-heading"><h2>All tools</h2><span>{customizing ? 'Select tools to pin or unpin' : 'Click to open and pin tools'}</span></div>
-        {groups.map(group => <section className="promotion-tool-group" key={group.title}><h3>{group.title}</h3><div className="promotion-tool-grid">{group.labels.map(label => { const item = items.find(value => value.label === label)!; return <button type="button" className="promotion-tool-card" key={label} aria-label={customizing ? `${pinned.includes(label) ? 'Unpin' : 'Pin'} ${label}` : `Open ${label}`} aria-pressed={customizing ? pinned.includes(label) : undefined} onClick={() => customizing ? togglePin(label) : showTool(label)}><span className="promotion-tool-name">{graphic(item)}{label === 'Rush reward' ? 'Rush Reward' : label}{customizing && <Pin className={pinned.includes(label) ? 'is-pinned' : ''} size={14}/>}</span><span className="promotion-tool-description">{item.description}</span></button>; })}</div></section>)}
+        <div className="promotion-panel-heading"><h2>Pinned</h2><button className="promotion-customize" disabled={customizing} onClick={() => setCustomizing(true)}>Customize</button><span className="promotion-heading-divider"/><button className="promotion-close" ref={closeButton} aria-label="Close promotions" onClick={close}><X size={18}/></button></div>
+        <PinnedTools labels={pinned} customizing={customizing} onOrderChange={setPinned} onOpen={showTool} graphic={label => graphic(items.find(item => item.label === label)!)} />
+        <div className="promotion-all-heading"><h2>All tools</h2><span>Click to open and pin tools</span></div>
+        {groups.map(group => <section className="promotion-tool-group" key={group.title}><h3>{group.title}</h3><div className="promotion-tool-grid">{group.labels.map(label => { const item = items.find(value => value.label === label)!; return <button type="button" className="promotion-tool-card" key={label} aria-label={customizing ? `${pinned.includes(label) ? 'Unpin' : 'Pin'} ${label}` : `Open ${label}`} aria-pressed={customizing ? pinned.includes(label) : undefined} onClick={() => customizing ? togglePin(label) : showTool(label)}><span className="promotion-tool-name">{graphic(item)}{label === 'Rush reward' ? 'Rush Reward' : label}{customizing && <Pin className={`promotion-card-pin${pinned.includes(label) ? ' is-pinned' : ''}`} fill={pinned.includes(label) ? 'currentColor' : 'none'} size={14} aria-hidden="true"/>}</span><span className="promotion-tool-description">{item.description}</span></button>; })}</div></section>)}
       </div>
     </div></div>, host)}
   </div>;
