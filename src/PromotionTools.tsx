@@ -62,8 +62,8 @@ export default function PromotionTools() {
   const scrollCoupon = useRef(false);
   const [pinned, setPinned] = useState<string[]>(initialPinned);
   useEffect(() => {
-    if (!open) { try { localStorage.setItem(pinnedStorageKey, JSON.stringify(pinned)); } catch { /* Keep the current-session order if storage is unavailable. */ } }
-  }, [pinned, open]);
+    if (!open || !customizing) { try { localStorage.setItem(pinnedStorageKey, JSON.stringify(pinned)); } catch { /* Keep the current-session order if storage is unavailable. */ } }
+  }, [pinned, open, customizing]);
   const [host, setHost] = useState<HTMLElement | null>(null);
   const root = useRef<HTMLDivElement>(null);
   const panel = useRef<HTMLDivElement>(null);
@@ -124,7 +124,7 @@ export default function PromotionTools() {
     </section></div>, host)}
     {open && host && createPortal(<div className="promotion-panel-viewport"><div className={`promotion-tools-list${customizing ? ' is-customizing' : ''}`} id="promotion-tools-list" ref={panel} role="region" aria-label="All promotions" onPointerDown={event => event.stopPropagation()}>
       <div className="promotion-panel-scroll">
-        <div className="promotion-panel-heading"><h2>Pinned</h2><button className="promotion-customize" disabled={customizing} onClick={() => setCustomizing(true)}>Customize</button><span className="promotion-heading-divider"/><button className="promotion-close" ref={closeButton} aria-label="Close promotions" onClick={close}><X size={18}/></button></div>
+        <div className="promotion-panel-heading"><h2>Pinned</h2><button className="promotion-customize" onClick={() => setCustomizing(previous => !previous)}>{customizing ? 'Done' : 'Customize'}</button><span className="promotion-heading-divider"/><button className="promotion-close" ref={closeButton} aria-label="Close promotions" onClick={close}><X size={18}/></button></div>
         <PinnedTools labels={pinned} customizing={customizing} onOrderChange={setPinned} onOpen={showTool} graphic={label => graphic(items.find(item => item.label === label)!)} />
         <div className="promotion-all-heading"><h2>All tools</h2><span>Click to open and pin tools</span></div>
         {groups.map(group => <section className="promotion-tool-group" key={group.title}><h3>{group.title}</h3><div className="promotion-tool-grid">{group.labels.map(label => { const item = items.find(value => value.label === label)!; return <button type="button" className="promotion-tool-card" key={label} aria-label={customizing ? `${pinned.includes(label) ? 'Unpin' : 'Pin'} ${label}` : `Open ${label}`} aria-pressed={customizing ? pinned.includes(label) : undefined} onClick={() => customizing ? togglePin(label) : showTool(label)}><span className="promotion-tool-name">{graphic(item)}{label === 'Rush reward' ? 'Rush Reward' : label}{customizing && <Pin className={`promotion-card-pin${pinned.includes(label) ? ' is-pinned' : ''}`} fill={pinned.includes(label) ? 'currentColor' : 'none'} size={14} aria-hidden="true"/>}</span><span className="promotion-tool-description">{item.description}</span></button>; })}</div></section>)}

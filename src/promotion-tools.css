@@ -40,7 +40,6 @@
 /* Hover stays inside the card without changing its size or spacing. */
 .promotion-tool-card:hover, .promotion-tool-card:focus-visible { background: #444444; }
 .promotion-tool-card:hover .promotion-tool-name { color: inherit; }
-.promotion-customize:disabled { opacity: .4; cursor: default; }
 .promotion-pinned.is-customizing .promo-pill { cursor: grab; touch-action: none; user-select: none; }
 .promotion-grip { color: #ffffff66; flex: none; }
 .promotion-pinned .promo-pill.is-dragging-pin { opacity: .45; box-shadow: inset 0 0 0 1px #FFFFFF; cursor: grabbing; }

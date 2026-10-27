@@ -1869,6 +1869,18 @@
           "action": "click",
           "target": {
             "role": "button",
+            "name": "Done"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "customized-done-saved",
+          "title": "Done saves pin settings and order while keeping the panel open"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
             "name": "Close promotions"
           }
         },
