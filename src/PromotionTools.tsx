@@ -8,6 +8,7 @@ import surpriseIcon from './assets/promotion-tools/surprise-set.png';
 import giveawayIcon from './assets/promotion-tools/giveaway.png';
 import billboardIcon from './assets/promotion-tools/billboard.png';
 import boltIcon from './assets/promotion-tools/bolt-fill.png';
+import couponIcon from './assets/promotion-tools/coupon-fill.png';
 import toolboxIcon from './assets/promotion-tools/toolbox-fill.png';
 import cardsIcon from './assets/promotion-tools/templates-cards-fill.png';
 import adsIcon from './assets/promotion-tools/advertisement-fill.png';
@@ -19,17 +20,17 @@ import './promotion-tools.css';
 const common = 'Let viewers team up to buy your products at a great price.';
 const items = [
   { label: 'Group Deal', image: groupIcon, description: common },
-  { label: 'Price Cut', image: priceIcon, description: common },
-  { label: 'Rush reward', image: rushIcon, description: common },
+  { label: 'Price Cut', image: priceIcon, description: 'Let audience cut price together. The more they cut, the better the deal' },
+  { label: 'Rush reward', image: rushIcon, description: 'Encourage purchases by giving buyers a chance to win prizes.' },
   { label: 'Surprise set', image: surpriseIcon, description: common },
-  { label: 'Giveaway', image: giveawayIcon, description: 'Reward viewers and encourage participation in your LIVE.' },
+  { label: 'Giveaway', image: giveawayIcon, description: 'Use prize to create excitement and reward your audience' },
   { label: 'Billboard', image: billboardIcon, description: 'Highlight key information on screen during your LIVE.' },
   { label: 'Flashsale', image: boltIcon, description: 'Drive instant purchases by offering limited-time deals' },
-  { label: 'Coupon', image: boltIcon, description: common },
+  { label: 'Coupon', image: couponIcon, description: 'Coupons could attract more new customers purchase your products.' },
   { label: 'Reward ladder', image: toolboxIcon, description: 'Offer higher-value rewards when shoppers buy more items.' },
   { label: 'Buy more save more', image: toolboxIcon, description: 'Offer bigger discounts when buyers buy more items.' },
   { label: 'Card Break', image: cardsIcon, description: 'Lower the barrier to buying and keep viewers watching with team-based card breaks.' },
-  { label: 'Shop ads', image: adsIcon, description: 'Reach more shoppers and bring viewers to your LIVE.' },
+  { label: 'Shop ads', image: adsIcon, description: 'Promote your products to reach more shoppers and drive sales.' },
 ];
 const groups = [
   { title: 'Promote hero products', labels: ['Group Deal', 'Price Cut', 'Flashsale'] },
