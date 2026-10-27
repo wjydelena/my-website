@@ -18,7 +18,7 @@
 .module-dnd-scope[data-moving="activity"] .docked-layout .activity-module { opacity: .3; }
 .module-drop-line { position: fixed; z-index: 1000; background: #089B93; pointer-events: none; }
 .module-hover-overlay { position: absolute; z-index: 10; background: rgba(0, 178, 174, 0.12); pointer-events: none; }
-.module-drag-ghost { position: fixed; z-index: 1001; display: flex; width: 240px; height: 54px; padding: 14px 16px; flex-direction: column; justify-content: center; align-items: flex-start; gap: 12px; border-radius: 8px; border: 1px solid #FFFFFF; opacity: .98; background: hsl(176.6667deg 40% 20%); box-shadow: 0 8px 24px 2px rgba(0, 0, 0, 0.40); pointer-events: none; }
+.module-drag-ghost { position: fixed; z-index: 1001; display: flex; width: 240px; height: 54px; padding: 14px 16px; flex-direction: column; justify-content: center; align-items: flex-start; gap: 12px; border-radius: 8px; border: 1px solid #089B93; opacity: .98; background: hsl(176.6667deg 40% 20%); box-shadow: 0 8px 24px 2px rgba(0, 0, 0, 0.40); pointer-events: none; }
 .module-drag-ghost-title { display: flex; align-items: center; gap: 8px; min-width: 0; height: 24px; flex: none; }
 .module-drag-ghost strong { display: block; font-size: 14px; line-height: 24px; }
 .move-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
