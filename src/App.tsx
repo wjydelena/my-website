@@ -19,6 +19,7 @@ import assistantIcon from './assets/LIVE_Ai_Assistant_Fill.svg';
 import './header.css';
 import './responsive.css';
 import './chat-focus.css';
+import './light-theme.css';
 const BadgeIcon=({kind}:{kind:'group'|'cut'})=><img className="badge-icon" src={kind==='group'?groupIcon:cutIcon} alt=""/>;
 const Avatar=({index}:{index:number})=><img className="avatar" src={avatars[index]} alt=""/>;
 function Sidebar(){return <aside className="sidebar"><PanelLeft className="sidebar-brand" size={18}/><div className="nav-rule"/><div className="nav-icons">{[House,Video,LayoutGrid,Store,Megaphone,Monitor,UserRound].map((Item,i)=><span className={'nav-icon '+(i===1?'selected':'')} key={i}><Item size={16} strokeWidth={2.2}/></span>)}</div><div className="account"><Avatar index={18}/></div></aside>}
