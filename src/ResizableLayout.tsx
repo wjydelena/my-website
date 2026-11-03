@@ -71,7 +71,7 @@ export function useConsoleLayout() {
 export function ResizableColumns({ children, header }: { children: React.ReactNode; header?: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const [box, setBox] = useState({ width: 1190, height: 818 });
-  const [ratios, setRatios] = useState([.38, .31, .31]);
+  const [ratios, setRatios] = useState([.4, .3, .3]);
   const [heights, setHeights] = useState({ video: 340, analytics: 194, feed: 272 });
   const [editing, setEditing] = useState(false);
   const [mode, setMode] = useState<LayoutMode>('Standard');
@@ -113,7 +113,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     setMode(next);
     if (next === 'Standard') {
       setArrangement('balanced');
-      setRatios([.38, .31, .31]);
+      setRatios([.4, .3, .3]);
       setHeights({ video: 340, analytics: 194, feed: 272 });
     } else if (next === 'Chat focus') {
       setArrangement('chat-focus');
@@ -175,7 +175,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     else setHeights(previous => ({ ...previous, [kind]: next }));
   };
   const reset = (kind: Kind) => {
-    if (kind === 'products' || kind === 'live') { markCustom(); setRatios([.38, .31, .31]); }
+    if (kind === 'products' || kind === 'live') { markCustom(); setRatios(focusedChat ? [.38, .31, .31] : [.4, .3, .3]); }
     else change(kind, (focusedChat ? { video: 240, analytics: 198, feed: 206 } : { video: 340, analytics: 194, feed: 272 })[kind]);
   };
   const move = (id: ModuleId, target: DropTarget) => {

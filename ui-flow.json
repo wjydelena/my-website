@@ -1909,6 +1909,170 @@
           "title": "Order and pin states retained when reopened"
         }
       ]
+    },
+    {
+      "id": "sidebar-expand-collapse",
+      "title": "Expand navigation and toggle menu groups",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "wide-overview",
+          "title": "1440px LIVE Console"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Expand navigation"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "nav-expanded",
+          "title": "Expanded LIVE Manager navigation"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "LIVE tools"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "nav-tools-collapsed",
+          "title": "LIVE tools submenu collapsed"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "LIVE tools"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Collapse navigation"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "nav-collapsed",
+          "title": "Compact navigation restored"
+        }
+      ]
+    },
+    {
+      "id": "product-card-controls",
+      "title": "Select pin reorder and edit reference products",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "wide-overview",
+          "title": "1440px LIVE Console"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Select all products"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "products-selected",
+          "title": "All products selected"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Pin product 1"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "product-one-pinned",
+          "title": "First product pinned"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Move product 2 to top"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "product-two-first",
+          "title": "Product moved to top"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Edit product 2"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "product-edit-dialog",
+          "title": "Local product editor"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "In stock"
+          },
+          "value": "80K"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Save product"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "product-edit-saved",
+          "title": "Edited inventory saved"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Delete product 3"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "product-delete-confirmation",
+          "title": "Delete requires confirmation"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "product-delete-cancelled",
+          "title": "Delete cancelled without changing list"
+        }
+      ]
     }
   ]
 }
