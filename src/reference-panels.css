@@ -1,0 +1,72 @@
+@font-face{font-family:'TikTok Text';src:url('./fonts/TikTokText-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'TikTok Text';src:url('./fonts/TikTokText-Medium.woff2') format('woff2');font-weight:500 600;font-style:normal;font-display:swap}
+@font-face{font-family:'TikTok Text';src:url('./fonts/TikTokText-Bold.woff2') format('woff2');font-weight:700 900;font-style:normal;font-display:swap}
+:root{--font-ui:'TikTok Text',Arial,sans-serif;--weight-semibold:500;--text-title:16px}
+body,button,input,select,textarea,.console-shell *,.module-drag-ghost,.promotion-drag-ghost,.module-drag-ghost *,.promotion-drag-ghost *{font-family:var(--font-ui)!important}
+.console-shell h2,.console-shell .reference-product-tabs button,.console-shell .activity-tabs button:not(.activity-filter),.console-shell .coupon-tabs>button{font-size:16px!important;font-weight:500!important;line-height:24px}
+.console-shell .console-title{font-size:16px;font-weight:500}
+.console-shell .quick-live,.console-shell .topbar strong{font-weight:500}
+.console-shell .topbar>.divider{display:none}
+.console-shell .topbar{gap:12px}
+.console-shell .promotion-tools .promo-pill{padding:0 16px;gap:8px;font-size:14px;font-weight:500}
+.console-shell .reference-product-price{font-weight:500}
+.console-shell .reference-product-tabs{height:57px}
+.console-shell .reference-select-all{transform:translateY(1px)}
+.console-shell .reference-product-pin{font-weight:500}
+.console-shell .reference-product-footer .footer-pill{font-weight:500}
+.console-shell .video-control-bar{top:12px;gap:7px;left:16px;right:16px;font-size:12px;white-space:nowrap}
+.video-control-bar button{display:flex;align-items:center;justify-content:center;border:0;padding:0;background:none;color:inherit;cursor:pointer}
+.scripts-control{display:flex;align-items:center;gap:6px;color:#ddd;font-weight:500}
+.scripts-control button{width:28px;height:14px;border-radius:20px;background:#666;justify-content:flex-start;padding:1px}
+.scripts-control button[aria-checked="true"]{background:#009995;justify-content:flex-end}
+.scripts-control i{width:12px;height:12px;border-radius:50%;background:white}
+.console-shell .video-control-bar .timer{font-family:var(--font-ui)!important;font-size:12px;font-weight:500}
+.console-shell .live-image{border-radius:0}
+.console-shell .chat-title{height:56px;gap:16px}
+.chat-title button{border:0;background:none;padding:0;color:#737373;cursor:pointer}
+.console-shell .reference-chat .chat-scroll{overflow-y:auto;padding:1px 16px 0;scrollbar-width:none;mask-image:linear-gradient(#000 calc(100% - 12px),transparent)}
+.console-shell .reference-chat .message{margin-bottom:12px;gap:8px}
+.reference-chat .name-line>span:first-child{min-width:0;overflow:hidden;text-overflow:ellipsis;flex-shrink:1}
+.reference-chat .chat-tag,.reference-chat .customer-tag{flex-shrink:0}
+.console-shell .reference-chat .avatar{width:28px;height:28px;flex:none}
+.console-shell .reference-chat .name-line{font-size:14px;line-height:18px;min-height:18px;gap:4px}
+.console-shell .reference-chat .message p{margin-top:6px;font-size:14px;line-height:20px;overflow-wrap:break-word}
+.console-shell .reference-chat .customer-tag{height:18px;font-size:11px;font-weight:400;gap:3px;padding:0 6px;white-space:nowrap}
+.console-shell .reference-chat .customer-tag img{width:13px;height:13px}
+.console-shell .reference-chat .chat-tag{height:18px;padding:0 6px;gap:3px;font-size:11px;font-weight:500}
+.console-shell .reference-chat .comment-box{margin:16px;height:40px;border-radius:4px;gap:8px}
+.comment-box input{background:none;border:0;outline:0;color:#141414;font-size:14px;min-width:0;flex:1;padding:0}
+.comment-box input::placeholder{color:#a3a3a3}
+.comment-count{font-size:12px;white-space:nowrap}
+.comment-box button{border:0;padding:0;background:none;cursor:pointer}
+.console-shell .analytics{padding:0 16px 16px}
+.console-shell .analytics-title{height:56px;margin-bottom:0}
+.console-shell .analytics-title>span{font-size:14px;font-weight:500}
+.console-shell .metric{height:60px;padding:8px;gap:4px;border-radius:6px}
+.console-shell .metric strong{font-size:16px;font-weight:500;line-height:24px}
+.console-shell .metric>span{font-size:12px;line-height:16px}
+.console-shell .activity-tabs{height:56px;gap:32px;position:relative}
+.activity-tabs>button{height:100%;position:relative;display:flex;align-items:center;white-space:nowrap;background:none;border:0;color:#161616;padding:0;cursor:pointer}
+.activity-tabs>button.active::after{content:'';position:absolute;bottom:8px;height:2px;left:0;right:0;background:#009995}
+.activity-tabs>.activity-filter{margin-left:auto;color:#737373}
+.console-shell .activity-list{padding:8px 16px 0;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#e3e3e3 transparent}
+.console-shell .activity{height:32px;min-height:32px;align-items:center;gap:8px;padding:4px;margin-bottom:8px;border-radius:18px;overflow:hidden;background:linear-gradient(90deg,#ebf7f7 65%,#fff)}
+.console-shell .activity p{font-size:14px;line-height:24px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.console-shell .activity .person-name,.console-shell .feed-item .person-name{font-weight:500}
+.console-shell .activity .mini-product,.console-shell .feed-item .mini-product{width:24px;height:24px;border-radius:4px;vertical-align:top;display:inline-block;margin:0 2px}
+.purchase-divider{display:inline-block;width:1px;height:12px;background:#d2dede;vertical-align:middle;margin:0 8px}
+.activity strong,.feed-item strong{font-weight:500}
+.console-shell .event-feed{padding:8px 16px 16px}
+.console-shell .feed-scroll{overflow-y:auto;scrollbar-width:thin;scrollbar-color:#e3e3e3 transparent}
+.console-shell .feed-item{gap:8px;min-height:32px;padding:4px;margin-bottom:8px;border-radius:20px;background:linear-gradient(90deg,#f5f5f5 65%,#fff)}
+.console-shell .feed-item.plain-event{background:none;min-height:24px;padding:0;margin-bottom:8px}
+.console-shell .feed-item p{font-size:14px;line-height:24px}
+.console-shell .gift-product{height:24px;width:24px;display:inline-block;vertical-align:top;margin-left:4px}
+.video-preview{container-type:inline-size}
+@container(max-width:360px){.console-shell .video-control-bar{gap:5px;left:12px;right:12px}.video-control-bar>.divider:nth-of-type(2),.video-control-bar .video-mic{display:none}}
+.reference-chat-options,.reference-activity-options{position:absolute;top:48px;right:16px;padding:12px;z-index:20;border:1px solid #e3e3e3;border-radius:6px;background:#fff;box-shadow:0 4px 16px #0001;font-size:13px}
+.reference-chat-options label,.reference-activity-options label{display:flex;gap:8px;align-items:center}
+.layout-editing .scripts-control,.layout-editing .video-mic{pointer-events:none}
+.layout-editing .reference-chat .comment-box,.layout-editing .reference-chat .chat-title>button{opacity:.3;pointer-events:none}
+.layout-editing .activity-tabs>button{pointer-events:none}
+@media(max-width:1250px){.video-control-bar>.divider:nth-of-type(2),.video-control-bar .video-mic{display:none}}

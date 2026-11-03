@@ -72,7 +72,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
   const ref = useRef<HTMLDivElement>(null);
   const [box, setBox] = useState({ width: 1190, height: 818 });
   const [ratios, setRatios] = useState([.4, .3, .3]);
-  const [heights, setHeights] = useState({ video: 340, analytics: 194, feed: 272 });
+  const [heights, setHeights] = useState({ video: 268, analytics: 200, feed: 462 });
   const [editing, setEditing] = useState(false);
   const [mode, setMode] = useState<LayoutMode>('Standard');
   const [arrangement, setArrangement] = useState<Arrangement>('balanced');
@@ -114,14 +114,14 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     if (next === 'Standard') {
       setArrangement('balanced');
       setRatios([.4, .3, .3]);
-      setHeights({ video: 340, analytics: 194, feed: 272 });
+      setHeights({ video: 268, analytics: 200, feed: 462 });
     } else if (next === 'Chat focus') {
       setArrangement('chat-focus');
       setRatios([.38, .31, .31]);
       setHeights({ video: 240, analytics: 198, feed: 206 });
     } else if (next === 'Host focus') {
       setArrangement('host-focus');
-      setHeights({ video: 340, analytics: 194, feed: 272 });
+      setHeights({ video: 268, analytics: 200, feed: 462 });
     }
   };
   useLayoutEffect(() => {
@@ -176,7 +176,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
   };
   const reset = (kind: Kind) => {
     if (kind === 'products' || kind === 'live') { markCustom(); setRatios(focusedChat ? [.38, .31, .31] : [.4, .3, .3]); }
-    else change(kind, (focusedChat ? { video: 240, analytics: 198, feed: 206 } : { video: 340, analytics: 194, feed: 272 })[kind]);
+    else change(kind, (focusedChat ? { video: 240, analytics: 198, feed: 206 } : { video: 268, analytics: 200, feed: 462 })[kind]);
   };
   const move = (id: ModuleId, target: DropTarget) => {
     if (!editing) return;

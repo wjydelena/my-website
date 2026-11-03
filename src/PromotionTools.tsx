@@ -27,7 +27,7 @@ const items = [
   { label: 'Billboard', image: billboardIcon, description: 'Highlight key information on screen during your LIVE.' },
   { label: 'Flashsale', image: boltIcon, description: 'Drive instant purchases by offering limited-time deals' },
   { label: 'Coupon', image: couponIcon, description: 'Coupons could attract more new customers purchase your products.' },
-  { label: 'Reward ladder', image: toolboxIcon, description: 'Offer higher-value rewards when shoppers buy more items.' },
+  { label: 'Reward ladder', image: surpriseIcon, description: 'Offer higher-value rewards when shoppers buy more items.' },
   { label: 'Buy more save more', image: toolboxIcon, description: 'Offer bigger discounts when buyers buy more items.' },
   { label: 'Card Break', image: cardsIcon, description: 'Lower the barrier to buying and keep viewers watching with team-based card breaks.' },
   { label: 'Shop ads', image: adsIcon, description: 'Promote your products to reach more shoppers and drive sales.' },
@@ -42,7 +42,7 @@ const groups = [
 
 const pinnedStorageKey = 'live-console.pinned-tools.v199';
 const initialPinned = () => {
-  const fallback = items.slice(0, 6).map(item => item.label);
+  const fallback = ['Group Deal', 'Price Cut', 'Rush reward', 'Reward ladder', 'Surprise set', 'Giveaway', 'Billboard'];
   try {
     const saved = JSON.parse(localStorage.getItem(pinnedStorageKey) || 'null');
     if (!Array.isArray(saved)) return fallback;
@@ -111,7 +111,7 @@ export default function PromotionTools() {
           event.preventDefault(); event.currentTarget.scrollBy({ left: event.key === 'ArrowRight' ? 240 : -240, behavior: 'smooth' });
         }
       }}>
-      {pinned.map(label => { const item = items.find(value => value.label === label)!; return <button type="button" className={`promo-pill${couponActive && label === 'Coupon' ? ' is-active' : ''}`} ref={label === 'Coupon' ? couponButton : undefined} aria-pressed={label === 'Coupon' ? couponActive : undefined} key={label} onClick={() => showTool(label)}>{graphic(item)}{label}</button>; })}
+      {pinned.map(label => { const item = items.find(value => value.label === label)!; return <button type="button" className={`promo-pill${couponActive && label === 'Coupon' ? ' is-active' : ''}`} ref={label === 'Coupon' ? couponButton : undefined} aria-pressed={label === 'Coupon' ? couponActive : undefined} key={label} onClick={() => showTool(label)}>{graphic(item)}{label === 'Rush reward' ? 'Rush Reward' : label}</button>; })}
     </div>
     <button className="promo-more" ref={trigger} type="button" aria-label="More promotions" aria-expanded={open} aria-controls="promotion-tools-list" onClick={() => { if (open) close(); else { setOpen(true); } }}><ChevronDown size={18}/></button>
     {couponActive && host && createPortal(<div className="coupon-panel-viewport"><section key={couponEntry} className="coupon-panel" aria-label="Coupon panel" onPointerDown={event => event.stopPropagation()}>

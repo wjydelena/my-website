@@ -2073,6 +2073,152 @@
           "title": "Delete cancelled without changing list"
         }
       ]
+    },
+    {
+      "id": "reference-chat-and-video",
+      "title": "Chat comment and video preview controls",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "wide-overview",
+          "title": "1440px LIVE Console"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Enter comment"
+          },
+          "value": "Can you show the next product?"
+        },
+        {
+          "action": "capture",
+          "id": "chat-comment-draft",
+          "title": "Local comment draft"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Send comment"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Chat settings"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "chat-settings",
+          "title": "Chat badge settings"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Chat settings"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "switch",
+            "name": "Scripts"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Pause video preview"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "video-paused",
+          "title": "Preview paused with Scripts off"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Play video preview"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reference-activity-tabs",
+      "title": "Activity filters and top customers",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "wide-overview",
+          "title": "1440px LIVE Console"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "tab",
+            "name": "Top customer"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "top-customers",
+          "title": "Top customer view"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "tab",
+            "name": "Activity"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Activity filters"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Purchases only"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "purchase-filter",
+          "title": "Purchases-only activity filter"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Purchases only"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Activity filters"
+          }
+        }
+      ]
     }
   ]
 }
