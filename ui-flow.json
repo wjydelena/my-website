@@ -1,6 +1,76 @@
 {
   "flows": [
     {
+      "id": "add-panel-restore",
+      "title": "Remove a panel, discover Add panel and restore it",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "wide-overview",
+          "title": "1440px LIVE Console"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Remove Products panel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "add-panel-first-tip",
+          "title": "First removal hint and Add panel"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Add panel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "removed-panel-menu",
+          "title": "Choose a removed panel"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Add Products panel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "panel-restored",
+          "title": "Products restored and Add panel hidden"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "cancel-default",
+          "title": "Cancel restores default layout and dimensions"
+        }
+      ]
+    },
+    {
       "id": "visual-review",
       "title": "Static LIVE Console reference",
       "viewport": {
@@ -2448,6 +2518,111 @@
           "action": "capture",
           "id": "cancel-saved-to-default",
           "title": "Cancel returns to default even after a prior Apply"
+        }
+      ]
+    },
+    {
+      "id": "add-panels-after-apply",
+      "title": "Restore multiple removed panels after Apply",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "wide-overview",
+          "title": "1440px LIVE Console"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Remove Chat panel"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Remove Analytics panel"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Apply"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "two-removals-applied",
+          "title": "Two panel removals applied"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Add panel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "two-removed-panels-menu",
+          "title": "Removed panels available in later edit"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Add Chat panel"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Add panel"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Add Analytics panel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "all-panels-restored",
+          "title": "All panels restored"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Apply"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "restored-layout-applied",
+          "title": "Restored layout applied"
         }
       ]
     }

@@ -3,6 +3,7 @@ import { ChevronDown, GripVertical, Trash2 } from 'lucide-react';
 import { ModuleId, moduleNames } from './module-layout';
 import { LayoutMode, useConsoleLayout } from './ResizableLayout';
 import './layout-editor.css';
+import { AddPanelControl } from './AddPanelControl';
 
 const modes: LayoutMode[] = ['Standard', 'Host focus', 'Custom'];
 const modeNames: Record<LayoutMode, string> = { Standard: 'Chat focus', 'Chat focus': 'Chat focus', 'Host focus': 'Video focus mode', Custom: 'Custom layout' };
@@ -28,7 +29,7 @@ export function ModuleTitle({ children }: { children: React.ReactNode }) {
 }
 
 export function EditingHeader() {
-  const { mode, chooseMode, applyEdit, cancelEdit, applyDisabled } = useConsoleLayout();
+  const { mode, chooseMode, applyEdit, cancelEdit, applyDisabled, removedPanels } = useConsoleLayout();
   const [open, setOpen] = useState(false);
   const [focused, setFocused] = useState(Math.max(0,modes.indexOf(mode)));
   const root = useRef<HTMLDivElement>(null);
@@ -84,7 +85,8 @@ export function EditingHeader() {
         </button>)}
       </div>}
     </div>
-    <div className="layout-editor-actions">
+    <div className={`layout-editor-actions${removedPanels.length?' has-add-panel':''}`}>
+      <AddPanelControl/>
       <button className="layout-apply" type="button" disabled={applyDisabled} onClick={applyEdit}>Apply</button>
       <button className="layout-cancel" type="button" onClick={cancelEdit}>Cancel</button>
     </div>

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useLayoutEffect, useRef, useState } from 'react';
 import './resize.css';
-import { ModuleBoard, ModuleId, DropTarget, MODULES, boardMinWidth, cloneBoard, moveModule, resolveBoard } from './module-layout';
+import { ModuleBoard, ModuleId, DropTarget, MODULES, boardMinWidth, cloneBoard, moveModule, resolveBoard, validBoard } from './module-layout';
 import { ModuleDragProvider, ModuleHoverOverlay } from './ModuleDrag';
 import { BoardResizeHandles } from './BoardResizeHandles';
 
@@ -62,6 +62,10 @@ type LayoutState = {
   chooseMode: (mode: LayoutMode) => void;
   removePanel: (id: ModuleId) => void;
   canRemovePanel: boolean;
+  removedPanels: ModuleId[];
+  restorePanel: (id: ModuleId) => void;
+  showRestoreHint: boolean;
+  dismissRestoreHint: () => void;
 };
 const LayoutContext = createContext<LayoutState | null>(null);
 export function useConsoleLayout() {
@@ -79,6 +83,10 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
   const [mode, setMode] = useState<LayoutMode>('Standard');
   const [arrangement, setArrangement] = useState<Arrangement>('balanced');
   const [board, setBoard] = useState<ModuleBoard | null>(null);
+  const removedPositions = useRef<Partial<Record<ModuleId, { board: ModuleBoard; column: number; row: number }>>>({});
+  const hintSeen = useRef(false);
+  const [showRestoreHint, setShowRestoreHint] = useState(false);
+  const dismissRestoreHint = () => setShowRestoreHint(false);
   const focusedChat = arrangement === 'chat-focus';
   const focusedHost = arrangement === 'host-focus';
   const absoluteLayout = !!board || focusedHost;
@@ -93,11 +101,14 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
   };
   const applyEdit = () => {
     if (applyDisabled) return;
+    dismissRestoreHint();
     saved.current = null;
     customBaseline.current = null;
     setEditing(false);
   };
   const cancelEdit = () => {
+    dismissRestoreHint();
+    removedPositions.current = {};
     setRatios([.4,.3,.3]);
     setHeights({video:268,analytics:200,feed:462});
     setMode('Standard');
@@ -108,9 +119,10 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     setEditing(false);
   };
   const chooseMode = (next: LayoutMode) => {
+    dismissRestoreHint();
     if (next === 'Custom') {
       if (mode !== 'Custom') customBaseline.current = currentGeometry();
-    } else { customBaseline.current = null; setBoard(null); }
+    } else { customBaseline.current = null; setBoard(null); removedPositions.current = {}; }
     setMode(next);
     if (next === 'Standard') {
       setArrangement('balanced');
@@ -202,13 +214,68 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     markCustom(); setBoard(draft);
   };
   const canRemovePanel = visibleBoard.columns.flatMap(c=>c.modules).length > 1;
+  const removedPanels = MODULES.filter(id => visibleBoard.hidden?.includes(id));
   const removePanel = (id: ModuleId) => {
     if(!editing || !canRemovePanel)return;
+    const column = visibleBoard.columns.findIndex(col=>col.modules.includes(id));
+    if(column < 0)return;
+    removedPositions.current[id] = {board:cloneBoard(visibleBoard),column,row:visibleBoard.columns[column].modules.indexOf(id)};
     const next = cloneBoard(visibleBoard);
     next.hidden = [...(next.hidden || []),id];
     next.columns.forEach(col=>{const index=col.modules.indexOf(id);if(index>=0){col.modules.splice(index,1);col.heights.splice(index,1);}});
     next.columns=next.columns.filter(col=>col.modules.length);
     markCustom();setBoard(next);
+    let seen = hintSeen.current;
+    try { seen = seen || localStorage.getItem('live-console.add-panel-hint.v1') === 'seen'; } catch {}
+    if(!seen) {
+      hintSeen.current = true;
+      setShowRestoreHint(true);
+      try { localStorage.setItem('live-console.add-panel-hint.v1','seen'); } catch {}
+    }
+  };
+  const restorePanel = (id: ModuleId) => {
+    if(!editing || !removedPanels.includes(id))return;
+    const next = cloneBoard(visibleBoard);
+    const savedPosition = removedPositions.current[id];
+    const original = savedPosition?.board.columns[savedPosition.column];
+    const peerColumn = id === 'products' ? -1 : next.columns.findIndex(col =>
+      !col.modules.includes('products') && col.modules.length < 3 && original?.modules.some(peer=>col.modules.includes(peer)));
+    const addToColumn = (column:number) => {
+      const col = next.columns[column];
+      const order = original?.modules || [];
+      const following = col.modules.findIndex(peer=>order.indexOf(peer) > (savedPosition?.row ?? -1));
+      const row = following < 0 ? col.modules.length : following;
+      col.modules.splice(row,0,id);
+      col.heights.splice(row,0,original?.heights[savedPosition!.row] || 270);
+    };
+    if(peerColumn >= 0) addToColumn(peerColumn);
+    else {
+      // Products always owns a column. If four columns are occupied, consolidate
+      // two compatible non-product columns before adding its original column.
+      if(id === 'products' && next.columns.length >= 4) {
+        const first = next.columns.findIndex(c=>!c.modules.includes('products') && c.modules.length < 3);
+        if(first<0)return;
+        const second = next.columns.findIndex((c,i)=>i!==first && !c.modules.includes('products') && c.modules.length+next.columns[first].modules.length<=3);
+        if(second<0)return;
+        next.columns[first].modules.push(...next.columns[second].modules);
+        next.columns[first].heights.push(...next.columns[second].heights);
+        next.columns[first].width += next.columns[second].width;
+        next.columns.splice(second,1);
+      }
+      if(next.columns.length < 4) {
+        const width = original?.width || next.columns[0].width;
+        next.columns.splice(Math.min(savedPosition?.column ?? next.columns.length,next.columns.length),0,{modules:[id],width,heights:[original?.heights[savedPosition!.row] || 270]});
+      } else {
+        const available = next.columns.findIndex(c=>!c.modules.includes('products') && c.modules.length<3);
+        if(available<0)return;
+        addToColumn(available);
+      }
+    }
+    next.hidden = next.hidden?.filter(panel=>panel!==id);
+    if(id==='products')next.productsHidden=false;
+    if(!validBoard(next))return;
+    markCustom();setBoard(next);dismissRestoreHint();
+    delete removedPositions.current[id];
   };
   const moduleStyle = (id: ModuleId): React.CSSProperties | undefined => !boardGeometry.rects[id] ? { display: 'none' } : absoluteLayout ? { ...boardGeometry.rects[id], position: 'absolute' } : undefined;
   const style = {
@@ -218,7 +285,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     '--video-height': `${video}px`, '--analytics-height': `${analytics}px`, '--feed-height': `${feed}px`,
   } as React.CSSProperties;
   if (absoluteLayout) style.minWidth = boardMinWidth(visibleBoard);
-  return <LayoutContext.Provider value={{ values, ranges, change, reset, editing, mode, arrangement, docked: absoluteLayout, moduleStyle, applyDisabled, beginEdit, applyEdit, cancelEdit, chooseMode, removePanel, canRemovePanel }}>
+  return <LayoutContext.Provider value={{ values, ranges, change, reset, editing, mode, arrangement, docked: absoluteLayout, moduleStyle, applyDisabled, beginEdit, applyEdit, cancelEdit, chooseMode, removePanel, canRemovePanel, removedPanels, restorePanel, showRestoreHint, dismissRestoreHint }}>
     <ModuleDragProvider board={visibleBoard} box={box} editing={editing} container={ref} onMove={move}>
     {header}
     <div className="layout-viewport">
