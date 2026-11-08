@@ -1,0 +1,7 @@
+.customize-education-anchor{position:relative;display:flex;align-items:center;flex:none;z-index:130}
+.console-shell .topbar .customize.education-highlight{background:#e5e5e5;color:#595959}
+.console-shell .customize-education-popover{position:absolute;top:calc(100% + 13px);left:50%;transform:translateX(-50%);box-sizing:border-box;width:320px;padding:12px;border-radius:8px;background:#0a9b98;color:#fff;box-shadow:0 8px 24px #0003;text-align:left;white-space:normal;z-index:131}
+.customize-education-popover::before{content:'';position:absolute;bottom:100%;left:calc(50% - 5px);width:0;height:0;border:5px solid transparent;border-bottom-color:#0a9b98}
+.console-shell .topbar .customize-education-popover>strong{display:block;margin:0 0 4px;font-family:inherit;font-size:14px;font-weight:500;line-height:20px;color:#fff}
+.console-shell .customize-education-popover>p{margin:0 0 8px;font-family:inherit;font-size:12px;font-weight:400;line-height:18px;color:#fff}
+.console-shell .customize-education-gif{display:block;width:100%;height:auto;aspect-ratio:1914/1084;object-fit:contain;border-radius:6px;overflow:hidden}
