@@ -1,0 +1,20 @@
+/* Navigation-only calibration to reference 1725; editor banner stays unchanged. */
+.console-shell .topbar.console-topnav{height:52px;gap:12px;padding:0 16px;background:#f5f5f5;border-bottom:0}
+.console-topnav .console-title{font-size:16px;line-height:24px;font-weight:500;white-space:nowrap}
+.console-shell .console-topnav .quick-live{height:28px;padding:0 12px;gap:6px;background:#fff;border:1px solid #d9d9d9;border-radius:99px;font-size:14px;line-height:20px;font-weight:500;white-space:nowrap}
+.console-topnav .quick-live>svg{width:14px;height:14px}
+.console-shell .console-topnav .top-actions{gap:12px;color:#737373;flex:none}
+.console-topnav .top-actions>.divider{width:1px;height:12px;background:#d4d4d4}
+.console-shell .console-topnav .assistant{width:108px;height:28px;flex:none;gap:4px;padding:0 12px;border:1px solid transparent;border-radius:99px;background:linear-gradient(#f5f5f5,#f5f5f5) padding-box,linear-gradient(100deg,#20d5ec,#0be09b) border-box;color:#00bfc5}
+.console-topnav .assistant strong{font-size:14px;font-weight:500;line-height:20px}
+.console-topnav .assistant-icon{width:14px;height:14px;flex-basis:14px}
+.console-shell .console-topnav .customize{width:158px;height:28px;gap:4px;padding:0 12px;border-radius:99px;background:#e2e2e2;color:#4f4f4f;font-size:14px;line-height:20px;font-weight:500;white-space:nowrap}
+.console-shell .console-topnav .customize:hover{background:#d9d9d9;color:#303030}
+.console-shell .console-topnav .customize.education-highlight{background:#e2e2e2;color:#4f4f4f}
+.console-topnav .top-actions>.nav-utility-icon{flex:none;width:22px;height:22px}
+.console-shell .reference-sidebar{background:#f5f5f5}
+.reference-sidebar:not(.is-expanded) .reference-nav-item.is-selected{background:#e1e1e1;border-radius:10px}
+.reference-sidebar:not(.is-expanded) .reference-nav-footer{padding-bottom:5px}
+.reference-sidebar:not(.is-expanded) .reference-profile{height:48px}
+.console-shell .workspace:has(.console-topnav){background:#f5f5f5}
+.workspace:has(.console-topnav) .layout-viewport{border-top-left-radius:8px}
