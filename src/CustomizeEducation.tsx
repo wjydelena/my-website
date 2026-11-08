@@ -1,18 +1,43 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {LayoutPanelLeft} from 'lucide-react';
 import layoutEducation from './assets/layout-education.gif';
-import {markCustomizeEducationSeen, scheduleCustomizeEducation} from './customize-education';
+import {hasSeenCustomizeEducation, markCustomizeEducationSeen, scheduleCustomizeEducation} from './customize-education';
 import './customize-education.css';
 
 export function CustomizeEducation({onCustomize}:{onCustomize:()=>void}) {
   const [visible,setVisible] = useState(false);
   const root = useRef<HTMLDivElement>(null);
+  const shown = useRef(false);
   const dismiss = () => {markCustomizeEducationSeen();setVisible(false);};
-  useEffect(()=>scheduleCustomizeEducation(()=>setVisible(true)),[]);
+  useEffect(()=>{
+    const element = root.current;
+    if(!element)return;
+    let intersecting = false;
+    let cancel = () => {};
+    const sync = () => {
+      cancel();
+      if(document.visibilityState!=='visible' || !intersecting) {
+        shown.current=false;
+        setVisible(false);
+        return;
+      }
+      if(shown.current || hasSeenCustomizeEducation())return;
+      cancel=scheduleCustomizeEducation(()=>{shown.current=true;setVisible(true);});
+    };
+    const observer = new IntersectionObserver(entries=>{
+      intersecting=entries[0].isIntersecting && entries[0].intersectionRatio>=.5;
+      sync();
+    },{threshold:[0,.5,1]});
+    observer.observe(element);
+    document.addEventListener('visibilitychange',sync);
+    return ()=>{cancel();observer.disconnect();document.removeEventListener('visibilitychange',sync);};
+  },[]);
   useEffect(()=>{
     if(!visible)return;
     const outside = (event:PointerEvent) => {
-      if(!root.current?.contains(event.target as Node))dismiss();
+      // An incidental click only collapses the hint. It does not consume the
+      // first-use introduction before the person has chosen to dismiss/use it.
+      if(!root.current?.contains(event.target as Node))setVisible(false);
     };
     const escape = (event:KeyboardEvent) => {
       if(event.key==='Escape')dismiss();
