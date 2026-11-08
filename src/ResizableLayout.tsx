@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useContext, useLayoutEffect, useRef, useState } from 'react';
 import './resize.css';
-import { ModuleBoard, ModuleId, DropTarget, MODULES, boardMinWidth, cloneBoard, moveModule, resolveBoard, validBoard } from './module-layout';
+import { ModuleBoard, ModuleId, DropTarget, MODULES, MIN_PANEL_WIDTH, boardMinWidth, cloneBoard, moveModule, resolveBoard, validBoard } from './module-layout';
 import { ModuleDragProvider, ModuleHoverOverlay } from './ModuleDrag';
 import { BoardResizeHandles } from './BoardResizeHandles';
 import { restoreRemovedPanel } from './restore-panels';
@@ -8,8 +8,8 @@ import { restoreRemovedPanel } from './restore-panels';
 type Kind = 'products' | 'live' | 'video' | 'analytics' | 'feed';
 const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value));
 const MIN_PRODUCTS_WIDTH = 400;
-const MIN_LIVE_WIDTH = 324;
-const MIN_ANALYTICS_WIDTH = 324;
+const MIN_LIVE_WIDTH = MIN_PANEL_WIDTH;
+const MIN_ANALYTICS_WIDTH = MIN_PANEL_WIDTH;
 export type LayoutMode = 'Standard' | 'Chat focus' | 'Host focus' | 'Custom';
 type Arrangement = 'balanced' | 'chat-focus' | 'host-focus';
 type Heights = { video: number; analytics: number; feed: number };
@@ -17,9 +17,10 @@ type GeometrySource = { ratios: number[]; heights: Heights; arrangement: Arrange
 function resolveValues(source: GeometrySource, box: { width: number; height: number }) {
   const { ratios, heights, arrangement } = source;
   const focusedChat = arrangement === 'chat-focus';
-  if (arrangement === 'host-focus') return { products: 0, live: box.width / 3, video: box.height, analytics: clamp(heights.analytics, 194, box.height - 310), feed: clamp(heights.feed, 160, box.height - heights.analytics - 150) };
-  const products = clamp(ratios[0] * box.width, MIN_PRODUCTS_WIDTH, box.width - MIN_LIVE_WIDTH - MIN_ANALYTICS_WIDTH);
-  const live = clamp(ratios[1] * box.width, MIN_LIVE_WIDTH, box.width - products - MIN_ANALYTICS_WIDTH);
+  if (arrangement === 'host-focus') return { products: 0, live: Math.max(MIN_PANEL_WIDTH, box.width / 3), video: box.height, analytics: clamp(heights.analytics, 194, box.height - 310), feed: clamp(heights.feed, 160, box.height - heights.analytics - 150) };
+  const width = Math.max(box.width, MIN_PRODUCTS_WIDTH + MIN_LIVE_WIDTH + MIN_ANALYTICS_WIDTH);
+  const products = clamp(ratios[0] * width, MIN_PRODUCTS_WIDTH, width - MIN_LIVE_WIDTH - MIN_ANALYTICS_WIDTH);
+  const live = clamp(ratios[1] * width, MIN_LIVE_WIDTH, width - products - MIN_ANALYTICS_WIDTH);
   const video = clamp(heights.video, 200, focusedChat ? box.height - 194 - 160 - 110 : box.height - 200);
   const analytics = clamp(heights.analytics, 194, focusedChat ? box.height - video - 160 - 110 : box.height - 310);
   const feed = clamp(heights.feed, 160, focusedChat ? box.height - video - analytics - 110 : box.height - analytics - 150);
@@ -35,7 +36,7 @@ function sourceBoard(source: GeometrySource, box: { width: number; height: numbe
       { modules: ['analytics', 'activity'], width: 1, heights: [v.analytics, box.height - v.analytics] },
     ] };
   }
-  const v = resolveValues(source, box), third = box.width - v.products - v.live;
+  const v = resolveValues(source, box), third = Math.max(MIN_PANEL_WIDTH, box.width - v.products - v.live);
   return { columns: source.arrangement === 'chat-focus' ? [
     { modules: ['products'], width: v.products, heights: [box.height] },
     { modules: ['chat'], width: third, heights: [box.height] },
@@ -155,7 +156,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
   const values = resolveValues(currentSource, box);
   if (absoluteLayout) values.feed = clamp(heights.feed, 160, (boardGeometry.rects.activity?.height ?? box.height) - 110);
   const { products, live, video, analytics, feed } = values;
-  const widths = [products, live, box.width - products - live];
+  const widths = [products, live, Math.max(MIN_PANEL_WIDTH, box.width - products - live)];
   const baselineValues = customBaseline.current ? resolveValues(customBaseline.current, box) : values;
   const baselineBoard = sourceBoard(customBaseline.current || currentSource, box);
   const baselineGeometry = resolveBoard(baselineBoard, box);
@@ -250,8 +251,9 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     gridTemplateRows: focusedChat ? `${video}px ${analytics}px 54px minmax(0, 1fr) ${feed}px` : undefined,
     '--products-edge': `${products}px`, '--live-edge': `${focusedChat ? products + widths[2] : products + live}px`,
     '--video-height': `${video}px`, '--analytics-height': `${analytics}px`, '--feed-height': `${feed}px`,
+    '--panel-min-width': `${MIN_PANEL_WIDTH}px`,
+    minWidth: boardMinWidth(visibleBoard),
   } as React.CSSProperties;
-  if (absoluteLayout) style.minWidth = boardMinWidth(visibleBoard);
   return <LayoutContext.Provider value={{ values, ranges, change, reset, editing, mode, arrangement, docked: absoluteLayout, moduleStyle, applyDisabled, beginEdit, applyEdit, cancelEdit, chooseMode, removePanel, canRemovePanel, removedPanels, restorePanel, restorePanels, showRestoreHint, dismissRestoreHint }}>
     <ModuleDragProvider board={visibleBoard} box={box} editing={editing} container={ref} onMove={move}>
     {header}

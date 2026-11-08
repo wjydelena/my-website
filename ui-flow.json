@@ -403,7 +403,7 @@
         {
           "action": "capture",
           "id": "page-1120",
-          "title": "1120px layout with original column minimums"
+          "title": "1120px layout with 318px non-Products column minimums"
         },
         {
           "action": "press",
@@ -417,6 +417,19 @@
           "action": "capture",
           "id": "page-1120-limits",
           "title": "Column size limits at 1120px"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "separator",
+            "name": "Resize live and analytics columns"
+          },
+          "key": "Home"
+        },
+        {
+          "action": "capture",
+          "id": "page-1120-live-min-318",
+          "title": "Video and Chat column reaches the 318px lower limit"
         }
       ]
     },
@@ -699,7 +712,7 @@
         {
           "action": "capture",
           "id": "page-1120",
-          "title": "1120px layout with original column minimums"
+          "title": "1120px layout with 318px non-Products column minimums"
         },
         {
           "action": "click",
@@ -730,7 +743,7 @@
         {
           "action": "capture",
           "id": "focus-editor-1120",
-          "title": "Chat focus editor with 400 / 324 / 324 minimum columns"
+          "title": "Chat focus editor with 400 / 318 / 318 minimum columns"
         },
         {
           "action": "click",

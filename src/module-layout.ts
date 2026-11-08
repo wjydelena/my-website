@@ -6,7 +6,8 @@ export type ModuleColumn = { modules: ModuleId[]; width: number; heights: number
 export type ModuleBoard = { columns: ModuleColumn[]; productsHidden?: boolean; hidden?: ModuleId[] };
 export type DropTarget = { type: 'column'; index: number } | { type: 'stack'; column: number; index: number };
 export type Rect = { left: number; top: number; width: number; height: number };
-export const columnMin = (column: ModuleColumn) => column.modules.includes('products') ? 400 : 324;
+export const MIN_PANEL_WIDTH = 318;
+export const columnMin = (column: ModuleColumn) => column.modules.includes('products') ? 400 : MIN_PANEL_WIDTH;
 export const boardMinWidth = (board: ModuleBoard) => board.columns.reduce((sum, col) => sum + columnMin(col), 0);
 export const cloneBoard = (board: ModuleBoard): ModuleBoard => ({ ...board, columns: board.columns.map(col => ({ ...col, modules: [...col.modules], heights: [...col.heights] })) });
 export const sameStructure = (a: ModuleBoard, b: ModuleBoard) => JSON.stringify(a.columns.map(c => c.modules)) === JSON.stringify(b.columns.map(c => c.modules));

@@ -1,6 +1,10 @@
 .module-dnd-scope { display: contents; }
 .layout-viewport { flex: 1; min-height: 0; min-width: 0; overflow: auto; position: relative; }
 .layout-viewport > .columns { width: 100%; height: 100%; }
+.console-shell .resizable-columns [data-module-id]:not([data-module-id="products"]) { min-width: var(--panel-min-width, 318px); }
+/* Keep the shared column divider inside each panel's measured width. */
+.console-shell .columns:not(.docked-layout):not(.chat-focus) .live-column { border-right: 0; }
+.console-shell .columns:not(.docked-layout):not(.chat-focus) .live-column > [data-module-id] { border-right: 1px solid var(--color-border); }
 .layout-viewport::-webkit-scrollbar { display: block; height: 6px; width: 6px; }
 .layout-viewport::-webkit-scrollbar-thumb { background: #595959; border-radius: 4px; }
 .activity-module { display: contents; }
