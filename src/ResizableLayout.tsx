@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useLayoutEffect, useRef, useState } from 'react';
+import React, { createContext, useCallback, useContext, useLayoutEffect, useRef, useState } from 'react';
 import './resize.css';
 import { ModuleBoard, ModuleId, DropTarget, MODULES, boardMinWidth, cloneBoard, moveModule, resolveBoard, validBoard } from './module-layout';
 import { ModuleDragProvider, ModuleHoverOverlay } from './ModuleDrag';
@@ -86,7 +86,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
   const removedPositions = useRef<Partial<Record<ModuleId, { board: ModuleBoard; column: number; row: number }>>>({});
   const hintSeen = useRef(false);
   const [showRestoreHint, setShowRestoreHint] = useState(false);
-  const dismissRestoreHint = () => setShowRestoreHint(false);
+  const dismissRestoreHint = useCallback(() => setShowRestoreHint(false), []);
   const focusedChat = arrangement === 'chat-focus';
   const focusedHost = arrangement === 'host-focus';
   const absoluteLayout = !!board || focusedHost;

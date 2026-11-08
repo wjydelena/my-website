@@ -2675,6 +2675,77 @@
           "title": "Restored layout applied"
         }
       ]
+    },
+    {
+      "id": "add-panel-hint-auto-dismiss",
+      "title": "First removal hint disappears automatically after four seconds",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "wide-overview",
+          "title": "1440px LIVE Console"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Remove Products panel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "add-panel-timed-hint",
+          "title": "Add panel guidance appears"
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "testId": "add-panel-without-hint"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "add-panel-hint-timeout",
+          "title": "Hint dismissed; Add panel remains available"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Add panel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "restore-menu-after-timeout",
+          "title": "Restore menu remains usable"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Add Products panel"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        }
+      ]
     }
   ]
 }

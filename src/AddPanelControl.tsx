@@ -10,9 +10,14 @@ export function AddPanelControl() {
   const trigger = useRef<HTMLButtonElement>(null);
   useEffect(()=>{if(!removedPanels.length)setOpen(false);},[removedPanels.length]);
   useEffect(()=>{
+    if(!showRestoreHint)return;
+    const timer=setTimeout(dismissRestoreHint,4000);
+    return ()=>clearTimeout(timer);
+  },[showRestoreHint,dismissRestoreHint]);
+  useEffect(()=>{
     if(!open && !showRestoreHint)return;
     const outside=(event:PointerEvent)=>{
-      if(!root.current?.contains(event.target as Node)){setOpen(false);dismissRestoreHint();}
+      if(!root.current?.contains(event.target as Node))setOpen(false);
     };
     const escape=(event:KeyboardEvent)=>{
       if(event.key==='Escape'){setOpen(false);dismissRestoreHint();trigger.current?.focus();}
@@ -24,7 +29,7 @@ export function AddPanelControl() {
   useEffect(()=>{if(open)root.current?.querySelector<HTMLButtonElement>('[role="menuitem"]')?.focus();},[open]);
   if(!removedPanels.length)return null;
   return <>
-    <div className="add-panel-control" ref={root}>
+    <div className="add-panel-control" ref={root} data-testid={!showRestoreHint?'add-panel-without-hint':undefined}>
       <button className="add-panel-trigger" type="button" ref={trigger} aria-label="Add panel" aria-haspopup="menu" aria-expanded={open} aria-controls="removed-panel-menu"
         aria-describedby={showRestoreHint?'add-panel-hint':undefined}
         onClick={()=>{dismissRestoreHint();setOpen(!open);}}
