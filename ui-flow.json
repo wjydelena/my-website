@@ -165,7 +165,7 @@
     },
     {
       "id": "visual-review",
-      "title": "Static LIVE Console reference",
+      "title": "Visual review and automatic introduction completion",
       "viewport": {
         "width": 1280,
         "height": 900
@@ -175,6 +175,28 @@
           "action": "capture",
           "id": "overview",
           "title": "Static three-column LIVE Console"
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "text": "Customize your LIVE console"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "education-two-play-start",
+          "title": "Introduction plays the GIF at most twice"
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "testId": "customize-without-education"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "education-auto-dismissed",
+          "title": "Introduction closes automatically after two GIF plays"
         }
       ]
     },
