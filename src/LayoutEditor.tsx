@@ -17,9 +17,14 @@ const descriptions: Record<LayoutMode, string> = {
 export function RemovePanelButton({id}:{id:ModuleId}) {
   const {editing,removePanel,canRemovePanel}=useConsoleLayout();
   if(!editing)return null;
+  if(!canRemovePanel)return <div className="remove-panel-guard" tabIndex={0} data-testid="last-panel-delete" aria-label={`Remove ${moduleNames[id]} panel unavailable`} aria-describedby={`last-panel-tooltip-${id}`}
+    onPointerDown={e=>e.stopPropagation()} onKeyDown={e=>e.stopPropagation()} onClick={e=>e.stopPropagation()}>
+    <button className="remove-panel" type="button" aria-label={`Remove ${moduleNames[id]} panel`} aria-describedby={`last-panel-tooltip-${id}`} disabled><Trash2 size={18}/></button>
+    <span className="remove-panel-tooltip last-panel-tooltip" id={`last-panel-tooltip-${id}`} role="tooltip">At least one panel must remain in your LIVE console.</span>
+  </div>;
   return <button className="remove-panel" type="button" aria-label={`Remove ${moduleNames[id]} panel`} disabled={!canRemovePanel}
     onPointerDown={e=>e.stopPropagation()} onKeyDown={e=>e.stopPropagation()} onClick={e=>{e.stopPropagation();removePanel(id);}}>
-    <Trash2 size={18}/><span className="remove-panel-tooltip" role="tooltip">{canRemovePanel?'Remove panel':'Keep at least one panel'}</span>
+    <Trash2 size={18}/><span className="remove-panel-tooltip" role="tooltip">Remove panel</span>
   </button>;
 }
 

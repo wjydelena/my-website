@@ -165,7 +165,7 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
     <BlockedContext.Provider value={blocked}>
     <div className="module-dnd-scope" data-moving={view?.id} data-drop-blocked={blocked ? 'true' : undefined} {...pointerProps}
       onPointerMoveCapture={event => {
-        if((event.target as Element).closest('.remove-panel')){setHovered(null);return;}
+        if((event.target as Element).closest('.remove-panel, .remove-panel-guard')){setHovered(null);return;}
         const module = (event.target as Element).closest('[data-module-id]');
         setHovered(editing && !session.current?.active && module ? module.getAttribute('data-module-id') as ModuleId : null);
       }}

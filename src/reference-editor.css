@@ -48,6 +48,12 @@
 .remove-panel:hover>.remove-panel-tooltip,.remove-panel:focus-visible>.remove-panel-tooltip{display:block}
 .analytics-title .remove-panel-tooltip,.activity-tabs .remove-panel-tooltip{left:auto;right:0;transform:none}
 .analytics-title .remove-panel-tooltip::before,.activity-tabs .remove-panel-tooltip::before{left:auto;right:7px}
+.console-shell .layout-editing .remove-panel-guard{position:relative;display:inline-flex;flex:none;width:24px;height:24px;margin-left:auto;cursor:not-allowed;z-index:15;outline:none}
+.console-shell .layout-editing .remove-panel-guard .remove-panel:disabled{pointer-events:none!important;opacity:.3;background:transparent}
+.console-shell .layout-editing .remove-panel-guard:focus-visible{outline:2px solid #009995;outline-offset:2px;border-radius:4px}
+.console-shell .layout-editing .remove-panel-guard>.last-panel-tooltip{left:auto;right:0;transform:none;width:300px;max-width:calc(100vw - 48px);white-space:normal;text-align:left;font-size:14px;line-height:20px;opacity:1}
+.console-shell .layout-editing .remove-panel-guard>.last-panel-tooltip::before{left:auto;right:7px}
+.console-shell .layout-editing .remove-panel-guard:hover>.last-panel-tooltip,.console-shell .layout-editing .remove-panel-guard:focus>.last-panel-tooltip{display:block}
 .console-shell .layout-editor-actions.has-add-panel{gap:10px;align-items:center}
 .console-shell .has-add-panel .layout-cancel{min-width:52px}
 .add-panel-control{position:relative;flex:none;z-index:120}

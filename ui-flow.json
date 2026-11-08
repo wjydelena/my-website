@@ -2532,6 +2532,64 @@
           "action": "click",
           "target": {
             "role": "button",
+            "name": "Remove Video panel"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Remove Analytics panel"
+          }
+        },
+        {
+          "action": "hover",
+          "target": {
+            "testId": "last-panel-delete"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "last-panel-delete-disabled",
+          "title": "Last panel cannot be removed; hover explains why"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Add panel"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Products"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Add"
+          }
+        },
+        {
+          "action": "hover",
+          "target": {
+            "role": "button",
+            "name": "Remove Chat panel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "delete-enabled-after-restoration",
+          "title": "Restoring another panel enables removal again"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
             "name": "Cancel"
           }
         },
