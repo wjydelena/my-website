@@ -24,5 +24,6 @@ import './chat-focus.css';
 import './light-theme.css';
 import './reference-layout.css';
 import './reference-panels.css';
+import './reference-editor.css';
 function Header(){const {editing,beginEdit}=useConsoleLayout();if(editing)return <EditingHeader/>;return <header className="topbar"><strong className="console-title">LIVE console</strong><span className="divider"/><div className="quick-live">Quick LIVE<ChevronDown size={16}/></div><div className="top-actions"><div className="assistant"><img className="assistant-icon" src={assistantIcon} width={16} height={16} alt=""/><strong style={{ fontSize: "14px" }}>Assistant</strong></div><span className="divider"/><button type="button" className="customize" style={{ fontSize: "14px" }} onClick={beginEdit}><LayoutPanelLeft size={16}/>Customize layout</button><span className="divider"/><Scan size={20}/><Settings size={21}/><span className="divider"/><TriangleAlert size={21}/></div></header>}
 export default function App(){return <div className="console-shell"><Sidebar/><main className="workspace"><ResizableColumns header={<Header/>}><ProductColumn/><LiveColumn/><AnalyticsColumn/></ResizableColumns></main></div>}

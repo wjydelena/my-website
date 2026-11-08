@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { GripVertical, Pin, Plus, PencilLine, Trash2, ArrowUpToLine, X } from 'lucide-react';
 import PromotionTools from './PromotionTools';
 import { useConsoleLayout } from './ResizableLayout';
-import { ModuleTitle } from './LayoutEditor';
+import { ModuleTitle, RemovePanelButton } from './LayoutEditor';
 import { useModuleHeader } from './ModuleDrag';
 import top from './assets/reference-products/product-1.png';
 import yellowBag from './assets/reference-products/product-2.png';
@@ -31,7 +31,7 @@ export default function ProductColumn() {
   });
   const save = () => { if(!draft || !draft.name.trim()) return; setProducts(prev => prev.some(p=>p.id===draft.id) ? prev.map(p=>p.id===draft.id?draft:p) : [...prev,draft]);setDraft(null); };
   return <section className="product-column reference-product-column" data-module-id="products" style={moduleStyle('products')}>
-    {editing && <div className="editing-products-heading" {...drag}><ModuleTitle>Products</ModuleTitle></div>}
+    {editing && <div className="editing-products-heading" {...drag}><ModuleTitle>Products</ModuleTitle><RemovePanelButton id="products"/></div>}
     <PromotionTools/>
     <div className="reference-product-controls">
       <div className="reference-product-tabs" role="tablist" aria-label="Product selling mode">{['Buy now','Auction'].map(value=><button type="button" role="tab" key={value} aria-selected={tab===value} onClick={()=>setTab(value)}>{value}</button>)}</div>

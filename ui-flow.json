@@ -264,7 +264,7 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Layout mode: Standard"
+            "name": "Layout mode"
           }
         },
         {
@@ -307,7 +307,7 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Layout mode: Standard"
+            "name": "Layout mode"
           }
         },
         {
@@ -340,7 +340,7 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Layout mode: Chat focus"
+            "name": "Layout mode"
           }
         },
         {
@@ -352,7 +352,7 @@
           "action": "click",
           "target": {
             "role": "option",
-            "name": "Standard"
+            "name": "Chat focus"
           }
         },
         {
@@ -393,14 +393,14 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Layout mode: Standard"
+            "name": "Layout mode"
           }
         },
         {
           "action": "click",
           "target": {
             "role": "option",
-            "name": "Custom"
+            "name": "Custom layout"
           }
         },
         {
@@ -479,7 +479,7 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Layout mode: Custom"
+            "name": "Layout mode"
           }
         },
         {
@@ -491,7 +491,7 @@
           "action": "click",
           "target": {
             "role": "option",
-            "name": "Custom"
+            "name": "Custom layout"
           }
         },
         {
@@ -527,7 +527,7 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Layout mode: Standard"
+            "name": "Layout mode"
           }
         },
         {
@@ -585,7 +585,7 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Layout mode: Standard"
+            "name": "Layout mode"
           }
         },
         {
@@ -604,14 +604,14 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Layout mode: Chat focus"
+            "name": "Layout mode"
           }
         },
         {
           "action": "click",
           "target": {
             "role": "option",
-            "name": "Custom"
+            "name": "Custom layout"
           }
         },
         {
@@ -623,7 +623,7 @@
           "action": "press",
           "target": {
             "role": "separator",
-            "name": "Resize chat and live columns"
+            "name": "Resize live and analytics columns"
           },
           "key": "ArrowRight"
         },
@@ -631,7 +631,7 @@
           "action": "press",
           "target": {
             "role": "separator",
-            "name": "Resize products and chat columns"
+            "name": "Resize products and live columns"
           },
           "key": "ArrowRight"
         },
@@ -639,7 +639,7 @@
           "action": "press",
           "target": {
             "role": "separator",
-            "name": "Resize live preview and analytics"
+            "name": "Resize live preview and chat"
           },
           "key": "ArrowUp"
         },
@@ -671,14 +671,14 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Layout mode: Custom"
+            "name": "Layout mode"
           }
         },
         {
           "action": "click",
           "target": {
             "role": "option",
-            "name": "Standard"
+            "name": "Chat focus"
           }
         },
         {
@@ -753,7 +753,7 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Layout mode: Standard"
+            "name": "Layout mode"
           }
         },
         {
@@ -801,14 +801,14 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Layout mode: Standard"
+            "name": "Layout mode"
           }
         },
         {
           "action": "click",
           "target": {
             "role": "option",
-            "name": "Custom"
+            "name": "Custom layout"
           }
         },
         {
@@ -1175,7 +1175,7 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Layout mode: Standard"
+            "name": "Layout mode"
           }
         },
         {
@@ -1387,7 +1387,7 @@
     },
     {
       "id": "host-focus-save-restore",
-      "title": "Select Host focus, save, and cancel a later preset change",
+      "title": "Save Video focus and Cancel back to default layout",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -1409,7 +1409,7 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Layout mode: Standard"
+            "name": "Layout mode"
           }
         },
         {
@@ -1421,7 +1421,7 @@
           "action": "click",
           "target": {
             "role": "option",
-            "name": "Host focus"
+            "name": "Video focus mode"
           }
         },
         {
@@ -1452,20 +1452,20 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Layout mode: Host focus"
+            "name": "Layout mode"
           }
         },
         {
           "action": "click",
           "target": {
             "role": "option",
-            "name": "Standard"
+            "name": "Chat focus"
           }
         },
         {
           "action": "capture",
           "id": "host-to-standard",
-          "title": "Standard restores Products and original layout"
+          "title": "Cancel restores default panels and dimensions"
         },
         {
           "action": "click",
@@ -1477,7 +1477,7 @@
         {
           "action": "capture",
           "id": "host-focus-restored",
-          "title": "Cancel restores saved Host focus"
+          "title": "Cancel restores default panels and dimensions"
         }
       ]
     },
@@ -1505,7 +1505,7 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Layout mode: Standard"
+            "name": "Layout mode"
           }
         },
         {
@@ -1517,7 +1517,7 @@
           "action": "click",
           "target": {
             "role": "option",
-            "name": "Host focus"
+            "name": "Video focus mode"
           }
         },
         {
@@ -1529,14 +1529,14 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Layout mode: Host focus"
+            "name": "Layout mode"
           }
         },
         {
           "action": "click",
           "target": {
             "role": "option",
-            "name": "Custom"
+            "name": "Custom layout"
           }
         },
         {
@@ -2217,6 +2217,237 @@
             "role": "button",
             "name": "Activity filters"
           }
+        }
+      ]
+    },
+    {
+      "id": "editor-three-modes",
+      "title": "Three layout mode choices and descriptions",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "wide-overview",
+          "title": "1440px LIVE Console"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "editor-reference",
+          "title": "Reference layout editor"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Layout mode"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "three-mode-menu",
+          "title": "Three modes with exact descriptions"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Video focus mode"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "video-focus-draft",
+          "title": "Video focus draft"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Layout mode"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Chat focus"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "chat-focus-draft",
+          "title": "Chat focus draft"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Layout mode"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Custom layout"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "custom-draft",
+          "title": "Custom layout draft"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "cancel-default",
+          "title": "Cancel restores default layout and dimensions"
+        }
+      ]
+    },
+    {
+      "id": "remove-panel-cancel-default",
+      "title": "Remove panel then cancel all draft changes",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "wide-overview",
+          "title": "1440px LIVE Console"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Remove Products panel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "products-removed-draft",
+          "title": "Products removed from draft"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Remove Activity panel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "activity-removed-draft",
+          "title": "Activity removed from draft"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "all-panels-default",
+          "title": "All default panels and sizes restored"
+        }
+      ]
+    },
+    {
+      "id": "saved-layout-cancel-default",
+      "title": "Save a layout then cancel a later draft back to default",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "steps": [
+        {
+          "action": "capture",
+          "id": "wide-overview",
+          "title": "1440px LIVE Console"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Remove Products panel"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Apply"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "removal-applied",
+          "title": "Apply retains the chosen layout"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Remove Analytics panel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "second-unsaved-draft",
+          "title": "Another unsaved removal"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "cancel-saved-to-default",
+          "title": "Cancel returns to default even after a prior Apply"
         }
       ]
     }

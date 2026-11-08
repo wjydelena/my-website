@@ -3,7 +3,7 @@ export type ModuleId = typeof MODULES[number];
 export const moduleNames: Record<ModuleId, string> = { products: 'Products', video: 'Video', chat: 'Chat', analytics: 'Analytics', activity: 'Activity' };
 export const minHeight: Record<ModuleId, number> = { products: 270, video: 200, chat: 200, analytics: 194, activity: 270 };
 export type ModuleColumn = { modules: ModuleId[]; width: number; heights: number[] };
-export type ModuleBoard = { columns: ModuleColumn[]; productsHidden?: boolean };
+export type ModuleBoard = { columns: ModuleColumn[]; productsHidden?: boolean; hidden?: ModuleId[] };
 export type DropTarget = { type: 'column'; index: number } | { type: 'stack'; column: number; index: number };
 export type Rect = { left: number; top: number; width: number; height: number };
 export const columnMin = (column: ModuleColumn) => column.modules.includes('products') ? 400 : 324;
@@ -44,7 +44,7 @@ export function resolveBoard(board: ModuleBoard, box: { width: number; height: n
 
 export function validBoard(board: ModuleBoard) {
   const all = board.columns.flatMap(c => c.modules);
-  const expected = board.productsHidden ? MODULES.filter(id => id !== 'products') : MODULES;
+  const expected = MODULES.filter(id => !(board.productsHidden && id === 'products') && !board.hidden?.includes(id));
   return board.columns.length <= 4 && board.columns.length > 0 && all.length === expected.length &&
     expected.every(id => all.filter(m => m === id).length === 1) &&
     board.columns.every(c => c.modules.length > 0 && c.modules.length <= 3 && (!c.modules.includes('products') || c.modules.length === 1));

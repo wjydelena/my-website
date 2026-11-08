@@ -1,0 +1,50 @@
+.console-shell .topbar.customize-header{height:56px;background:#e5f5f4;border-bottom:0;gap:16px;padding:0 16px}
+.console-shell .customize-title{font-size:16px;font-weight:500;line-height:24px}
+.console-shell .layout-mode-field{width:300px}
+.console-shell .layout-mode-trigger{width:300px;height:32px;background:#fff;border:1px solid #d4d4d4;border-radius:4px;padding:0 12px;gap:8px;font-size:14px;font-weight:400}
+.console-shell #layout-mode-label{opacity:1;color:#737373}
+.console-shell .layout-mode-trigger>span:nth-child(2){flex:1}
+.console-shell .layout-mode-trigger svg{color:#737373}
+.console-shell .layout-mode-trigger[aria-expanded="true"]{box-shadow:0 0 0 1px #009995;border-color:#009995}
+.console-shell .layout-mode-options{top:38px;left:0;width:300px;background:#fff;z-index:100;padding:4px;border:1px solid #e3e3e3;border-radius:6px;box-shadow:0 8px 24px #0002}
+.console-shell .layout-mode-options button{min-height:64px;padding:10px 12px;gap:4px;font-size:14px}
+.console-shell .layout-mode-options button>span:first-child{font-weight:500}
+.console-shell .layout-mode-description{font-size:12px;line-height:18px;color:#737373}
+.console-shell .layout-mode-options button.is-selected{background:#e5f5f4}
+.console-shell .layout-mode-options button:focus-visible{outline:1px solid #009995;outline-offset:-1px}
+.console-shell .layout-editor-actions{gap:8px}
+.console-shell .layout-editor-actions button{border-radius:4px;height:28px;font-size:12px;font-weight:500;padding:0 16px;min-width:64px}
+.console-shell .layout-editor-actions .layout-apply{background:#009995;color:#fff}
+.console-shell .layout-editor-actions .layout-cancel{background:none;color:#007f7b;padding:0 8px;min-width:56px}
+.console-shell .layout-editor-actions .layout-cancel:hover{background:#d4edeb}
+.console-shell .layout-editing .editing-products-heading{height:44px;border:0;justify-content:space-between}
+.console-shell .layout-editing .promotion-tools{height:56px;min-height:56px;pointer-events:none}
+.console-shell .layout-editing .promotion-content,.console-shell .layout-editing .promo-more{opacity:.3}
+.console-shell .layout-editing .reference-product-controls,.console-shell .layout-editing .reference-product-actions,.console-shell .layout-editing .reference-product-stats{opacity:1}
+.console-shell .layout-editing .reference-product-pin{opacity:.3}
+.console-shell .layout-editing .module-title{font-size:16px;font-weight:500;gap:4px}
+.console-shell .layout-editing .module-title>svg,.console-shell .layout-editing .activity-edit-grip{color:#737373}
+.console-shell .layout-editing .video-edit-label .module-title>svg{color:#fff}
+.console-shell .layout-editing .video-control-bar{display:none}
+.console-shell .layout-editing .video-edit-label{height:54px;top:0;left:0;right:0;padding:0 16px;display:flex;justify-content:space-between}
+.console-shell .layout-editing .chat-title>button:not(.remove-panel),.console-shell .layout-editing .analytics-title>span,.console-shell .layout-editing .activity-filter{display:none}
+.console-shell .layout-editing .analytics-title::before{display:none}
+.console-shell .layout-editing .comment-box{background:#f5f5f5;opacity:1}
+.console-shell .layout-editing .comment-box>*{opacity:.4;pointer-events:none}
+.console-shell .layout-editing .activity-tabs{gap:32px}
+.console-shell .layout-editing .activity-edit-grip{margin-right:4px}
+.console-shell .layout-editing .activity-tabs>.active::after{left:24px}
+.console-shell .layout-editing .remove-panel{position:relative;display:flex;flex:none;align-items:center;justify-content:center;width:24px;height:24px;margin-left:auto;padding:0;border:0;border-radius:4px;background:transparent;color:#737373;pointer-events:auto!important;opacity:1;cursor:pointer;z-index:15;font-size:14px;font-weight:400}
+.console-shell .layout-editing .remove-panel *{cursor:pointer}
+.console-shell .layout-editing .reference-chat .chat-title>.remove-panel{opacity:1;pointer-events:auto}
+.console-shell .layout-editing .reference-chat .chat-title>.remove-panel:disabled{opacity:.3}
+.console-shell .layout-editing .reference-product-footer .footer-pill{opacity:1;background:#ececec;color:#a3a3a3}
+.console-shell .layout-editing .remove-panel:hover,.console-shell .layout-editing .remove-panel:focus-visible{background:#f0f0f0;outline:none}
+.console-shell .layout-editing .video-edit-label .remove-panel{color:#fff}
+.console-shell .layout-editing .video-edit-label .remove-panel:hover{background:#ffffff26}
+.console-shell .layout-editing .remove-panel:disabled{opacity:.3;cursor:not-allowed}
+.remove-panel-tooltip{display:none;position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);background:#404040;color:white;padding:9px 12px;border-radius:8px;white-space:nowrap;font-size:14px;font-weight:400;line-height:18px;box-shadow:0 8px 24px #0003;pointer-events:none;z-index:100}
+.remove-panel-tooltip::before{content:'';position:absolute;bottom:100%;left:calc(50% - 5px);border:5px solid transparent;border-bottom-color:#404040}
+.remove-panel:hover>.remove-panel-tooltip,.remove-panel:focus-visible>.remove-panel-tooltip{display:block}
+.analytics-title .remove-panel-tooltip,.activity-tabs .remove-panel-tooltip{left:auto;right:0;transform:none}
+.analytics-title .remove-panel-tooltip::before,.activity-tabs .remove-panel-tooltip::before{left:auto;right:7px}
