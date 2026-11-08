@@ -171,7 +171,7 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
       }}
       onPointerLeave={() => { setHovered(null); if (session.current && !session.current.active) clear(); }}>
       {children}
-      <span id="module-move-instructions" className="move-sr-only">Drag anywhere in a module to move it. Maximum 4 columns and 3 modules per column. Products must be alone. Space picks up, arrows choose a position, Enter drops, Escape cancels.</span>
+      <span id="module-move-instructions" className="move-sr-only">Drag anywhere in a module to move it. Maximum 5 columns and 3 modules per column. Products must be alone. Space picks up, arrows choose a position, Enter drops, Escape cancels.</span>
       <span className="move-sr-only" role="status" aria-live="polite">{announcement}</span>
       {view && <>
         {line && origin && <div className={`module-drop-line ${view.target!.type === 'column' ? 'vertical' : 'horizontal'}`} data-testid="module-drop-line" style={{

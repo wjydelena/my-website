@@ -86,7 +86,6 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
   const [mode, setMode] = useState<LayoutMode>('Standard');
   const [arrangement, setArrangement] = useState<Arrangement>('balanced');
   const [board, setBoard] = useState<ModuleBoard | null>(null);
-  const removedPositions = useRef<Partial<Record<ModuleId, { board: ModuleBoard; column: number; row: number }>>>({});
   const hintSeen = useRef(false);
   const [showRestoreHint, setShowRestoreHint] = useState(false);
   const dismissRestoreHint = useCallback(() => setShowRestoreHint(false), []);
@@ -111,7 +110,6 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
   };
   const cancelEdit = () => {
     dismissRestoreHint();
-    removedPositions.current = {};
     setRatios([.4,.3,.3]);
     setHeights({video:268,analytics:200,feed:462});
     setMode('Standard');
@@ -125,7 +123,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     dismissRestoreHint();
     if (next === 'Custom') {
       if (mode !== 'Custom') customBaseline.current = currentGeometry();
-    } else { customBaseline.current = null; setBoard(null); removedPositions.current = {}; }
+    } else { customBaseline.current = null; setBoard(null); }
     setMode(next);
     if (next === 'Standard') {
       setArrangement('balanced');
@@ -222,7 +220,6 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     if(!editing || !canRemovePanel)return;
     const column = visibleBoard.columns.findIndex(col=>col.modules.includes(id));
     if(column < 0)return;
-    removedPositions.current[id] = {board:cloneBoard(visibleBoard),column,row:visibleBoard.columns[column].modules.indexOf(id)};
     const next = cloneBoard(visibleBoard);
     next.hidden = [...(next.hidden || []),id];
     next.columns.forEach(col=>{const index=col.modules.indexOf(id);if(index>=0){col.modules.splice(index,1);col.heights.splice(index,1);}});
@@ -237,12 +234,15 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     }
   };
   const restorePanels = (ids: ModuleId[]) => {
-    if(!editing)return;
-    let next=visibleBoard;
-    for(const id of ids)next=restoreRemovedPanel(next,id,removedPositions.current[id]);
-    if(next===visibleBoard)return;
+    const selected=MODULES.filter(id=>ids.includes(id) && removedPanels.includes(id));
+    if(!editing || !selected.length)return;
+    const widths=resolveBoard(visibleBoard,box).widths;
+    let next=cloneBoard(visibleBoard);
+    // Normalize proportional preset tracks before mixing in pixel-sized new columns.
+    next.columns.forEach((column,index)=>{column.width=widths[index];});
+    for(const id of selected)next=restoreRemovedPanel(next,id);
+    if(next.hidden?.length===visibleBoard.hidden?.length)return;
     markCustom();setBoard(next);dismissRestoreHint();
-    for(const id of ids)if(!next.hidden?.includes(id))delete removedPositions.current[id];
   };
   const restorePanel = (id: ModuleId) => restorePanels([id]);
   const moduleStyle = (id: ModuleId): React.CSSProperties | undefined => !boardGeometry.rects[id] ? { display: 'none' } : absoluteLayout ? { ...boardGeometry.rects[id], position: 'absolute' } : undefined;

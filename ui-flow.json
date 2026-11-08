@@ -147,7 +147,7 @@
         {
           "action": "capture",
           "id": "panel-restored",
-          "title": "Products restored and Add panel hidden"
+          "title": "Products appended as a new rightmost column; Add panel hidden"
         },
         {
           "action": "click",
@@ -1098,7 +1098,7 @@
         {
           "action": "capture",
           "id": "module-four-columns-draft",
-          "title": "Video forms its own column; maximum four columns"
+          "title": "Video forms its own column; up to five columns"
         },
         {
           "action": "click",
@@ -1141,6 +1141,27 @@
           "title": "Products moved as its own column"
         },
         {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Activity"
+          },
+          "key": "Space"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Activity"
+          },
+          "key": "Enter"
+        },
+        {
+          "action": "capture",
+          "id": "module-four-columns-fifth-column",
+          "title": "Fifth independent column with minimum-width scrolling"
+        },
+        {
           "action": "click",
           "target": {
             "role": "button",
@@ -1150,7 +1171,7 @@
         {
           "action": "capture",
           "id": "module-four-columns-restored",
-          "title": "Cancel restores the saved four-column layout"
+          "title": "Cancel restores the default layout"
         }
       ]
     },
@@ -1334,6 +1355,27 @@
           "action": "capture",
           "id": "module-four-narrow",
           "title": "Four columns retain minimum widths with horizontal scrolling"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Activity"
+          },
+          "key": "Space"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Activity"
+          },
+          "key": "Enter"
+        },
+        {
+          "action": "capture",
+          "id": "module-narrow-four-fifth-column",
+          "title": "Fifth independent column with minimum-width scrolling"
         },
         {
           "action": "click",
@@ -2709,7 +2751,7 @@
     },
     {
       "id": "add-panels-after-apply",
-      "title": "Multi-select restore after Apply",
+      "title": "Add removed panels as independent columns, up to five",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -2801,7 +2843,7 @@
         {
           "action": "capture",
           "id": "all-panels-restored",
-          "title": "All panels restored"
+          "title": "Chat and Analytics appended independently; five columns"
         },
         {
           "action": "click",
@@ -2814,6 +2856,58 @@
           "action": "capture",
           "id": "restored-layout-applied",
           "title": "Restored layout applied"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Remove Chat panel"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Add panel"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Chat"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Add"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "repeat-add-five-columns",
+          "title": "Repeated removal and addition appends Chat once without merging existing columns"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "five-columns-cancel-default",
+          "title": "Cancel returns to the default layout"
         }
       ]
     },

@@ -7,6 +7,7 @@ export type ModuleBoard = { columns: ModuleColumn[]; productsHidden?: boolean; h
 export type DropTarget = { type: 'column'; index: number } | { type: 'stack'; column: number; index: number };
 export type Rect = { left: number; top: number; width: number; height: number };
 export const MIN_PANEL_WIDTH = 318;
+export const MAX_COLUMNS = 5;
 export const columnMin = (column: ModuleColumn) => column.modules.includes('products') ? 400 : MIN_PANEL_WIDTH;
 export const boardMinWidth = (board: ModuleBoard) => board.columns.reduce((sum, col) => sum + columnMin(col), 0);
 export const cloneBoard = (board: ModuleBoard): ModuleBoard => ({ ...board, columns: board.columns.map(col => ({ ...col, modules: [...col.modules], heights: [...col.heights] })) });
@@ -46,7 +47,7 @@ export function resolveBoard(board: ModuleBoard, box: { width: number; height: n
 export function validBoard(board: ModuleBoard) {
   const all = board.columns.flatMap(c => c.modules);
   const expected = MODULES.filter(id => !(board.productsHidden && id === 'products') && !board.hidden?.includes(id));
-  return board.columns.length <= 4 && board.columns.length > 0 && all.length === expected.length &&
+  return board.columns.length <= MAX_COLUMNS && board.columns.length > 0 && all.length === expected.length &&
     expected.every(id => all.filter(m => m === id).length === 1) &&
     board.columns.every(c => c.modules.length > 0 && c.modules.length <= 3 && (!c.modules.includes('products') || c.modules.length === 1));
 }
@@ -69,7 +70,7 @@ export function moveModule(board: ModuleBoard, id: ModuleId, target: DropTarget)
     destination.modules.splice(insert, 0, id); destination.heights.splice(insert, 0, destination === source ? sourceHeight : average || 1);
   } else {
     const wholeColumn = source.modules.length === 1;
-    if (!wholeColumn && next.columns.length >= 4) return reject('Maximum 4 columns');
+    if (!wholeColumn && next.columns.length >= MAX_COLUMNS) return reject(`Maximum ${MAX_COLUMNS} columns`);
     let insert = target.index;
     source.modules.splice(row, 1); source.heights.splice(row, 1);
     if (wholeColumn) { next.columns.splice(sourceIndex, 1); if (sourceIndex < insert) insert--; }
