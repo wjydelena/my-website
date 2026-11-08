@@ -3,6 +3,7 @@ import './resize.css';
 import { ModuleBoard, ModuleId, DropTarget, MODULES, boardMinWidth, cloneBoard, moveModule, resolveBoard, validBoard } from './module-layout';
 import { ModuleDragProvider, ModuleHoverOverlay } from './ModuleDrag';
 import { BoardResizeHandles } from './BoardResizeHandles';
+import { restoreRemovedPanel } from './restore-panels';
 
 type Kind = 'products' | 'live' | 'video' | 'analytics' | 'feed';
 const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value));
@@ -64,6 +65,7 @@ type LayoutState = {
   canRemovePanel: boolean;
   removedPanels: ModuleId[];
   restorePanel: (id: ModuleId) => void;
+  restorePanels: (ids: ModuleId[]) => void;
   showRestoreHint: boolean;
   dismissRestoreHint: () => void;
 };
@@ -233,50 +235,15 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
       try { localStorage.setItem('live-console.add-panel-hint.v1','seen'); } catch {}
     }
   };
-  const restorePanel = (id: ModuleId) => {
-    if(!editing || !removedPanels.includes(id))return;
-    const next = cloneBoard(visibleBoard);
-    const savedPosition = removedPositions.current[id];
-    const original = savedPosition?.board.columns[savedPosition.column];
-    const peerColumn = id === 'products' ? -1 : next.columns.findIndex(col =>
-      !col.modules.includes('products') && col.modules.length < 3 && original?.modules.some(peer=>col.modules.includes(peer)));
-    const addToColumn = (column:number) => {
-      const col = next.columns[column];
-      const order = original?.modules || [];
-      const following = col.modules.findIndex(peer=>order.indexOf(peer) > (savedPosition?.row ?? -1));
-      const row = following < 0 ? col.modules.length : following;
-      col.modules.splice(row,0,id);
-      col.heights.splice(row,0,original?.heights[savedPosition!.row] || 270);
-    };
-    if(peerColumn >= 0) addToColumn(peerColumn);
-    else {
-      // Products always owns a column. If four columns are occupied, consolidate
-      // two compatible non-product columns before adding its original column.
-      if(id === 'products' && next.columns.length >= 4) {
-        const first = next.columns.findIndex(c=>!c.modules.includes('products') && c.modules.length < 3);
-        if(first<0)return;
-        const second = next.columns.findIndex((c,i)=>i!==first && !c.modules.includes('products') && c.modules.length+next.columns[first].modules.length<=3);
-        if(second<0)return;
-        next.columns[first].modules.push(...next.columns[second].modules);
-        next.columns[first].heights.push(...next.columns[second].heights);
-        next.columns[first].width += next.columns[second].width;
-        next.columns.splice(second,1);
-      }
-      if(next.columns.length < 4) {
-        const width = original?.width || next.columns[0].width;
-        next.columns.splice(Math.min(savedPosition?.column ?? next.columns.length,next.columns.length),0,{modules:[id],width,heights:[original?.heights[savedPosition!.row] || 270]});
-      } else {
-        const available = next.columns.findIndex(c=>!c.modules.includes('products') && c.modules.length<3);
-        if(available<0)return;
-        addToColumn(available);
-      }
-    }
-    next.hidden = next.hidden?.filter(panel=>panel!==id);
-    if(id==='products')next.productsHidden=false;
-    if(!validBoard(next))return;
+  const restorePanels = (ids: ModuleId[]) => {
+    if(!editing)return;
+    let next=visibleBoard;
+    for(const id of ids)next=restoreRemovedPanel(next,id,removedPositions.current[id]);
+    if(next===visibleBoard)return;
     markCustom();setBoard(next);dismissRestoreHint();
-    delete removedPositions.current[id];
+    for(const id of ids)if(!next.hidden?.includes(id))delete removedPositions.current[id];
   };
+  const restorePanel = (id: ModuleId) => restorePanels([id]);
   const moduleStyle = (id: ModuleId): React.CSSProperties | undefined => !boardGeometry.rects[id] ? { display: 'none' } : absoluteLayout ? { ...boardGeometry.rects[id], position: 'absolute' } : undefined;
   const style = {
     gridTemplateColumns: (focusedChat ? [products, widths[2], live] : widths).map(width => `${width}px`).join(' '),
@@ -285,7 +252,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     '--video-height': `${video}px`, '--analytics-height': `${analytics}px`, '--feed-height': `${feed}px`,
   } as React.CSSProperties;
   if (absoluteLayout) style.minWidth = boardMinWidth(visibleBoard);
-  return <LayoutContext.Provider value={{ values, ranges, change, reset, editing, mode, arrangement, docked: absoluteLayout, moduleStyle, applyDisabled, beginEdit, applyEdit, cancelEdit, chooseMode, removePanel, canRemovePanel, removedPanels, restorePanel, showRestoreHint, dismissRestoreHint }}>
+  return <LayoutContext.Provider value={{ values, ranges, change, reset, editing, mode, arrangement, docked: absoluteLayout, moduleStyle, applyDisabled, beginEdit, applyEdit, cancelEdit, chooseMode, removePanel, canRemovePanel, removedPanels, restorePanel, restorePanels, showRestoreHint, dismissRestoreHint }}>
     <ModuleDragProvider board={visibleBoard} box={box} editing={editing} container={ref} onMove={move}>
     {header}
     <div className="layout-viewport">

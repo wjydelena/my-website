@@ -1,0 +1,28 @@
+.console-shell{position:relative}
+.console-shell .add-panel-backdrop{position:absolute;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:24px;background:#0006;color:#171717;cursor:default}
+.console-shell .add-panel-modal{display:flex;flex-direction:column;width:840px;max-width:100%;max-height:min(740px,100%);padding:24px;background:#fff;border-radius:8px;box-shadow:0 16px 48px #0003;outline:none;overflow:hidden;min-width:0;box-sizing:border-box}
+.console-shell .add-panel-modal.single-panel{width:530px}
+.console-shell .add-panel-modal-header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex:none;margin-bottom:24px}
+.console-shell .add-panel-modal-header h2{margin:0;font-size:20px;line-height:28px;font-weight:500;color:#171717}
+.console-shell .add-panel-modal-close{display:grid;place-items:center;width:24px;height:24px;padding:0;border:0;background:transparent;color:#737373;border-radius:4px;cursor:pointer}
+.console-shell .add-panel-modal-close:hover{background:#f5f5f5}
+.console-shell .add-panel-modal-body{overflow:auto;min-height:0;flex:1 1 auto;overscroll-behavior:contain;scrollbar-width:thin}
+.console-shell .add-panel-card-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.console-shell .single-panel .add-panel-card-grid{grid-template-columns:minmax(0,1fr)}
+.console-shell .panel-choice{display:flex;flex-direction:column;align-items:stretch;min-width:0;width:100%;padding:0;border:0;border-radius:8px;background:transparent;color:#171717;font-family:inherit;text-align:center;cursor:pointer}
+.console-shell .panel-choice-preview{position:relative;display:flex;align-items:flex-end;justify-content:center;width:100%;height:310px;flex:none;overflow:hidden;border-radius:8px;background:#f5f5f5;transition:background 120ms ease}
+.console-shell .panel-choice.is-selected .panel-choice-preview{background:#e5f5f4}
+.console-shell .panel-choice:not(.is-selected):hover .panel-choice-preview{background:#eeeeee}
+.console-shell .panel-choice-art{display:block;width:auto;height:274px;max-width:calc(100% - 48px);object-fit:contain;object-position:bottom;filter:drop-shadow(0 -2px 16px #0002);border-radius:6px 6px 0 0;mask-image:linear-gradient(#000 0%,#000 84%,transparent 100%);pointer-events:none;user-select:none}
+.console-shell .panel-choice-check{position:absolute;right:13px;top:13px;display:grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#aaa;color:white}
+.console-shell .panel-choice.is-selected .panel-choice-check{background:#009995}
+.console-shell .panel-choice-name{display:block;margin-top:14px;font-size:16px;line-height:24px;font-weight:500}
+.console-shell .panel-choice-description{display:block;margin-top:4px;font-size:12px;line-height:18px;font-weight:400;color:#737373}
+.console-shell .add-panel-modal-footer{display:flex;justify-content:flex-end;gap:8px;flex:none;margin-top:24px}
+.console-shell .add-panel-modal-footer button{height:40px;padding:0 20px;border:0;border-radius:4px;font-family:inherit;font-size:14px;line-height:20px;font-weight:500;cursor:pointer}
+.console-shell .panel-modal-cancel{background:#ececec;color:#171717}
+.console-shell .panel-modal-add{min-width:67px;background:#009995;color:#fff}
+.console-shell .panel-modal-add:disabled{background:#b7e5e3;cursor:not-allowed}
+.console-shell .panel-choice:focus-visible{outline:2px solid #009995;outline-offset:-2px}
+.console-shell .add-panel-modal-header button:focus-visible,.console-shell .add-panel-modal-footer button:focus-visible{outline:2px solid #009995;outline-offset:2px}
+@media(max-width:680px){.console-shell .add-panel-backdrop{padding:16px}.console-shell .add-panel-modal{padding:20px}.console-shell .add-panel-card-grid{grid-template-columns:minmax(0,1fr)}.console-shell .panel-choice-preview{height:260px}.console-shell .panel-choice-art{height:230px}}
