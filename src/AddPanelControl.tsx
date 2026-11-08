@@ -12,7 +12,7 @@ export function AddPanelControl() {
   useEffect(()=>{if(!removedPanels.length)setOpen(false);},[removedPanels.length]);
   useEffect(()=>{
     if(!showRestoreHint)return;
-    const timer=setTimeout(dismissRestoreHint,4000);
+    const timer=setTimeout(dismissRestoreHint,3000);
     return ()=>clearTimeout(timer);
   },[showRestoreHint,dismissRestoreHint]);
   useEffect(()=>{

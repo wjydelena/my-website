@@ -2726,7 +2726,7 @@
     },
     {
       "id": "add-panel-hint-auto-dismiss",
-      "title": "First removal hint disappears automatically after four seconds",
+      "title": "First removal hint disappears automatically after three seconds",
       "viewport": {
         "width": 1440,
         "height": 900
