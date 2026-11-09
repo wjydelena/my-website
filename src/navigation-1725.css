@@ -18,3 +18,6 @@
 .reference-sidebar:not(.is-expanded) .reference-profile{height:48px}
 .console-shell .workspace:has(.console-topnav){background:#f5f5f5}
 .workspace:has(.console-topnav) .layout-viewport{border-top-left-radius:8px}
+/* The gray navigation frame must not show through transparent content panels. */
+.console-shell .layout-viewport,.console-shell .resizable-columns{background:#fff}
+.console-shell .resizable-columns [data-module-id]:not([data-module-id="video"]){background:#fff}
