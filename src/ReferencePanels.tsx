@@ -34,11 +34,12 @@ const initialMessages = [
   { name:'Alex Johnson', image:chat6, role:'mod', text:'This product is $9.99, only in today’s LIVE' },
 ];
 function Chat() {
-  const {editing,moduleStyle}=useConsoleLayout(); const drag=useModuleHeader('chat');
+  const {editing,moduleStyle,mergedChatActivity}=useConsoleLayout(); const drag=useModuleHeader('chat');
   const [comment,setComment]=useState(''); const [sent,setSent]=useState<string[]>([]);
   const [options,setOptions]=useState(false); const [showBadges,setShowBadges]=useState(true);
   const messages=[...initialMessages,...sent.map(text=>({name:'You',image:chat0,role:'normal',text}))];
   const submit=()=>{if(comment.trim()){setSent(v=>[...v,comment.trim()]);setComment('');}};
+  if(mergedChatActivity)return <CombinedChatActivity comment={comment} setComment={setComment} sent={sent} submit={submit}/>;
   return <div className="chat reference-chat" data-module-id="chat" style={moduleStyle('chat')}>
     <div className="chat-title" {...drag}><ModuleTitle>Chat</ModuleTitle><RemovePanelButton id="chat"/><button type="button" aria-label="Chat filters" disabled={editing} onClick={()=>setOptions(!options)}><SlidersHorizontal size={16}/></button><button type="button" aria-label="Chat settings" disabled={editing} onClick={()=>setOptions(!options)}><Settings size={16}/></button></div>
     {options&&!editing&&<div className="reference-chat-options"><label><input type="checkbox" checked={showBadges} onChange={e=>setShowBadges(e.target.checked)}/>Show user badges</label></div>}
@@ -66,6 +67,28 @@ const events=[
   {name:'Jason',image:jason,action:'subscribed to you for 5 months'}, {name:'Gladys',image:gladys,action:'added a product to cart',product:true,no:true},
   {name:'Bali',image:baii,action:'is viewing a product',product:true,no:true},
 ];
+function CombinedChatActivity({comment,setComment,sent,submit}:{comment:string;setComment:(value:string)=>void;sent:string[];submit:()=>void}) {
+  const {editing,moduleStyle}=useConsoleLayout();const drag=useModuleHeader('chat');
+  const [tab,setTab]=useState('Chat');
+  const message=(m:typeof initialMessages[number],key:string)=><div className="message" key={key}><img className="avatar" src={m.image} alt=""/><div className="message-content"><div className="name-line"><span>{m.name}</span>
+    {m.role==='fan'&&<span className="fan-icon"><UserRoundCheck size={14} fill="currentColor"/><b>♥</b></span>}{m.role==='mod'&&<UserRoundCog size={14} fill="currentColor"/>}
+    {(m.role==='fan'||m.role==='normal')&&<><span className="divider"/><span className="chat-tag"><ShoppingCart size={13}/>3</span></>}
+    {(m.role==='fan'||m.role==='normal'||m.bag)&&<span className="chat-tag"><ShoppingBag size={13}/>2</span>}
+    {m.customer&&<span className="customer-tag"><Timer size={13}/>No.{m.customer} Customer</span>}
+  </div><p>{m.text}</p></div></div>;
+  const event=(i:number)=><div className={'feed-item'+(i<2?' plain-event':'')} key={`event-${i}`}><img className="avatar" src={events[i].image} alt=""/><p><span className="person-name">{events[i].name}</span> {events[i].action} {events[i].product&&<img className="mini-product" src={shoe} alt="Shoe"/>}{events[i].no&&<strong> No.6</strong>}{events[i].gift&&<><img className="gift-product" src={pancakes} alt="Pancakes"/><strong> x4</strong></>}</p></div>;
+  return <div className="chat reference-chat merged-chat-activity" data-module-id="chat" data-merged-modules="chat activity" style={moduleStyle('chat')}>
+    <div className="combined-tabs" {...drag}><button type="button" role="tab" aria-selected={tab==='Chat'} className={tab==='Chat'?'active':''} disabled={editing} onClick={()=>setTab('Chat')}><ModuleTitle>Chat</ModuleTitle></button><button type="button" role="tab" aria-selected={tab==='Top customer'} className={tab==='Top customer'?'active':''} disabled={editing} onClick={()=>setTab('Top customer')}>Top customer</button><RemovePanelButton id="chat"/></div>
+    <div className="activity-list combined-purchases">{purchases.map((p,i)=><div className="activity" key={p.name}><img className="avatar" src={p.image} alt=""/><p><span className="person-name">{p.name}</span>{tab==='Chat'?' made a purchase ':` · No.${i+1} customer `}<img className="mini-product" src={shoe} alt="Shoe"/><strong> No.6</strong><span className="purchase-divider"/><strong>$100.00</strong></p></div>)}</div>
+    <div className="chat-scroll combined-stream">{tab==='Chat'&&<>
+      {message(initialMessages[0],'message-0')}{event(0)}{event(1)}{event(2)}
+      {message(initialMessages[1],'message-1')}{message(initialMessages[3],'message-3')}{event(3)}{event(4)}
+      {[2,4,5,6].map(i=>message(initialMessages[i],`message-${i}`))}{events.slice(5).map((_,i)=>event(i+5))}
+      {sent.map((text,i)=>message({name:'You',image:chat0,role:'normal',text},`sent-${i}`))}
+    </>}</div>
+    <form className="comment-box" onSubmit={e=>{e.preventDefault();submit();}}><input aria-label="Enter comment" placeholder="Say something..." maxLength={100} disabled={editing} value={comment} onChange={e=>setComment(e.target.value)}/><button type="submit" aria-label="Send comment" disabled={editing||!comment.trim()}><Send size={19}/></button></form>
+  </div>;
+}
 export function AnalyticsColumn(){
   const {editing,moduleStyle}=useConsoleLayout();const analyticsDrag=useModuleHeader('analytics');const activityDrag=useModuleHeader('activity');
   const [tab,setTab]=useState('Activity');const [filters,setFilters]=useState(false);const [purchasesOnly,setPurchasesOnly]=useState(false);

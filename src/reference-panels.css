@@ -70,3 +70,19 @@ body,button,input,select,textarea,.console-shell *,.module-drag-ghost,.promotion
 .layout-editing .reference-chat .comment-box,.layout-editing .reference-chat .chat-title>button{opacity:.3;pointer-events:none}
 .layout-editing .activity-tabs>button{pointer-events:none}
 @media(max-width:1250px){.video-control-bar>.divider:nth-of-type(2),.video-control-bar .video-mic{display:none}}
+.console-shell .merged-chat-activity{display:flex;flex-direction:column;overflow:hidden;padding:0}
+.combined-tabs{height:54px;min-height:54px;flex:none;display:flex;align-items:center;gap:32px;padding:0 16px;position:relative}
+.combined-tabs>button[role="tab"]{height:100%;padding:0;border:0;background:none;color:#161616;font-size:16px;font-weight:500;position:relative;white-space:nowrap}
+.combined-tabs>button[role="tab"]:disabled{opacity:1}
+.combined-tabs>button.active::after{content:'';height:2px;background:#009995;position:absolute;bottom:8px;left:0;right:0}
+.layout-editing .combined-tabs>button.active:first-child::after{left:24px}
+.combined-tabs>.remove-panel,.combined-tabs>.remove-panel-guard{margin-left:auto;flex:none}
+.console-shell .merged-chat-activity .combined-purchases{flex:none;height:130px;min-height:0;border-bottom:1px solid #e3e3e3;padding:8px 16px 0}
+.console-shell .merged-chat-activity .combined-purchases .avatar{height:24px;width:24px}
+.console-shell .merged-chat-activity .combined-stream{flex:1;min-height:0;padding:8px 16px 0;scrollbar-width:thin;scrollbar-color:#e3e3e3 transparent;mask-image:none}
+.console-shell .merged-chat-activity .feed-item .avatar{height:24px;width:24px}
+.console-shell .merged-chat-activity .comment-box{flex:none;margin:8px 16px 16px;height:44px}
+.console-shell .layout-editing .merged-chat-activity .comment-box{opacity:1;background:#fff}
+.console-shell .layout-editing .merged-chat-activity .comment-box>*{opacity:1}
+.console-shell .layout-editing .merged-chat-activity .comment-box svg{color:#737373}
+.console-shell .host-focus.layout-editing .reference-select-all{display:none}

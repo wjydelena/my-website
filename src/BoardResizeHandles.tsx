@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { ModuleBoard, columnMin, minHeight, moduleNames, resolveBoard } from './module-layout';
+import { ModuleBoard, columnMin, moduleMinHeight, visualModuleIndices, moduleNames, resolveBoard } from './module-layout';
 
 function TrackHandle({ vertical, value, min, max, label, style, change }: {
   vertical: boolean; value: number; min: number; max: number; label: string; style: React.CSSProperties; change: (value: number) => void;
@@ -28,9 +28,9 @@ export function BoardResizeHandles({ board, box, resize }: { board: ModuleBoard;
   return <>
     {board.columns.slice(0, -1).map((col, c) => <TrackHandle key={`col-${c}`} vertical value={widths[c]} min={columnMin(col)} max={widths[c] + widths[c + 1] - columnMin(board.columns[c + 1])}
       label={`Resize column ${c + 1} and column ${c + 2}`} style={{ left: widths.slice(0, c + 1).reduce((a, b) => a + b, 0) }} change={value => resize('column', c, 0, value)}/>)}
-    {board.columns.flatMap((col, c) => col.modules.slice(0, -1).map((id, r) => <TrackHandle key={`${id}-${col.modules[r + 1]}`} vertical={false}
-      value={rows[c][r]} min={minHeight[id]} max={rows[c][r] + rows[c][r + 1] - minHeight[col.modules[r + 1]]}
-      label={`Resize ${moduleNames[id]} and ${moduleNames[col.modules[r + 1]]}`}
-      style={{ left: widths.slice(0, c).reduce((a, b) => a + b, 0), width: widths[c], right: 'auto', top: rows[c].slice(0, r + 1).reduce((a, b) => a + b, 0) - 4, bottom: 'auto' }} change={value => resize('row', c, r, value)}/>))}
+    {board.columns.flatMap((col, c) => {const indices=visualModuleIndices(board,col);return indices.slice(0,-1).map((r,i)=>{const n=indices[i+1],id=col.modules[r];return <TrackHandle key={`${id}-${col.modules[n]}`} vertical={false}
+      value={rows[c][r]} min={moduleMinHeight(board,id)} max={rows[c][r] + rows[c][n] - moduleMinHeight(board,col.modules[n])}
+      label={`Resize ${moduleNames[id]} and ${moduleNames[col.modules[n]]}`}
+      style={{ left: widths.slice(0, c).reduce((a, b) => a + b, 0), width: widths[c], right: 'auto', top: rows[c].slice(0, r + 1).reduce((a, b) => a + b, 0) - 4, bottom: 'auto' }} change={value => resize('row', c, r, value)}/>;});})}
   </>;
 }

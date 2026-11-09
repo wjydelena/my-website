@@ -6,7 +6,7 @@ import './layout-editor.css';
 import { AddPanelControl } from './AddPanelControl';
 
 const modes: LayoutMode[] = ['Standard', 'Host focus', 'Custom'];
-const modeNames: Record<LayoutMode, string> = { Standard: 'Chat focus', 'Chat focus': 'Chat focus', 'Host focus': 'Video focus mode', Custom: 'Custom layout' };
+const modeNames: Record<LayoutMode, string> = { Standard: 'Chat focus', 'Chat focus': 'Chat focus', 'Host focus': 'Video focus', Custom: 'Custom layout' };
 const descriptions: Record<LayoutMode, string> = {
   Standard: 'Maximize control over your LIVE',
   'Chat focus': 'Maximize control over your LIVE',
@@ -15,14 +15,16 @@ const descriptions: Record<LayoutMode, string> = {
 };
 
 export function RemovePanelButton({id}:{id:ModuleId}) {
-  const {editing,removePanel,canRemovePanel}=useConsoleLayout();
-  if(!editing)return null;
-  if(!canRemovePanel)return <div className="remove-panel-guard" tabIndex={0} data-testid="last-panel-delete" aria-label={`Remove ${moduleNames[id]} panel unavailable`} aria-describedby={`last-panel-tooltip-${id}`}
+  const {editing,removePanel,canRemovePanelFor,mergedChatActivity,removedPanels}=useConsoleLayout();
+  const canRemovePanel=canRemovePanelFor(id);
+  const label=mergedChatActivity&&(id==='chat'||id==='activity')?'Remove Chat and Activity panels':`Remove ${moduleNames[id]} panel`;
+  if(!editing || removedPanels.includes(id) || (mergedChatActivity && id==='activity'))return null;
+  if(!canRemovePanel)return <div className="remove-panel-guard" tabIndex={0} data-testid="last-panel-delete" aria-label={`${label} unavailable`} aria-describedby={`last-panel-tooltip-${id}`}
     onPointerDown={e=>e.stopPropagation()} onKeyDown={e=>e.stopPropagation()} onClick={e=>e.stopPropagation()}>
-    <button className="remove-panel" type="button" aria-label={`Remove ${moduleNames[id]} panel`} aria-describedby={`last-panel-tooltip-${id}`} disabled><Trash2 size={18}/></button>
+    <button className="remove-panel" type="button" aria-label={label} aria-describedby={`last-panel-tooltip-${id}`} disabled><Trash2 size={18}/></button>
     <span className="remove-panel-tooltip last-panel-tooltip" id={`last-panel-tooltip-${id}`} role="tooltip">At least one panel must remain in your LIVE console.</span>
   </div>;
-  return <button className="remove-panel" type="button" aria-label={`Remove ${moduleNames[id]} panel`} disabled={!canRemovePanel}
+  return <button className="remove-panel" type="button" aria-label={label} disabled={!canRemovePanel}
     onPointerDown={e=>e.stopPropagation()} onKeyDown={e=>e.stopPropagation()} onClick={e=>{e.stopPropagation();removePanel(id);}}>
     <Trash2 size={18}/><span className="remove-panel-tooltip" role="tooltip">Remove panel</span>
   </button>;

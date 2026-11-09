@@ -1655,19 +1655,19 @@
         {
           "action": "capture",
           "id": "layout-four-options",
-          "title": "Four layout modes with descriptions"
+          "title": "Three layout modes with descriptions"
         },
         {
           "action": "click",
           "target": {
             "role": "option",
-            "name": "Video focus mode"
+            "name": "Video focus"
           }
         },
         {
           "action": "capture",
           "id": "host-focus-edit",
-          "title": "Host focus: Video, Chat, Analytics and Activity, no Products"
+          "title": "Video focus: Products, full-height Video, Analytics and combined Chat + Activity"
         },
         {
           "action": "click",
@@ -1723,7 +1723,7 @@
     },
     {
       "id": "host-focus-custom",
-      "title": "Customize Host focus without restoring Products",
+      "title": "Customize Video focus with combined Chat and Activity",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -1751,19 +1751,19 @@
         {
           "action": "capture",
           "id": "layout-four-options",
-          "title": "Four layout modes with descriptions"
+          "title": "Three layout modes with descriptions"
         },
         {
           "action": "click",
           "target": {
             "role": "option",
-            "name": "Video focus mode"
+            "name": "Video focus"
           }
         },
         {
           "action": "capture",
           "id": "host-focus-edit",
-          "title": "Host focus: Video, Chat, Analytics and Activity, no Products"
+          "title": "Video focus: Products, full-height Video, Analytics and combined Chat + Activity"
         },
         {
           "action": "click",
@@ -1782,7 +1782,7 @@
         {
           "action": "capture",
           "id": "host-custom-unchanged",
-          "title": "Custom inherits Host focus; Apply disabled until a change"
+          "title": "Custom inherits Video focus; Apply disabled until a change"
         },
         {
           "action": "press",
@@ -1815,7 +1815,175 @@
         {
           "action": "capture",
           "id": "host-custom-applied",
-          "title": "Custom arrangement saved without Products"
+          "title": "Custom Video focus arrangement saved with Products"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "separator",
+            "name": "Resize Analytics and Chat"
+          },
+          "key": "ArrowDown"
+        },
+        {
+          "action": "capture",
+          "id": "merged-region-resized",
+          "title": "Analytics and combined Chat + Activity share one resize boundary"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Chat"
+          },
+          "key": "Space"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Chat"
+          },
+          "key": "Enter"
+        },
+        {
+          "action": "capture",
+          "id": "merged-region-moved",
+          "title": "Chat and Activity move as one region"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Remove Chat and Activity panels"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "merged-region-removed",
+          "title": "One deletion removes both Chat and Activity"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Add panel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "merged-panels-available",
+          "title": "Both Chat and Activity are available to add"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Chat"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Activity"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Add"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "merged-panels-added-independently",
+          "title": "Chat and Activity restored as independent rightmost columns"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Apply"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "merged-restoration-applied",
+          "title": "Restored independent panels saved"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Layout mode"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Video focus"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Remove Products panel"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Remove Video panel"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Remove Analytics panel"
+          }
+        },
+        {
+          "action": "hover",
+          "target": {
+            "testId": "last-panel-delete"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "last-merged-region-protected",
+          "title": "The last combined region cannot be deleted"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "merged-cancel-default",
+          "title": "Cancel restores all default panels and sizes"
         }
       ]
     },
@@ -2501,7 +2669,7 @@
           "action": "click",
           "target": {
             "role": "option",
-            "name": "Video focus mode"
+            "name": "Video focus"
           }
         },
         {

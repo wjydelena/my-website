@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useContext, useLayoutEffect, useRef, useState } from 'react';
 import './resize.css';
-import { ModuleBoard, ModuleId, DropTarget, MODULES, MIN_PANEL_WIDTH, boardMinWidth, cloneBoard, moveModule, resolveBoard, validBoard } from './module-layout';
+import { ModuleBoard, ModuleId, DropTarget, MODULES, MIN_PANEL_WIDTH, boardMinWidth, cloneBoard, moveModule, resolveBoard, validBoard, visualModuleIndices, panelRemovalIds, removeBoardPanel } from './module-layout';
 import { ModuleDragProvider, ModuleHoverOverlay } from './ModuleDrag';
 import { BoardResizeHandles } from './BoardResizeHandles';
 import { restoreRemovedPanel } from './restore-panels';
@@ -17,11 +17,10 @@ type GeometrySource = { ratios: number[]; heights: Heights; arrangement: Arrange
 function resolveValues(source: GeometrySource, box: { width: number; height: number }) {
   const { ratios, heights, arrangement } = source;
   const focusedChat = arrangement === 'chat-focus';
-  if (arrangement === 'host-focus') return { products: 0, live: Math.max(MIN_PANEL_WIDTH, box.width / 3), video: box.height, analytics: clamp(heights.analytics, 194, box.height - 310), feed: clamp(heights.feed, 160, box.height - heights.analytics - 150) };
   const width = Math.max(box.width, MIN_PRODUCTS_WIDTH + MIN_LIVE_WIDTH + MIN_ANALYTICS_WIDTH);
   const products = clamp(ratios[0] * width, MIN_PRODUCTS_WIDTH, width - MIN_LIVE_WIDTH - MIN_ANALYTICS_WIDTH);
   const live = clamp(ratios[1] * width, MIN_LIVE_WIDTH, width - products - MIN_ANALYTICS_WIDTH);
-  const video = clamp(heights.video, 200, focusedChat ? box.height - 194 - 160 - 110 : box.height - 200);
+  const video = arrangement === 'host-focus' ? box.height : clamp(heights.video, 200, focusedChat ? box.height - 194 - 160 - 110 : box.height - 200);
   const analytics = clamp(heights.analytics, 194, focusedChat ? box.height - video - 160 - 110 : box.height - 310);
   const feed = clamp(heights.feed, 160, focusedChat ? box.height - video - analytics - 110 : box.height - analytics - 150);
   return { products, live, video, analytics, feed };
@@ -30,10 +29,10 @@ function sourceBoard(source: GeometrySource, box: { width: number; height: numbe
   if (source.board) return source.board;
   if (source.arrangement === 'host-focus') {
     const v = resolveValues(source, box);
-    return { productsHidden: true, columns: [
-      { modules: ['video'], width: 1, heights: [box.height] },
-      { modules: ['chat'], width: 1, heights: [box.height] },
-      { modules: ['analytics', 'activity'], width: 1, heights: [v.analytics, box.height - v.analytics] },
+    return { chatActivityMerged: true, columns: [
+      { modules: ['products'], width: v.products, heights: [box.height] },
+      { modules: ['video'], width: v.live, heights: [box.height] },
+      { modules: ['analytics', 'chat', 'activity'], width: Math.max(MIN_PANEL_WIDTH,box.width-v.products-v.live), heights: [v.analytics, box.height - v.analytics, 0] },
     ] };
   }
   const v = resolveValues(source, box), third = Math.max(MIN_PANEL_WIDTH, box.width - v.products - v.live);
@@ -64,6 +63,8 @@ type LayoutState = {
   chooseMode: (mode: LayoutMode) => void;
   removePanel: (id: ModuleId) => void;
   canRemovePanel: boolean;
+  canRemovePanelFor: (id: ModuleId) => boolean;
+  mergedChatActivity: boolean;
   removedPanels: ModuleId[];
   restorePanel: (id: ModuleId) => void;
   restorePanels: (ids: ModuleId[]) => void;
@@ -135,6 +136,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
       setHeights({ video: 240, analytics: 198, feed: 206 });
     } else if (next === 'Host focus') {
       setArrangement('host-focus');
+      setRatios([.4, .3, .3]);
       setHeights({ video: 268, analytics: 200, feed: 462 });
     }
   };
@@ -210,20 +212,19 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     } else {
       draft.columns[column].heights = [...geometry.rows[column]];
       draft.columns[column].heights[row] = next;
-      draft.columns[column].heights[row + 1] += current - next;
+      const nextRow=visualModuleIndices(visibleBoard,visibleBoard.columns[column]).find(i=>i>row);
+      if(nextRow===undefined)return;
+      draft.columns[column].heights[nextRow] += current - next;
     }
     markCustom(); setBoard(draft);
   };
   const canRemovePanel = visibleBoard.columns.flatMap(c=>c.modules).length > 1;
+  const canRemovePanelFor = (id:ModuleId) => visibleBoard.columns.flatMap(c=>c.modules).length > panelRemovalIds(visibleBoard,id).length;
   const removedPanels = MODULES.filter(id => visibleBoard.hidden?.includes(id));
   const removePanel = (id: ModuleId) => {
-    if(!editing || !canRemovePanel)return;
-    const column = visibleBoard.columns.findIndex(col=>col.modules.includes(id));
-    if(column < 0)return;
-    const next = cloneBoard(visibleBoard);
-    next.hidden = [...(next.hidden || []),id];
-    next.columns.forEach(col=>{const index=col.modules.indexOf(id);if(index>=0){col.modules.splice(index,1);col.heights.splice(index,1);}});
-    next.columns=next.columns.filter(col=>col.modules.length);
+    if(!editing || !canRemovePanelFor(id))return;
+    const next = removeBoardPanel(visibleBoard,id);
+    if(next===visibleBoard)return;
     markCustom();setBoard(next);
     let seen = hintSeen.current;
     try { seen = seen || localStorage.getItem('live-console.add-panel-hint.v1') === 'seen'; } catch {}
@@ -245,7 +246,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     markCustom();setBoard(next);dismissRestoreHint();
   };
   const restorePanel = (id: ModuleId) => restorePanels([id]);
-  const moduleStyle = (id: ModuleId): React.CSSProperties | undefined => !boardGeometry.rects[id] ? { display: 'none' } : absoluteLayout ? { ...boardGeometry.rects[id], position: 'absolute' } : undefined;
+  const moduleStyle = (id: ModuleId): React.CSSProperties | undefined => !boardGeometry.rects[id] || (visibleBoard.chatActivityMerged && id==='activity') ? { display: 'none' } : absoluteLayout ? { ...boardGeometry.rects[id], position: 'absolute' } : undefined;
   const style = {
     gridTemplateColumns: (focusedChat ? [products, widths[2], live] : widths).map(width => `${width}px`).join(' '),
     gridTemplateRows: focusedChat ? `${video}px ${analytics}px 54px minmax(0, 1fr) ${feed}px` : undefined,
@@ -254,7 +255,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     '--panel-min-width': `${MIN_PANEL_WIDTH}px`,
     minWidth: boardMinWidth(visibleBoard),
   } as React.CSSProperties;
-  return <LayoutContext.Provider value={{ values, ranges, change, reset, editing, mode, arrangement, docked: absoluteLayout, moduleStyle, applyDisabled, beginEdit, applyEdit, cancelEdit, chooseMode, removePanel, canRemovePanel, removedPanels, restorePanel, restorePanels, showRestoreHint, dismissRestoreHint }}>
+  return <LayoutContext.Provider value={{ values, ranges, change, reset, editing, mode, arrangement, docked: absoluteLayout, moduleStyle, applyDisabled, beginEdit, applyEdit, cancelEdit, chooseMode, removePanel, canRemovePanel, canRemovePanelFor, mergedChatActivity:!!visibleBoard.chatActivityMerged, removedPanels, restorePanel, restorePanels, showRestoreHint, dismissRestoreHint }}>
     <ModuleDragProvider board={visibleBoard} box={box} editing={editing} container={ref} onMove={move}>
     {header}
     <div className="layout-viewport">
