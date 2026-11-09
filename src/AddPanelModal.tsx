@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Check, X} from 'lucide-react';
+import {Check, Minus, X} from 'lucide-react';
 import {ModuleId, moduleNames} from './module-layout';
 import products from './assets/panel-previews/products.png';
 import video from './assets/panel-previews/video.png';
@@ -38,6 +38,8 @@ export function AddPanelModal({panels,onAdd,onClose}:{panels:ModuleId[];onAdd:(i
     return ()=>{document.removeEventListener('keydown',keydown,true);siblings.forEach((el,i)=>{el.inert=oldInert[i];});if(previouslyFocused?.isConnected)previouslyFocused.focus();else requestAnimationFrame(()=>shell?.querySelector<HTMLButtonElement>('.layout-mode-trigger')?.focus());};
   },[]);
   const chosen=panels.filter(id=>selected.includes(id));
+  const allSelected=chosen.length===panels.length;
+  const partiallySelected=chosen.length>0&&!allSelected;
   return <div className="add-panel-backdrop" onPointerDown={e=>e.stopPropagation()}>
     <div className={`add-panel-modal ${panels.length===1?'single-panel':'multiple-panels'}`} ref={dialog} role="dialog" aria-modal="true" aria-labelledby="add-panel-title" tabIndex={-1}>
       <header className="add-panel-modal-header"><h2 id="add-panel-title">Add panel</h2><button className="add-panel-modal-close" type="button" aria-label="Close Add panel" onClick={onClose}><X size={20}/></button></header>
@@ -48,7 +50,12 @@ export function AddPanelModal({panels,onAdd,onClose}:{panels:ModuleId[];onAdd:(i
           <span className="panel-choice-name">{moduleNames[id]}</span><span className="panel-choice-description" id={`panel-description-${id}`}>{panelDescriptions[id]}</span>
         </button>)}
       </div></div>
-      <footer className="add-panel-modal-footer"><button type="button" className="panel-modal-cancel" aria-label="Cancel Add panel" onClick={onClose}>Cancel</button><button type="button" className="panel-modal-add" disabled={!chosen.length} onClick={()=>onAdd(chosen)}>Add</button></footer>
+      <footer className="add-panel-modal-footer">
+        {panels.length>1&&<button type="button" className="panel-modal-select-all" role="checkbox" aria-label="Select all" aria-checked={partiallySelected?'mixed':allSelected} onClick={()=>setSelected(allSelected?[]:[...panels])}>
+          <span className={`panel-select-all-box${chosen.length?' is-selected':''}`} aria-hidden="true">{partiallySelected?<Minus size={12} strokeWidth={2.5}/>:allSelected?<Check size={12} strokeWidth={2.5}/>:null}</span><span>Select all</span>
+        </button>}
+        <button type="button" className="panel-modal-cancel" aria-label="Cancel Add panel" onClick={onClose}>Cancel</button><button type="button" className="panel-modal-add" disabled={!chosen.length} onClick={()=>onAdd(chosen)}>Add</button>
+      </footer>
     </div>
   </div>;
 }

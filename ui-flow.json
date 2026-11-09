@@ -2986,6 +2986,49 @@
           "action": "click",
           "target": {
             "role": "checkbox",
+            "name": "Select all"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "add-panels-all-selected",
+          "title": "Footer Select all selects every available panel"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Chat"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "add-panels-partial-selection",
+          "title": "Individual deselection shows an indeterminate Select all checkbox"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Select all"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Select all"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "add-panels-all-cleared",
+          "title": "Select all clears selection; Add is disabled"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
             "name": "Chat"
           }
         },
