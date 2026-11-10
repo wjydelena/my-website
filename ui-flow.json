@@ -406,6 +406,23 @@
           "title": "1120px layout with 318px non-Products column minimums"
         },
         {
+          "action": "waitFor",
+          "target": {
+            "text": "Customize your LIVE console"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "text": "Quick LIVE"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "education-outside-dismissed",
+          "title": "Clicking outside dismisses entry education without entering layout editing"
+        },
+        {
           "action": "press",
           "target": {
             "role": "separator",

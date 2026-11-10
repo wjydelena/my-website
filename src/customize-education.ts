@@ -1,6 +1,6 @@
-// v1 marked the introduction seen before it was actually visible. Do not carry
-// that premature record forward; completion requires dismissal/use or two GIF plays.
-export const CUSTOMIZE_EDUCATION_KEY = 'live-console.customize-education.v2';
+// Reintroduce the restored education once, without inheriting earlier dismissal records.
+// Completion still requires dismissal/use or two GIF plays, not merely appearing.
+export const CUSTOMIZE_EDUCATION_KEY = 'live-console.customize-education.v3';
 export const CUSTOMIZE_EDUCATION_DELAY = 2000;
 // Sum of all 71 GIF frame delays: 5,850ms per play, at most two plays.
 export const CUSTOMIZE_EDUCATION_PLAY_DURATION = 5850;

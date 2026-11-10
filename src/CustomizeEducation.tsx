@@ -43,8 +43,12 @@ export function CustomizeEducation({onCustomize}:{onCustomize:()=>void}) {
     const escape = (event:KeyboardEvent) => {
       if(event.key==='Escape')dismiss();
     };
+    const outside = (event:PointerEvent) => {
+      if(event.target instanceof Node && !root.current?.contains(event.target))dismiss();
+    };
     document.addEventListener('keydown',escape);
-    return ()=>document.removeEventListener('keydown',escape);
+    document.addEventListener('pointerdown',outside,true);
+    return ()=>{document.removeEventListener('keydown',escape);document.removeEventListener('pointerdown',outside,true);};
   },[visible,dismiss]);
   return <div className="customize-education-anchor" ref={root} data-testid={!visible?'customize-without-education':undefined}>
     <button type="button" className={`customize${visible?' education-highlight':''}`} style={{fontSize:'14px'}}
