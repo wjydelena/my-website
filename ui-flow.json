@@ -1262,6 +1262,48 @@
           "title": "Chat, Analytics and Activity stacked in one column"
         },
         {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Video"
+          },
+          "key": "Space"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Video"
+          },
+          "key": "ArrowRight"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Video"
+          },
+          "key": "ArrowRight"
+        },
+        {
+          "action": "capture",
+          "id": "column-capacity-warning",
+          "title": "Maximum 3 modules per column: a fourth module is blocked"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move Video"
+          },
+          "key": "Enter"
+        },
+        {
+          "action": "capture",
+          "id": "column-capacity-rejected",
+          "title": "Rejected drop preserves the three-module column"
+        },
+        {
           "action": "click",
           "target": {
             "role": "button",

@@ -8,6 +8,8 @@ export type DropTarget = { type: 'column'; index: number } | { type: 'stack'; co
 export type Rect = { left: number; top: number; width: number; height: number };
 export const MIN_PANEL_WIDTH = 318;
 export const MAX_COLUMNS = 5;
+export const MAX_MODULES_PER_COLUMN = 3;
+export const COLUMN_CAPACITY_MESSAGE = 'Maximum 3 modules per column';
 export const columnMin = (column: ModuleColumn) => column.modules.includes('products') ? 400 : MIN_PANEL_WIDTH;
 export const boardMinWidth = (board: ModuleBoard) => board.columns.reduce((sum, col) => sum + columnMin(col), 0);
 export const cloneBoard = (board: ModuleBoard): ModuleBoard => ({ ...board, columns: board.columns.map(col => ({ ...col, modules: [...col.modules], heights: [...col.heights] })) });
@@ -15,6 +17,16 @@ export const sameStructure = (a: ModuleBoard, b: ModuleBoard) => JSON.stringify(
 export const visualModuleIndices = (board: ModuleBoard, column: ModuleColumn) => column.modules.map((_,i)=>i).filter(i=>!(board.chatActivityMerged && column.modules[i]==='activity'));
 export const moduleMinHeight = (board: ModuleBoard, id: ModuleId) => board.chatActivityMerged && id==='chat' ? 270 : minHeight[id];
 export const panelRemovalIds = (board: ModuleBoard, id: ModuleId): ModuleId[] => board.chatActivityMerged && (id==='chat'||id==='activity') ? ['chat','activity'] : [id];
+/** Capacity counts underlying modules, even when Chat and Activity share one surface. */
+export function stackBlockedReason(board:ModuleBoard,id:ModuleId,column:number):string|undefined {
+  const destination=board.columns[column];
+  if(!destination)return 'Choose a column';
+  if(id==='products')return 'Products can’t be stacked with other modules';
+  if(destination.modules.includes('products'))return 'Modules can’t share a column with Products.';
+  const moving=panelRemovalIds(board,id);
+  const count=destination.modules.filter(m=>!moving.includes(m)).length+moving.length;
+  if(count>MAX_MODULES_PER_COLUMN)return COLUMN_CAPACITY_MESSAGE;
+}
 export function removeBoardPanel(board:ModuleBoard,id:ModuleId):ModuleBoard {
   const visible=board.columns.flatMap(c=>c.modules), ids=panelRemovalIds(board,id);
   if(!ids.every(id=>visible.includes(id)) || visible.length<=ids.length)return board;
@@ -67,10 +79,14 @@ export function validBoard(board: ModuleBoard) {
   if(board.chatActivityMerged && !board.columns.some(c=>c.modules.includes('chat')&&c.modules[c.modules.indexOf('chat')+1]==='activity'))return false;
   return board.columns.length <= MAX_COLUMNS && board.columns.length > 0 && all.length === expected.length &&
     expected.every(id => all.filter(m => m === id).length === 1) &&
-    board.columns.every(c => c.modules.length > 0 && visualModuleIndices(board,c).length <= 3 && (!c.modules.includes('products') || c.modules.length === 1));
+    board.columns.every(c => c.modules.length > 0 && c.modules.length <= MAX_MODULES_PER_COLUMN && (!c.modules.includes('products') || c.modules.length === 1));
 }
 
 export function moveModule(board: ModuleBoard, id: ModuleId, target: DropTarget): { board: ModuleBoard; changed: boolean; reason?: string } {
+  if(target.type==='stack'){
+    const reason=stackBlockedReason(board,id,target.column);
+    if(reason)return {board,changed:false,reason};
+  }
   if(board.chatActivityMerged)return moveMergedModule(board,id,target);
   const reject = (reason: string) => ({ board, changed: false, reason });
   const sourceIndex = board.columns.findIndex(c => c.modules.includes(id));
@@ -81,7 +97,7 @@ export function moveModule(board: ModuleBoard, id: ModuleId, target: DropTarget)
     const destination = next.columns[target.column];
     if (!destination) return reject('Choose a column');
     if (id === 'products' || destination.modules.includes('products')) return reject('Products must stay in its own column');
-    if (destination !== source && destination.modules.length >= 3) return reject('Maximum 3 modules per column');
+    if (destination !== source && destination.modules.length >= MAX_MODULES_PER_COLUMN) return reject(COLUMN_CAPACITY_MESSAGE);
     let insert = target.index;
     if (destination === source && row < insert) insert--;
     source.modules.splice(row, 1); source.heights.splice(row, 1);

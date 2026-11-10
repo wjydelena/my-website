@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useRef, useState } from 'react';
 import { GripVertical } from 'lucide-react';
-import { DropTarget, ModuleBoard, ModuleId, Rect, dropTargets, moduleNames, moveModule, resolveBoard, targetLabel, targetRect } from './module-layout';
+import { DropTarget, ModuleBoard, ModuleId, Rect, dropTargets, moduleNames, moveModule, resolveBoard, targetLabel, targetRect, stackBlockedReason, COLUMN_CAPACITY_MESSAGE } from './module-layout';
 import './module-drag.css';
 
 type DragView = { id: ModuleId; x: number; y: number; target?: DropTarget; reason?: string; keyboard: boolean; blockedColumn?: number };
@@ -96,18 +96,23 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
       const origin = container.current!.getBoundingClientRect();
       const x = event.clientX - origin.left, y = event.clientY - origin.top;
       let blockedColumn: number | undefined;
+      let blockedReason: string | undefined;
       if (target?.type !== 'column' && y >= 0 && y <= geometry.height) {
         const column = board.columns.findIndex(col => {
           const r = geometry.rects[col.modules[0]];
           return x >= r.left && x < r.left + r.width;
         });
         if (column >= 0) {
-          const containsProducts = board.columns[column].modules.includes('products');
-          if (current.id === 'products' ? !containsProducts : containsProducts) blockedColumn = column;
+          // Reordering within Products' own column is not an invalid cross-column hover.
+          if(!(current.id==='products'&&board.columns[column].modules.includes('products'))){
+            blockedReason=stackBlockedReason(board,current.id,column);
+            if(blockedReason)blockedColumn=column;
+          }
         }
       }
+      if(blockedReason&&blockedReason!==current.view?.reason)announce(blockedReason);
       update({ id: current.id, x: event.clientX, y: event.clientY, target, blockedColumn,
-        reason: blockedColumn !== undefined ? (current.id === 'products' ? 'Products can’t be stacked with other modules' : 'Modules can’t share a column with Products.') : result?.reason || (result && !result.changed ? 'Already in this position' : undefined), keyboard: false });
+        reason: blockedReason || result?.reason || (result && !result.changed ? 'Already in this position' : undefined), keyboard: false });
     },
     onPointerUp: event => {
       if (session.current?.pointer === event.pointerId) {
@@ -133,7 +138,7 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
       if (![' ', 'Enter', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Escape'].includes(event.key)) return;
       event.preventDefault();
       if (event.key === 'Escape') { clear(); return; }
-      const available = dropTargets(board).filter(t => moveModule(board, id, t).changed);
+      const available = dropTargets(board).filter(t => {const result=moveModule(board,id,t);return result.changed||result.reason===COLUMN_CAPACITY_MESSAGE;});
       if (!available.length) return;
       if (!session.current) {
         if (event.key !== ' ' && event.key !== 'Enter') return;
@@ -148,8 +153,10 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
         const target = available[(index + direction + available.length) % available.length];
         const origin = container.current!.getBoundingClientRect(), r = targetRect(target, board, geometry);
         container.current?.parentElement?.scrollTo?.({ left: Math.max(0, r.left - 80), behavior: 'instant' as ScrollBehavior });
-        update({ id, x: origin.left + r.left + 16, y: origin.top + r.top + 32, target, keyboard: true });
-        announce(targetLabel(target));
+        const reason=moveModule(board,id,target).reason;
+        update({ id, x: origin.left + r.left + 16, y: origin.top + r.top + 32, target, reason,
+          blockedColumn:reason===COLUMN_CAPACITY_MESSAGE&&target.type==='stack'?target.column:undefined, keyboard: true });
+        announce(reason||targetLabel(target));
       }
     },
   };
