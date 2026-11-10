@@ -1,7 +1,3 @@
-// Reintroduce the restored education once, without inheriting earlier dismissal records.
-// Completion still requires dismissal/use or two GIF plays, not merely appearing.
-export const CUSTOMIZE_EDUCATION_KEY = 'live-console.customize-education.v3';
-export const CUSTOMIZE_EDUCATION_DELAY = 2000;
 // Sum of all 71 GIF frame delays: 5,850ms per play, at most two plays.
 export const CUSTOMIZE_EDUCATION_PLAY_DURATION = 5850;
 export const CUSTOMIZE_EDUCATION_MAX_PLAYS = 2;
@@ -9,20 +5,12 @@ export function scheduleCustomizeEducationDismiss(dismiss: () => void) {
   const timer = setTimeout(dismiss, CUSTOMIZE_EDUCATION_PLAY_DURATION * CUSTOMIZE_EDUCATION_MAX_PLAYS);
   return () => clearTimeout(timer);
 }
-let seenInMemory = false;
-export function hasSeenCustomizeEducation() {
-  try { return seenInMemory || localStorage.getItem(CUSTOMIZE_EDUCATION_KEY) === 'seen'; }
-  catch { return seenInMemory; }
-}
-export function markCustomizeEducationSeen() {
-  seenInMemory = true;
-  try { localStorage.setItem(CUSTOMIZE_EDUCATION_KEY, 'seen'); } catch {}
-}
-export function scheduleCustomizeEducation(show: () => void) {
-  if (hasSeenCustomizeEducation()) return () => {};
-  const timer = setTimeout(() => {
-    if (hasSeenCustomizeEducation()) return;
-    show();
-  }, CUSTOMIZE_EDUCATION_DELAY);
-  return () => clearTimeout(timer);
+// Only empty, non-interactive page surfaces start a demonstration.
+// Header unmounts in layout editing, so this listener is normal-mode only.
+export function isCustomizeEducationBlankTarget(target:EventTarget|null) {
+  if(!(target instanceof HTMLElement) || !target.closest('.console-shell'))return false;
+  if(document.querySelector('[aria-modal="true"], [role="dialog"]'))return false;
+  if(target.closest('button,a,input,textarea,select,label,summary,video,audio,img,svg,[role="button"],[role="link"],[role="tab"],[role="checkbox"],[role="switch"],[role="menu"],[role="menuitem"],[role="separator"],[tabindex],[contenteditable="true"],[draggable="true"],.quick-live,.assistant'))return false;
+  if(getComputedStyle(target).cursor!=='auto' && getComputedStyle(target).cursor!=='default')return false;
+  return !Array.from(target.childNodes).some(node=>node.nodeType===Node.TEXT_NODE && node.textContent?.trim());
 }

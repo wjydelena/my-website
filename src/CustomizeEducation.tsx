@@ -1,54 +1,54 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {LayoutPanelLeft} from 'lucide-react';
 import layoutEducation from './assets/layout-education-twice.gif';
-import {hasSeenCustomizeEducation, markCustomizeEducationSeen, scheduleCustomizeEducation, scheduleCustomizeEducationDismiss} from './customize-education';
+import {isCustomizeEducationBlankTarget, scheduleCustomizeEducationDismiss} from './customize-education';
 import './customize-education.css';
 
 export function CustomizeEducation({onCustomize}:{onCustomize:()=>void}) {
   const [visible,setVisible] = useState(false);
   const [animationReady,setAnimationReady] = useState(false);
+  const [gifSrc,setGifSrc] = useState<string>();
   const root = useRef<HTMLDivElement>(null);
-  const shown = useRef(false);
-  const dismiss = useCallback(() => {markCustomizeEducationSeen();setVisible(false);},[]);
+  const dismiss = useCallback(() => {setVisible(false);setAnimationReady(false);},[]);
+  useEffect(()=>{
+    if(!visible){setGifSrc(undefined);return;}
+    let active=true;
+    let url:string|undefined;
+    // A fresh URL gives every demonstration its own GIF playback timeline.
+    fetch(layoutEducation).then(response=>response.blob()).then(blob=>{
+      if(!active)return;
+      url=URL.createObjectURL(blob);
+      setGifSrc(url);
+    }).catch(()=>{if(active)dismiss();});
+    return ()=>{active=false;if(url)URL.revokeObjectURL(url);};
+  },[visible,dismiss]);
   useEffect(()=>{
     if(!visible){setAnimationReady(false);return;}
     if(!animationReady)return;
     return scheduleCustomizeEducationDismiss(dismiss);
   },[visible,animationReady,dismiss]);
   useEffect(()=>{
-    const element = root.current;
-    if(!element)return;
-    let intersecting = false;
-    let cancel = () => {};
-    const sync = () => {
-      cancel();
-      if(document.visibilityState!=='visible' || !intersecting) {
-        shown.current=false;
-        setVisible(false);
-        return;
+    const click = (event:MouseEvent) => {
+      if(!(event.target instanceof Node) || root.current?.contains(event.target))return;
+      if(visible){dismiss();return;}
+      if(event.button!==0 || event.defaultPrevented || document.visibilityState!=='visible')return;
+      if(isCustomizeEducationBlankTarget(event.target)){
+        setAnimationReady(false);
+        setVisible(true);
       }
-      if(shown.current || hasSeenCustomizeEducation())return;
-      cancel=scheduleCustomizeEducation(()=>{shown.current=true;setVisible(true);});
     };
-    const observer = new IntersectionObserver(entries=>{
-      intersecting=entries[0].isIntersecting && entries[0].intersectionRatio>=.5;
-      sync();
-    },{threshold:[0,.5,1]});
-    observer.observe(element);
-    document.addEventListener('visibilitychange',sync);
-    return ()=>{cancel();observer.disconnect();document.removeEventListener('visibilitychange',sync);};
-  },[]);
+    const hide = () => {if(document.visibilityState!=='visible')dismiss();};
+    document.addEventListener('click',click,true);
+    document.addEventListener('visibilitychange',hide);
+    return ()=>{document.removeEventListener('click',click,true);document.removeEventListener('visibilitychange',hide);};
+  },[visible,dismiss]);
   useEffect(()=>{
     if(!visible)return;
     const escape = (event:KeyboardEvent) => {
       if(event.key==='Escape')dismiss();
     };
-    const outside = (event:PointerEvent) => {
-      if(event.target instanceof Node && !root.current?.contains(event.target))dismiss();
-    };
     document.addEventListener('keydown',escape);
-    document.addEventListener('pointerdown',outside,true);
-    return ()=>{document.removeEventListener('keydown',escape);document.removeEventListener('pointerdown',outside,true);};
+    return ()=>document.removeEventListener('keydown',escape);
   },[visible,dismiss]);
   return <div className="customize-education-anchor" ref={root} data-testid={!visible?'customize-without-education':undefined}>
     <button type="button" className={`customize${visible?' education-highlight':''}`} style={{fontSize:'14px'}}
@@ -59,7 +59,7 @@ export function CustomizeEducation({onCustomize}:{onCustomize:()=>void}) {
     {visible && <div className="customize-education-popover" role="status" aria-live="polite" id="customize-education-copy">
       <strong>Customize your LIVE console</strong>
       <p>Drag panels to rearrange, resize horizontally or vertically, or remove panels you don't need. Add them back anytime.</p>
-      <img className="customize-education-gif" src={layoutEducation} onLoad={()=>setAnimationReady(true)} onError={dismiss} alt="Demonstration of rearranging, resizing, removing and restoring LIVE console panels" width={296} height={168}/>
+      <img className="customize-education-gif" src={gifSrc} onLoad={()=>setAnimationReady(true)} onError={dismiss} alt="Demonstration of rearranging, resizing, removing and restoring LIVE console panels" width={296} height={168}/>
     </div>}
   </div>;
 }

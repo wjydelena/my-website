@@ -2,7 +2,7 @@
   "flows": [
     {
       "id": "customize-first-education",
-      "title": "First visit: discover Customize layout after two seconds",
+      "title": "Demonstrate entry education with blank-area clicks",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -12,6 +12,12 @@
           "action": "capture",
           "id": "console-education-entry",
           "title": "Enter LIVE Console"
+        },
+        {
+          "action": "click",
+          "target": {
+            "testId": "console-blank-area"
+          }
         },
         {
           "action": "waitFor",
@@ -47,6 +53,34 @@
           "action": "capture",
           "id": "education-dismissed-return",
           "title": "Return without repeated introduction"
+        },
+        {
+          "action": "click",
+          "target": {
+            "testId": "console-blank-area"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "text": "Customize your LIVE console"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "education-replayed",
+          "title": "Blank click replays the introduction after returning from editing"
+        },
+        {
+          "action": "click",
+          "target": {
+            "testId": "console-blank-area"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "education-demo-closed",
+          "title": "Another blank click closes the demonstration"
         }
       ]
     },
@@ -175,6 +209,12 @@
           "action": "capture",
           "id": "overview",
           "title": "Static three-column LIVE Console"
+        },
+        {
+          "action": "click",
+          "target": {
+            "testId": "console-blank-area"
+          }
         },
         {
           "action": "waitFor",
@@ -404,6 +444,12 @@
           "action": "capture",
           "id": "page-1120",
           "title": "1120px layout with 318px non-Products column minimums"
+        },
+        {
+          "action": "click",
+          "target": {
+            "testId": "console-blank-area"
+          }
         },
         {
           "action": "waitFor",
