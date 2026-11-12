@@ -631,8 +631,8 @@
       ]
     },
     {
-      "id": "custom-layout",
-      "title": "Custom sizing and transaction behavior",
+      "id": "preset-adjustments",
+      "title": "Preset sizing, save, reset and cancellation",
       "viewport": {
         "width": 1280,
         "height": 900
@@ -661,13 +661,13 @@
           "action": "click",
           "target": {
             "role": "option",
-            "name": "Custom layout"
+            "name": "Chat focus"
           }
         },
         {
           "action": "capture",
           "id": "custom-unchanged-balanced",
-          "title": "Unchanged Custom from Standard; Apply disabled"
+          "title": "Initial Chat focus preset; Reset hidden"
         },
         {
           "action": "press",
@@ -688,7 +688,7 @@
         {
           "action": "capture",
           "id": "custom-draft",
-          "title": "Custom with manual sizing"
+          "title": "Adjusted with manual sizing"
         },
         {
           "action": "click",
@@ -720,7 +720,7 @@
         {
           "action": "capture",
           "id": "auto-custom-mode",
-          "title": "Manual resize switches mode to Custom"
+          "title": "Manual resize keeps Chat focus mode and shows Reset"
         },
         {
           "action": "click",
@@ -746,14 +746,27 @@
         {
           "action": "capture",
           "id": "custom-applied",
-          "title": "Applied custom size and selected mode"
+          "title": "Applied adjusted size and selected mode"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Layout mode"
+          },
+          "key": "Escape"
         },
         {
           "action": "click",
           "target": {
-            "role": "option",
-            "name": "Custom layout"
+            "role": "button",
+            "name": "Reset layout"
           }
+        },
+        {
+          "action": "capture",
+          "id": "saved-chat-preset-reset",
+          "title": "Reset restores the current Chat focus preset, not saved adjusted sizes"
         },
         {
           "action": "click",
@@ -824,7 +837,7 @@
     },
     {
       "id": "chat-focus-structure",
-      "title": "Chat focus module placement, custom resize and cancel",
+      "title": "Chat focus module placement, adjusted resize and cancel",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -859,7 +872,7 @@
         {
           "action": "capture",
           "id": "focus-columns",
-          "title": "Products on the left, Chat in the center, media and activity stack on the right"
+          "title": "Products left, Video and Chat center, Analytics and Activity right"
         },
         {
           "action": "click",
@@ -872,13 +885,13 @@
           "action": "click",
           "target": {
             "role": "option",
-            "name": "Custom layout"
+            "name": "Chat focus"
           }
         },
         {
           "action": "capture",
           "id": "custom-unchanged-focus",
-          "title": "Unchanged Custom from Chat focus; Apply disabled"
+          "title": "Unmodified Chat focus preset; Reset hidden"
         },
         {
           "action": "press",
@@ -907,7 +920,7 @@
         {
           "action": "capture",
           "id": "focus-custom",
-          "title": "Custom sizing preserves the Chat focus arrangement"
+          "title": "Adjusted sizing preserves the Chat focus arrangement"
         },
         {
           "action": "click",
@@ -919,7 +932,7 @@
         {
           "action": "capture",
           "id": "focus-custom-applied",
-          "title": "Applied custom Chat focus layout"
+          "title": "Applied adjusted Chat focus layout"
         },
         {
           "action": "click",
@@ -957,7 +970,7 @@
         {
           "action": "capture",
           "id": "focus-restored",
-          "title": "Cancel restores the saved arrangement and dimensions"
+          "title": "Cancel restores the global default layout and dimensions"
         }
       ]
     },
@@ -1039,8 +1052,8 @@
       ]
     },
     {
-      "id": "custom-apply-guard",
-      "title": "Custom Apply enables only for actual changes",
+      "id": "preset-apply-guard",
+      "title": "Saved adjusted preset: Apply enables only for actual changes",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -1059,17 +1072,25 @@
           }
         },
         {
+          "action": "press",
+          "target": {
+            "role": "separator",
+            "name": "Resize live preview and chat"
+          },
+          "key": "ArrowUp"
+        },
+        {
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Layout mode"
+            "name": "Apply"
           }
         },
         {
           "action": "click",
           "target": {
-            "role": "option",
-            "name": "Custom layout"
+            "role": "button",
+            "name": "Customize layout"
           }
         },
         {
@@ -1827,8 +1848,8 @@
       ]
     },
     {
-      "id": "host-focus-custom",
-      "title": "Customize Video focus with combined Chat and Activity",
+      "id": "host-focus-adjustments",
+      "title": "Video focus adjustments, reset and combined Chat and Activity",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -1856,7 +1877,7 @@
         {
           "action": "capture",
           "id": "layout-four-options",
-          "title": "Three layout modes with descriptions"
+          "title": "Two preset choices with descriptions"
         },
         {
           "action": "click",
@@ -1881,13 +1902,13 @@
           "action": "click",
           "target": {
             "role": "option",
-            "name": "Custom layout"
+            "name": "Video focus"
           }
         },
         {
           "action": "capture",
           "id": "host-custom-unchanged",
-          "title": "Custom inherits Video focus; Apply disabled until a change"
+          "title": "Unmodified Video focus preset; Reset hidden"
         },
         {
           "action": "press",
@@ -1908,7 +1929,7 @@
         {
           "action": "capture",
           "id": "host-custom-moved",
-          "title": "Four visible modules remain draggable in Custom"
+          "title": "Four visible modules remain draggable in Adjusted"
         },
         {
           "action": "click",
@@ -1920,7 +1941,7 @@
         {
           "action": "capture",
           "id": "host-custom-applied",
-          "title": "Custom Video focus arrangement saved with Products"
+          "title": "Adjusted Video focus arrangement saved with Products"
         },
         {
           "action": "click",
@@ -1941,6 +1962,18 @@
           "action": "capture",
           "id": "merged-region-resized",
           "title": "Analytics and combined Chat + Activity share one resize boundary"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Reset layout"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "video-preset-reset",
+          "title": "Reset restores full-height Video and combined Chat + Activity"
         },
         {
           "action": "press",
@@ -2734,8 +2767,8 @@
       ]
     },
     {
-      "id": "editor-three-modes",
-      "title": "Three layout mode choices and descriptions",
+      "id": "editor-two-presets",
+      "title": "Two existing presets, adjusted identity and Reset",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -2768,7 +2801,7 @@
         {
           "action": "capture",
           "id": "three-mode-menu",
-          "title": "Three modes with exact descriptions"
+          "title": "Only Chat focus and Video focus presets with descriptions"
         },
         {
           "action": "click",
@@ -2802,23 +2835,29 @@
           "title": "Chat focus draft"
         },
         {
-          "action": "click",
+          "action": "press",
           "target": {
-            "role": "button",
-            "name": "Layout mode"
-          }
-        },
-        {
-          "action": "click",
-          "target": {
-            "role": "option",
-            "name": "Custom layout"
-          }
+            "role": "separator",
+            "name": "Resize live preview and chat"
+          },
+          "key": "ArrowUp"
         },
         {
           "action": "capture",
           "id": "custom-draft",
-          "title": "Custom layout draft"
+          "title": "Adjusted Chat focus mode with right-side Reset"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Reset layout"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "chat-preset-reset",
+          "title": "Chat focus reset restores initial preset and hides Reset"
         },
         {
           "action": "click",

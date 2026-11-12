@@ -10,10 +10,13 @@ const clamp = (value: number, min: number, max: number) => Math.max(min, Math.mi
 const MIN_PRODUCTS_WIDTH = 400;
 const MIN_LIVE_WIDTH = MIN_PANEL_WIDTH;
 const MIN_ANALYTICS_WIDTH = MIN_PANEL_WIDTH;
-export type LayoutMode = 'Standard' | 'Chat focus' | 'Host focus' | 'Custom';
+export type LayoutMode = 'Standard' | 'Host focus';
 type Arrangement = 'balanced' | 'chat-focus' | 'host-focus';
 type Heights = { video: number; analytics: number; feed: number };
 type GeometrySource = { ratios: number[]; heights: Heights; arrangement: Arrangement; board: ModuleBoard | null };
+function presetSource(mode: LayoutMode, editing: boolean): GeometrySource {
+  return {ratios:[.4,.3,.3],heights:mode==='Standard'&&editing?{video:262,analytics:200,feed:458}:{video:268,analytics:200,feed:462},arrangement:mode==='Host focus'?'host-focus':'balanced',board:null};
+}
 function resolveValues(source: GeometrySource, box: { width: number; height: number }) {
   const { ratios, heights, arrangement } = source;
   const focusedChat = arrangement === 'chat-focus';
@@ -57,6 +60,8 @@ type LayoutState = {
   docked: boolean;
   moduleStyle: (id: ModuleId) => React.CSSProperties | undefined;
   applyDisabled: boolean;
+  presetAdjusted: boolean;
+  resetPreset: () => void;
   beginEdit: () => void;
   applyEdit: () => void;
   cancelEdit: () => void;
@@ -93,20 +98,21 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
   const focusedChat = arrangement === 'chat-focus';
   const focusedHost = arrangement === 'host-focus';
   const absoluteLayout = !!board || focusedHost;
-  const customBaseline = useRef<GeometrySource | null>(null);
+  const editBaseline = useRef<GeometrySource | null>(null);
+  const [presetEdited, setPresetEdited] = useState(false);
   const currentGeometry = (): GeometrySource => ({ ratios: [...ratios], heights: { ...heights }, arrangement, board });
   const saved = useRef<(GeometrySource & { mode: LayoutMode }) | null>(null);
   const beginEdit = () => {
     saved.current = { ...currentGeometry(), mode };
-    customBaseline.current = mode === 'Custom' ? currentGeometry() : null;
-    if(mode === 'Standard') setHeights({video:262,analytics:200,feed:458});
+    editBaseline.current = !presetEdited&&mode==='Standard'?{...currentGeometry(),heights:{video:262,analytics:200,feed:458}}:currentGeometry();
+    if(mode === 'Standard'&&!presetEdited) setHeights({video:262,analytics:200,feed:458});
     setEditing(true);
   };
   const applyEdit = () => {
     if (applyDisabled) return;
     dismissRestoreHint();
     saved.current = null;
-    customBaseline.current = null;
+    editBaseline.current = null;
     setEditing(false);
   };
   const cancelEdit = () => {
@@ -117,29 +123,20 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     setArrangement('balanced');
     setBoard(null);
     saved.current = null;
-    customBaseline.current = null;
+    editBaseline.current = null;
+    setPresetEdited(false);
     setEditing(false);
   };
   const chooseMode = (next: LayoutMode) => {
     dismissRestoreHint();
-    if (next === 'Custom') {
-      if (mode !== 'Custom') customBaseline.current = currentGeometry();
-    } else { customBaseline.current = null; setBoard(null); }
+    editBaseline.current = null;
+    setPresetEdited(false);
+    setBoard(null);
     setMode(next);
-    if (next === 'Standard') {
-      setArrangement('balanced');
-      setRatios([.4, .3, .3]);
-      setHeights(editing ? {video:262,analytics:200,feed:458} : {video:268,analytics:200,feed:462});
-    } else if (next === 'Chat focus') {
-      setArrangement('chat-focus');
-      setRatios([.38, .31, .31]);
-      setHeights({ video: 240, analytics: 198, feed: 206 });
-    } else if (next === 'Host focus') {
-      setArrangement('host-focus');
-      setRatios([.4, .3, .3]);
-      setHeights({ video: 268, analytics: 200, feed: 462 });
-    }
+    const preset=presetSource(next,editing);
+    setArrangement(preset.arrangement);setRatios(preset.ratios);setHeights(preset.heights);
   };
+  const resetPreset = () => chooseMode(mode);
   useLayoutEffect(() => {
     const element = ref.current!;
     const measure = () => setBox({ width: element.clientWidth, height: element.clientHeight });
@@ -149,7 +146,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     return () => observer.disconnect();
   }, []);
   // Resolve the draft and its baseline at the same viewport, so viewport resizing
-  // alone never counts as a custom edit. Keep all existing size constraints.
+  // alone never counts as an edit. Keep all existing size constraints.
   const currentSource = { ratios, heights, arrangement, board };
   const visibleBoard = sourceBoard(currentSource, box);
   const boardGeometry = resolveBoard(visibleBoard, box);
@@ -157,20 +154,28 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
   if (absoluteLayout) values.feed = clamp(heights.feed, 160, (boardGeometry.rects.activity?.height ?? box.height) - 110);
   const { products, live, video, analytics, feed } = values;
   const widths = [products, live, Math.max(MIN_PANEL_WIDTH, box.width - products - live)];
-  const baselineValues = customBaseline.current ? resolveValues(customBaseline.current, box) : values;
-  const baselineBoard = sourceBoard(customBaseline.current || currentSource, box);
+  const baselineValues = editBaseline.current ? resolveValues(editBaseline.current, box) : values;
+  const baselineBoard = sourceBoard(editBaseline.current || currentSource, box);
   const baselineGeometry = resolveBoard(baselineBoard, box);
   const placementChanged = MODULES.some(id => {
     const current = boardGeometry.rects[id], baseline = baselineGeometry.rects[id];
     if (!current || !baseline) return current !== baseline;
     return (['left', 'top', 'width', 'height'] as const).some(key => Math.abs(current[key] - baseline[key]) > .01);
   });
-  const baselineFeed = (customBaseline.current?.board || customBaseline.current?.arrangement === 'host-focus') ? clamp(customBaseline.current.heights.feed, 160, (baselineGeometry.rects.activity?.height ?? box.height) - 110) : baselineValues.feed;
-  const customChanged = placementChanged || Math.abs(values.feed - baselineFeed) > .01;
-  const applyDisabled = editing && mode === 'Custom' && !customChanged;
-  const markCustom = () => {
-    if (mode !== 'Custom') customBaseline.current = currentGeometry();
-    setMode('Custom');
+  const baselineFeed = (editBaseline.current?.board || editBaseline.current?.arrangement === 'host-focus') ? clamp(editBaseline.current.heights.feed, 160, (baselineGeometry.rects.activity?.height ?? box.height) - 110) : baselineValues.feed;
+  const editChanged = placementChanged || Math.abs(values.feed - baselineFeed) > .01;
+  const applyDisabled = editing && presetEdited && !editChanged;
+  const initialPreset=presetSource(mode,editing), initialBoard=sourceBoard(initialPreset,box), initialGeometry=resolveBoard(initialBoard,box);
+  const initialValues=resolveValues(initialPreset,box);
+  const initialFeed=mode==='Host focus'?clamp(initialPreset.heights.feed,160,(initialGeometry.rects.activity?.height??box.height)-110):initialValues.feed;
+  const presetAdjusted=!!visibleBoard.chatActivityMerged!==!!initialBoard.chatActivityMerged||Math.abs(values.feed-initialFeed)>.01||MODULES.some(id=>{
+    const current=boardGeometry.rects[id], initial=initialGeometry.rects[id];
+    if(!current||!initial)return current!==initial;
+    return (['left','top','width','height'] as const).some(key=>Math.abs(current[key]-initial[key])>.01);
+  });
+  const markAdjusted = () => {
+    if (!editBaseline.current) editBaseline.current = currentGeometry();
+    setPresetEdited(true);
   };
   const ranges = {
     products: [MIN_PRODUCTS_WIDTH, focusedChat ? products + widths[2] - MIN_ANALYTICS_WIDTH : products + live - MIN_LIVE_WIDTH],
@@ -183,7 +188,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     const [min, max] = ranges[kind];
     const next = clamp(input, min, max);
     if (Math.abs(next - values[kind]) <= 0.01) return;
-    markCustom();
+    markAdjusted();
     if (kind === 'products') setRatios(focusedChat
       ? [next / box.width, live / box.width, (products + widths[2] - next) / box.width]
       : [next / box.width, (products + live - next) / box.width, widths[2] / box.width]);
@@ -191,14 +196,14 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     else setHeights(previous => ({ ...previous, [kind]: next }));
   };
   const reset = (kind: Kind) => {
-    if (kind === 'products' || kind === 'live') { markCustom(); setRatios(focusedChat ? [.38, .31, .31] : [.4, .3, .3]); }
+    if (kind === 'products' || kind === 'live') { markAdjusted(); setRatios(focusedChat ? [.38, .31, .31] : [.4, .3, .3]); }
     else change(kind, (focusedChat ? { video: 240, analytics: 198, feed: 206 } : { video: 268, analytics: 200, feed: 462 })[kind]);
   };
   const move = (id: ModuleId, target: DropTarget) => {
     if (!editing) return;
     const result = moveModule(visibleBoard, id, target);
     if (!result.changed) return;
-    markCustom(); setBoard(result.board);
+    markAdjusted(); setBoard(result.board);
   };
   const resizeBoard = (axis: 'column' | 'row', column: number, row: number, next: number) => {
     if (!absoluteLayout) return;
@@ -216,7 +221,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
       if(nextRow===undefined)return;
       draft.columns[column].heights[nextRow] += current - next;
     }
-    markCustom(); setBoard(draft);
+    markAdjusted(); setBoard(draft);
   };
   const canRemovePanel = visibleBoard.columns.flatMap(c=>c.modules).length > 1;
   const canRemovePanelFor = (id:ModuleId) => visibleBoard.columns.flatMap(c=>c.modules).length > panelRemovalIds(visibleBoard,id).length;
@@ -225,7 +230,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     if(!editing || !canRemovePanelFor(id))return;
     const next = removeBoardPanel(visibleBoard,id);
     if(next===visibleBoard)return;
-    markCustom();setBoard(next);
+    markAdjusted();setBoard(next);
     let seen = hintSeen.current;
     try { seen = seen || localStorage.getItem('live-console.add-panel-hint.v1') === 'seen'; } catch {}
     if(!seen) {
@@ -243,7 +248,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     next.columns.forEach((column,index)=>{column.width=widths[index];});
     for(const id of selected)next=restoreRemovedPanel(next,id);
     if(next.hidden?.length===visibleBoard.hidden?.length)return;
-    markCustom();setBoard(next);dismissRestoreHint();
+    markAdjusted();setBoard(next);dismissRestoreHint();
   };
   const restorePanel = (id: ModuleId) => restorePanels([id]);
   const moduleStyle = (id: ModuleId): React.CSSProperties | undefined => !boardGeometry.rects[id] || (visibleBoard.chatActivityMerged && id==='activity') ? { display: 'none' } : absoluteLayout ? { ...boardGeometry.rects[id], position: 'absolute' } : undefined;
@@ -255,7 +260,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     '--panel-min-width': `${MIN_PANEL_WIDTH}px`,
     minWidth: boardMinWidth(visibleBoard),
   } as React.CSSProperties;
-  return <LayoutContext.Provider value={{ values, ranges, change, reset, editing, mode, arrangement, docked: absoluteLayout, moduleStyle, applyDisabled, beginEdit, applyEdit, cancelEdit, chooseMode, removePanel, canRemovePanel, canRemovePanelFor, mergedChatActivity:!!visibleBoard.chatActivityMerged, removedPanels, restorePanel, restorePanels, showRestoreHint, dismissRestoreHint }}>
+  return <LayoutContext.Provider value={{ values, ranges, change, reset, editing, mode, arrangement, docked: absoluteLayout, moduleStyle, applyDisabled, presetAdjusted, resetPreset, beginEdit, applyEdit, cancelEdit, chooseMode, removePanel, canRemovePanel, canRemovePanelFor, mergedChatActivity:!!visibleBoard.chatActivityMerged, removedPanels, restorePanel, restorePanels, showRestoreHint, dismissRestoreHint }}>
     <ModuleDragProvider board={visibleBoard} box={box} editing={editing} container={ref} onMove={move}>
     {header}
     <div className="layout-viewport">

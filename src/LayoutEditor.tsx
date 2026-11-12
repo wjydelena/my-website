@@ -1,17 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ChevronDown, GripVertical, Trash2 } from 'lucide-react';
+import { ChevronDown, GripVertical, Trash2, Undo2 } from 'lucide-react';
 import { ModuleId, moduleNames } from './module-layout';
 import { LayoutMode, useConsoleLayout } from './ResizableLayout';
 import './layout-editor.css';
 import { AddPanelControl } from './AddPanelControl';
 
-const modes: LayoutMode[] = ['Standard', 'Host focus', 'Custom'];
-const modeNames: Record<LayoutMode, string> = { Standard: 'Chat focus', 'Chat focus': 'Chat focus', 'Host focus': 'Video focus', Custom: 'Custom layout' };
+const modes: LayoutMode[] = ['Standard', 'Host focus'];
+const modeNames: Record<LayoutMode, string> = { Standard: 'Chat focus', 'Host focus': 'Video focus' };
 const descriptions: Record<LayoutMode, string> = {
   Standard: 'Maximize control over your LIVE',
-  'Chat focus': 'Maximize control over your LIVE',
   'Host focus': 'Bigger LIVE video preview lets you see what your viewers see.',
-  Custom: 'Arrange and resize panels to suit your needs.',
 };
 
 export function RemovePanelButton({id}:{id:ModuleId}) {
@@ -36,7 +34,7 @@ export function ModuleTitle({ children }: { children: React.ReactNode }) {
 }
 
 export function EditingHeader() {
-  const { mode, chooseMode, applyEdit, cancelEdit, applyDisabled, removedPanels } = useConsoleLayout();
+  const { mode, chooseMode, applyEdit, cancelEdit, applyDisabled, removedPanels, presetAdjusted, resetPreset } = useConsoleLayout();
   const [open, setOpen] = useState(false);
   const [focused, setFocused] = useState(Math.max(0,modes.indexOf(mode)));
   const root = useRef<HTMLDivElement>(null);
@@ -63,7 +61,7 @@ export function EditingHeader() {
     setOpen(false);
     trigger.current?.focus();
   };
-  return <header className="topbar customize-header">
+  return <header className="topbar customize-header preset-only-editor">
     <strong className="customize-title">Customize layout</strong>
     <div className="layout-mode-field" ref={root}>
       <button className="layout-mode-trigger" type="button" ref={trigger}
@@ -74,7 +72,7 @@ export function EditingHeader() {
             event.preventDefault(); setFocused(Math.max(0,modes.indexOf(mode))); setOpen(true);
           }
         }}>
-        <span id="layout-mode-label">Layout mode</span><span>{mode==='Standard'||mode==='Chat focus'?'Chat focus mode':modeNames[mode]}</span><ChevronDown size={16}/>
+        <span id="layout-mode-label">Layout mode</span><span>{mode==='Standard'?'Chat focus mode':'Video focus mode'}</span><ChevronDown size={16}/>
       </button>
       {open && <div className="layout-mode-options" id="layout-mode-options" role="listbox" aria-labelledby="layout-mode-label"
         onKeyDown={event => {
@@ -94,6 +92,10 @@ export function EditingHeader() {
     </div>
     <div className={`layout-editor-actions${removedPanels.length?' has-add-panel':''}`}>
       <AddPanelControl/>
+      {presetAdjusted && <>
+        <button className="layout-reset" type="button" aria-label="Reset layout" title="Reset layout" onClick={resetPreset}><Undo2 size={16} aria-hidden="true"/></button>
+        <span className="layout-reset-divider" aria-hidden="true"/>
+      </>}
       <button className="layout-apply" type="button" disabled={applyDisabled} onClick={applyEdit}>Apply</button>
       <button className="layout-cancel" type="button" onClick={cancelEdit}>Cancel</button>
     </div>
