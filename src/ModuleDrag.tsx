@@ -8,7 +8,7 @@ type HeaderProps = React.HTMLAttributes<HTMLDivElement>;
 type MotionSurface = { id: ModuleId; node: HTMLElement; rect: Rect; offset?: {left: number; top: number}; animation?: Animation; settled?: boolean };
 function releaseSurface(surface: MotionSurface) {
   surface.animation?.cancel();
-  surface.node.classList.remove('module-displacement-surface', 'module-preview-source');
+  surface.node.classList.remove('module-displacement-surface', 'module-preview-source', 'module-source-settled');
   for (const key of ['left','top','width','height']) surface.node.style.removeProperty(`--floating-${key}`);
 }
 const DragContext = createContext<(id: ModuleId) => HeaderProps>(() => ({}));
@@ -38,13 +38,15 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
   const [announcement, announce] = useState('');
   const [tipTop, setTipTop] = useState<number | null>(null);
   const tipTimer = useRef<ReturnType<typeof setTimeout>>();
-  const dismissTip = () => { clearTimeout(tipTimer.current); setTipTop(null); };
+  const tipDismissTimer = useRef<ReturnType<typeof setTimeout>>();
+  const dismissTip = () => { clearTimeout(tipTimer.current); clearTimeout(tipDismissTimer.current); setTipTop(null); };
   React.useEffect(() => {
     dismissTip();
     if (!editing) return;
     tipTimer.current = setTimeout(() => {
       const banner = container.current?.closest('.console-shell')?.querySelector('header');
       setTipTop((banner?.getBoundingClientRect().bottom ?? 56) + 20);
+      tipDismissTimer.current = setTimeout(() => setTipTop(null), 4000);
     }, 300);
     const operate = (event: Event) => {
       if (event instanceof KeyboardEvent && ['Tab','Shift','Control','Alt','Meta'].includes(event.key)) return;
@@ -53,6 +55,7 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
     for (const type of ['pointerdown','click','keydown','wheel']) document.addEventListener(type, operate, true);
     return () => {
       clearTimeout(tipTimer.current);
+      clearTimeout(tipDismissTimer.current);
       for (const type of ['pointerdown','click','keydown','wheel']) document.removeEventListener(type, operate, true);
     };
   }, [editing]);
@@ -108,6 +111,7 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
       const current = floating && !moving ? frame({left: floating.left - origin.left, top: floating.top - origin.top, width: floating.width, height: floating.height}, surface.offset) : surface.animation ? {left: style.left, top: style.top, width: style.width, height: style.height} : frame(dropped?.get(surface.id) || surface.rect, surface.offset);
       surface.animation?.cancel();
       surface.node.classList.toggle('module-preview-source', !!view && moving);
+      if (!moving) surface.node.classList.remove('module-source-settled');
       surface.node.style.setProperty('--floating-width', `${surface.rect.width}px`);
       surface.node.style.setProperty('--floating-height', `${surface.rect.height}px`);
       const animation = surface.node.animate([current, frame(destination || surface.rect, surface.offset)], {
@@ -115,6 +119,9 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
       });
       surface.animation = animation;
       surface.settled = false;
+      if (view && moving && preview) animation.onfinish = () => {
+        if (surface.animation === animation) surface.node.classList.add('module-source-settled');
+      };
       if (!view) animation.onfinish = () => {
         if (surface.animation !== animation) return;
         surface.settled = true;
@@ -302,7 +309,7 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
       {children}
       {editing && tipTop !== null && <div className="layout-edit-tip" role="status" style={{top: tipTop}}>Make it yours. Move, resize, add, or remove panels.</div>}
       {view && <div className="module-anchor-card" aria-hidden="true" data-testid="module-anchor-card" style={{left: Math.max(8, Math.min(view.x + 18, window.innerWidth - 248)), top: Math.max(8, Math.min(view.y + 18, window.innerHeight - 58))}}><GripVertical size={16}/><span>{moduleNames[view.id]}</span></div>}
-      <span id="module-move-instructions" className="move-sr-only">Drag anywhere in a module to move it. Maximum 5 columns and 3 modules per column. Products must be alone. Space picks up, arrows choose a position, Enter drops, Escape cancels.</span>
+      <span id="module-move-instructions" className="move-sr-only" data-testid={editing && tipTop === null ? 'layout-tip-dismissed' : undefined}>Drag anywhere in a module to move it. Maximum 5 columns and 3 modules per column. Products must be alone. Space picks up, arrows choose a position, Enter drops, Escape cancels.</span>
       <span className="move-sr-only" role="status" aria-live="polite">{announcement}</span>
     </div>
     </PreviewContext.Provider>

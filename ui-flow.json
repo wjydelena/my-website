@@ -530,7 +530,18 @@
         {
           "action": "capture",
           "id": "editor-welcome-toast",
-          "title": "300ms delayed fade-in toast centered 20px below the editing banner"
+          "title": "300ms delayed welcome toast, shown for 4 seconds unless an operation dismisses it"
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "testId": "layout-tip-dismissed"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "editor-welcome-auto-dismissed",
+          "title": "Welcome toast disappears after 4 seconds without an operation"
         },
         {
           "action": "click",
@@ -547,7 +558,7 @@
         {
           "action": "capture",
           "id": "editor-welcome-dismissed",
-          "title": "The first editing operation dismisses the welcome toast for this session"
+          "title": "Welcome toast stays dismissed after the editing operation"
         },
         {
           "action": "click",
@@ -1205,7 +1216,7 @@
         {
           "action": "capture",
           "id": "module-vertical-target",
-          "title": "240×50 floating title anchor and #EBF7F7 reserved space; neighboring panels slide aside without an insertion line"
+          "title": "240×50 title anchor with #EBF7F7 reserved space; source at 30% opacity during displacement, hidden after neighbors settle"
         },
         {
           "action": "press",
@@ -1366,7 +1377,7 @@
         {
           "action": "capture",
           "id": "module-horizontal-target",
-          "title": "240×50 floating title anchor and #EBF7F7 reserved space; neighboring panels slide aside without an insertion line"
+          "title": "240×50 title anchor with #EBF7F7 reserved space; source at 30% opacity during displacement, hidden after neighbors settle"
         },
         {
           "action": "press",
@@ -1763,7 +1774,7 @@
         {
           "action": "capture",
           "id": "products-teal-drag-card",
-          "title": "240×50 floating title anchor and #EBF7F7 reserved space; neighboring panels slide aside without an insertion line"
+          "title": "240×50 title anchor with #EBF7F7 reserved space; source at 30% opacity during displacement, hidden after neighbors settle"
         },
         {
           "action": "press",
@@ -2042,7 +2053,7 @@
         {
           "action": "capture",
           "id": "merged-region-displacement-preview",
-          "title": "240×50 floating title anchor and #EBF7F7 reserved space; neighboring panels slide aside without an insertion line"
+          "title": "240×50 title anchor with #EBF7F7 reserved space; source at 30% opacity during displacement, hidden after neighbors settle"
         },
         {
           "action": "press",
