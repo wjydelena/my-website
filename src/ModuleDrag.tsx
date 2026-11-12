@@ -64,8 +64,9 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
   const surfaces = useRef<MotionSurface[]>([]);
   const droppedRects = useRef<Map<ModuleId, Rect> | null>(null);
   const motionLayout = useRef({ board, width: box.width, height: box.height });
-  const proposed = view?.target && !view.reason ? moveModule(board, view.id, view.target) : undefined;
-  const preview = proposed?.changed ? resolveBoard(proposed.board, box) : undefined;
+  const proposed = view?.target && (!view.reason || view.reason === 'Already in this position') ? moveModule(board, view.id, view.target) : undefined;
+  // The original position is a valid reserved slot, even though dropping there changes nothing.
+  const preview = proposed && !proposed.reason ? resolveBoard(proposed.board, box) : undefined;
   const previewKey = preview && view ? `${view.id}:${JSON.stringify(view.target)}` : '';
   // Animate only the rendered surfaces. The board and hit-test geometry stay unchanged until drop.
   React.useLayoutEffect(() => {
