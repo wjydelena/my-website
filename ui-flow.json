@@ -498,7 +498,7 @@
     },
     {
       "id": "customize-layout",
-      "title": "Choose, cancel and apply layout presets",
+      "title": "Choose, cancel and apply layout pback to defaults",
       "viewport": {
         "width": 1280,
         "height": 900
@@ -607,7 +607,7 @@
         {
           "action": "capture",
           "id": "chat-focus-selected",
-          "title": "Applied preset remains selected"
+          "title": "Applied pback to default remains selected"
         },
         {
           "action": "click",
@@ -632,7 +632,7 @@
     },
     {
       "id": "preset-adjustments",
-      "title": "Preset sizing, save, reset and cancellation",
+      "title": "Pback to default sizing, save, back to default and cancellation",
       "viewport": {
         "width": 1280,
         "height": 900
@@ -667,7 +667,7 @@
         {
           "action": "capture",
           "id": "custom-unchanged-balanced",
-          "title": "Initial Chat focus preset; Reset hidden"
+          "title": "Initial Chat focus pback to default; Back to default hidden"
         },
         {
           "action": "press",
@@ -720,7 +720,7 @@
         {
           "action": "capture",
           "id": "auto-custom-mode",
-          "title": "Manual resize keeps Chat focus mode and shows Reset"
+          "title": "Manual resize keeps Chat focus mode and shows Back to default"
         },
         {
           "action": "click",
@@ -760,13 +760,13 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Reset layout"
+            "name": "Back to default"
           }
         },
         {
           "action": "capture",
           "id": "saved-chat-preset-reset",
-          "title": "Reset restores the current Chat focus preset, not saved adjusted sizes"
+          "title": "Back to default restores the current Chat focus pback to default, not saved adjusted sizes"
         },
         {
           "action": "click",
@@ -891,7 +891,7 @@
         {
           "action": "capture",
           "id": "custom-unchanged-focus",
-          "title": "Unmodified Chat focus preset; Reset hidden"
+          "title": "Unmodified Chat focus pback to default; Back to default hidden"
         },
         {
           "action": "press",
@@ -1053,7 +1053,7 @@
     },
     {
       "id": "preset-apply-guard",
-      "title": "Saved adjusted preset: Apply enables only for actual changes",
+      "title": "Saved adjusted pback to default: Apply enables only for actual changes",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -1096,7 +1096,7 @@
         {
           "action": "capture",
           "id": "custom-guard-disabled",
-          "title": "No changes: Apply disabled at 30% opacity · Modified tag"
+          "title": "No changes: Apply disabled at 30% opacity · no status badge"
         },
         {
           "action": "click",
@@ -1108,7 +1108,7 @@
         {
           "action": "capture",
           "id": "saved-modified-dropdown",
-          "title": "Saved adjusted mode retains Modified in dropdown"
+          "title": "Saved adjusted mode retains Adjusted in dropdown"
         },
         {
           "action": "press",
@@ -1189,7 +1189,7 @@
         {
           "action": "capture",
           "id": "module-vertical-target",
-          "title": "Video picked up; surrounding columns shift and squeeze to make room"
+          "title": "Full translucent panel follows the drag; neighboring panels slide aside without an insertion line"
         },
         {
           "action": "press",
@@ -1350,7 +1350,7 @@
         {
           "action": "capture",
           "id": "module-horizontal-target",
-          "title": "Chat picked up; nearby panels resize and shift around the valid stack target"
+          "title": "Full translucent panel follows the drag; neighboring panels slide aside without an insertion line"
         },
         {
           "action": "press",
@@ -1747,7 +1747,7 @@
         {
           "action": "capture",
           "id": "products-teal-drag-card",
-          "title": "Products drag card and neighboring columns making room"
+          "title": "Full translucent panel follows the drag; neighboring panels slide aside without an insertion line"
         },
         {
           "action": "press",
@@ -1869,7 +1869,7 @@
     },
     {
       "id": "host-focus-adjustments",
-      "title": "Video focus adjustments, reset and combined Chat and Activity",
+      "title": "Video focus adjustments, back to default and combined Chat and Activity",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -1897,7 +1897,7 @@
         {
           "action": "capture",
           "id": "layout-four-options",
-          "title": "Two preset choices with descriptions"
+          "title": "Two pback to default choices with descriptions"
         },
         {
           "action": "click",
@@ -1928,7 +1928,7 @@
         {
           "action": "capture",
           "id": "host-custom-unchanged",
-          "title": "Unmodified Video focus preset; Reset hidden"
+          "title": "Unmodified Video focus pback to default; Back to default hidden"
         },
         {
           "action": "press",
@@ -1981,7 +1981,7 @@
         {
           "action": "capture",
           "id": "merged-region-resized",
-          "title": "Analytics and combined Chat + Activity share one resize boundary · Modified tag"
+          "title": "Analytics and combined Chat + Activity share one resize boundary · no status badge"
         },
         {
           "action": "click",
@@ -1993,7 +1993,7 @@
         {
           "action": "capture",
           "id": "modified-video-dropdown",
-          "title": "Modified Video focus preset shown in dropdown"
+          "title": "Two preset choices; no status badges in the trigger or options"
         },
         {
           "action": "press",
@@ -2007,13 +2007,13 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Reset layout"
+            "name": "Back to default"
           }
         },
         {
           "action": "capture",
           "id": "video-preset-reset",
-          "title": "Reset restores full-height Video and combined Chat + Activity"
+          "title": "Back to default restores full-height Video and combined Chat + Activity"
         },
         {
           "action": "press",
@@ -2026,7 +2026,7 @@
         {
           "action": "capture",
           "id": "merged-region-displacement-preview",
-          "title": "Combined Chat and Activity move atomically; surrounding columns make room before drop"
+          "title": "Full translucent panel follows the drag; neighboring panels slide aside without an insertion line"
         },
         {
           "action": "press",
@@ -2813,7 +2813,7 @@
     },
     {
       "id": "editor-two-presets",
-      "title": "Two existing presets, adjusted identity and Reset",
+      "title": "Two existing pback to defaults, adjusted identity and Reset",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -2846,7 +2846,7 @@
         {
           "action": "capture",
           "id": "three-mode-menu",
-          "title": "Only Chat focus and Video focus presets with descriptions"
+          "title": "Only Chat focus and Video focus pback to defaults with descriptions"
         },
         {
           "action": "click",
@@ -2890,7 +2890,7 @@
         {
           "action": "capture",
           "id": "custom-draft",
-          "title": "Adjusted Chat focus mode with right-side Reset · Modified tag"
+          "title": "Adjusted Chat focus mode with right-side Back to default · no status badge"
         },
         {
           "action": "click",
@@ -2902,7 +2902,7 @@
         {
           "action": "capture",
           "id": "modified-chat-dropdown",
-          "title": "Modified Chat focus preset shown in dropdown"
+          "title": "Two preset choices; no status badges in the trigger or options"
         },
         {
           "action": "press",
@@ -2916,13 +2916,13 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Reset layout"
+            "name": "Back to default"
           }
         },
         {
           "action": "capture",
           "id": "chat-preset-reset",
-          "title": "Chat focus reset restores initial preset and hides Reset"
+          "title": "Chat focus back to default restores initial pback to default and hides Back to default"
         },
         {
           "action": "click",
@@ -3005,7 +3005,7 @@
         {
           "action": "capture",
           "id": "last-panel-delete-disabled",
-          "title": "Last panel cannot be removed; hover explains why"
+          "title": "Last panel cannot be removed; disabled without a hover tooltip"
         },
         {
           "action": "click",

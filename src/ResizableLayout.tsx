@@ -291,7 +291,6 @@ export function ResizeHandle({ kind, label }: { kind: Kind; label: string }) {
     aria-orientation={vertical ? 'vertical' : 'horizontal'}
     aria-valuenow={Math.round(values[kind])} aria-valuemin={Math.round(ranges[kind][0])} aria-valuemax={Math.round(ranges[kind][1])}
     aria-valuetext={`${Math.round(values[kind])} pixels`}
-    title="Drag to resize · Double-click to reset · Arrow keys to adjust"
     onPointerDown={event => {
       if (event.button !== 0) return;
       event.preventDefault();

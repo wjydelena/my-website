@@ -33,14 +33,14 @@ export default function Sidebar() {
       <button className="nav-toggle" type="button" aria-label={expanded ? 'Collapse navigation' : 'Expand navigation'} aria-expanded={expanded} onClick={() => setExpanded(!expanded)}><PanelLeft size={18}/></button>
     </div>
     <nav className="reference-nav-list">{entries.map(entry => <div key={entry.label}>
-      <button type="button" className={`reference-nav-item${selected === entry.label ? ' is-selected' : ''}`} title={!expanded ? entry.label : undefined} aria-label={entry.label} aria-current={selected === entry.label ? 'page' : undefined} aria-expanded={entry.children && expanded ? !closed.includes(entry.label) : undefined}
+      <button type="button" className={`reference-nav-item${selected === entry.label ? ' is-selected' : ''}`} aria-label={entry.label} aria-current={selected === entry.label ? 'page' : undefined} aria-expanded={entry.children && expanded ? !closed.includes(entry.label) : undefined}
         onClick={() => { if(entry.children) { if(!expanded) setExpanded(true); else toggle(entry.label); } else setSelected(entry.label); }}>
         <img src={entry.icon} alt=""/>{expanded && <><span>{entry.label}</span>{entry.children && <ChevronDown className={closed.includes(entry.label) ? '' : 'is-open'} size={13}/>}</>}
       </button>
       {expanded && entry.children && !closed.includes(entry.label) && <div className="reference-nav-children">{entry.children.map(child => <button type="button" key={child} className={selected === child ? 'is-selected' : ''} onClick={() => setSelected(child)}>{child}</button>)}</div>}
     </div>)}</nav>
     <div className="reference-nav-footer">
-      <button type="button" className="reference-nav-item" aria-label="Notification" title={!expanded ? 'Notification' : undefined} onClick={() => setSelected('Notification')}><img src={notification} alt=""/>{expanded && <span>Notification</span>}</button>
+      <button type="button" className="reference-nav-item" aria-label="Notification" onClick={() => setSelected('Notification')}><img src={notification} alt=""/>{expanded && <span>Notification</span>}</button>
       <button type="button" className="reference-profile" aria-label="Account zlf_us846" onClick={() => {setExpanded(true);setClosed(prev => prev.filter(x => x !== 'Account health'));}}><img src={avatar} alt=""/>{expanded && <span>zlf_us846</span>}</button>
     </div>
   </aside>;

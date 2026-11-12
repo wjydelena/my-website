@@ -1,11 +1,15 @@
 import React, { createContext, useContext, useRef, useState } from 'react';
-import { GripVertical } from 'lucide-react';
 import { DropTarget, ModuleBoard, ModuleId, Rect, dropTargets, moduleNames, moveModule, resolveBoard, targetLabel, targetRect, stackBlockedReason, COLUMN_CAPACITY_MESSAGE } from './module-layout';
 import './module-drag.css';
 
 type DragView = { id: ModuleId; x: number; y: number; target?: DropTarget; reason?: string; keyboard: boolean; blockedColumn?: number };
 type HeaderProps = React.HTMLAttributes<HTMLDivElement>;
 type MotionSurface = { id: ModuleId; node: HTMLElement; rect: Rect; offset?: {left: number; top: number}; animation?: Animation; settled?: boolean };
+function releaseSurface(surface: MotionSurface) {
+  surface.animation?.cancel();
+  surface.node.classList.remove('module-displacement-surface', 'module-preview-source');
+  for (const key of ['left','top','width','height']) surface.node.style.removeProperty(`--floating-${key}`);
+}
 const DragContext = createContext<(id: ModuleId) => HeaderProps>(() => ({}));
 const HoverContext = createContext<{ id: ModuleId; rect: Rect } | null>(null);
 const BlockedContext = createContext<{ column: number; rect: Rect; message: string } | null>(null);
@@ -24,7 +28,7 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
   board: ModuleBoard; box: { width: number; height: number }; editing: boolean;
   container: React.RefObject<HTMLDivElement>; onMove: (id: ModuleId, target: DropTarget) => void; children: React.ReactNode;
 }) {
-  const session = useRef<{ id: ModuleId; x: number; y: number; pointer?: number; element?: HTMLElement; active: boolean; view?: DragView } | null>(null);
+  const session = useRef<{ id: ModuleId; x: number; y: number; grabX?: number; grabY?: number; pointer?: number; element?: HTMLElement; active: boolean; view?: DragView } | null>(null);
   const [view, setView] = useState<DragView | null>(null);
   const [hovered, setHovered] = useState<ModuleId | null>(null);
   const [announcement, announce] = useState('');
@@ -41,13 +45,13 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
     const previous = motionLayout.current;
     if (previous.board !== board || previous.width !== box.width || previous.height !== box.height) {
       container.current?.classList.remove('module-displacement-layout');
-      surfaces.current.forEach(s => { s.animation?.cancel(); s.node.classList.remove('module-displacement-surface', 'module-preview-source'); });
+      surfaces.current.forEach(s => { releaseSurface(s); });
       surfaces.current = [];
       motionLayout.current = { board, width: box.width, height: box.height };
     }
     const dropped = droppedRects.current;
     droppedRects.current = null;
-    if ((preview || dropped) && !surfaces.current.length && container.current) {
+    if ((view || dropped) && !surfaces.current.length && container.current) {
       const origin = container.current.getBoundingClientRect();
       container.current.querySelectorAll<HTMLElement>('[data-module-id]').forEach(module => {
         const id = module.dataset.moduleId as ModuleId;
@@ -67,7 +71,8 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
     const frame = (r: Rect, offset: {left: number; top: number}) => ({ left: `${r.left - offset.left}px`, top: `${r.top - offset.top}px`, width: `${r.width}px`, height: `${r.height}px` });
     surfaces.current.forEach(surface => {
       const destination = preview?.rects[surface.id];
-      const moving = surface.id === view?.id || (board.chatActivityMerged && view?.id === 'chat' && surface.id === 'activity');
+      const moving = surface.id === view?.id || !!(board.chatActivityMerged && view?.id === 'chat' && surface.id === 'activity');
+      const floating = surface.node.classList.contains('module-preview-source') ? surface.node.getBoundingClientRect() : undefined;
       surface.node.classList.add('module-displacement-surface');
       if (!surface.offset) {
         const origin = container.current!.getBoundingClientRect();
@@ -75,29 +80,44 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
         surface.offset = {left: parent.left - origin.left, top: parent.top - origin.top};
       }
       const style = getComputedStyle(surface.node);
-      const current = surface.animation ? {left: style.left, top: style.top, width: style.width, height: style.height} : frame(dropped?.get(surface.id) || surface.rect, surface.offset);
+      const origin = container.current!.getBoundingClientRect();
+      const current = floating && !moving ? frame({left: floating.left - origin.left, top: floating.top - origin.top, width: floating.width, height: floating.height}, surface.offset) : surface.animation ? {left: style.left, top: style.top, width: style.width, height: style.height} : frame(dropped?.get(surface.id) || surface.rect, surface.offset);
       surface.animation?.cancel();
-      surface.node.classList.toggle('module-preview-source', !!preview && moving);
+      surface.node.classList.toggle('module-preview-source', !!view && moving);
+      surface.node.style.setProperty('--floating-width', `${surface.rect.width}px`);
+      surface.node.style.setProperty('--floating-height', `${surface.rect.height}px`);
       const animation = surface.node.animate([current, frame(destination && !moving ? destination : surface.rect, surface.offset)], {
-        duration: reduced ? 0 : 240, easing: 'cubic-bezier(.22, 1, .36, 1)', fill: 'both',
+        duration: reduced ? 0 : 200, easing: 'cubic-bezier(.25, .8, .25, 1)', fill: 'both',
       });
       surface.animation = animation;
       surface.settled = false;
-      if (!preview) animation.onfinish = () => {
+      if (!view) animation.onfinish = () => {
         if (surface.animation !== animation) return;
         surface.settled = true;
         // Restore all wrappers together: no intermediate flex/grid reflow on cancellation.
         if (surfaces.current.every(s => s.settled)) {
           container.current?.classList.remove('module-displacement-layout');
-          surfaces.current.forEach(s => { s.animation?.cancel(); s.node.classList.remove('module-displacement-surface', 'module-preview-source'); });
+          surfaces.current.forEach(s => { releaseSurface(s); });
           surfaces.current = [];
         }
       };
     });
-  }, [previewKey, board, box.width, box.height, editing]);
+  }, [previewKey, view?.id, board, box.width, box.height, editing]);
+  React.useLayoutEffect(() => {
+    if (!view || !container.current) return;
+    const surface = surfaces.current.find(s => s.id === view.id);
+    if (!surface) return;
+    const origin = container.current.getBoundingClientRect();
+    const start = session.current;
+    const dx = start?.grabX ?? (start ? start.x - origin.left - surface.rect.left : 0);
+    const dy = start?.grabY ?? (start ? start.y - origin.top - surface.rect.top : 0);
+    const position = view.keyboard && preview ? preview.rects[view.id] : undefined;
+    surface.node.style.setProperty('--floating-left', `${position ? origin.left + position.left : view.x - dx}px`);
+    surface.node.style.setProperty('--floating-top', `${position ? origin.top + position.top : view.y - dy}px`);
+  }, [view?.x, view?.y, view?.id, previewKey]);
   React.useLayoutEffect(() => () => {
     container.current?.classList.remove('module-displacement-layout');
-    surfaces.current.forEach(s => { s.animation?.cancel(); s.node.classList.remove('module-displacement-surface', 'module-preview-source'); });
+    surfaces.current.forEach(s => { releaseSurface(s); });
     surfaces.current = [];
   }, []);
   const update = (next: DragView) => { if (session.current) session.current.view = next; setView(next); };
@@ -113,7 +133,7 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
       const result = moveModule(board, current.id, current.view.target);
       if (result.changed) {
         const origin = container.current!.getBoundingClientRect();
-        droppedRects.current = new Map(surfaces.current.filter(s => s.id !== current.id).map(s => {
+        droppedRects.current = new Map(surfaces.current.map(s => {
           const r = s.node.getBoundingClientRect();
           return [s.id, {left: r.left - origin.left, top: r.top - origin.top, width: r.width, height: r.height}];
         }));
@@ -139,9 +159,20 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
     const localX = x - origin.left, localY = y - origin.top;
     if (localX < -16 || localX > geometry.width + 16 || localY < -16 || localY > geometry.height + 16) return undefined;
     const all = dropTargets(board);
-    // Column edges take priority over module edges at their intersections.
-    return all.find(t => t.type === 'column' && Math.abs(localX - targetRect(t, board, geometry).left) <= 22) ||
-      all.find(t => { if (t.type !== 'stack') return false; const r = targetRect(t, board, geometry); return localX > r.left + 22 && localX < r.left + r.width - 22 && Math.abs(localY - r.top) <= 32; });
+    // Like the reference sortable cards: crossing a panel's midpoint shifts its neighbors.
+    const edge = all.find(t => t.type === 'column' && Math.abs(localX - targetRect(t, board, geometry).left) <= 32);
+    if (edge) return edge;
+    const column = board.columns.findIndex(c => {const r=geometry.rects[c.modules[0]];return localX>=r.left&&localX<r.left+r.width;});
+    if (column < 0) return undefined;
+    const candidates = all.filter((t):t is Extract<DropTarget,{type:'stack'}> => t.type==='stack'&&t.column===column);
+    let index = board.columns[column].modules.length;
+    for (let i=0;i<board.columns[column].modules.length;i++) {
+      const id=board.columns[column].modules[i];
+      if(board.chatActivityMerged&&id==='activity')continue;
+      const r=geometry.rects[id];
+      if(localY<r.top+r.height/2){index=i;break;}
+    }
+    return candidates.find(t=>t.index===index);
   };
   const pointerProps: React.HTMLAttributes<HTMLDivElement> = {
     onPointerDown: event => {
@@ -150,7 +181,10 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
       const module = target.closest('[data-module-id]');
       if (!editing || event.button !== 0 || !module || target.closest('[role="separator"]') || session.current) return;
       const id = module.getAttribute('data-module-id') as ModuleId;
-      session.current = { id, x: event.clientX, y: event.clientY, pointer: event.pointerId, element: event.currentTarget, active: false };
+      const nodes = getComputedStyle(module).display === 'contents' ? Array.from(module.children) : [module];
+      const rects = nodes.map(n=>n.getBoundingClientRect()).filter(r=>r.width&&r.height);
+      const left = Math.min(...rects.map(r=>r.left)), top = Math.min(...rects.map(r=>r.top));
+      session.current = { id, x: event.clientX, y: event.clientY, grabX: event.clientX-left, grabY: event.clientY-top, pointer: event.pointerId, element: event.currentTarget, active: false };
     },
     onPointerMove: event => {
       const current = session.current;
@@ -210,7 +244,6 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
   const headerProps = (id: ModuleId): HeaderProps => !editing ? {} : {
     role: 'button', tabIndex: 0, 'aria-label': `Move ${moduleNames[id]}`,
     'aria-describedby': 'module-move-instructions', 'aria-pressed': view?.id === id,
-    title: 'Drag anywhere in this module · Space to pick up · Arrow keys to choose a position · Enter to drop · Esc to cancel',
     onKeyDown: event => {
       if (event.key === 'Tab') { clear(); return; }
       if (![' ', 'Enter', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Escape'].includes(event.key)) return;
@@ -238,8 +271,6 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
       }
     },
   };
-  const line = preview && view?.target ? targetRect(view.target, board, geometry) : undefined;
-  const origin = container.current?.getBoundingClientRect();
   const blocked = view?.blockedColumn !== undefined ? {
     column: view.blockedColumn,
     message: view.reason ?? '',
@@ -258,15 +289,6 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
       {children}
       <span id="module-move-instructions" className="move-sr-only">Drag anywhere in a module to move it. Maximum 5 columns and 3 modules per column. Products must be alone. Space picks up, arrows choose a position, Enter drops, Escape cancels.</span>
       <span className="move-sr-only" role="status" aria-live="polite">{announcement}</span>
-      {view && <>
-        {line && origin && <div className={`module-drop-line ${view.target!.type === 'column' ? 'vertical' : 'horizontal'}`} data-testid="module-drop-line" style={{
-          left: origin.left + Math.min(Math.max(line.left - (line.width === 3 ? 1.5 : 0), 0), geometry.width - line.width),
-          top: origin.top + Math.min(Math.max(line.top - (line.height === 3 ? 1.5 : 0), 0), geometry.height - line.height), width: line.width, height: line.height,
-        }}/>}
-        <div className="module-drag-ghost" style={{ left: Math.max(8, Math.min(view.x + 18, window.innerWidth - 248)), top: Math.max(8, Math.min(view.y + 18, window.innerHeight - 62)) }}>
-          <div className="module-drag-ghost-title"><GripVertical size={16}/><strong>{moduleNames[view.id]}</strong></div>
-        </div>
-      </>}
     </div>
     </BlockedContext.Provider>
     </HoverContext.Provider>

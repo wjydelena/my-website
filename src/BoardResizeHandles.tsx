@@ -11,7 +11,6 @@ function TrackHandle({ vertical, value, min, max, label, style, change }: {
   return <div className={`resize-handle dock-resize ${vertical ? 'vertical' : 'horizontal'}${active ? ' is-dragging' : ''}`}
     role="separator" tabIndex={0} aria-label={label} aria-orientation={vertical ? 'vertical' : 'horizontal'}
     aria-valuenow={Math.round(value)} aria-valuemin={Math.round(min)} aria-valuemax={Math.round(max)} style={style}
-    title="Drag to resize · Arrow keys to adjust · Double-click to balance"
     onPointerDown={e => { if (e.button !== 0) return; e.preventDefault(); e.currentTarget.focus(); e.currentTarget.setPointerCapture(e.pointerId); drag.current = { pointer: e.pointerId, origin: vertical ? e.clientX : e.clientY, value }; setActive(true); }}
     onPointerMove={e => { const start = drag.current; if (start?.pointer === e.pointerId) update(start.value + (vertical ? e.clientX : e.clientY) - start.origin); }}
     onPointerUp={e => { if (e.currentTarget.hasPointerCapture(e.pointerId)) e.currentTarget.releasePointerCapture(e.pointerId); finish(); }}
