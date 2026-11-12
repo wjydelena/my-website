@@ -2,6 +2,10 @@
 .console-shell .topbar.preset-only-editor{background:#e5f5f4}
 .console-shell .preset-only-editor .customize-title{font-size:15px;color:#202020}
 .console-shell .preset-only-editor .layout-mode-trigger{color:#202020;border-color:#d3d4d5}
+.console-shell .preset-only-editor .layout-mode-field.is-modified,.console-shell .preset-only-editor .layout-mode-field.is-modified .layout-mode-trigger,.console-shell .preset-only-editor .layout-mode-field.is-modified .layout-mode-options{width:340px}
+.console-shell .preset-only-editor .layout-mode-value,.console-shell .preset-only-editor .layout-mode-option-name{display:flex;align-items:center;gap:4px;min-width:0}
+.console-shell .preset-only-editor .layout-modified-tag{display:inline-flex;align-items:center;flex:none;height:18px;padding:0 6px;border-radius:99px;background:#ececed;color:#6a6a6b;font-size:12px;font-weight:500;line-height:18px;white-space:nowrap}
+.console-shell .preset-only-editor .layout-mode-trigger>svg{flex:none}
 .console-shell .preset-only-editor .layout-editor-actions,.console-shell .preset-only-editor .layout-editor-actions.has-add-panel{align-items:center;gap:8px}
 .console-shell .preset-only-editor .layout-editor-actions .layout-reset{min-width:0;width:auto;height:28px;padding:0;gap:4px;white-space:nowrap;background:transparent;color:#028380;border-radius:4px}
 .console-shell .preset-only-editor .layout-reset svg{flex:none}

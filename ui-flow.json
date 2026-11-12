@@ -1096,7 +1096,27 @@
         {
           "action": "capture",
           "id": "custom-guard-disabled",
-          "title": "No changes: Apply disabled at 30% opacity"
+          "title": "No changes: Apply disabled at 30% opacity \u00b7 Modified tag"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Layout mode"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "saved-modified-dropdown",
+          "title": "Saved adjusted mode retains Modified in dropdown"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Layout mode"
+          },
+          "key": "Escape"
         },
         {
           "action": "press",
@@ -1961,7 +1981,27 @@
         {
           "action": "capture",
           "id": "merged-region-resized",
-          "title": "Analytics and combined Chat + Activity share one resize boundary"
+          "title": "Analytics and combined Chat + Activity share one resize boundary \u00b7 Modified tag"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Layout mode"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "modified-video-dropdown",
+          "title": "Modified Video focus preset shown in dropdown"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Layout mode"
+          },
+          "key": "Escape"
         },
         {
           "action": "click",
@@ -2845,7 +2885,27 @@
         {
           "action": "capture",
           "id": "custom-draft",
-          "title": "Adjusted Chat focus mode with right-side Reset"
+          "title": "Adjusted Chat focus mode with right-side Reset \u00b7 Modified tag"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Layout mode"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "modified-chat-dropdown",
+          "title": "Modified Chat focus preset shown in dropdown"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Layout mode"
+          },
+          "key": "Escape"
         },
         {
           "action": "click",

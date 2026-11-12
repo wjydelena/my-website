@@ -63,7 +63,7 @@ export function EditingHeader() {
   };
   return <header className="topbar customize-header preset-only-editor">
     <strong className="customize-title">Customize layout</strong>
-    <div className="layout-mode-field" ref={root}>
+    <div className={`layout-mode-field${presetAdjusted?' is-modified':''}`} ref={root}>
       <button className="layout-mode-trigger" type="button" ref={trigger}
         aria-label="Layout mode" aria-haspopup="listbox" aria-expanded={open} aria-controls="layout-mode-options"
         onClick={() => { setFocused(Math.max(0,modes.indexOf(mode))); setOpen(!open); }}
@@ -72,7 +72,8 @@ export function EditingHeader() {
             event.preventDefault(); setFocused(Math.max(0,modes.indexOf(mode))); setOpen(true);
           }
         }}>
-        <span id="layout-mode-label">Layout mode</span><span>{mode==='Standard'?'Chat focus mode':'Video focus mode'}</span><ChevronDown size={16}/>
+        <span id="layout-mode-label">Layout mode</span>
+        <span className="layout-mode-value"><span>{mode==='Standard'?'Chat focus mode':'Video focus mode'}</span>{presetAdjusted&&<span className="layout-modified-tag">Modified</span>}</span><ChevronDown size={16}/>
       </button>
       {open && <div className="layout-mode-options" id="layout-mode-options" role="listbox" aria-labelledby="layout-mode-label"
         onKeyDown={event => {
@@ -82,10 +83,10 @@ export function EditingHeader() {
             event.preventDefault(); setFocused(event.key === 'Home' ? 0 : modes.length - 1);
           } else if (event.key === 'Tab') setOpen(false);
         }}>
-        {modes.map((value, index) => <button key={value} type="button" role="option" aria-label={modeNames[value]} aria-describedby={`layout-description-${index}`} aria-selected={mode === value}
+        {modes.map((value, index) => <button key={value} type="button" role="option" aria-label={modeNames[value]} aria-describedby={`layout-description-${index}${mode===value&&presetAdjusted?` layout-modified-${index}`:''}`} aria-selected={mode === value}
           ref={node => { options.current[index] = node; }} tabIndex={focused === index ? 0 : -1}
           className={mode === value ? 'is-selected' : ''} onClick={() => choose(value)}>
-          <span>{modeNames[value]}</span>
+          <span className="layout-mode-option-name"><span>{modeNames[value]}</span>{mode===value&&presetAdjusted&&<span className="layout-modified-tag" id={`layout-modified-${index}`}>Modified</span>}</span>
           <span className="layout-mode-description" id={`layout-description-${index}`}>{descriptions[value]}</span>
         </button>)}
       </div>}
