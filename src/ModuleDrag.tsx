@@ -5,6 +5,7 @@ import './module-drag.css';
 
 type DragView = { id: ModuleId; x: number; y: number; target?: DropTarget; reason?: string; keyboard: boolean; blockedColumn?: number };
 type HeaderProps = React.HTMLAttributes<HTMLDivElement>;
+type MotionSurface = { id: ModuleId; node: HTMLElement; rect: Rect; offset?: {left: number; top: number}; animation?: Animation; settled?: boolean };
 const DragContext = createContext<(id: ModuleId) => HeaderProps>(() => ({}));
 const HoverContext = createContext<{ id: ModuleId; rect: Rect } | null>(null);
 const BlockedContext = createContext<{ column: number; rect: Rect; message: string } | null>(null);
@@ -29,6 +30,76 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
   const [announcement, announce] = useState('');
   const suppressClick = useRef(false);
   const geometry = resolveBoard(board, box);
+  const surfaces = useRef<MotionSurface[]>([]);
+  const droppedRects = useRef<Map<ModuleId, Rect> | null>(null);
+  const motionLayout = useRef({ board, width: box.width, height: box.height });
+  const proposed = view?.target && !view.reason ? moveModule(board, view.id, view.target) : undefined;
+  const preview = proposed?.changed ? resolveBoard(proposed.board, box) : undefined;
+  const previewKey = preview && view ? `${view.id}:${JSON.stringify(view.target)}` : '';
+  // Animate only the rendered surfaces. The board and hit-test geometry stay unchanged until drop.
+  React.useLayoutEffect(() => {
+    const previous = motionLayout.current;
+    if (previous.board !== board || previous.width !== box.width || previous.height !== box.height) {
+      container.current?.classList.remove('module-displacement-layout');
+      surfaces.current.forEach(s => { s.animation?.cancel(); s.node.classList.remove('module-displacement-surface', 'module-preview-source'); });
+      surfaces.current = [];
+      motionLayout.current = { board, width: box.width, height: box.height };
+    }
+    const dropped = droppedRects.current;
+    droppedRects.current = null;
+    if ((preview || dropped) && !surfaces.current.length && container.current) {
+      const origin = container.current.getBoundingClientRect();
+      container.current.querySelectorAll<HTMLElement>('[data-module-id]').forEach(module => {
+        const id = module.dataset.moduleId as ModuleId;
+        if (getComputedStyle(module).display === 'none') return;
+        // Measure Activity's region before giving its display:contents wrapper a temporary box.
+        const nodes = getComputedStyle(module).display === 'contents' ? Array.from(module.children) as HTMLElement[] : [module];
+        const parts = nodes.map(node => ({ node, bounds: node.getBoundingClientRect() })).filter(p => p.bounds.width && p.bounds.height);
+        if (!parts.length) return;
+        const left = Math.min(...parts.map(p => p.bounds.left)) - origin.left;
+        const top = Math.min(...parts.map(p => p.bounds.top)) - origin.top;
+        const rect = { left, top, width: Math.max(...parts.map(p => p.bounds.right)) - origin.left - left, height: Math.max(...parts.map(p => p.bounds.bottom)) - origin.top - top };
+        surfaces.current.push({ id, node: module, rect });
+      });
+      container.current.classList.add('module-displacement-layout');
+    }
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const frame = (r: Rect, offset: {left: number; top: number}) => ({ left: `${r.left - offset.left}px`, top: `${r.top - offset.top}px`, width: `${r.width}px`, height: `${r.height}px` });
+    surfaces.current.forEach(surface => {
+      const destination = preview?.rects[surface.id];
+      const moving = surface.id === view?.id || (board.chatActivityMerged && view?.id === 'chat' && surface.id === 'activity');
+      surface.node.classList.add('module-displacement-surface');
+      if (!surface.offset) {
+        const origin = container.current!.getBoundingClientRect();
+        const parent = surface.node.offsetParent?.getBoundingClientRect() || origin;
+        surface.offset = {left: parent.left - origin.left, top: parent.top - origin.top};
+      }
+      const style = getComputedStyle(surface.node);
+      const current = surface.animation ? {left: style.left, top: style.top, width: style.width, height: style.height} : frame(dropped?.get(surface.id) || surface.rect, surface.offset);
+      surface.animation?.cancel();
+      surface.node.classList.toggle('module-preview-source', !!preview && moving);
+      const animation = surface.node.animate([current, frame(destination && !moving ? destination : surface.rect, surface.offset)], {
+        duration: reduced ? 0 : 240, easing: 'cubic-bezier(.22, 1, .36, 1)', fill: 'both',
+      });
+      surface.animation = animation;
+      surface.settled = false;
+      if (!preview) animation.onfinish = () => {
+        if (surface.animation !== animation) return;
+        surface.settled = true;
+        // Restore all wrappers together: no intermediate flex/grid reflow on cancellation.
+        if (surfaces.current.every(s => s.settled)) {
+          container.current?.classList.remove('module-displacement-layout');
+          surfaces.current.forEach(s => { s.animation?.cancel(); s.node.classList.remove('module-displacement-surface', 'module-preview-source'); });
+          surfaces.current = [];
+        }
+      };
+    });
+  }, [previewKey, board, box.width, box.height, editing]);
+  React.useLayoutEffect(() => () => {
+    container.current?.classList.remove('module-displacement-layout');
+    surfaces.current.forEach(s => { s.animation?.cancel(); s.node.classList.remove('module-displacement-surface', 'module-preview-source'); });
+    surfaces.current = [];
+  }, []);
   const update = (next: DragView) => { if (session.current) session.current.view = next; setView(next); };
   const clear = () => {
     const current = session.current;
@@ -40,7 +111,14 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
     const current = session.current;
     if (editing && current?.active && current.view?.target && !current.view.reason) {
       const result = moveModule(board, current.id, current.view.target);
-      if (result.changed) { onMove(current.id, current.view.target); announce(`${moduleNames[current.id]} moved. ${targetLabel(current.view.target)}.`); }
+      if (result.changed) {
+        const origin = container.current!.getBoundingClientRect();
+        droppedRects.current = new Map(surfaces.current.filter(s => s.id !== current.id).map(s => {
+          const r = s.node.getBoundingClientRect();
+          return [s.id, {left: r.left - origin.left, top: r.top - origin.top, width: r.width, height: r.height}];
+        }));
+        onMove(current.id, current.view.target); announce(`${moduleNames[current.id]} moved. ${targetLabel(current.view.target)}.`);
+      }
     }
     clear();
     suppressClick.current = !!current?.active && current.pointer !== undefined;
@@ -160,7 +238,7 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
       }
     },
   };
-  const line = view?.target && !view.reason ? targetRect(view.target, board, geometry) : undefined;
+  const line = preview && view?.target ? targetRect(view.target, board, geometry) : undefined;
   const origin = container.current?.getBoundingClientRect();
   const blocked = view?.blockedColumn !== undefined ? {
     column: view.blockedColumn,
@@ -170,7 +248,7 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
   return <DragContext.Provider value={headerProps}>
     <HoverContext.Provider value={editing && hovered && geometry.rects[hovered] && !view ? { id: hovered, rect: geometry.rects[hovered] } : null}>
     <BlockedContext.Provider value={blocked}>
-    <div className="module-dnd-scope" data-moving={view?.id} data-drop-blocked={blocked ? 'true' : undefined} {...pointerProps}
+    <div className="module-dnd-scope" data-moving={view?.id} data-drop-preview={preview ? 'true' : undefined} data-drop-blocked={blocked ? 'true' : undefined} {...pointerProps}
       onPointerMoveCapture={event => {
         if((event.target as Element).closest('.remove-panel, .remove-panel-guard')){setHovered(null);return;}
         const module = (event.target as Element).closest('[data-module-id]');

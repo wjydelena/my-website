@@ -1096,7 +1096,7 @@
         {
           "action": "capture",
           "id": "custom-guard-disabled",
-          "title": "No changes: Apply disabled at 30% opacity \u00b7 Modified tag"
+          "title": "No changes: Apply disabled at 30% opacity · Modified tag"
         },
         {
           "action": "click",
@@ -1189,7 +1189,7 @@
         {
           "action": "capture",
           "id": "module-vertical-target",
-          "title": "Video picked up; vertical insertion line"
+          "title": "Video picked up; surrounding columns shift and squeeze to make room"
         },
         {
           "action": "press",
@@ -1350,7 +1350,7 @@
         {
           "action": "capture",
           "id": "module-horizontal-target",
-          "title": "Chat picked up; horizontal insertion line"
+          "title": "Chat picked up; nearby panels resize and shift around the valid stack target"
         },
         {
           "action": "press",
@@ -1747,7 +1747,7 @@
         {
           "action": "capture",
           "id": "products-teal-drag-card",
-          "title": "Products drag card with teal border and dark teal background"
+          "title": "Products drag card and neighboring columns making room"
         },
         {
           "action": "press",
@@ -1981,7 +1981,7 @@
         {
           "action": "capture",
           "id": "merged-region-resized",
-          "title": "Analytics and combined Chat + Activity share one resize boundary \u00b7 Modified tag"
+          "title": "Analytics and combined Chat + Activity share one resize boundary · Modified tag"
         },
         {
           "action": "click",
@@ -2022,6 +2022,11 @@
             "name": "Move Chat"
           },
           "key": "Space"
+        },
+        {
+          "action": "capture",
+          "id": "merged-region-displacement-preview",
+          "title": "Combined Chat and Activity move atomically; surrounding columns make room before drop"
         },
         {
           "action": "press",
@@ -2885,7 +2890,7 @@
         {
           "action": "capture",
           "id": "custom-draft",
-          "title": "Adjusted Chat focus mode with right-side Reset \u00b7 Modified tag"
+          "title": "Adjusted Chat focus mode with right-side Reset · Modified tag"
         },
         {
           "action": "click",
