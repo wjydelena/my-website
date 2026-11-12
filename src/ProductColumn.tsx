@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { GripVertical, Pin, Plus, PencilLine, Trash2, ArrowUpToLine, X } from 'lucide-react';
+import { GripVertical, Pin, Plus, PencilLine, Trash2, ArrowUpToLine, X, Search } from 'lucide-react';
 import PromotionTools from './PromotionTools';
 import { useConsoleLayout } from './ResizableLayout';
 import { ModuleTitle, RemovePanelButton } from './LayoutEditor';
@@ -22,8 +22,13 @@ export default function ProductColumn() {
   const [listPinned, setListPinned] = useState(false);
   const [draft, setDraft] = useState<Product | null>(null);
   const [deleting, setDeleting] = useState<Product | null>(null);
+  const [query, setQuery] = useState('');
+  const [filter, setFilter] = useState('All products');
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const moving = useRef<number | null>(null);
-  const all = products.length > 0 && products.every(p => checked.includes(p.id));
+  const visible = products.filter(p => (!query.trim() || `${p.id} ${p.name}`.toLowerCase().includes(query.trim().toLowerCase())) && (filter==='All products' || (filter==='Pinned products'?pinned===p.id:checked.includes(p.id))));
+  const all = visible.length > 0 && visible.every(p => checked.includes(p.id));
+  const some = visible.some(p => checked.includes(p.id));
   const toggle = (id: number) => setChecked(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev,id]);
   const moveTo = (id: number, target: number) => setProducts(prev => {
     const source = prev.find(p => p.id === id); if(!source) return prev;
@@ -35,10 +40,16 @@ export default function ProductColumn() {
     <PromotionTools/>
     <div className="reference-product-controls">
       <div className="reference-product-tabs" role="tablist" aria-label="Product selling mode">{['Buy now','Auction'].map(value=><button type="button" role="tab" key={value} aria-selected={tab===value} onClick={()=>setTab(value)}>{value}</button>)}</div>
-      <label className="reference-select-all"><input type="checkbox" aria-label="Select all products" checked={all} disabled={editing || !products.length} ref={el=>{if(el)el.indeterminate=!all&&checked.length>0;}} onChange={()=>setChecked(all?[]:products.map(p=>p.id))}/>All</label>
+      <div className="reference-product-toolbar">
+        <label className="reference-select-all"><input type="checkbox" aria-label="Select all products" checked={all} disabled={editing || !visible.length} ref={el=>{if(el)el.indeterminate=!all&&some;}} onChange={()=>setChecked(prev=>all?prev.filter(id=>!visible.some(p=>p.id===id)):[...new Set([...prev,...visible.map(p=>p.id)])])}/>All</label>
+        <div className="reference-product-search"><input type="search" aria-label="Search product ID or name" placeholder="Search product ID or name" value={query} disabled={editing} onChange={e=>setQuery(e.target.value)}/>{query?<button type="button" aria-label="Clear product search" disabled={editing} onClick={()=>setQuery('')}><X size={16}/></button>:<Search size={16} aria-hidden="true"/>}</div>
+        <div className="reference-product-filter"><button type="button" className="reference-product-filter-trigger" data-active={filter!=='All products'} aria-label="Product filters" aria-haspopup="menu" aria-expanded={filtersOpen} disabled={editing} onClick={()=>setFiltersOpen(!filtersOpen)}><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true"><path d="M1 5h1M6 5h9M1 11h9M14 11h1"/><circle cx="4" cy="5" r="2"/><circle cx="12" cy="11" r="2"/></svg></button>
+          {filtersOpen&&<><button type="button" className="reference-product-filter-dismiss" aria-label="Close product filters" onClick={()=>setFiltersOpen(false)}/><div className="reference-product-filter-menu" role="menu" aria-label="Product filters" onKeyDown={e=>{if(e.key==='Escape'){setFiltersOpen(false);e.stopPropagation();}}}>{['All products','Pinned products','Selected products'].map(value=><button type="button" role="menuitemradio" key={value} aria-checked={filter===value} onClick={()=>{setFilter(value);setFiltersOpen(false);}}>{value}</button>)}</div></>}
+        </div>
+      </div>
     </div>
     <div className="reference-products" role="tabpanel" aria-label={tab}>
-      {products.map((product,index)=><article className="reference-product-card" key={product.id} data-product-id={product.id} onDragOver={event=>{if(moving.current!==null&&!editing)event.preventDefault();}} onDrop={event=>{event.preventDefault();if(moving.current!==null){moveTo(moving.current,index);moving.current=null;}}}>
+      {visible.map(product=>{const index=products.indexOf(product);return <article className="reference-product-card" key={product.id} data-product-id={product.id} onDragOver={event=>{if(moving.current!==null&&!editing)event.preventDefault();}} onDrop={event=>{event.preventDefault();if(moving.current!==null){moveTo(moving.current,index);moving.current=null;}}}>
         <div className="reference-product-main">
           <div className="reference-product-top">
             <div className="reference-product-rank"><span>{index+1}</span><button type="button" aria-label={`Reorder product ${product.id}`} disabled={editing} draggable={!editing} onDragStart={event=>{moving.current=product.id;event.dataTransfer.effectAllowed='move';event.dataTransfer.setData('text/plain',String(product.id));}} onDragEnd={()=>{moving.current=null;}} onKeyDown={event=>{if(['ArrowUp','ArrowDown'].includes(event.key)){event.preventDefault();moveTo(product.id,Math.max(0,Math.min(products.length-1,index+(event.key==='ArrowUp'?-1:1))));}}}><GripVertical size={16}/></button></div>
@@ -48,9 +59,9 @@ export default function ProductColumn() {
           <button type="button" className="reference-product-pin" aria-label={`${pinned===product.id?'Unpin':'Pin'} product ${product.id}`} aria-pressed={pinned===product.id} disabled={editing} onClick={()=>setPinned(pinned===product.id?null:product.id)}><Pin size={17}/>{pinned===product.id?'Pinned':'Pin'}</button>
           <div className="reference-product-stats"><span>Clicks <b>0</b></span><i/><span>Add to cart <b>0</b></span><i/><span>Items sold <b>0</b></span></div>
         </div>
-        <div className="reference-product-actions"><button type="button" aria-label={`Edit product ${product.id}`} disabled={editing} onClick={()=>setDraft({...product})}><PencilLine size={18}/></button><button type="button" aria-label={`Delete product ${product.id}`} disabled={editing} onClick={()=>setDeleting(product)}><Trash2 size={17}/></button><button type="button" aria-label={`Move product ${product.id} to top`} disabled={editing} onClick={()=>moveTo(product.id,0)}><ArrowUpToLine size={19}/></button></div>
-      </article>)}
-      {!products.length&&<p className="reference-products-empty">No products yet. Add a product to get started.</p>}
+        <div className="reference-product-actions"><button type="button" aria-label={`Edit product ${product.id}`} disabled={editing} onClick={()=>setDraft({...product})}><PencilLine size={16}/></button><button type="button" aria-label={`Delete product ${product.id}`} disabled={editing} onClick={()=>setDeleting(product)}><Trash2 size={16}/></button><button type="button" aria-label={`Move product ${product.id} to top`} disabled={editing} onClick={()=>moveTo(product.id,0)}><ArrowUpToLine size={16}/></button></div>
+      </article>})}
+      {!visible.length&&<div className="reference-products-empty" role="status">{products.length?<><p>No products found.</p><button type="button" onClick={()=>{setQuery('');setFilter('All products');}}>Clear search and filters</button></>:<p>No products yet. Add a product to get started.</p>}</div>}
     </div>
     <div className="product-footer reference-product-footer"><button type="button" className="footer-pill" disabled={editing} aria-pressed={listPinned} onClick={()=>setListPinned(!listPinned)}><Pin size={18}/>{listPinned?'Unpin product list':'Pin product list'}</button><button type="button" className="footer-pill" disabled={editing} onClick={()=>setDraft({...defaults[0],id:Math.max(0,...products.map(p=>p.id))+1})}><Plus size={22}/>Add product</button></div>
     {draft&&<div className="reference-product-modal"><section role="dialog" aria-modal="true" aria-label="Edit product"><header><h2>{products.some(p=>p.id===draft.id)?'Edit product':'Add product'}</h2><button type="button" aria-label="Close product editor" onClick={()=>setDraft(null)}><X size={18}/></button></header><label>Product name<input value={draft.name} onChange={e=>setDraft({...draft,name:e.target.value})}/></label><label>Price<input value={draft.price} onChange={e=>setDraft({...draft,price:e.target.value})}/></label><label>In stock<input value={draft.stock} onChange={e=>setDraft({...draft,stock:e.target.value})}/></label><footer><button type="button" onClick={()=>setDraft(null)}>Cancel</button><button type="button" onClick={save}>Save product</button></footer></section></div>}

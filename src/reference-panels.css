@@ -11,7 +11,7 @@ body,button,input,select,textarea,.console-shell *,.module-drag-ghost,.promotion
 .console-shell .promotion-tools .promo-pill{padding:0 16px;gap:8px;font-size:14px;font-weight:500}
 .console-shell .reference-product-price{font-weight:500}
 .console-shell .reference-product-tabs{height:57px}
-.console-shell .reference-select-all{transform:translateY(1px)}
+.console-shell .reference-select-all{transform:none}
 .console-shell .reference-product-pin{font-weight:500}
 .console-shell .reference-product-footer .footer-pill{font-weight:500}
 .console-shell .video-control-bar{top:12px;gap:7px;left:16px;right:16px;font-size:12px;white-space:nowrap}

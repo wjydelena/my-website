@@ -2573,6 +2573,56 @@
           "title": "1440px LIVE Console"
         },
         {
+          "action": "fill",
+          "target": {
+            "label": "Search product ID or name"
+          },
+          "value": "2"
+        },
+        {
+          "action": "capture",
+          "id": "product-search-id",
+          "title": "Search finds product 2 by ID"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Search product ID or name"
+          },
+          "value": "no-matching-product"
+        },
+        {
+          "action": "capture",
+          "id": "product-search-empty",
+          "title": "No results with clear search recovery"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Clear search and filters"
+          }
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Search product ID or name"
+          },
+          "value": "CLASSIC"
+        },
+        {
+          "action": "capture",
+          "id": "product-search-name",
+          "title": "Case-insensitive product name search"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Clear product search"
+          }
+        },
+        {
           "action": "click",
           "target": {
             "role": "checkbox",
@@ -2595,6 +2645,44 @@
           "action": "capture",
           "id": "product-one-pinned",
           "title": "First product pinned"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Product filters"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "product-filter-menu",
+          "title": "Filter all, pinned, or selected products"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitemradio",
+            "name": "Pinned products"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "product-filter-pinned",
+          "title": "Only the pinned product appears"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Product filters"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitemradio",
+            "name": "All products"
+          }
         },
         {
           "action": "click",
