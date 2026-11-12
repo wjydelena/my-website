@@ -120,7 +120,8 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
       });
       surface.animation = animation;
       surface.settled = false;
-      if (view && moving && preview) animation.onfinish = () => {
+      // A green preview at the original position is not a new slot: keep its source at 30%.
+      if (view && moving && proposed?.changed) animation.onfinish = () => {
         if (surface.animation === animation) surface.node.classList.add('module-source-settled');
       };
       if (!view) animation.onfinish = () => {
