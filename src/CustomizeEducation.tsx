@@ -4,12 +4,14 @@ import layoutEducation from './assets/layout-education-twice.gif';
 import {isCustomizeEducationBlankTarget, scheduleCustomizeEducationDismiss} from './customize-education';
 import './customize-education.css';
 
-export function CustomizeEducation({onCustomize}:{onCustomize:()=>void}) {
-  const [visible,setVisible] = useState(false);
+export function CustomizeEducation({onCustomize,entryShown}:{onCustomize:()=>void;entryShown:React.MutableRefObject<boolean>}) {
+  const [visible,setVisible] = useState(()=>!entryShown.current);
   const [animationReady,setAnimationReady] = useState(false);
   const [gifSrc,setGifSrc] = useState<string>();
   const root = useRef<HTMLDivElement>(null);
   const dismiss = useCallback(() => {setVisible(false);setAnimationReady(false);},[]);
+  // Header survives edit mode, so returning from editing does not replay entry education automatically.
+  useEffect(()=>{entryShown.current=true;},[entryShown]);
   useEffect(()=>{
     if(!visible){setGifSrc(undefined);return;}
     let active=true;
@@ -56,7 +58,7 @@ export function CustomizeEducation({onCustomize}:{onCustomize:()=>void}) {
       onClick={()=>{dismiss();onCustomize();}}>
       <LayoutPanelLeft size={16}/>Customize layout
     </button>
-    {visible && <div className="customize-education-popover" role="status" aria-live="polite" id="customize-education-copy">
+    {visible && <div className="customize-education-popover" role="status" aria-live="polite" id="customize-education-copy" data-testid={animationReady?'customize-education-ready':undefined}>
       <strong>Customize your LIVE console</strong>
       <p>Drag panels to rearrange, resize horizontally or vertically, or remove panels you don't need. Add them back anytime.</p>
       <img className="customize-education-gif" src={gifSrc} onLoad={()=>setAnimationReady(true)} onError={dismiss} alt="Demonstration of rearranging, resizing, removing and restoring LIVE console panels" width={296} height={168}/>
