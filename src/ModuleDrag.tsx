@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useRef, useState } from 'react';
+import { GripVertical } from 'lucide-react';
 import { DropTarget, ModuleBoard, ModuleId, Rect, dropTargets, moduleNames, moveModule, resolveBoard, targetLabel, targetRect, stackBlockedReason, COLUMN_CAPACITY_MESSAGE } from './module-layout';
 import './module-drag.css';
 
@@ -13,12 +14,15 @@ function releaseSurface(surface: MotionSurface) {
 const DragContext = createContext<(id: ModuleId) => HeaderProps>(() => ({}));
 const HoverContext = createContext<{ id: ModuleId; rect: Rect } | null>(null);
 const BlockedContext = createContext<{ column: number; rect: Rect; message: string } | null>(null);
+const PreviewContext = createContext<Rect | null>(null);
 export const useModuleHeader = (id: ModuleId) => useContext(DragContext)(id);
 
 export function ModuleHoverOverlay() {
   const hovered = useContext(HoverContext);
   const blocked = useContext(BlockedContext);
+  const placeholder = useContext(PreviewContext);
   return <>
+    {placeholder && <div className="module-drop-placeholder" data-testid="module-drop-placeholder" aria-hidden="true" style={placeholder}/>}
     {hovered && <div className="module-hover-overlay" data-hover-module={hovered.id} aria-hidden="true" style={hovered.rect}/>}
     {blocked && <div className="module-blocked-overlay" data-blocked-column={blocked.column} style={blocked.rect}><span>{blocked.message}</span></div>}
   </>;
@@ -32,6 +36,26 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
   const [view, setView] = useState<DragView | null>(null);
   const [hovered, setHovered] = useState<ModuleId | null>(null);
   const [announcement, announce] = useState('');
+  const [tipTop, setTipTop] = useState<number | null>(null);
+  const tipTimer = useRef<ReturnType<typeof setTimeout>>();
+  const dismissTip = () => { clearTimeout(tipTimer.current); setTipTop(null); };
+  React.useEffect(() => {
+    dismissTip();
+    if (!editing) return;
+    tipTimer.current = setTimeout(() => {
+      const banner = container.current?.closest('.console-shell')?.querySelector('header');
+      setTipTop((banner?.getBoundingClientRect().bottom ?? 56) + 20);
+    }, 300);
+    const operate = (event: Event) => {
+      if (event instanceof KeyboardEvent && ['Tab','Shift','Control','Alt','Meta'].includes(event.key)) return;
+      dismissTip();
+    };
+    for (const type of ['pointerdown','click','keydown','wheel']) document.addEventListener(type, operate, true);
+    return () => {
+      clearTimeout(tipTimer.current);
+      for (const type of ['pointerdown','click','keydown','wheel']) document.removeEventListener(type, operate, true);
+    };
+  }, [editing]);
   const suppressClick = useRef(false);
   const geometry = resolveBoard(board, box);
   const surfaces = useRef<MotionSurface[]>([]);
@@ -86,7 +110,7 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
       surface.node.classList.toggle('module-preview-source', !!view && moving);
       surface.node.style.setProperty('--floating-width', `${surface.rect.width}px`);
       surface.node.style.setProperty('--floating-height', `${surface.rect.height}px`);
-      const animation = surface.node.animate([current, frame(destination && !moving ? destination : surface.rect, surface.offset)], {
+      const animation = surface.node.animate([current, frame(destination || surface.rect, surface.offset)], {
         duration: reduced ? 0 : 200, easing: 'cubic-bezier(.25, .8, .25, 1)', fill: 'both',
       });
       surface.animation = animation;
@@ -103,18 +127,6 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
       };
     });
   }, [previewKey, view?.id, board, box.width, box.height, editing]);
-  React.useLayoutEffect(() => {
-    if (!view || !container.current) return;
-    const surface = surfaces.current.find(s => s.id === view.id);
-    if (!surface) return;
-    const origin = container.current.getBoundingClientRect();
-    const start = session.current;
-    const dx = start?.grabX ?? (start ? start.x - origin.left - surface.rect.left : 0);
-    const dy = start?.grabY ?? (start ? start.y - origin.top - surface.rect.top : 0);
-    const position = view.keyboard && preview ? preview.rects[view.id] : undefined;
-    surface.node.style.setProperty('--floating-left', `${position ? origin.left + position.left : view.x - dx}px`);
-    surface.node.style.setProperty('--floating-top', `${position ? origin.top + position.top : view.y - dy}px`);
-  }, [view?.x, view?.y, view?.id, previewKey]);
   React.useLayoutEffect(() => () => {
     container.current?.classList.remove('module-displacement-layout');
     surfaces.current.forEach(s => { releaseSurface(s); });
@@ -279,6 +291,7 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
   return <DragContext.Provider value={headerProps}>
     <HoverContext.Provider value={editing && hovered && geometry.rects[hovered] && !view ? { id: hovered, rect: geometry.rects[hovered] } : null}>
     <BlockedContext.Provider value={blocked}>
+    <PreviewContext.Provider value={view && preview ? preview.rects[view.id] : null}>
     <div className="module-dnd-scope" data-moving={view?.id} data-drop-preview={preview ? 'true' : undefined} data-drop-blocked={blocked ? 'true' : undefined} {...pointerProps}
       onPointerMoveCapture={event => {
         if((event.target as Element).closest('.remove-panel, .remove-panel-guard')){setHovered(null);return;}
@@ -287,9 +300,12 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
       }}
       onPointerLeave={() => { setHovered(null); if (session.current && !session.current.active) clear(); }}>
       {children}
+      {editing && tipTop !== null && <div className="layout-edit-tip" role="status" style={{top: tipTop}}>Make it yours. Move, resize, add, or remove panels.</div>}
+      {view && <div className="module-anchor-card" aria-hidden="true" data-testid="module-anchor-card" style={{left: Math.max(8, Math.min(view.x + 18, window.innerWidth - 248)), top: Math.max(8, Math.min(view.y + 18, window.innerHeight - 58))}}><GripVertical size={16}/><span>{moduleNames[view.id]}</span></div>}
       <span id="module-move-instructions" className="move-sr-only">Drag anywhere in a module to move it. Maximum 5 columns and 3 modules per column. Products must be alone. Space picks up, arrows choose a position, Enter drops, Escape cancels.</span>
       <span className="move-sr-only" role="status" aria-live="polite">{announcement}</span>
     </div>
+    </PreviewContext.Provider>
     </BlockedContext.Provider>
     </HoverContext.Provider>
   </DragContext.Provider>;

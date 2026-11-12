@@ -522,6 +522,17 @@
           "title": "Layout editing with Standard selected"
         },
         {
+          "action": "waitFor",
+          "target": {
+            "text": "Make it yours. Move, resize, add, or remove panels."
+          }
+        },
+        {
+          "action": "capture",
+          "id": "editor-welcome-toast",
+          "title": "300ms delayed fade-in toast centered 20px below the editing banner"
+        },
+        {
           "action": "click",
           "target": {
             "role": "button",
@@ -532,6 +543,11 @@
           "action": "capture",
           "id": "layout-dropdown",
           "title": "Layout mode options, Standard selected"
+        },
+        {
+          "action": "capture",
+          "id": "editor-welcome-dismissed",
+          "title": "The first editing operation dismisses the welcome toast for this session"
         },
         {
           "action": "click",
@@ -1189,7 +1205,7 @@
         {
           "action": "capture",
           "id": "module-vertical-target",
-          "title": "Full translucent panel follows the drag; neighboring panels slide aside without an insertion line"
+          "title": "240×50 floating title anchor and #EBF7F7 reserved space; neighboring panels slide aside without an insertion line"
         },
         {
           "action": "press",
@@ -1350,7 +1366,7 @@
         {
           "action": "capture",
           "id": "module-horizontal-target",
-          "title": "Full translucent panel follows the drag; neighboring panels slide aside without an insertion line"
+          "title": "240×50 floating title anchor and #EBF7F7 reserved space; neighboring panels slide aside without an insertion line"
         },
         {
           "action": "press",
@@ -1747,7 +1763,7 @@
         {
           "action": "capture",
           "id": "products-teal-drag-card",
-          "title": "Full translucent panel follows the drag; neighboring panels slide aside without an insertion line"
+          "title": "240×50 floating title anchor and #EBF7F7 reserved space; neighboring panels slide aside without an insertion line"
         },
         {
           "action": "press",
@@ -2026,7 +2042,7 @@
         {
           "action": "capture",
           "id": "merged-region-displacement-preview",
-          "title": "Full translucent panel follows the drag; neighboring panels slide aside without an insertion line"
+          "title": "240×50 floating title anchor and #EBF7F7 reserved space; neighboring panels slide aside without an insertion line"
         },
         {
           "action": "press",
