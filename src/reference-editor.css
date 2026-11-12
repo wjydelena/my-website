@@ -1,15 +1,15 @@
 .console-shell .topbar.customize-header{height:56px;background:#d9f0ef;border-bottom:0;gap:16px;padding:0 16px}
-.console-shell .topbar.preset-only-editor{background:#e5f5f4}
+.console-shell .topbar.preset-only-editor{background:#d9f0ef}
 .console-shell .preset-only-editor .customize-title{font-size:15px;color:#202020}
 .console-shell .preset-only-editor .layout-mode-trigger{color:#202020;border-color:#d3d4d5}
 .console-shell .preset-only-editor .layout-mode-value,.console-shell .preset-only-editor .layout-mode-option-name{display:flex;align-items:center;gap:4px;min-width:0}
 .console-shell .preset-only-editor .layout-mode-trigger>svg{flex:none}
 .console-shell .preset-only-editor .layout-editor-actions,.console-shell .preset-only-editor .layout-editor-actions.has-add-panel{align-items:center;gap:8px}
-.console-shell .preset-only-editor .layout-editor-actions .layout-reset{min-width:0;width:auto;height:28px;padding:0;gap:4px;white-space:nowrap;background:transparent;color:#028380;border-radius:4px}
+.console-shell .preset-only-editor .layout-editor-actions .layout-reset{min-width:0;width:auto;height:28px;padding:0;gap:4px;white-space:nowrap;background:transparent;border:0;color:#009995;border-radius:4px;font-weight:500}
 .console-shell .preset-only-editor .layout-reset svg{flex:none}
 .console-shell .preset-only-editor .layout-reset:hover{background:#d4edeb}
 .layout-reset-divider{width:1px;height:10px;background:#c4d4d3;flex:none}
-.console-shell .preset-only-editor .add-panel-divider{height:10px}
+.console-shell .preset-only-editor .layout-reset-divider,.console-shell .preset-only-editor .add-panel-divider{box-sizing:border-box;width:5px;height:10px;padding:0 2px;background-clip:content-box}
 .console-shell .preset-only-editor .layout-editor-actions .layout-apply{width:56px;min-width:56px;padding:0;background:#08918a}
 .console-shell .preset-only-editor .layout-editor-actions .layout-cancel{width:64px;min-width:64px;padding:0;background:#fff;border:1px solid #d4dddd;color:#202020}
 .console-shell .preset-only-editor .layout-editor-actions .layout-cancel:hover{background:#f5f5f5}
