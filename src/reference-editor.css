@@ -3,7 +3,8 @@
 .console-shell .preset-only-editor .customize-title{font-size:15px;color:#202020}
 .console-shell .preset-only-editor .layout-mode-trigger{color:#202020;border-color:#d3d4d5}
 .console-shell .preset-only-editor .layout-editor-actions,.console-shell .preset-only-editor .layout-editor-actions.has-add-panel{align-items:center;gap:8px}
-.console-shell .preset-only-editor .layout-editor-actions .layout-reset{min-width:20px;width:20px;height:28px;padding:0;background:transparent;color:#009995;border-radius:4px}
+.console-shell .preset-only-editor .layout-editor-actions .layout-reset{min-width:0;width:auto;height:28px;padding:0;gap:4px;white-space:nowrap;background:transparent;color:#028380;border-radius:4px}
+.console-shell .preset-only-editor .layout-reset svg{flex:none}
 .console-shell .preset-only-editor .layout-reset:hover{background:#d4edeb}
 .layout-reset-divider{width:1px;height:10px;background:#c4d4d3;flex:none}
 .console-shell .preset-only-editor .add-panel-divider{height:10px}

@@ -93,7 +93,7 @@ export function EditingHeader() {
     <div className={`layout-editor-actions${removedPanels.length?' has-add-panel':''}`}>
       <AddPanelControl/>
       {presetAdjusted && <>
-        <button className="layout-reset" type="button" aria-label="Reset layout" title="Reset layout" onClick={resetPreset}><Undo2 size={16} aria-hidden="true"/></button>
+        <button className="layout-reset" type="button" aria-label="Reset layout" title="Reset layout" onClick={resetPreset}><Undo2 size={16} aria-hidden="true"/><span>Reset</span></button>
         <span className="layout-reset-divider" aria-hidden="true"/>
       </>}
       <button className="layout-apply" type="button" disabled={applyDisabled} onClick={applyEdit}>Apply</button>
