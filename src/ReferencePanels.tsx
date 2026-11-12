@@ -1,11 +1,13 @@
 import React, { useRef, useState } from 'react';
-import { Settings, SlidersHorizontal, ShoppingCart, ShoppingBag, UserRoundCheck, UserRoundCog, Send, ExternalLink, GripVertical, Power, Mic, MicOff, Timer } from 'lucide-react';
+import { ShoppingCart, ShoppingBag, UserRoundCheck, UserRoundCog, Send, ExternalLink, GripVertical, Power, Mic, MicOff, Timer } from 'lucide-react';
 import { useConsoleLayout, ResizeHandle } from './ResizableLayout';
 import { useModuleHeader } from './ModuleDrag';
 import { ModuleTitle, RemovePanelButton } from './LayoutEditor';
 import liveVideo from './assets/live-loop.mp4';
 import videoCollapse from './assets/video-collapse.png';
 import videoLiveIndicator from './assets/video-live-indicator.png';
+import filterIcon from './assets/annotation-filter.png';
+import moreIcon from './assets/annotation-more.png';
 import customerIcon from './assets/customer.png';
 import chat0 from './assets/reference-panels/chat-0.png';
 import chat1 from './assets/reference-panels/chat-1.png';
@@ -41,7 +43,7 @@ function Chat() {
   const submit=()=>{if(comment.trim()){setSent(v=>[...v,comment.trim()]);setComment('');}};
   if(mergedChatActivity)return <CombinedChatActivity comment={comment} setComment={setComment} sent={sent} submit={submit}/>;
   return <div className="chat reference-chat" data-module-id="chat" style={moduleStyle('chat')}>
-    <div className="chat-title" {...drag}><ModuleTitle>Chat</ModuleTitle><RemovePanelButton id="chat"/><button type="button" aria-label="Chat filters" disabled={editing} onClick={()=>setOptions(!options)}><SlidersHorizontal size={16}/></button><button type="button" aria-label="Chat settings" disabled={editing} onClick={()=>setOptions(!options)}><Settings size={16}/></button></div>
+    <div className="chat-title" {...drag}><ModuleTitle>Chat</ModuleTitle><RemovePanelButton id="chat"/><button type="button" aria-label="Chat filters" disabled={editing} onClick={()=>setOptions(!options)}><img className="annotation-console-icon" src={filterIcon} width={16} height={16} alt=""/></button><button type="button" aria-label="Chat settings" disabled={editing} onClick={()=>setOptions(!options)}><img className="annotation-console-icon" src={moreIcon} width={16} height={16} alt=""/></button></div>
     {options&&!editing&&<div className="reference-chat-options"><label><input type="checkbox" checked={showBadges} onChange={e=>setShowBadges(e.target.checked)}/>Show user badges</label></div>}
     <div className="chat-scroll">{messages.map((m,i)=><div className="message" key={i}><img className="avatar" src={m.image} alt=""/><div className="message-content"><div className="name-line"><span>{m.name}</span>{showBadges&&<>
       {m.role==='fan'&&<span className="fan-icon"><UserRoundCheck size={14} fill="currentColor"/><b>♥</b></span>}{m.role==='mod'&&<UserRoundCog size={14} fill="currentColor"/>}
@@ -93,7 +95,7 @@ export function AnalyticsColumn(){
   const {editing,moduleStyle}=useConsoleLayout();const analyticsDrag=useModuleHeader('analytics');const activityDrag=useModuleHeader('activity');
   const [tab,setTab]=useState('Activity');const [filters,setFilters]=useState(false);const [purchasesOnly,setPurchasesOnly]=useState(false);
   return <section className="analytics-column"><div className="analytics" data-module-id="analytics" style={moduleStyle('analytics')}><div className="analytics-title" {...analyticsDrag}><ModuleTitle>Analytics</ModuleTitle><RemovePanelButton id="analytics"/><span>LIVE Dashboard<ExternalLink size={15}/></span></div><div className="metric-grid">{metrics.map(([value,label])=><div className="metric" key={label}><strong>{value}</strong><span>{label}</span></div>)}</div><ResizeHandle kind="analytics" label="Resize analytics and activity"/></div>
-    <div className="activity-module" data-module-id="activity" style={moduleStyle('activity')}><div className="activity-tabs tabs" {...activityDrag}>{['Activity','Top customer'].map(value=><button type="button" role="tab" aria-selected={tab===value} className={tab===value?'active':''} disabled={editing} key={value} onClick={()=>setTab(value)}>{editing&&value==='Activity'&&<GripVertical className="activity-edit-grip" size={16}/>} {value}</button>)}<RemovePanelButton id="activity"/><button type="button" className="activity-filter" aria-label="Activity filters" disabled={editing} onClick={()=>setFilters(!filters)}><SlidersHorizontal size={16}/></button></div>
+    <div className="activity-module" data-module-id="activity" style={moduleStyle('activity')}><div className="activity-tabs tabs" {...activityDrag}>{['Activity','Top customer'].map(value=><button type="button" role="tab" aria-selected={tab===value} className={tab===value?'active':''} disabled={editing} key={value} onClick={()=>setTab(value)}>{editing&&value==='Activity'&&<GripVertical className="activity-edit-grip" size={16}/>} {value}</button>)}<RemovePanelButton id="activity"/><button type="button" className="activity-filter" aria-label="Activity filters" disabled={editing} onClick={()=>setFilters(!filters)}><img className="annotation-console-icon" src={filterIcon} width={16} height={16} alt=""/></button></div>
       {filters&&!editing&&<div className="reference-activity-options"><label><input type="checkbox" checked={purchasesOnly} onChange={e=>setPurchasesOnly(e.target.checked)}/>Purchases only</label></div>}
       <div className="activity-list">{purchases.map((p,i)=><div className="activity" key={p.name}><img className="avatar" src={p.image} alt=""/><p><span className="person-name">{p.name}</span>{tab==='Activity'?' made a purchase ':` · No.${i+1} customer `}<img className="mini-product" src={shoe} alt="Shoe"/><strong> No.6</strong><span className="purchase-divider"/><strong>$100.00</strong></p></div>)}</div>
       <div className="event-feed"><ResizeHandle kind="feed" label="Resize activity and event feed"/><div className="feed-scroll">{!purchasesOnly&&tab==='Activity'&&events.map((e,i)=><div className={'feed-item'+(i<2?' plain-event':'')} key={i}><img className="avatar" src={e.image} alt=""/><p><span className="person-name">{e.name}</span> {e.action} {e.product&&<img className="mini-product" src={shoe} alt="Shoe"/>}{e.no&&<strong> No.6</strong>}{e.gift&&<><img className="gift-product" src={pancakes} alt="Pancakes"/><strong> x4</strong></>}</p></div>)}</div></div>

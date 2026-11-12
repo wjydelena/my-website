@@ -9,6 +9,7 @@ import yellowBag from './assets/reference-products/product-2.png';
 import redBag from './assets/reference-products/product-3.png';
 import heel from './assets/reference-products/product-4.png';
 import blazer from './assets/reference-products/product-5.png';
+import filterIcon from './assets/annotation-filter.png';
 
 type Product = { id: number; image: string; name: string; price: string; stock: string };
 const defaults: Product[] = [top,yellowBag,redBag,heel,blazer].map((image,index) => ({id:index+1,image,name:"Men's Classic Fit, Dunk Low Fit Delson Fit Skechers...",price:'200.00',stock:'100K'}));
@@ -43,7 +44,7 @@ export default function ProductColumn() {
       <div className="reference-product-toolbar">
         <label className="reference-select-all"><input type="checkbox" aria-label="Select all products" checked={all} disabled={editing || !visible.length} ref={el=>{if(el)el.indeterminate=!all&&some;}} onChange={()=>setChecked(prev=>all?prev.filter(id=>!visible.some(p=>p.id===id)):[...new Set([...prev,...visible.map(p=>p.id)])])}/>All</label>
         <div className="reference-product-search"><input type="search" aria-label="Search product ID or name" placeholder="Search product ID or name" value={query} disabled={editing} onChange={e=>setQuery(e.target.value)}/>{query?<button type="button" aria-label="Clear product search" disabled={editing} onClick={()=>setQuery('')}><X size={16}/></button>:<Search size={16} aria-hidden="true"/>}</div>
-        <div className="reference-product-filter"><button type="button" className="reference-product-filter-trigger" data-active={filter!=='All products'} aria-label="Product filters" aria-haspopup="menu" aria-expanded={filtersOpen} disabled={editing} onClick={()=>setFiltersOpen(!filtersOpen)}><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true"><path d="M1 5h1M6 5h9M1 11h9M14 11h1"/><circle cx="4" cy="5" r="2"/><circle cx="12" cy="11" r="2"/></svg></button>
+        <div className="reference-product-filter"><button type="button" className="reference-product-filter-trigger" data-active={filter!=='All products'} aria-label="Product filters" aria-haspopup="menu" aria-expanded={filtersOpen} disabled={editing} onClick={()=>setFiltersOpen(!filtersOpen)}><img className="annotation-console-icon" src={filterIcon} width={16} height={16} alt=""/></button>
           {filtersOpen&&<><button type="button" className="reference-product-filter-dismiss" aria-label="Close product filters" onClick={()=>setFiltersOpen(false)}/><div className="reference-product-filter-menu" role="menu" aria-label="Product filters" onKeyDown={e=>{if(e.key==='Escape'){setFiltersOpen(false);e.stopPropagation();}}}>{['All products','Pinned products','Selected products'].map(value=><button type="button" role="menuitemradio" key={value} aria-checked={filter===value} onClick={()=>{setFilter(value);setFiltersOpen(false);}}>{value}</button>)}</div></>}
         </div>
       </div>
