@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { GripVertical, Plus, PencilLine, Trash2, ArrowUpToLine, X, Search, MoreHorizontal } from 'lucide-react';
+import { GripVertical, ShoppingBag, PencilLine, Trash2, ArrowUpToLine, X, Search, MoreHorizontal } from 'lucide-react';
 import PinIcon from './PinIcon';
+import SellingModes, { CouponEntry } from './SellingModes';
+import './selling-modes.css';
 import ProductPromotions from './ProductPromotions';
 import './product-promotions.css';
 import PromotionTools from './PromotionTools';
@@ -26,6 +28,8 @@ export default function ProductColumn() {
   const [checked, setChecked] = useState<number[]>([]);
   const [pinned, setPinned] = useState<number | null>(null);
   const [tab, setTab] = useState('Buy now');
+  const [couponRequest, setCouponRequest] = useState(0);
+  const couponEntry = useRef<HTMLButtonElement>(null);
   const [listPinned, setListPinned] = useState(false);
   const [draft, setDraft] = useState<Product | null>(null);
   const [deleting, setDeleting] = useState<Product | null>(null);
@@ -56,15 +60,17 @@ export default function ProductColumn() {
     {editing && <div className="editing-products-heading" {...drag}><ModuleTitle>Products</ModuleTitle><RemovePanelButton id="products"/></div>}
     <div className="reference-product-controls">
       <div className="reference-product-tabs" role="tablist" aria-label="Product selling mode">{['Buy now','Auction','Gift & rewards','Item sold'].map(value=><button type="button" role="tab" key={value} aria-selected={tab===value} onClick={()=>setTab(value)}>{value}</button>)}</div>
-      <div className="reference-product-toolbar">
+      <div className="reference-product-toolbar" style={tab==='Buy now'?undefined:{display:'none'}}>
         <label className="reference-select-all"><input type="checkbox" aria-label="Select all products" checked={all} disabled={editing || !visible.length} ref={el=>{if(el)el.indeterminate=!all&&some;}} onChange={()=>setChecked(prev=>all?prev.filter(id=>!visible.some(p=>p.id===id)):[...new Set([...prev,...visible.map(p=>p.id)])])}/>All</label>
         <div className="reference-product-search"><input type="search" aria-label="Search product ID or name" placeholder="Search product ID or name" value={query} disabled={editing} onChange={e=>setQuery(e.target.value)}/>{query?<button type="button" aria-label="Clear product search" disabled={editing} onClick={()=>setQuery('')}><X size={16}/></button>:<Search size={16} aria-hidden="true"/>}</div>
         <div className="reference-product-filter"><button type="button" className="reference-product-filter-trigger" data-active={filter!=='All products'} aria-label="Product filters" aria-haspopup="menu" aria-expanded={filtersOpen} disabled={editing} onClick={()=>setFiltersOpen(!filtersOpen)}><img className="annotation-console-icon" src={filterIcon} width={16} height={16} alt=""/></button>
           {filtersOpen&&<><button type="button" className="reference-product-filter-dismiss" aria-label="Close product filters" onClick={()=>setFiltersOpen(false)}/><div className="reference-product-filter-menu" role="menu" aria-label="Product filters" onKeyDown={e=>{if(e.key==='Escape'){setFiltersOpen(false);e.stopPropagation();}}}>{['All products','Pinned products','Selected products'].map(value=><button type="button" role="menuitemradio" key={value} aria-checked={filter===value} onClick={()=>{setFilter(value);setFiltersOpen(false);}}>{value}</button>)}</div></>}
         </div>
+        <CouponEntry disabled={editing} buttonRef={couponEntry} onClick={()=>setCouponRequest(value=>value+1)}/>
       </div>
     </div>
-    <div className="reference-products" role="tabpanel" aria-label={tab}>
+    <SellingModes mode={tab} disabled={editing} onCoupon={()=>setCouponRequest(value=>value+1)} couponRef={couponEntry}/>
+    <div className="reference-products" role="tabpanel" aria-label="Buy now" style={tab==='Buy now'?undefined:{display:'none'}}>
       {visible.map(product=>{const index=products.indexOf(product);const hasPromotions=product.id===3;return <article className={`reference-product-card promotion-product-card${hasPromotions?' has-promotions':''}${hasPromotions&&expanded?' is-expanded':''}`} key={product.id} data-product-id={product.id} onDragOver={event=>{if(moving.current!==null&&!editing)event.preventDefault();}} onDrop={event=>{event.preventDefault();if(moving.current!==null&&!editing){moveTo(moving.current,index);moving.current=null;}}}>
         {hasPromotions&&<button type="button" className="product-card-promotion-toggle" aria-label="Toggle promotions for product 3" aria-expanded={expanded} aria-controls="product-3-promotions" disabled={editing} onClick={()=>setExpanded(!expanded)}/>}
         <div className="reference-product-main">
@@ -81,7 +87,7 @@ export default function ProductColumn() {
       </article>})}
       {!visible.length&&<div className="reference-products-empty" role="status">{products.length?<><p>No products found.</p><button type="button" onClick={()=>{setQuery('');setFilter('All products');}}>Clear search and filters</button></>:<p>No products yet. Add a product to get started.</p>}</div>}
     </div>
-    <div className="product-footer reference-product-footer"><button type="button" className="footer-pill" disabled={editing} aria-pressed={listPinned} onClick={()=>setListPinned(!listPinned)}><PinIcon/>{listPinned?'Unpin product list':'Pin product list'}</button><PromotionTools compact/><button type="button" className="footer-pill" disabled={editing} onClick={()=>setDraft({...defaults[0],id:Math.max(0,...products.map(p=>p.id))+1})}><Plus size={22}/>Add product</button></div>
+    <div className="product-footer reference-product-footer buy-now-footer" style={tab==='Buy now'?undefined:{display:'none'}}><PromotionTools compact createPromotion couponRequest={couponRequest} couponReturnFocus={couponEntry} listPinned={listPinned} onToggleListPin={()=>setListPinned(!listPinned)}/><button type="button" className="footer-pill buy-now-add" disabled={editing} onClick={()=>setDraft({...defaults[0],id:Math.max(0,...products.map(p=>p.id))+1})}><ShoppingBag size={16}/>Add product</button></div>
     {draft&&<div className="reference-product-modal"><section role="dialog" aria-modal="true" aria-label="Edit product"><header><h2>{products.some(p=>p.id===draft.id)?'Edit product':'Add product'}</h2><button type="button" aria-label="Close product editor" onClick={()=>setDraft(null)}><X size={18}/></button></header><label>Product name<input value={draft.name} onChange={e=>setDraft({...draft,name:e.target.value})}/></label><label>Price<input value={draft.price} onChange={e=>setDraft({...draft,price:e.target.value})}/></label><label>In stock<input value={draft.stock} onChange={e=>setDraft({...draft,stock:e.target.value})}/></label><footer><button type="button" onClick={()=>setDraft(null)}>Cancel</button><button type="button" onClick={save}>Save product</button></footer></section></div>}
     {deleting&&<div className="reference-product-modal"><section role="dialog" aria-modal="true" aria-label="Delete product"><h2>Delete product?</h2><p>This removes the product from this prototype’s list.</p><footer><button type="button" onClick={()=>setDeleting(null)}>Cancel</button><button type="button" onClick={()=>{setProducts(prev=>prev.filter(p=>p.id!==deleting.id));setChecked(prev=>prev.filter(id=>id!==deleting.id));setDeleting(null);}}>Delete</button></footer></section></div>}
   </section>;

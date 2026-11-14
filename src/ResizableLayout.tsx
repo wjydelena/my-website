@@ -15,7 +15,7 @@ type Arrangement = 'balanced' | 'chat-focus' | 'host-focus';
 type Heights = { video: number; analytics: number; feed: number };
 type GeometrySource = { ratios: number[]; heights: Heights; arrangement: Arrangement; board: ModuleBoard | null };
 function presetSource(mode: LayoutMode, editing: boolean): GeometrySource {
-  return {ratios:[.4,.3,.3],heights:mode==='Standard'&&editing?{video:262,analytics:200,feed:458}:{video:268,analytics:200,feed:462},arrangement:mode==='Host focus'?'host-focus':'balanced',board:null};
+  return {ratios:[.4,.3,.3],heights:mode==='Standard'&&editing?{video:262,analytics:334,feed:324}:{video:268,analytics:334,feed:328},arrangement:mode==='Host focus'?'host-focus':'balanced',board:null};
 }
 function resolveValues(source: GeometrySource, box: { width: number; height: number }) {
   const { ratios, heights, arrangement } = source;
@@ -52,7 +52,7 @@ function sourceBoard(source: GeometrySource, box: { width: number; height: numbe
 type LayoutState = {
   values: Record<Kind, number>;
   ranges: Record<Kind, number[]>;
-  change: (kind: Kind, value: number) => void;
+  change: (kind: Kind, value: number, fitFeed?: boolean) => void;
   reset: (kind: Kind) => void;
   editing: boolean;
   mode: LayoutMode;
@@ -87,7 +87,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
   const ref = useRef<HTMLDivElement>(null);
   const [box, setBox] = useState({ width: 1190, height: 818 });
   const [ratios, setRatios] = useState([.4, .3, .3]);
-  const [heights, setHeights] = useState({ video: 268, analytics: 200, feed: 462 });
+  const [heights, setHeights] = useState({ video: 268, analytics: 334, feed: 328 });
   const [editing, setEditing] = useState(false);
   const [mode, setMode] = useState<LayoutMode>('Standard');
   const [arrangement, setArrangement] = useState<Arrangement>('balanced');
@@ -104,8 +104,8 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
   const saved = useRef<(GeometrySource & { mode: LayoutMode }) | null>(null);
   const beginEdit = () => {
     saved.current = { ...currentGeometry(), mode };
-    editBaseline.current = !presetEdited&&mode==='Standard'?{...currentGeometry(),heights:{video:262,analytics:200,feed:458}}:currentGeometry();
-    if(mode === 'Standard'&&!presetEdited) setHeights({video:262,analytics:200,feed:458});
+    editBaseline.current = !presetEdited&&mode==='Standard'?{...currentGeometry(),heights:{video:262,analytics:334,feed:324}}:currentGeometry();
+    if(mode === 'Standard'&&!presetEdited) setHeights({video:262,analytics:334,feed:324});
     setEditing(true);
   };
   const applyEdit = () => {
@@ -118,7 +118,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
   const cancelEdit = () => {
     dismissRestoreHint();
     setRatios([.4,.3,.3]);
-    setHeights({video:268,analytics:200,feed:462});
+    setHeights({video:268,analytics:334,feed:328});
     setMode('Standard');
     setArrangement('balanced');
     setBoard(null);
@@ -184,8 +184,11 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     analytics: [194, focusedChat ? box.height - video - feed - 110 : box.height - feed - 150],
     feed: [160, absoluteLayout ? (boardGeometry.rects.activity?.height ?? box.height) - 110 : focusedChat ? box.height - video - analytics - 110 : box.height - analytics - 150],
   };
-  const change = (kind: Kind, input: number) => {
-    const [min, max] = ranges[kind];
+  const change = (kind: Kind, input: number, fitFeed = false) => {
+    // Automatic tool folding can release Activity space; manual handles retain their bounds.
+    const [min, max] = kind === 'analytics' && fitFeed
+      ? [194, focusedChat ? box.height - video - 160 - 110 : box.height - 310]
+      : ranges[kind];
     const next = clamp(input, min, max);
     if (Math.abs(next - values[kind]) <= 0.01) return;
     markAdjusted();
@@ -197,7 +200,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
   };
   const reset = (kind: Kind) => {
     if (kind === 'products' || kind === 'live') { markAdjusted(); setRatios(focusedChat ? [.38, .31, .31] : [.4, .3, .3]); }
-    else change(kind, (focusedChat ? { video: 240, analytics: 198, feed: 206 } : { video: 268, analytics: 200, feed: 462 })[kind]);
+    else change(kind, (focusedChat ? { video: 240, analytics: 277, feed: 160 } : { video: 268, analytics: 334, feed: 328 })[kind]);
   };
   const move = (id: ModuleId, target: DropTarget) => {
     if (!editing) return;

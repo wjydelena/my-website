@@ -434,7 +434,7 @@
         {
           "action": "capture",
           "id": "promotions-closed",
-          "title": "Products restored with compact footer promotion entry"
+          "title": "Products restored with Create promotion footer entry"
         }
       ]
     },
@@ -493,6 +493,70 @@
           "action": "capture",
           "id": "page-1120-live-min-318",
           "title": "Video and Chat column reaches the 318px lower limit"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "tab",
+            "name": "Auction"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "tab",
+            "name": "Card break"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "narrow-card-break",
+          "title": "Narrow card-break list and Add footer"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "tab",
+            "name": "Gift & rewards"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "tab",
+            "name": "Purchase with gift"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "narrow-purchase-gift",
+          "title": "Narrow gift tiers wrap without horizontal overflow"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Collapse LIVE tools"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "narrow-live-tools-collapsed",
+          "title": "Narrow LIVE tools collapse"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Expand LIVE tools"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "tab",
+            "name": "Buy now"
+          }
         }
       ]
     },
@@ -2494,7 +2558,14 @@
         {
           "action": "capture",
           "id": "coupon-reopened",
-          "title": "Coupon reopens from the footer promotion catalog"
+          "title": "Coupon reopens from the Create promotion catalog"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Close Coupon"
+          }
         },
         {
           "action": "click",
@@ -2514,6 +2585,65 @@
           "action": "capture",
           "id": "coupon-no-duplicate",
           "title": "Coupon remains a single pinned catalog entry"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Close Coupon"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Open coupons, 3 available"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "buy-now-direct-coupon",
+          "title": "Buy now toolbar opens Coupon directly"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Close Coupon"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "tab",
+            "name": "Auction"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Open coupons, 3 available"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "auction-direct-coupon",
+          "title": "Auction toolbar opens Coupon directly"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Close Coupon"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "tab",
+            "name": "Buy now"
+          }
         }
       ]
     },
@@ -3010,6 +3140,314 @@
           "action": "capture",
           "id": "promotion-edit-return",
           "title": "Product and promotion state restored after layout editing"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "tab",
+            "name": "Item sold"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "item-sold-empty",
+          "title": "Item sold initial empty state; no reference screenshot was provided"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "tab",
+            "name": "Buy now"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "tab",
+            "name": "Auction"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "auction-items-default",
+          "title": "Auction items: temporary product, bids, winner strips and Add footer"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Start auction item 1"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "auction-item-bidding",
+          "title": "Temporary product local bidding started"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Stop auction item 1"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "auction-item-winner",
+          "title": "Stopped local round shows winner and item sold"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "tab",
+            "name": "Surprise set"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "surprise-set-default",
+          "title": "Three surprise sets, remaining inventory and Start #1 controls"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Start #1 Surprise set 1"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "surprise-set-started",
+          "title": "One surprise set starts independently"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Stop Surprise set 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "tab",
+            "name": "Card break"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "card-break-default",
+          "title": "Two card breaks with teal progress and Manage controls"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Manage Card break 1"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "card-break-manage",
+          "title": "Manage twelve card slots"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Start #1"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "card-break-started",
+          "title": "Selected card slot bidding starts"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "tab",
+            "name": "Gift & rewards"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "giveaway-default",
+          "title": "Unpublished giveaways with prize quantities, tasks and review status"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Publish giveaway 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Show published giveaways"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "giveaway-published",
+          "title": "Published filter shows the locally published giveaway"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Show unpublished giveaways"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Publish giveaway 3"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "giveaway-under-review",
+          "title": "Under-review giveaway explains why publication is pending"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Close selling dialog"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "tab",
+            "name": "Rush reward"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "rush-reward-default",
+          "title": "Two random-prize rewards with countdown and Start and pin"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Start and pin rush reward 1"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "rush-reward-started",
+          "title": "Reward started and pinned locally"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Stop rush reward 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Show ended rush rewards"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "rush-reward-ended",
+          "title": "Ended filter shows completed local reward"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "tab",
+            "name": "Purchase with gift"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "purchase-gift-default",
+          "title": "Two auto-start gift tiers with separate claim limits"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Increase limits for tier 1"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "purchase-gift-limit-editor",
+          "title": "Edit a tier claim limit"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Quantity or claim limit"
+          },
+          "value": "48"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Save"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "purchase-gift-limit-saved",
+          "title": "Tier one claim limit updated locally"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Create new"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "reward-create-dialog",
+          "title": "Create new opens a local reward form"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "tab",
+            "name": "Item sold"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "item-sold-local-record",
+          "title": "Item sold shows the completed local auction round; no reference screenshot was provided"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "tab",
+            "name": "Buy now"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "selling-return-buy-now",
+          "title": "Buy now content and Create promotion plus Add product footer preserved"
         }
       ]
     },
@@ -3167,6 +3605,61 @@
           "target": {
             "role": "button",
             "name": "Activity filters"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Collapse LIVE tools"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "live-tools-collapsed",
+          "title": "LIVE tools cards hidden; Activity receives additional vertical space"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Expand LIVE tools"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "live-tools-expanded",
+          "title": "Billboard, Shop ads and Auto-post messages restored"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Open Billboard LIVE tool"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "live-billboard-editor",
+          "title": "Local billboard preview editor"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Save preview"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "live-billboard-saved",
+          "title": "Billboard saved in the prototype only"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Close LIVE tool"
           }
         }
       ]
