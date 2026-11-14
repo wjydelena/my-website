@@ -2696,7 +2696,7 @@
     },
     {
       "id": "product-card-controls",
-      "title": "Select pin reorder and edit reference products",
+      "title": "Select, pin, reorder, edit products and expand product promotions",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -2829,6 +2829,13 @@
           "action": "click",
           "target": {
             "role": "button",
+            "name": "More actions for product 2"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
             "name": "Move product 2 to top"
           }
         },
@@ -2841,6 +2848,13 @@
           "action": "click",
           "target": {
             "role": "button",
+            "name": "More actions for product 2"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
             "name": "Edit product 2"
           }
         },
@@ -2872,6 +2886,13 @@
           "action": "click",
           "target": {
             "role": "button",
+            "name": "More actions for product 3"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
             "name": "Delete product 3"
           }
         },
@@ -2891,6 +2912,97 @@
           "action": "capture",
           "id": "product-delete-cancelled",
           "title": "Delete cancelled without changing list"
+        },
+        {
+          "action": "hover",
+          "target": {
+            "role": "button",
+            "name": "Toggle promotions for product 3"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "promotion-card-hover-collapsed",
+          "title": "Card hover gray background and collapsed white promotion strip"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Toggle promotions for product 3"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "promotion-card-expanded",
+          "title": "Whole-card click expands three product promotions"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Start LIVE Flash sale"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "promotion-start-independent",
+          "title": "Start a promotion without collapsing the card"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Stop LIVE Flash sale"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Pin product 3"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "promotion-pin-independent",
+          "title": "Pin product independently while promotions remain expanded"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Expand or collapse product 3 promotions"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "promotion-card-recollapsed",
+          "title": "Promotion header collapses details"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "promotion-edit-disabled",
+          "title": "Normal promotion actions disabled while layout drag remains available"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "promotion-edit-return",
+          "title": "Product and promotion state restored after layout editing"
         }
       ]
     },

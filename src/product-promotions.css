@@ -1,0 +1,53 @@
+.console-shell .reference-product-column .reference-product-tabs{gap:32px;overflow-x:auto;scrollbar-width:none;white-space:nowrap}
+.console-shell .reference-product-column .reference-product-tabs button{flex:none}
+.console-shell .reference-product-column .reference-products{padding:8px;overflow-y:auto;scrollbar-width:none}
+.console-shell .reference-product-column .reference-product-card{position:relative;display:block;height:auto;min-height:86px;padding:8px;margin-bottom:8px;background:#fff;border-radius:8px;overflow:visible;transition:background-color 120ms}
+.console-shell .reference-product-column .reference-product-card:hover,.console-shell .reference-product-column .reference-product-card.is-expanded{background:#f5f5f5}
+.console-shell .reference-product-column .reference-product-main{height:70px;padding:0;pointer-events:none}
+.console-shell .reference-product-column .reference-product-top{height:70px;display:flex;gap:8px;align-items:flex-start}
+.console-shell .reference-product-column .reference-product-rank{width:40px;height:70px;flex:none;padding:0;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start}
+.console-shell .reference-product-column .reference-product-rank>span{width:40px;height:32px;display:grid;place-items:center;border:0;border-radius:4px;background:#f1f1f1;font-size:14px;color:#141414}
+.console-shell .reference-product-column .reference-product-card[data-product-id="1"] .reference-product-rank>span{background:transparent}
+.console-shell .reference-product-column .reference-product-card:hover .reference-product-rank>span{background:#e9e9e9}
+.console-shell .reference-product-column .reference-product-rank button{position:relative;z-index:3;pointer-events:auto;width:16px;height:20px;padding:0;background:none;border:0;color:#8a8a8a}
+.console-shell .reference-product-column .reference-product-thumb{width:70px;height:70px;flex:none;position:relative}
+.console-shell .reference-product-column .reference-product-thumb img{width:70px;height:70px;object-fit:cover;border-radius:6px}
+.console-shell .reference-product-column .reference-product-thumb input{position:absolute;z-index:3;pointer-events:auto;left:4px;top:4px;margin:0;width:16px;height:16px}
+.console-shell .reference-product-column .reference-product-info{flex:1;padding:0;min-width:0;height:70px;display:flex;flex-direction:column}
+.console-shell .reference-product-column .reference-product-name{font-size:14px;line-height:20px;margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.console-shell .reference-product-column .reference-product-stock{font-size:12px;line-height:18px;color:#858585;margin-top:4px}
+.console-shell .reference-product-column .product-price-line{display:flex;align-items:baseline;gap:6px;margin-top:auto;padding-right:100px;overflow:hidden;white-space:nowrap;min-height:24px}
+.console-shell .reference-product-column .reference-product-price{font-size:16px;line-height:24px;font-weight:500;overflow:hidden;text-overflow:ellipsis}
+.console-shell .reference-product-column .product-price-line del{font-size:12px;color:#aaa}
+.console-shell .reference-product-column .reference-product-pin{pointer-events:auto;z-index:3;top:auto;bottom:0;right:0;height:24px;min-width:62px;border-radius:20px;font-size:12px;line-height:20px;padding:0 10px}
+.console-shell .reference-product-column .reference-product-pin svg{transform:rotate(45deg)}
+.console-shell .reference-product-column .reference-product-stats{display:none}
+.console-shell .reference-product-column .reference-product-actions{position:absolute;z-index:4;right:78px;top:54px;width:24px;border:0}
+.console-shell .reference-product-column .reference-product-actions>.product-actions-trigger{height:24px;width:24px;border-radius:50%;color:#141414;background:#f1f1f1;padding:0}
+.console-shell .reference-product-column .reference-product-actions>.product-actions-trigger:hover{background:#e0e0e0}
+.console-shell .reference-product-column .product-actions-menu{position:absolute;z-index:20;right:0;top:28px;min-width:150px;padding:4px;border-radius:8px;background:#fff;border:1px solid #eee;box-shadow:0 6px 20px #0002}
+.console-shell .reference-product-column .product-actions-menu button{justify-content:flex-start;gap:8px;white-space:nowrap;width:100%;height:32px;padding:0 8px;font-size:12px}
+.console-shell .reference-product-column .product-card-promotion-toggle{position:absolute;inset:0;z-index:1;border:0;border-radius:8px;background:transparent;cursor:pointer}
+.console-shell .reference-product-column .product-card-promotion-toggle:focus-visible{outline:2px solid #009995;outline-offset:2px}
+.console-shell .reference-product-column .product-promotions{position:relative;z-index:2;margin:10px 0 0 48px;background:#fff;border-radius:6px}
+.console-shell .reference-product-column .product-promotions-heading{display:flex;width:100%;align-items:center;justify-content:space-between;height:34px;border:0;border-radius:6px;background:#fff;padding:0 8px;font-size:12px;font-weight:500;color:#737373;cursor:pointer}
+.product-promotions-heading svg.is-expanded{transform:rotate(180deg)}
+.product-promotions-details{padding:0 8px}
+.product-promotion-row{position:relative;display:flex;gap:6px;align-items:flex-start;min-height:53px;padding:7px 4px;border-bottom:1px solid #eee}
+.product-promotion-row:last-child{border-bottom:0}
+.product-promotion-icon{flex:none;margin-top:1px;color:#ff3155}
+.product-promotion-icon.flash{color:#ff5900}
+.product-promotion-icon.group{filter:brightness(0) saturate(100%) invert(30%) sepia(94%) saturate(3033%) hue-rotate(328deg) brightness(107%) contrast(104%)}
+.promotion-muted{color:#737373}
+.product-promotion-copy{min-width:0;flex:1}
+.product-promotion-copy strong{display:block;font-size:12px;line-height:18px;font-weight:500}
+.product-promotion-copy p{display:flex;align-items:center;gap:4px;flex-wrap:wrap;font-size:12px;line-height:18px;color:#737373;margin:2px 0 0}
+.product-promotion-actions{display:flex;align-items:center;gap:8px;flex:none}
+.product-promotion-actions button{height:20px;padding:0;border:0;background:none;color:#009995;font-size:12px;cursor:pointer}
+.product-promotion-actions button:hover{text-decoration:underline}
+.product-promotion-menu{position:absolute;z-index:10;right:4px;top:30px;background:#fff;border:1px solid #ddd;border-radius:6px;box-shadow:0 4px 16px #0002;padding:4px}
+.product-promotion-menu button{display:block;width:100%;border:0;background:none;padding:8px;font-size:12px;text-align:left;cursor:pointer}
+.product-promotion-menu button:hover{background:#f5f5f5}
+.product-promotion-empty{padding:12px;font-size:12px;color:#737373}
+.layout-editing .product-promotions button{opacity:.3;pointer-events:none}
+@media(prefers-reduced-motion:reduce){.console-shell .reference-product-column .reference-product-card{transition:none}}
