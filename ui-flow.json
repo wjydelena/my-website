@@ -1896,7 +1896,7 @@
         {
           "action": "capture",
           "id": "live-tools-independent-edit",
-          "title": "LIVE tools has its own grip and delete control; business actions disabled"
+          "title": "LIVE tools has its own grip and delete control; collapse icon hidden, tool cards enabled at full opacity"
         },
         {
           "action": "press",

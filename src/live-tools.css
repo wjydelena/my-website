@@ -12,7 +12,7 @@
 .live-tool-cards span{max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:16px}
 .live-tool-cards>button:not(:disabled):hover{background:#ececec}
 .console-shell .analytics-section{padding:0 16px 16px;min-height:200px}
-.layout-editing .live-tool-cards{opacity:.3;pointer-events:none}
+.layout-editing .live-tool-cards{opacity:1;pointer-events:auto}
 .layout-editing .live-tools-section>header{cursor:grab}
 .live-tool-dialog-shade{position:fixed;inset:0;z-index:210;background:#0003;display:flex;align-items:center;justify-content:center;padding:24px}
 .live-tool-dialog{background:white;border-radius:12px;box-shadow:0 12px 48px #0003;padding:24px;width:min(400px,100%);color:#161616}

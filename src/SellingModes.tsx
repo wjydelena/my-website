@@ -14,7 +14,7 @@ import sweater from './assets/reference-products/promotion-sweater.png';
 import hanson from './assets/reference-panels/chat-6.png';
 
 export function CouponEntry({disabled,onClick,buttonRef,auction=false}:{disabled:boolean;onClick:()=>void;buttonRef?:React.RefObject<HTMLButtonElement>;auction?:boolean}){
-  return <div className="coupon-entry-wrap"><i/><button type="button" className={`coupon-entry${auction?' auction-coupon':''}`} ref={buttonRef} disabled={disabled} aria-label="Open coupons, 3 available" onClick={onClick}><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path fill="currentColor" d="M3 2h12a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3a2 2 0 0 0 0-4V4a2 2 0 0 1 2-2Z"/><path stroke="white" strokeWidth="1" strokeDasharray="3 2" d="M11 2v14"/></svg><span>3</span></button></div>;
+  return <div className="coupon-entry-wrap"><i/><button type="button" className={`coupon-entry`} ref={buttonRef} disabled={disabled} aria-label="Open coupons, 3 available" onClick={onClick}><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path fill="currentColor" d="M3 2h12a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3a2 2 0 0 0 0-4V4a2 2 0 0 1 2-2Z"/><path stroke="white" strokeWidth="1" strokeDasharray="3 2" d="M11 2v14"/></svg><span>3</span></button></div>;
 }
 type Row={id:number;name:string;image:string;temporary?:boolean;selected?:boolean;pinned?:boolean;running?:boolean;sold?:number;published?:boolean;review?:boolean;ended?:boolean;price?:string;stock?:string};
 type Form={title:string;name:string;price:string;stock:string;save:(name:string,price:string,stock:string)=>void};
