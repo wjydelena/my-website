@@ -35,7 +35,7 @@
 .reference-product-tabs { height: 56px; display: flex; align-items: stretch; gap: 32px; }
 .reference-product-tabs button { position: relative; padding: 0; border: 0; background: transparent; color: #141414; font: 600 16px/24px var(--font-ui); cursor: pointer; }
 .reference-product-tabs button[aria-selected="true"]::after { content: ''; position: absolute; bottom: 8px; left: 0; right: 0; height: 2px; background: #009995; }
-.reference-product-toolbar { display: flex; align-items: center; gap: 8px; margin: 8px 0 16px; height: 32px; }
+.reference-product-toolbar { display: flex; align-items: center; gap: 8px; margin: 16px 0 16px; height: 32px; }
 .reference-select-all { height: 32px; padding-left: 8px; margin-right: 4px; flex: none; display: flex; align-items: center; gap: 8px; font-size: 14px; }
 .reference-product-search { display: flex; align-items: center; flex: 1; min-width: 0; height: 32px; border: 1px solid #d4d4d4; border-radius: 4px; padding: 0 12px; gap: 8px; color: #737373; background: #fff; }
 .reference-product-search:focus-within { border-color: #009995; box-shadow: 0 0 0 1px #009995; }
