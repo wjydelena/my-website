@@ -28,24 +28,31 @@
 .console-shell .reference-product-column .product-actions-menu button{justify-content:flex-start;gap:8px;white-space:nowrap;width:100%;height:32px;padding:0 8px;font-size:12px}
 .console-shell .reference-product-column .product-card-promotion-toggle{position:absolute;inset:0;z-index:1;border:0;border-radius:8px;background:transparent;cursor:pointer}
 .console-shell .reference-product-column .product-card-promotion-toggle:focus-visible{outline:2px solid #009995;outline-offset:2px}
-.console-shell .reference-product-column .product-promotions{position:relative;z-index:2;margin:10px 0 0 48px;background:#f1f1f1;border-radius:6px}
+.console-shell .reference-product-column .product-promotions{position:relative;z-index:2;margin:10px 0 0 48px;background:#f1f1f1;border-radius:8px}
 .console-shell .reference-product-column .reference-product-card:hover .product-promotions{background:#e9e9e9}
 .console-shell .reference-product-column .reference-product-card.is-expanded .product-promotions{background:#fff}
 .console-shell .reference-product-column .product-promotions-heading{display:flex;width:100%;align-items:center;justify-content:space-between;height:34px;border:0;border-radius:6px;background:transparent;padding:0 8px;font-size:12px;font-weight:500;color:#737373;cursor:pointer}
-.product-promotions-heading svg.is-expanded{transform:rotate(180deg)}
-.product-promotions-details{padding:0 8px;background:#fff;border-radius:0 0 6px 6px}
-.product-promotion-row{position:relative;display:flex;gap:6px;align-items:flex-start;min-height:53px;padding:7px 4px;border-bottom:1px solid #eee}
+.product-promotions-heading svg.is-expanded{transform:none}
+.console-shell .reference-product-column .reference-product-card.is-expanded .product-promotions-heading{height:32px}
+.product-promotions-details{padding:0 8px 4px;background:#fff;border-radius:0 0 8px 8px}
+.product-promotion-row{position:relative;display:flex;gap:4px;align-items:flex-start;min-height:54px;padding:7px 4px;border-bottom:1px solid #eee}
 .product-promotion-row:last-child{border-bottom:0}
-.product-promotion-icon{flex:none;margin-top:1px;color:#ff3155}
-.product-promotion-icon.flash{color:#ff5900}
-.product-promotion-icon.group{filter:brightness(0) saturate(100%) invert(30%) sepia(94%) saturate(3033%) hue-rotate(328deg) brightness(107%) contrast(104%)}
+.product-promotion-icon{flex:none;width:14px;height:20px;object-fit:contain;margin-top:-2px;filter:none}
+.console-shell:not(:has(.layout-editing)) .product-promotion-row:hover::before{content:"";position:absolute;inset:3px 0;background:#f5f5f5;border-radius:8px;pointer-events:none}
+.product-promotion-icon,.product-promotion-copy,.product-promotion-actions{position:relative;z-index:1}
 .promotion-muted{color:#737373}
+.promotion-cut-title{display:flex!important;align-items:center;flex-wrap:wrap;column-gap:6px}
+.promotion-title-divider{display:inline-block;width:1px;height:12px;background:#d9d9d9;flex:none}
+.promotion-meta-dot{color:#d9d9d9}
 .product-promotion-copy{min-width:0;flex:1}
 .product-promotion-copy strong{display:block;font-size:12px;line-height:18px;font-weight:500}
 .product-promotion-copy p{display:flex;align-items:center;gap:4px;flex-wrap:wrap;font-size:12px;line-height:18px;color:#737373;margin:2px 0 0}
-.product-promotion-actions{display:flex;align-items:center;gap:8px;flex:none}
-.product-promotion-actions button{height:20px;padding:0;border:0;background:none;color:#009995;font-size:12px;cursor:pointer}
-.product-promotion-actions button:hover{text-decoration:underline}
+.product-promotion-actions{display:flex;align-items:center;gap:8px;flex:none;margin-top:-2px}
+.product-promotion-actions button{height:24px;padding:0;border:0;background:none;color:#009995;font-size:12px;line-height:18px;font-weight:500;cursor:pointer}
+.product-promotion-actions button:first-child{display:grid;place-items:center;width:24px;border-radius:50%}
+.product-promotion-actions button:first-child:hover{background:#e0e0e0}
+.product-promotion-actions button:last-child{min-width:32px}
+.product-promotion-actions button:last-child:hover{color:#007f7b}
 .product-promotion-menu{position:absolute;z-index:10;right:4px;top:30px;background:#fff;border:1px solid #ddd;border-radius:6px;box-shadow:0 4px 16px #0002;padding:4px}
 .product-promotion-menu button{display:block;width:100%;border:0;background:none;padding:8px;font-size:12px;text-align:left;cursor:pointer}
 .product-promotion-menu button:hover{background:#f5f5f5}

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { ChevronDown, Clock3, MoreHorizontal, Scissors, Users, Zap } from 'lucide-react';
-import groupIcon from './assets/promotion-tools/02-group.png';
+import { ChevronDown, Clock3, MoreHorizontal, Users } from 'lucide-react';
+import flashIcon from './assets/annotation-icons/promotion-flash.png';
+import cutIcon from './assets/annotation-icons/promotion-cut.png';
+import groupIcon from './assets/annotation-icons/promotion-group.png';
 
 const promotions = [
-  {id:'flash',title:'LIVE Flash sale',meta:'Price: $70 · Total purchase limit: 50',Icon:Zap},
-  {id:'cut',title:'Price cut: 3 cuts to $80.00',meta:'Quantity: 20',Icon:Scissors},
-  {id:'group',title:'Group deal: $8.00',meta:'Quantity: 20',Icon:Users},
+  {id:'flash',title:'LIVE Flash sale',icon:flashIcon},
+  {id:'cut',title:'Price cut: $20.00',icon:cutIcon},
+  {id:'group',title:'Group deal: $9.00',icon:groupIcon},
 ];
 export default function ProductPromotions({expanded,onToggle,disabled}:{expanded:boolean;onToggle:()=>void;disabled:boolean}) {
   const [running,setRunning]=useState<string[]>([]);
@@ -19,9 +21,9 @@ export default function ProductPromotions({expanded,onToggle,disabled}:{expanded
       <span>{remaining} unstarted promotions</span><ChevronDown size={16} className={expanded?'is-expanded':''}/>
     </button>
     {expanded&&<div className="product-promotions-details" data-testid="product-promotions-expanded">
-      {active.map(({id,title,meta,Icon})=><div className="product-promotion-row" key={id}>
-        {id==='group'?<img src={groupIcon} className="product-promotion-icon group" width={16} height={16} alt=""/>:<Icon size={16} className={`product-promotion-icon ${id}`} fill={id==='flash'?'currentColor':'none'}/>}
-        <div className="product-promotion-copy"><strong>{id==='cut'?<>Price cut: <span className="promotion-muted">3 cuts</span> to $80.00</>:title}</strong><p>{meta}{id!=='flash'&&<><span> · </span><Users size={12}/><span>3 · </span><Clock3 size={12}/><span>30s</span></>}</p></div>
+      {active.map(({id,title,icon})=><div className="product-promotion-row" key={id} data-promotion-id={id}>
+        <img src={icon} className={`product-promotion-icon ${id}`} width={14} height={20} alt=""/>
+        <div className="product-promotion-copy"><strong className={id==='cut'?'promotion-cut-title':undefined}>{id==='cut'?<><span>{title}</span><i className="promotion-title-divider" aria-hidden="true"/><span><span className="promotion-muted">3 cuts to </span>$9.00</span></>:title}</strong><p>{id==='flash'?<><span>Price: $100.00</span><span className="promotion-meta-dot" aria-hidden="true">•</span><span>Total purchase limit: 50</span></>:<><span>Quantity: 20</span><span className="promotion-meta-dot" aria-hidden="true">•</span><Users size={12}/><span>3</span><span className="promotion-meta-dot" aria-hidden="true">•</span><Clock3 size={12}/><span>30s</span></>}</p></div>
         <div className="product-promotion-actions"><button type="button" aria-label={`More ${title} actions`} aria-expanded={menu===id} disabled={disabled} onClick={()=>setMenu(menu===id?null:id)}><MoreHorizontal size={16}/></button><button type="button" aria-label={`${running.includes(id)?'Stop':'Start'} ${title}`} disabled={disabled} onClick={()=>{setMenu(null);setRunning(prev=>prev.includes(id)?prev.filter(x=>x!==id):[...prev,id]);}}>{running.includes(id)?'Stop':'Start'}</button></div>
         {menu===id&&<div className="product-promotion-menu" role="menu" aria-label={`${title} actions`} onKeyDown={e=>{if(e.key==='Escape')setMenu(null);}}><button role="menuitem" type="button" onClick={()=>{setHidden(prev=>[...prev,id]);setMenu(null);}}>Remove promotion</button><button role="menuitem" type="button" onClick={()=>setMenu(null)}>Cancel</button></div>}
       </div>)}
