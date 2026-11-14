@@ -46,7 +46,7 @@ export function ModuleDragProvider({ board, box, editing, container, onMove, chi
     tipTimer.current = setTimeout(() => {
       const banner = container.current?.closest('.console-shell')?.querySelector('header');
       setTipTop((banner?.getBoundingClientRect().bottom ?? 56) + 20);
-      tipDismissTimer.current = setTimeout(() => setTipTop(null), 4000);
+      tipDismissTimer.current = setTimeout(() => setTipTop(null), 3500);
     }, 300);
     const operate = (event: Event) => {
       if (event instanceof KeyboardEvent && ['Tab','Shift','Control','Alt','Meta'].includes(event.key)) return;

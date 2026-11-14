@@ -89,7 +89,7 @@ export function useConsoleLayout() {
 }
 
 export function ResizableColumns({ children, header }: { children: React.ReactNode; header?: React.ReactNode }) {
-  const {setLayoutCompleted}=usePrompter();
+  const {setLayoutCompleted,scheduleLayoutSuggestion}=usePrompter();
   const ref = useRef<HTMLDivElement>(null);
   const [box, setBox] = useState({ width: 1190, height: 818 });
   const [ratios, setRatios] = useState([.4, .3, .3]);
@@ -106,18 +106,33 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
   const focusedHost = arrangement === 'host-focus';
   const absoluteLayout = !!board || focusedHost;
   const editBaseline = useRef<GeometrySource | null>(null);
+  const suggestionBaseline = useRef<GeometrySource | null>(null);
   const [presetEdited, setPresetEdited] = useState(false);
   const currentGeometry = (): GeometrySource => ({ ratios: [...ratios], heights: { ...heights }, arrangement, board, toolsExpanded });
   const saved = useRef<(GeometrySource & { mode: LayoutMode }) | null>(null);
   const beginEdit = () => {
     saved.current = { ...currentGeometry(), mode };
     editBaseline.current = !presetEdited&&mode==='Standard'?{...currentGeometry(),heights:{video:262,tools:133,analytics:201,feed:324}}:currentGeometry();
+    suggestionBaseline.current=editBaseline.current;
     if(mode === 'Standard'&&!presetEdited) setHeights({video:262,tools:133,analytics:201,feed:324});
     setEditing(true);
   };
   const applyEdit = () => {
     if (applyDisabled) return;
     setLayoutCompleted(true);
+    if(suggestionBaseline.current){
+      const baseline=suggestionBaseline.current;
+      const baselineGeometry=resolveBoard(sourceBoard(baseline,box),box);
+      const current=currentGeometry();
+      const resolvedCurrent=resolveBoard(sourceBoard(current,box),box);
+      const changed=baseline.toolsExpanded!==current.toolsExpanded||Math.abs(baseline.heights.feed-current.heights.feed)>.01||MODULES.some(id=>{
+        const a=baselineGeometry.rects[id],b=resolvedCurrent.rects[id];
+        if(!a||!b)return a!==b;
+        return (['left','top','width','height'] as const).some(key=>Math.abs(a[key]-b[key])>.01);
+      });
+      if(changed)scheduleLayoutSuggestion();
+    }
+    suggestionBaseline.current=null;
     dismissRestoreHint();
     saved.current = null;
     editBaseline.current = null;
@@ -125,6 +140,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
   };
   const cancelEdit = () => {
     dismissRestoreHint();
+    suggestionBaseline.current=null;
     setRatios([.4,.3,.3]);
     setHeights({video:268,tools:133,analytics:201,feed:328});
     setToolsExpanded(true);
