@@ -57,7 +57,7 @@ export function PrompterOverlay(){
   if(editing||!visible)return null;
   return <div className="prompter-positioner">
     <section ref={root} className={`prompter-popover${compact?' is-compact':suggestion?' has-suggestion':' is-empty'}`}
-      style={{backdropFilter:'blur(12px)',WebkitBackdropFilter:'blur(12px)'}}
+      style={{backdropFilter:'blur(3px)',WebkitBackdropFilter:'blur(3px)'}}
       id="prompter-panel" role="region" aria-label="Prompter suggestions" data-testid={compact?'prompter-collapsed':suggestion?'prompter-suggestion':'prompter-empty'}
       onPointerDown={event=>event.stopPropagation()}
       onPointerEnter={()=>{if(collapsed){setHovered(true);state.setVideoPreviewVisible(false);}}}
