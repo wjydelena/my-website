@@ -1,8 +1,8 @@
 .prompter-logo{display:inline-block;width:16px;height:16px;flex-shrink:0;background:currentColor;mask-size:contain;-webkit-mask-size:contain;mask-repeat:no-repeat;-webkit-mask-repeat:no-repeat;mask-position:center;-webkit-mask-position:center}
 .console-shell button.assistant{cursor:pointer;font:inherit}
 .console-shell button.assistant .prompter-logo{color:#00bdc3;width:14px;height:14px}
-.console-shell .prompter-positioner{position:fixed;top:72px;right:16px;width:368px;max-width:calc(100vw - 84px);pointer-events:none;z-index:80;animation:prompter-enter 180ms cubic-bezier(.22,1,.36,1) both}
-@keyframes prompter-enter{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.console-shell .prompter-positioner{position:fixed;top:72px;right:16px;width:368px;max-width:calc(100vw - 84px);pointer-events:none;z-index:80;animation:prompter-enter 180ms cubic-bezier(.22,1,.36,1) backwards}
+@keyframes prompter-enter{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){.console-shell .prompter-positioner{animation:none}}
 .console-shell .prompter-popover{position:relative;box-sizing:border-box;width:100%;padding:16px;border-radius:8px;background:rgba(50,50,50,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:#f5f5f5;box-shadow:0 12px 24px rgba(0,0,0,.22);pointer-events:auto}
 .console-shell .prompter-popover.is-compact{width:170px;padding:14px 16px}

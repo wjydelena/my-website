@@ -4,10 +4,12 @@ import {usePrompter} from './PrompterContext';
 import {useConsoleLayout} from './ResizableLayout';
 import {isCustomizeEducationBlankTarget} from './customize-education';
 import logo from './assets/prompter-logo.png';
+import captionLogo from './assets/annotation-icons/prompter-caption.png';
 import collapseIcon from './assets/video-collapse.png';
 import './prompter.css';
 
-export function PrompterLogo(){
+export function PrompterLogo({monochrome=false}:{monochrome?:boolean}){
+  if(!monochrome)return <img className="prompter-entry-logo" src={captionLogo} width={16} height={16} alt="" style={{width:16,height:16,objectFit:'contain',flexShrink:0,filter:'none'}}/>;
   return <span className="prompter-logo" aria-hidden="true" style={{maskImage:`url("${logo}")`,WebkitMaskImage:`url("${logo}")`}}/>;
 }
 export function PrompterOverlay(){
@@ -63,7 +65,7 @@ export function PrompterOverlay(){
       onFocusCapture={()=>{if(collapsed){setFocused(true);state.setVideoPreviewVisible(false);}}}
       onBlurCapture={event=>{if(!event.currentTarget.contains(event.relatedTarget as Node|null))setFocused(false);}}>
       <header className="prompter-header">
-        <PrompterLogo/><strong>Prompter</strong>
+        <PrompterLogo monochrome/><strong>Prompter</strong>
         <div className="prompter-controls">
           <button type="button" aria-label={compact?'Expand Prompter':'Collapse Prompter'} onClick={compact?open:minimize}>
             <img src={collapseIcon} width={16} height={16} alt=""/>
