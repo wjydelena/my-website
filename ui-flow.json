@@ -424,6 +424,25 @@
           "title": "All categorized promotion tools"
         },
         {
+          "action": "hover",
+          "target": {
+            "role": "button",
+            "name": "Open Group Deal"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "promotion-card-hover",
+          "title": "Promotion catalogue card shared gray hover"
+        },
+        {
+          "action": "hover",
+          "target": {
+            "role": "button",
+            "name": "Close promotions"
+          }
+        },
+        {
           "action": "press",
           "target": {
             "role": "button",
@@ -3173,6 +3192,25 @@
           "title": "Auction items: temporary product, bids, winner strips and Add footer"
         },
         {
+          "action": "hover",
+          "target": {
+            "role": "button",
+            "name": "Start auction item 1"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "auction-items-card-hover",
+          "title": "Auction items uses shared Buy now card hover"
+        },
+        {
+          "action": "hover",
+          "target": {
+            "role": "tab",
+            "name": "Auction items"
+          }
+        },
+        {
           "action": "click",
           "target": {
             "role": "button",
@@ -3209,6 +3247,25 @@
           "title": "Three surprise sets, remaining inventory and Start #1 controls"
         },
         {
+          "action": "hover",
+          "target": {
+            "role": "button",
+            "name": "Start #1 Surprise set 1"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "surprise-set-card-hover",
+          "title": "Surprise set uses shared Buy now card hover"
+        },
+        {
+          "action": "hover",
+          "target": {
+            "role": "tab",
+            "name": "Surprise set"
+          }
+        },
+        {
           "action": "click",
           "target": {
             "role": "button",
@@ -3238,6 +3295,25 @@
           "action": "capture",
           "id": "card-break-default",
           "title": "Two card breaks with teal progress and Manage controls"
+        },
+        {
+          "action": "hover",
+          "target": {
+            "role": "button",
+            "name": "Manage Card break 1"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "card-break-card-hover",
+          "title": "Card break uses shared Buy now card hover"
+        },
+        {
+          "action": "hover",
+          "target": {
+            "role": "tab",
+            "name": "Card break"
+          }
         },
         {
           "action": "click",
@@ -3274,6 +3350,25 @@
           "action": "capture",
           "id": "giveaway-default",
           "title": "Unpublished giveaways with prize quantities, tasks and review status"
+        },
+        {
+          "action": "hover",
+          "target": {
+            "role": "button",
+            "name": "Publish giveaway 1"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "giveaway-card-hover",
+          "title": "Giveaway uses shared Buy now card hover"
+        },
+        {
+          "action": "hover",
+          "target": {
+            "role": "tab",
+            "name": "Giveaway"
+          }
         },
         {
           "action": "click",
@@ -3333,6 +3428,25 @@
           "title": "Two random-prize rewards with countdown and Start and pin"
         },
         {
+          "action": "hover",
+          "target": {
+            "role": "button",
+            "name": "Start and pin rush reward 1"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "rush-reward-card-hover",
+          "title": "Rush reward uses shared Buy now card hover"
+        },
+        {
+          "action": "hover",
+          "target": {
+            "role": "tab",
+            "name": "Rush reward"
+          }
+        },
+        {
           "action": "click",
           "target": {
             "role": "button",
@@ -3374,6 +3488,25 @@
           "action": "capture",
           "id": "purchase-gift-default",
           "title": "Two auto-start gift tiers with separate claim limits"
+        },
+        {
+          "action": "hover",
+          "target": {
+            "role": "button",
+            "name": "Increase limits for tier 1"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "purchase-gift-card-hover",
+          "title": "Purchase with gift uses shared Buy now card hover"
+        },
+        {
+          "action": "hover",
+          "target": {
+            "role": "tab",
+            "name": "Purchase with gift"
+          }
         },
         {
           "action": "click",
@@ -3630,6 +3763,18 @@
           "action": "capture",
           "id": "live-tools-expanded",
           "title": "Billboard, Shop ads and Auto-post messages restored"
+        },
+        {
+          "action": "hover",
+          "target": {
+            "role": "button",
+            "name": "Open Billboard LIVE tool"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "live-tools-card-hover",
+          "title": "LIVE tool card shared gray hover"
         },
         {
           "action": "click",
