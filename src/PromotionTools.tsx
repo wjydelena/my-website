@@ -50,7 +50,7 @@ const initialPinned = () => {
   } catch { return fallback; }
 };
 
-export default function PromotionTools() {
+export default function PromotionTools({compact=false}:{compact?:boolean}) {
   const { editing, mode } = useConsoleLayout();
   const [open, setOpen] = useState(false);
   const [customizing, setCustomizing] = useState(false);
@@ -69,7 +69,7 @@ export default function PromotionTools() {
   const panel = useRef<HTMLDivElement>(null);
   const closeButton = useRef<HTMLButtonElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
-  useLayoutEffect(() => setHost(root.current?.parentElement || null), []);
+  useLayoutEffect(() => setHost(root.current?.closest<HTMLElement>('.reference-product-column') || root.current?.parentElement || null), []);
   const close = () => { setOpen(false); setCustomizing(false); trigger.current?.focus(); };
   useEffect(() => { setOpen(false); setCustomizing(false); setCouponActive(false); }, [editing, mode]);
   useEffect(() => {
@@ -95,6 +95,7 @@ export default function PromotionTools() {
   useLayoutEffect(() => {
     if (!scrollCoupon.current || !couponActive) return;
     scrollCoupon.current = false;
+    if(compact){trigger.current?.focus({preventScroll:true});return;}
     if (toolbar.current && couponButton.current) {
       const row = toolbar.current.getBoundingClientRect(), tab = couponButton.current.getBoundingClientRect();
       if (tab.right > row.right - 36) toolbar.current.scrollLeft += tab.right - row.right + 36;
@@ -102,9 +103,9 @@ export default function PromotionTools() {
     }
     couponButton.current?.focus({ preventScroll: true });
   }, [pinned, couponActive, couponEntry]);
-  const closeCoupon = () => { setCouponActive(false); couponButton.current?.focus({ preventScroll: true }); };
+  const closeCoupon = () => { setCouponActive(false); (compact?trigger.current:couponButton.current)?.focus({ preventScroll: true }); };
 
-  return <div className="promotion-bar promotion-tools" ref={root}>
+  return <div className={`promotion-bar promotion-tools${compact?' promotion-tools-compact':''}`} ref={root}>
     <div className="promotion-content" ref={toolbar} role="region" aria-label="Promotion tools" tabIndex={0}
       onKeyDown={event => {
         if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
@@ -113,7 +114,7 @@ export default function PromotionTools() {
       }}>
       {pinned.map(label => { const item = items.find(value => value.label === label)!; return <button type="button" className={`promo-pill${couponActive && label === 'Coupon' ? ' is-active' : ''}`} ref={label === 'Coupon' ? couponButton : undefined} aria-pressed={label === 'Coupon' ? couponActive : undefined} key={label} onClick={() => showTool(label)}>{graphic(item)}{label === 'Rush reward' ? 'Rush Reward' : label}</button>; })}
     </div>
-    <button className="promo-more" ref={trigger} type="button" aria-label="More promotions" aria-expanded={open} aria-controls="promotion-tools-list" onClick={() => { if (open) close(); else { setOpen(true); } }}><ChevronDown size={18}/></button>
+    <button className="promo-more" ref={trigger} type="button" aria-label="More promotions" aria-expanded={open} aria-controls="promotion-tools-list" disabled={editing} onClick={() => { if (open) close(); else { setOpen(true); } }}>{compact?<Plus size={20}/>:<ChevronDown size={18}/>}</button>
     {couponActive && host && createPortal(<div className="coupon-panel-viewport"><section key={couponEntry} className="coupon-panel" aria-label="Coupon panel" onPointerDown={event => event.stopPropagation()}>
       <div className="coupon-heading"><h2>Coupon</h2><button type="button" aria-label="Close Coupon" onClick={closeCoupon}><X size={18}/></button></div>
       <div className="coupon-tabs" role="tablist" aria-label="Coupon source">{['My shop', 'Co-funded'].map(tab => <button type="button" key={tab} role="tab" aria-selected={couponTab === tab} onClick={() => setCouponTab(tab)}>{tab}</button>)}</div>

@@ -434,7 +434,7 @@
         {
           "action": "capture",
           "id": "promotions-closed",
-          "title": "Toolbar restored"
+          "title": "Products restored with compact footer promotion entry"
         }
       ]
     },
@@ -1695,7 +1695,7 @@
     },
     {
       "id": "editor-hover-overlays",
-      "title": "Persistent promotion tools and module hover overlays in edit mode",
+      "title": "Compact footer promotion entry and module hover overlays in edit mode",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -1722,7 +1722,7 @@
         {
           "action": "capture",
           "id": "editor-header-tools",
-          "title": "Neutral gray editing bar and Products heading above persistent promotion tools"
+          "title": "Neutral gray editing bar and Products heading; no top promotion shortcut strip"
         },
         {
           "action": "hover",
@@ -2360,7 +2360,7 @@
         {
           "action": "capture",
           "id": "promotion-updated-toolbar",
-          "title": "Updated pinned toolbar and unchanged product list"
+          "title": "Updated catalog pins and unchanged product list with footer entry"
         },
         {
           "action": "click",
@@ -2398,7 +2398,7 @@
     },
     {
       "id": "coupon-pin-and-open",
-      "title": "Coupon pinning, automatic toolbar positioning and panel",
+      "title": "Coupon pinning and panel through the footer promotion entry",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -2444,7 +2444,7 @@
         {
           "action": "capture",
           "id": "coupon-active-panel",
-          "title": "Coupon pinned at end and selected; catalog closes"
+          "title": "Coupon pinned in the catalog and opened; catalog closes"
         },
         {
           "action": "click",
@@ -2475,19 +2475,26 @@
         {
           "action": "capture",
           "id": "coupon-panel-closed",
-          "title": "Products restored; Coupon stays pinned"
+          "title": "Products restored; Coupon stays pinned in the catalog"
         },
         {
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Coupon"
+            "name": "More promotions"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Open Coupon"
           }
         },
         {
           "action": "capture",
           "id": "coupon-reopened",
-          "title": "Pinned Coupon reopens its panel"
+          "title": "Coupon reopens from the footer promotion catalog"
         },
         {
           "action": "click",
@@ -2506,7 +2513,7 @@
         {
           "action": "capture",
           "id": "coupon-no-duplicate",
-          "title": "Coupon remains a single last tab"
+          "title": "Coupon remains a single pinned catalog entry"
         }
       ]
     },
@@ -2607,7 +2614,7 @@
         {
           "action": "capture",
           "id": "customized-toolbar",
-          "title": "Saved order shown in toolbar"
+          "title": "Saved catalog order retained with footer promotion entry"
         },
         {
           "action": "click",
