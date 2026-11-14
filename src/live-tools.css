@@ -1,6 +1,6 @@
 .console-shell .analytics-column .analytics{padding:0}
 .analytics-content-scroll{height:100%;overflow-y:auto;scrollbar-width:none}
-.live-tools-section{position:relative;border-bottom:1px solid #e5e5e5;padding:0 16px 16px;min-height:54px;color:#161616}
+.live-tools-section{position:relative;flex:none;height:var(--tools-height,133px);overflow:hidden;border-bottom:1px solid #e5e5e5;padding:0 16px 16px;min-height:54px;color:#161616}
 .live-tools-section:not(.is-expanded){padding-bottom:0}
 .live-tools-section>header{height:54px;display:flex;align-items:center;justify-content:space-between}
 .live-tools-section h2>button{font:inherit;color:inherit;border:0;padding:0;background:none;cursor:pointer;text-align:left}
@@ -12,8 +12,8 @@
 .live-tool-cards span{max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:16px}
 .live-tool-cards>button:not(:disabled):hover{background:#ececec}
 .console-shell .analytics-section{padding:0 16px 16px;min-height:200px}
-.layout-editing .live-tools-section{pointer-events:none}
-.layout-editing .live-tools-section>header,.layout-editing .live-tool-cards{opacity:.3}
+.layout-editing .live-tool-cards{opacity:.3;pointer-events:none}
+.layout-editing .live-tools-section>header{cursor:grab}
 .live-tool-dialog-shade{position:fixed;inset:0;z-index:210;background:#0003;display:flex;align-items:center;justify-content:center;padding:24px}
 .live-tool-dialog{background:white;border-radius:12px;box-shadow:0 12px 48px #0003;padding:24px;width:min(400px,100%);color:#161616}
 .live-tool-dialog>header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}

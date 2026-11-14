@@ -1,6 +1,7 @@
+import { CartIcon, BagIcon, CustomerIcon, ModeratorIcon } from './AttachmentIcons';
 import React, { useRef, useState } from 'react';
 import LiveTools from './LiveTools';
-import { ShoppingCart, ShoppingBag, UserRoundCheck, UserRoundCog, Send, ExternalLink, GripVertical, Power, Mic, MicOff, Timer } from 'lucide-react';
+import { UserRoundCheck, Send, ExternalLink, GripVertical, Power, Mic, MicOff } from 'lucide-react';
 import { useConsoleLayout, ResizeHandle } from './ResizableLayout';
 import { useModuleHeader } from './ModuleDrag';
 import { ModuleTitle, RemovePanelButton } from './LayoutEditor';
@@ -47,10 +48,10 @@ function Chat() {
     <div className="chat-title" {...drag}><ModuleTitle>Chat</ModuleTitle><RemovePanelButton id="chat"/><button type="button" aria-label="Chat filters" disabled={editing} onClick={()=>setOptions(!options)}><img className="annotation-console-icon" src={filterIcon} width={16} height={16} alt=""/></button><button type="button" aria-label="Chat settings" disabled={editing} onClick={()=>setOptions(!options)}><img className="annotation-console-icon" src={moreIcon} width={16} height={16} alt=""/></button></div>
     {options&&!editing&&<div className="reference-chat-options"><label><input type="checkbox" checked={showBadges} onChange={e=>setShowBadges(e.target.checked)}/>Show user badges</label></div>}
     <div className="chat-scroll">{messages.map((m,i)=><div className="message" key={i}><img className="avatar" src={m.image} alt=""/><div className="message-content"><div className="name-line"><span>{m.name}</span>{showBadges&&<>
-      {m.role==='fan'&&<span className="fan-icon"><UserRoundCheck size={14} fill="currentColor"/><b>♥</b></span>}{m.role==='mod'&&<UserRoundCog size={14} fill="currentColor"/>}
-      {(m.role==='fan'||m.role==='normal')&&<><span className="divider"/><span className="chat-tag"><ShoppingCart size={13}/>3</span></>}
-      {(m.role==='fan'||m.role==='normal'||('bag' in m&&m.bag))&&<span className="chat-tag"><ShoppingBag size={13}/>2</span>}
-      {'customer' in m&&m.customer&&<span className="customer-tag"><Timer size={13}/>No.{m.customer} Customer</span>}
+      {m.role==='fan'&&<span className="fan-icon"><UserRoundCheck size={14} fill="currentColor"/><b>♥</b></span>}{m.role==='mod'&&<ModeratorIcon/>}
+      {(m.role==='fan'||m.role==='normal')&&<><span className="divider"/><span className="chat-tag"><CartIcon/>3</span></>}
+      {(m.role==='fan'||m.role==='normal'||('bag' in m&&m.bag))&&<span className="chat-tag"><BagIcon/>2</span>}
+      {'customer' in m&&m.customer&&<span className="customer-tag"><CustomerIcon/>No.{m.customer} Customer</span>}
     </>}</div><p>{m.text}</p></div></div>)}</div>
     <form className="comment-box" onSubmit={e=>{e.preventDefault();submit();}}><input aria-label="Enter comment" placeholder="Enter comment" maxLength={100} disabled={editing} value={comment} onChange={e=>setComment(e.target.value)}/><span className="comment-count">{comment.length}/100</span><button type="submit" aria-label="Send comment" disabled={editing||!comment.trim()}><Send size={19}/></button></form>
   </div>;
@@ -74,10 +75,10 @@ function CombinedChatActivity({comment,setComment,sent,submit}:{comment:string;s
   const {editing,moduleStyle}=useConsoleLayout();const drag=useModuleHeader('chat');
   const [tab,setTab]=useState('Chat');
   const message=(m:typeof initialMessages[number],key:string)=><div className="message" key={key}><img className="avatar" src={m.image} alt=""/><div className="message-content"><div className="name-line"><span>{m.name}</span>
-    {m.role==='fan'&&<span className="fan-icon"><UserRoundCheck size={14} fill="currentColor"/><b>♥</b></span>}{m.role==='mod'&&<UserRoundCog size={14} fill="currentColor"/>}
-    {(m.role==='fan'||m.role==='normal')&&<><span className="divider"/><span className="chat-tag"><ShoppingCart size={13}/>3</span></>}
-    {(m.role==='fan'||m.role==='normal'||m.bag)&&<span className="chat-tag"><ShoppingBag size={13}/>2</span>}
-    {m.customer&&<span className="customer-tag"><Timer size={13}/>No.{m.customer} Customer</span>}
+    {m.role==='fan'&&<span className="fan-icon"><UserRoundCheck size={14} fill="currentColor"/><b>♥</b></span>}{m.role==='mod'&&<ModeratorIcon/>}
+    {(m.role==='fan'||m.role==='normal')&&<><span className="divider"/><span className="chat-tag"><CartIcon/>3</span></>}
+    {(m.role==='fan'||m.role==='normal'||m.bag)&&<span className="chat-tag"><BagIcon/>2</span>}
+    {m.customer&&<span className="customer-tag"><CustomerIcon/>No.{m.customer} Customer</span>}
   </div><p>{m.text}</p></div></div>;
   const event=(i:number)=><div className={'feed-item'+(i<2?' plain-event':'')} key={`event-${i}`}><img className="avatar" src={events[i].image} alt=""/><p><span className="person-name">{events[i].name}</span> {events[i].action} {events[i].product&&<img className="mini-product" src={shoe} alt="Shoe"/>}{events[i].no&&<strong> No.6</strong>}{events[i].gift&&<><img className="gift-product" src={pancakes} alt="Pancakes"/><strong> x4</strong></>}</p></div>;
   return <div className="chat reference-chat merged-chat-activity" data-module-id="chat" data-merged-modules="chat activity" style={moduleStyle('chat')}>
@@ -95,7 +96,7 @@ function CombinedChatActivity({comment,setComment,sent,submit}:{comment:string;s
 export function AnalyticsColumn(){
   const {editing,moduleStyle}=useConsoleLayout();const analyticsDrag=useModuleHeader('analytics');const activityDrag=useModuleHeader('activity');
   const [tab,setTab]=useState('Activity');const [filters,setFilters]=useState(false);const [purchasesOnly,setPurchasesOnly]=useState(false);
-  return <section className="analytics-column"><div className="analytics" data-module-id="analytics" style={moduleStyle('analytics')}><div className="analytics-content-scroll"><LiveTools/><div className="analytics-section"><div className="analytics-title" {...analyticsDrag}><ModuleTitle>Analytics</ModuleTitle><RemovePanelButton id="analytics"/><span>LIVE Dashboard<ExternalLink size={15}/></span></div><div className="metric-grid">{metrics.map(([value,label])=><div className="metric" key={label}><strong>{value}</strong><span>{label}</span></div>)}</div></div></div><ResizeHandle kind="analytics" label="Resize analytics and activity"/></div>
+  return <section className="analytics-column"><LiveTools/><div className="analytics" data-module-id="analytics" style={moduleStyle('analytics')}><div className="analytics-content-scroll"><div className="analytics-section"><div className="analytics-title" {...analyticsDrag}><ModuleTitle>Analytics</ModuleTitle><RemovePanelButton id="analytics"/><span>LIVE Dashboard<ExternalLink size={15}/></span></div><div className="metric-grid">{metrics.map(([value,label])=><div className="metric" key={label}><strong>{value}</strong><span>{label}</span></div>)}</div></div></div><ResizeHandle kind="analytics" label="Resize analytics and activity"/></div>
     <div className="activity-module" data-module-id="activity" style={moduleStyle('activity')}><div className="activity-tabs tabs" {...activityDrag}>{['Activity','Top customer'].map(value=><button type="button" role="tab" aria-selected={tab===value} className={tab===value?'active':''} disabled={editing} key={value} onClick={()=>setTab(value)}>{editing&&value==='Activity'&&<GripVertical className="activity-edit-grip" size={16}/>} {value}</button>)}<RemovePanelButton id="activity"/><button type="button" className="activity-filter" aria-label="Activity filters" disabled={editing} onClick={()=>setFilters(!filters)}><img className="annotation-console-icon" src={filterIcon} width={16} height={16} alt=""/></button></div>
       {filters&&!editing&&<div className="reference-activity-options"><label><input type="checkbox" checked={purchasesOnly} onChange={e=>setPurchasesOnly(e.target.checked)}/>Purchases only</label></div>}
       <div className="activity-list">{purchases.map((p,i)=><div className="activity" key={p.name}><img className="avatar" src={p.image} alt=""/><p><span className="person-name">{p.name}</span>{tab==='Activity'?' made a purchase ':` · No.${i+1} customer `}<img className="mini-product" src={shoe} alt="Shoe"/><strong> No.6</strong><span className="purchase-divider"/><strong>$100.00</strong></p></div>)}</div>

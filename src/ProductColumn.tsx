@@ -1,5 +1,6 @@
+import { BagIcon } from './AttachmentIcons';
 import React, { useEffect, useRef, useState } from 'react';
-import { GripVertical, ShoppingBag, PencilLine, Trash2, ArrowUpToLine, X, Search, MoreHorizontal } from 'lucide-react';
+import { GripVertical, PencilLine, Trash2, ArrowUpToLine, X, Search, MoreHorizontal } from 'lucide-react';
 import PinIcon from './PinIcon';
 import SellingModes, { CouponEntry } from './SellingModes';
 import './selling-modes.css';
@@ -87,7 +88,7 @@ export default function ProductColumn() {
       </article>})}
       {!visible.length&&<div className="reference-products-empty" role="status">{products.length?<><p>No products found.</p><button type="button" onClick={()=>{setQuery('');setFilter('All products');}}>Clear search and filters</button></>:<p>No products yet. Add a product to get started.</p>}</div>}
     </div>
-    <div className="product-footer reference-product-footer buy-now-footer" style={tab==='Buy now'?undefined:{display:'none'}}><PromotionTools compact createPromotion couponRequest={couponRequest} couponReturnFocus={couponEntry} listPinned={listPinned} onToggleListPin={()=>setListPinned(!listPinned)}/><button type="button" className="footer-pill buy-now-add" disabled={editing} onClick={()=>setDraft({...defaults[0],id:Math.max(0,...products.map(p=>p.id))+1})}><ShoppingBag size={16}/>Add product</button></div>
+    <div className="product-footer reference-product-footer buy-now-footer" style={tab==='Buy now'?undefined:{display:'none'}}><PromotionTools compact createPromotion couponRequest={couponRequest} couponReturnFocus={couponEntry} listPinned={listPinned} onToggleListPin={()=>setListPinned(!listPinned)}/><button type="button" className="footer-pill buy-now-add" disabled={editing} onClick={()=>setDraft({...defaults[0],id:Math.max(0,...products.map(p=>p.id))+1})}><BagIcon/>Add product</button></div>
     {draft&&<div className="reference-product-modal"><section role="dialog" aria-modal="true" aria-label="Edit product"><header><h2>{products.some(p=>p.id===draft.id)?'Edit product':'Add product'}</h2><button type="button" aria-label="Close product editor" onClick={()=>setDraft(null)}><X size={18}/></button></header><label>Product name<input value={draft.name} onChange={e=>setDraft({...draft,name:e.target.value})}/></label><label>Price<input value={draft.price} onChange={e=>setDraft({...draft,price:e.target.value})}/></label><label>In stock<input value={draft.stock} onChange={e=>setDraft({...draft,stock:e.target.value})}/></label><footer><button type="button" onClick={()=>setDraft(null)}>Cancel</button><button type="button" onClick={save}>Save product</button></footer></section></div>}
     {deleting&&<div className="reference-product-modal"><section role="dialog" aria-modal="true" aria-label="Delete product"><h2>Delete product?</h2><p>This removes the product from this prototype’s list.</p><footer><button type="button" onClick={()=>setDeleting(null)}>Cancel</button><button type="button" onClick={()=>{setProducts(prev=>prev.filter(p=>p.id!==deleting.id));setChecked(prev=>prev.filter(id=>id!==deleting.id));setDeleting(null);}}>Delete</button></footer></section></div>}
   </section>;

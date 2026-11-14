@@ -5,7 +5,7 @@ import {useConsoleLayout} from './ResizableLayout';
 import {AddPanelModal} from './AddPanelModal';
 
 export function AddPanelControl() {
-  const {removedPanels, restorePanels, showRestoreHint, dismissRestoreHint} = useConsoleLayout();
+  const {removedPanels, restorePanels, restoreCapacity, showRestoreHint, dismissRestoreHint} = useConsoleLayout();
   const [open,setOpen] = useState(false);
   const root = useRef<HTMLDivElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
@@ -34,6 +34,6 @@ export function AddPanelControl() {
       {showRestoreHint && !open && <div className="add-panel-hint" id="add-panel-hint" role="status"><strong>Add panels back anytime</strong><p>Click “Add panel” to restore panels you’ve removed.</p></div>}
     </div>
     <span className="add-panel-divider" aria-hidden="true"/>
-    {open && host && createPortal(<AddPanelModal panels={removedPanels} onClose={()=>setOpen(false)} onAdd={ids=>{restorePanels(ids);setOpen(false);}}/>,host)}
+    {open && host && createPortal(<AddPanelModal panels={removedPanels} availableColumns={restoreCapacity} onClose={()=>setOpen(false)} onAdd={ids=>{restorePanels(ids);setOpen(false);}}/>,host)}
   </>;
 }

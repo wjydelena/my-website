@@ -128,3 +128,7 @@
 
 .sold-items-panel{display:flex;flex-direction:column;flex:1;min-height:0;overflow-y:auto;padding:16px}.sold-item{display:flex;align-items:center;gap:12px;margin:0 0 20px}.sold-item>img{width:70px;height:70px;border-radius:6px;object-fit:cover}.sold-item>div{min-width:0;flex:1}
 .console-shell .reference-product-column .reference-product-tabs.reference-product-tabs{gap:clamp(8px,calc((100% - 304px)/3),32px)}
+
+/* All SellingModes cards share the annotated inset, including gift tiers and sold cards. */
+.console-shell :is(.auction-item,.auction-set,.giveaway-item,.rush-item,.purchase-gift-panel,.purchase-gift-tier,.sold-item){padding:8px}
+.console-shell .coupon-entry span{font-size:12px;font-weight:500}

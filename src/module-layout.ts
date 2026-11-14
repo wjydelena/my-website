@@ -1,7 +1,7 @@
-export const MODULES = ['products', 'video', 'chat', 'analytics', 'activity'] as const;
+export const MODULES = ['products', 'video', 'chat', 'analytics', 'activity', 'tools'] as const;
 export type ModuleId = typeof MODULES[number];
-export const moduleNames: Record<ModuleId, string> = { products: 'Products', video: 'Video', chat: 'Chat', analytics: 'Analytics', activity: 'Activity' };
-export const minHeight: Record<ModuleId, number> = { products: 270, video: 200, chat: 200, analytics: 194, activity: 270 };
+export const moduleNames: Record<ModuleId, string> = { products: 'Products', video: 'Video', chat: 'Chat', analytics: 'Analytics', activity: 'Activity', tools: 'LIVE tools' };
+export const minHeight: Record<ModuleId, number> = { products: 270, video: 200, chat: 200, analytics: 194, activity: 270, tools: 54 };
 export type ModuleColumn = { modules: ModuleId[]; width: number; heights: number[] };
 export type ModuleBoard = { columns: ModuleColumn[]; productsHidden?: boolean; hidden?: ModuleId[]; chatActivityMerged?: boolean };
 export type DropTarget = { type: 'column'; index: number } | { type: 'stack'; column: number; index: number };

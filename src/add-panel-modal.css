@@ -29,3 +29,11 @@
 .console-shell .panel-choice:focus-visible{outline:2px solid #009995;outline-offset:-2px}
 .console-shell .add-panel-modal-header button:focus-visible,.console-shell .add-panel-modal-footer button:focus-visible{outline:2px solid #009995;outline-offset:2px}
 @media(max-width:680px){.console-shell .add-panel-backdrop{padding:16px}.console-shell .add-panel-modal{padding:20px}.console-shell .add-panel-card-grid{grid-template-columns:minmax(0,1fr)}.console-shell .panel-choice-preview{height:260px}.console-shell .panel-choice-art{height:230px}}
+
+.panel-tools-preview{display:flex;flex-direction:column;gap:14px;width:100%;padding:18px 14px;color:#161616;text-align:left}
+.panel-tools-preview>strong{font-size:15px}
+.panel-tools-preview>span{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.panel-tools-preview>span>span{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;padding:10px 4px;border-radius:6px;background:#f1f1f1}
+.panel-tools-preview small{font-size:9px;text-align:center;line-height:12px}
+
+.panel-capacity-message{margin:12px 0 0;color:#737373;font-size:12px;line-height:18px}

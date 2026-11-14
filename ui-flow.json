@@ -1458,6 +1458,13 @@
           }
         },
         {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Remove LIVE tools panel"
+          }
+        },
+        {
           "action": "press",
           "target": {
             "role": "button",
@@ -1878,6 +1885,84 @@
           "action": "capture",
           "id": "editor-hover-exit",
           "title": "Normal mode without editing heading or hover overlays"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Customize layout"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "live-tools-independent-edit",
+          "title": "LIVE tools has its own grip and delete control; business actions disabled"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move LIVE tools"
+          },
+          "key": "Space"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Move LIVE tools"
+          },
+          "key": "Enter"
+        },
+        {
+          "action": "capture",
+          "id": "live-tools-independent-moved",
+          "title": "LIVE tools moved independently to a new column; Analytics retained"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Remove LIVE tools panel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "live-tools-independent-removed",
+          "title": "LIVE tools removed independently and available in Add panel"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Add panel"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "LIVE tools"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Add"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "live-tools-independent-restored",
+          "title": "LIVE tools restored as the rightmost column"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Apply"
+          }
         }
       ]
     },
@@ -2001,7 +2086,7 @@
         {
           "action": "capture",
           "id": "host-focus-edit",
-          "title": "Video focus: Products, full-height Video, Analytics and combined Chat + Activity"
+          "title": "Video focus: Products, large Video with LIVE tools above it, Analytics and combined Chat + Activity"
         },
         {
           "action": "click",
@@ -2103,7 +2188,7 @@
         {
           "action": "capture",
           "id": "host-focus-edit",
-          "title": "Video focus: Products, full-height Video, Analytics and combined Chat + Activity"
+          "title": "Video focus: Products, large Video with LIVE tools above it, Analytics and combined Chat + Activity"
         },
         {
           "action": "click",
@@ -2143,7 +2228,7 @@
         {
           "action": "capture",
           "id": "host-custom-moved",
-          "title": "Four visible modules remain draggable in Adjusted"
+          "title": "Five visible surfaces remain independently draggable"
         },
         {
           "action": "click",
@@ -2207,7 +2292,7 @@
         {
           "action": "capture",
           "id": "video-preset-reset",
-          "title": "Back to default restores full-height Video and combined Chat + Activity"
+          "title": "Back to default restores large Video with LIVE tools above it and combined Chat + Activity"
         },
         {
           "action": "press",
@@ -2337,6 +2422,13 @@
           "target": {
             "role": "button",
             "name": "Remove Analytics panel"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Remove LIVE tools panel"
           }
         },
         {
@@ -4004,6 +4096,13 @@
           "target": {
             "role": "button",
             "name": "Remove Analytics panel"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Remove LIVE tools panel"
           }
         },
         {
