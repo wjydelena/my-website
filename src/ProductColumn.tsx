@@ -9,6 +9,7 @@ import PromotionTools from './PromotionTools';
 import { useConsoleLayout } from './ResizableLayout';
 import { ModuleTitle, RemovePanelButton } from './LayoutEditor';
 import { useModuleHeader } from './ModuleDrag';
+import { usePrompter } from './PrompterContext';
 import top from './assets/reference-products/product-1.png';
 import yellowBag from './assets/reference-products/product-2.png';
 import redBag from './assets/reference-products/product-3.png';
@@ -26,7 +27,8 @@ export default function ProductColumn() {
   const drag = useModuleHeader('products');
   const [products, setProducts] = useState(defaults);
   const [checked, setChecked] = useState<number[]>([]);
-  const [pinned, setPinned] = useState<number | null>(null);
+  const {pinned,setPinned,setProducts:setPrompterProducts}=usePrompter();
+  useEffect(()=>setPrompterProducts(products),[products,setPrompterProducts]);
   const [tab, setTab] = useState('Buy now');
   const [couponRequest, setCouponRequest] = useState(0);
   const couponEntry = useRef<HTMLButtonElement>(null);
@@ -71,7 +73,7 @@ export default function ProductColumn() {
     </div>
     <SellingModes mode={tab} disabled={editing} onCoupon={()=>setCouponRequest(value=>value+1)} couponRef={couponEntry}/>
     <div className="reference-products" role="tabpanel" aria-label="Buy now" style={tab==='Buy now'?undefined:{display:'none'}}>
-      {visible.map(product=>{const index=products.indexOf(product);const hasPromotions=product.id===3;return <article className={`reference-product-card promotion-product-card${hasPromotions?' has-promotions':''}${hasPromotions&&expanded?' is-expanded':''}`} key={product.id} data-product-id={product.id} onDragOver={event=>{if(moving.current!==null&&!editing)event.preventDefault();}} onDrop={event=>{event.preventDefault();if(moving.current!==null&&!editing){moveTo(moving.current,index);moving.current=null;}}}>
+      {visible.map(product=>{const index=products.indexOf(product);const hasPromotions=product.id===3;return <article className={`reference-product-card promotion-product-card${hasPromotions?' has-promotions':''}${hasPromotions&&expanded?' is-expanded':''}${pinned===product.id?' is-pinned':''}`} key={product.id} data-product-id={product.id} onDragOver={event=>{if(moving.current!==null&&!editing)event.preventDefault();}} onDrop={event=>{event.preventDefault();if(moving.current!==null&&!editing){moveTo(moving.current,index);moving.current=null;}}}>
         {hasPromotions&&<button type="button" className="product-card-promotion-toggle" aria-label="Toggle promotions for product 3" aria-expanded={expanded} aria-controls="product-3-promotions" disabled={editing} onClick={()=>setExpanded(!expanded)}/>}
         <div className="reference-product-main">
           <div className="reference-product-top">
@@ -79,10 +81,11 @@ export default function ProductColumn() {
             <div className="reference-product-thumb"><img src={product.image} alt={['Green knit top','Beige pants','Yellow handbag','Red handbag','Blue blazer','Beige sweater','Cosmetics'][(product.id-1)%7]}/><input type="checkbox" checked={checked.includes(product.id)} disabled={editing} aria-label={`Select product ${product.id}`} onChange={()=>toggle(product.id)}/></div>
             <div className="reference-product-info"><p className="reference-product-name">{product.name}</p><span className="reference-product-stock">Stocks: {product.stock}</span><div className="product-price-line"><strong className="reference-product-price">${product.price}</strong>{product.oldPrice&&<del>${product.oldPrice}</del>}</div></div>
           </div>
-          <button type="button" className="reference-product-pin" aria-label={`${pinned===product.id?'Unpin':'Pin'} product ${product.id}`} aria-pressed={pinned===product.id} disabled={editing} onClick={()=>setPinned(pinned===product.id?null:product.id)}><PinIcon/>{pinned===product.id?'Pinned':'Pin'}</button>
+          <button type="button" className="reference-product-pin" aria-label={`${pinned===product.id?'Unpin':'Pin'} product ${product.id}`} aria-pressed={pinned===product.id} disabled={editing} onClick={()=>setPinned(pinned===product.id?null:product.id)}><PinIcon/>Pin</button>
           <div className="reference-product-stats"><span>Clicks <b>0</b></span><i/><span>Add to cart <b>0</b></span><i/><span>Items sold <b>0</b></span></div>
         </div>
         <div className="reference-product-actions"><button type="button" className="product-actions-trigger" aria-label={`More actions for product ${product.id}`} aria-haspopup="menu" aria-expanded={actionsFor===product.id} disabled={editing} onClick={()=>setActionsFor(actionsFor===product.id?null:product.id)}><MoreHorizontal size={18}/></button>{actionsFor===product.id&&<div className="product-actions-menu" role="menu" aria-label={`Actions for product ${product.id}`}><button type="button" role="menuitem" aria-label={`Edit product ${product.id}`} onClick={()=>{setActionsFor(null);setDraft({...product});}}><PencilLine size={16}/>Edit</button><button type="button" role="menuitem" aria-label={`Delete product ${product.id}`} onClick={()=>{setActionsFor(null);setDeleting(product);}}><Trash2 size={16}/>Delete</button><button type="button" role="menuitem" aria-label={`Move product ${product.id} to top`} onClick={()=>{setActionsFor(null);moveTo(product.id,0);}}><ArrowUpToLine size={16}/>Move to top</button></div>}</div>
+        {pinned===product.id&&<div className="pinned-product-status"><PinIcon/>Pinned</div>}
         {hasPromotions&&<ProductPromotions expanded={expanded} onToggle={()=>setExpanded(!expanded)} disabled={editing}/>}
       </article>})}
       {!visible.length&&<div className="reference-products-empty" role="status">{products.length?<><p>No products found.</p><button type="button" onClick={()=>{setQuery('');setFilter('All products');}}>Clear search and filters</button></>:<p>No products yet. Add a product to get started.</p>}</div>}

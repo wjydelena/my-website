@@ -4,6 +4,7 @@ import { ModuleBoard, ModuleId, DropTarget, MODULES, MAX_COLUMNS, MIN_PANEL_WIDT
 import { ModuleDragProvider, ModuleHoverOverlay } from './ModuleDrag';
 import { BoardResizeHandles } from './BoardResizeHandles';
 import { restoreRemovedPanel } from './restore-panels';
+import { usePrompter } from './PrompterContext';
 
 type Kind = 'products' | 'live' | 'video' | 'tools' | 'analytics' | 'feed';
 const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value));
@@ -88,6 +89,7 @@ export function useConsoleLayout() {
 }
 
 export function ResizableColumns({ children, header }: { children: React.ReactNode; header?: React.ReactNode }) {
+  const {setLayoutCompleted}=usePrompter();
   const ref = useRef<HTMLDivElement>(null);
   const [box, setBox] = useState({ width: 1190, height: 818 });
   const [ratios, setRatios] = useState([.4, .3, .3]);
@@ -115,6 +117,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
   };
   const applyEdit = () => {
     if (applyDisabled) return;
+    setLayoutCompleted(true);
     dismissRestoreHint();
     saved.current = null;
     editBaseline.current = null;

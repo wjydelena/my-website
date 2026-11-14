@@ -2134,9 +2134,35 @@
           }
         },
         {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Prompter"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Pin suggested product"
+          }
+        },
+        {
+          "action": "hover",
+          "target": {
+            "testId": "prompter-collapsed"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "testId": "prompter-empty"
+          }
+        },
+        {
           "action": "capture",
           "id": "host-focus-restored",
-          "title": "Cancel restores default panels and dimensions"
+          "title": "Cancel restores default; hover compact Prompter shows no-new-suggestions state"
         }
       ]
     },
@@ -4235,9 +4261,22 @@
           }
         },
         {
+          "action": "click",
+          "target": {
+            "testId": "console-blank-area"
+          },
+          "label": "Click blank area after completing layout"
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "testId": "prompter-suggestion"
+          }
+        },
+        {
           "action": "capture",
           "id": "cancel-saved-to-default",
-          "title": "Cancel returns to default even after a prior Apply"
+          "title": "Cancel restores default; blank click opens Prompter recommendation"
         }
       ]
     },
@@ -4446,9 +4485,29 @@
           }
         },
         {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Prompter"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Pin suggested product"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "testId": "prompter-collapsed"
+          }
+        },
+        {
           "action": "capture",
           "id": "five-columns-cancel-default",
-          "title": "Cancel returns to the default layout"
+          "title": "Cancel restores default; suggested Pin collapses Prompter and shows pinned product"
         }
       ]
     },

@@ -4,7 +4,7 @@ import layoutEducation from './assets/layout-education-twice.gif';
 import {isCustomizeEducationBlankTarget, scheduleCustomizeEducationDismiss} from './customize-education';
 import './customize-education.css';
 
-export function CustomizeEducation({onCustomize,entryShown}:{onCustomize:()=>void;entryShown:React.MutableRefObject<boolean>}) {
+export function CustomizeEducation({onCustomize,entryShown,allowBlankReplay=true}:{onCustomize:()=>void;entryShown:React.MutableRefObject<boolean>;allowBlankReplay?:boolean}) {
   const [visible,setVisible] = useState(()=>!entryShown.current);
   const [animationReady,setAnimationReady] = useState(false);
   const [gifSrc,setGifSrc] = useState<string>();
@@ -34,7 +34,7 @@ export function CustomizeEducation({onCustomize,entryShown}:{onCustomize:()=>voi
       if(!(event.target instanceof Node) || root.current?.contains(event.target))return;
       if(visible){dismiss();return;}
       if(event.button!==0 || event.defaultPrevented || document.visibilityState!=='visible')return;
-      if(isCustomizeEducationBlankTarget(event.target)){
+      if(allowBlankReplay&&isCustomizeEducationBlankTarget(event.target)){
         setAnimationReady(false);
         setVisible(true);
       }
@@ -43,7 +43,7 @@ export function CustomizeEducation({onCustomize,entryShown}:{onCustomize:()=>voi
     document.addEventListener('click',click,true);
     document.addEventListener('visibilitychange',hide);
     return ()=>{document.removeEventListener('click',click,true);document.removeEventListener('visibilitychange',hide);};
-  },[visible,dismiss]);
+  },[visible,dismiss,allowBlankReplay]);
   useEffect(()=>{
     if(!visible)return;
     const escape = (event:KeyboardEvent) => {

@@ -17,7 +17,8 @@ import chair from './assets/chair.png';
 import boot from './assets/boot.png';
 import shirt from './assets/shirt.png';
 import './styles.css';
-import assistantIcon from './assets/LIVE_Ai_Assistant_Fill.svg';
+import {PrompterProvider,usePrompter} from './PrompterContext';
+import {PrompterLogo,PrompterOverlay} from './Prompter';
 import './header.css';
 import './responsive.css';
 import './chat-focus.css';
@@ -28,5 +29,5 @@ import './reference-editor.css';
 import { CustomizeEducation } from './CustomizeEducation';
 import './navigation-1725.css';
 import './card-hover.css';
-function Header(){const entryEducationShown=React.useRef(false);const {editing,beginEdit}=useConsoleLayout();if(editing)return <EditingHeader/>;return <header className="topbar console-topnav" data-testid="console-blank-area"><strong className="console-title">LIVE console</strong><div className="quick-live">Quick LIVE<ChevronDown size={14}/></div><div className="top-actions"><div className="assistant"><img className="assistant-icon" src={assistantIcon} width={14} height={14} alt=""/><strong>Prompter</strong></div><span className="divider"/><CustomizeEducation onCustomize={beginEdit} entryShown={entryEducationShown}/><span className="divider"/><svg className="nav-utility-icon nav-fullscreen-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M8 3H4a1 1 0 0 0-1 1v4M16 3h4a1 1 0 0 1 1 1v4M21 16v4a1 1 0 0 1-1 1h-4M8 21H4a1 1 0 0 1-1-1v-4"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg><Settings className="nav-utility-icon" size={20}/><span className="divider"/><TriangleAlert className="nav-utility-icon" size={20}/></div></header>}
-export default function App(){return <div className="console-shell"><Sidebar/><main className="workspace"><ResizableColumns header={<Header/>}><ProductColumn/><LiveColumn/><AnalyticsColumn/></ResizableColumns></main></div>}
+function Header(){const entryEducationShown=React.useRef(false);const {editing,beginEdit}=useConsoleLayout();const {layoutCompleted,visible,open}=usePrompter();if(editing)return <EditingHeader/>;return <header className="topbar console-topnav" data-testid="console-blank-area"><strong className="console-title">LIVE console</strong><div className="quick-live">Quick LIVE<ChevronDown size={14}/></div><div className="top-actions"><button type="button" className="assistant" aria-expanded={visible} aria-controls="prompter-panel" onClick={open}><PrompterLogo/><strong>Prompter</strong></button><span className="divider"/><CustomizeEducation onCustomize={beginEdit} entryShown={entryEducationShown} allowBlankReplay={!layoutCompleted}/><span className="divider"/><svg className="nav-utility-icon nav-fullscreen-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M8 3H4a1 1 0 0 0-1 1v4M16 3h4a1 1 0 0 1 1 1v4M21 16v4a1 1 0 0 1-1 1h-4M8 21H4a1 1 0 0 1-1-1v-4"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg><Settings className="nav-utility-icon" size={20}/><span className="divider"/><TriangleAlert className="nav-utility-icon" size={20}/></div></header>}
+export default function App(){return <PrompterProvider><div className="console-shell"><Sidebar/><main className="workspace"><ResizableColumns header={<Header/>}><ProductColumn/><LiveColumn/><AnalyticsColumn/><PrompterOverlay/></ResizableColumns></main></div></PrompterProvider>}
