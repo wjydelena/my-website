@@ -74,6 +74,9 @@
 .giveaway-badge{height:20px;padding:0 6px;border-radius:20px;font-size:12px;line-height:20px;white-space:nowrap;background:#ededed;color:#161616}
 .giveaway-badge.under-review{background:#ffedc4;color:#af7c00}
 .giveaway-rules{padding:8px;border-radius:6px;background:#f8f8f8;margin-top:8px;font-size:12px;line-height:18px;color:#737373}
+.giveaway-rules{transition:background-color 120ms ease}
+.console-shell .resizable-columns:not(.layout-editing) .giveaway-item:hover .giveaway-rules{background:#fff}
+@media (prefers-reduced-motion:reduce){.giveaway-rules{transition:none}}
 .giveaway-rules>p+p{margin-top:4px}
 .giveaway-rules b{color:#161616;font-weight:500;margin-right:4px}
 .giveaway-rules .giveaway-result{display:flex;align-items:center;gap:6px;margin-top:8px;color:#161616;flex-wrap:wrap}

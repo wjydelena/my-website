@@ -6,11 +6,11 @@ import filterIcon from './assets/annotation-filter.png';
 import gavel from './assets/selling-modes/gavel.png';
 import cards from './assets/selling-modes/trading-cards.png';
 import collage from './assets/selling-modes/gift-collage.png';
-import redBag from './assets/selling-modes/red-gift.png';
+import redBag from './assets/selling-modes/red-gift-clean.png';
 import tierBag from './assets/selling-modes/tier-bag.png';
 import tierBlazer from './assets/selling-modes/tier-blazer.png';
 import pants from './assets/reference-products/promotion-pants.png';
-import sweater from './assets/reference-products/promotion-sweater.png';
+import sweater from './assets/selling-modes/giveaway-sweater-clean.png';
 import hanson from './assets/reference-panels/chat-6.png';
 
 export function CouponEntry({disabled,onClick,buttonRef,auction=false}:{disabled:boolean;onClick:()=>void;buttonRef?:React.RefObject<HTMLButtonElement>;auction?:boolean}){

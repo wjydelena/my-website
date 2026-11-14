@@ -1,8 +1,8 @@
 import {PrompterVideoProduct} from './Prompter';
-import { CartIcon, BagIcon, CustomerIcon, ModeratorIcon } from './AttachmentIcons';
+import { CartIcon, BagIcon, CustomerIcon, ModeratorIcon, FanHeartIcon } from './AttachmentIcons';
 import React, { useRef, useState } from 'react';
 import LiveTools from './LiveTools';
-import { UserRoundCheck, Send, ExternalLink, GripVertical, Power, Mic, MicOff } from 'lucide-react';
+import { Send, ExternalLink, GripVertical, Power, Mic, MicOff } from 'lucide-react';
 import { useConsoleLayout, ResizeHandle } from './ResizableLayout';
 import { useModuleHeader } from './ModuleDrag';
 import { ModuleTitle, RemovePanelButton } from './LayoutEditor';
@@ -49,7 +49,7 @@ function Chat() {
     <div className="chat-title" {...drag}><ModuleTitle>Chat</ModuleTitle><RemovePanelButton id="chat"/><button type="button" aria-label="Chat filters" disabled={editing} onClick={()=>setOptions(!options)}><img className="annotation-console-icon" src={filterIcon} width={16} height={16} alt=""/></button><button type="button" aria-label="Chat settings" disabled={editing} onClick={()=>setOptions(!options)}><img className="annotation-console-icon" src={moreIcon} width={16} height={16} alt=""/></button></div>
     {options&&!editing&&<div className="reference-chat-options"><label><input type="checkbox" checked={showBadges} onChange={e=>setShowBadges(e.target.checked)}/>Show user badges</label></div>}
     <div className="chat-scroll">{messages.map((m,i)=><div className="message" key={i}><img className="avatar" src={m.image} alt=""/><div className="message-content"><div className="name-line"><span>{m.name}</span>{showBadges&&<>
-      {m.role==='fan'&&<span className="fan-icon"><UserRoundCheck size={14} fill="currentColor"/><b>♥</b></span>}{m.role==='mod'&&<ModeratorIcon/>}
+      {m.role==='fan'&&<span className="fan-icon"><FanHeartIcon/></span>}{m.role==='mod'&&<ModeratorIcon/>}
       {(m.role==='fan'||m.role==='normal')&&<><span className="divider"/><span className="chat-tag"><CartIcon/>3</span></>}
       {(m.role==='fan'||m.role==='normal'||('bag' in m&&m.bag))&&<span className="chat-tag"><BagIcon/>2</span>}
       {'customer' in m&&m.customer&&<span className="customer-tag"><CustomerIcon/>No.{m.customer} Customer</span>}
@@ -76,7 +76,7 @@ function CombinedChatActivity({comment,setComment,sent,submit}:{comment:string;s
   const {editing,moduleStyle}=useConsoleLayout();const drag=useModuleHeader('chat');
   const [tab,setTab]=useState('Chat');
   const message=(m:typeof initialMessages[number],key:string)=><div className="message" key={key}><img className="avatar" src={m.image} alt=""/><div className="message-content"><div className="name-line"><span>{m.name}</span>
-    {m.role==='fan'&&<span className="fan-icon"><UserRoundCheck size={14} fill="currentColor"/><b>♥</b></span>}{m.role==='mod'&&<ModeratorIcon/>}
+    {m.role==='fan'&&<span className="fan-icon"><FanHeartIcon/></span>}{m.role==='mod'&&<ModeratorIcon/>}
     {(m.role==='fan'||m.role==='normal')&&<><span className="divider"/><span className="chat-tag"><CartIcon/>3</span></>}
     {(m.role==='fan'||m.role==='normal'||m.bag)&&<span className="chat-tag"><BagIcon/>2</span>}
     {m.customer&&<span className="customer-tag"><CustomerIcon/>No.{m.customer} Customer</span>}
