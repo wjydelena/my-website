@@ -1,6 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { ChevronDown, X, Pin, Plus } from 'lucide-react';
+import { ChevronDown, X, Plus } from 'lucide-react';
+import PinIcon from './PinIcon';
 import priceIcon from './assets/promotion-tools/01-price-cut.png';
 import groupIcon from './assets/promotion-tools/02-group.png';
 import rushIcon from './assets/promotion-tools/rush-reward.png';
@@ -128,7 +129,7 @@ export default function PromotionTools({compact=false}:{compact?:boolean}) {
         <div className="promotion-panel-heading"><h2>Pinned</h2><button className="promotion-customize" onClick={() => setCustomizing(previous => !previous)}>{customizing ? 'Done' : 'Customize'}</button><span className="promotion-heading-divider"/><button className="promotion-close" ref={closeButton} aria-label="Close promotions" onClick={close}><X size={18}/></button></div>
         <PinnedTools labels={pinned} customizing={customizing} onOrderChange={setPinned} onOpen={showTool} graphic={label => graphic(items.find(item => item.label === label)!)} />
         <div className="promotion-all-heading"><h2>All tools</h2><span>Click to open and pin tools</span></div>
-        {groups.map(group => <section className="promotion-tool-group" key={group.title}><h3>{group.title}</h3><div className="promotion-tool-grid">{group.labels.map(label => { const item = items.find(value => value.label === label)!; return <button type="button" className="promotion-tool-card" key={label} aria-label={customizing ? `${pinned.includes(label) ? 'Unpin' : 'Pin'} ${label}` : `Open ${label}`} aria-pressed={customizing ? pinned.includes(label) : undefined} onClick={() => customizing ? togglePin(label) : showTool(label)}><span className="promotion-tool-name">{graphic(item)}{label === 'Rush reward' ? 'Rush Reward' : label}{customizing && <Pin className={`promotion-card-pin${pinned.includes(label) ? ' is-pinned' : ''}`} fill={pinned.includes(label) ? 'currentColor' : 'none'} size={14} aria-hidden="true"/>}</span><span className="promotion-tool-description">{item.description}</span></button>; })}</div></section>)}
+        {groups.map(group => <section className="promotion-tool-group" key={group.title}><h3>{group.title}</h3><div className="promotion-tool-grid">{group.labels.map(label => { const item = items.find(value => value.label === label)!; return <button type="button" className="promotion-tool-card" key={label} aria-label={customizing ? `${pinned.includes(label) ? 'Unpin' : 'Pin'} ${label}` : `Open ${label}`} aria-pressed={customizing ? pinned.includes(label) : undefined} onClick={() => customizing ? togglePin(label) : showTool(label)}><span className="promotion-tool-name">{graphic(item)}{label === 'Rush reward' ? 'Rush Reward' : label}{customizing && <PinIcon className={`promotion-card-pin${pinned.includes(label) ? ' is-pinned' : ''}`}/>}</span><span className="promotion-tool-description">{item.description}</span></button>; })}</div></section>)}
       </div>
     </div></div>, host)}
   </div>;
