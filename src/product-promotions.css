@@ -30,6 +30,7 @@
 .console-shell .reference-product-column .product-card-promotion-toggle:focus-visible{outline:2px solid #009995;outline-offset:2px}
 .console-shell .reference-product-column .product-promotions{position:relative;z-index:2;margin:10px 0 0 48px;background:#f1f1f1;border-radius:6px}
 .console-shell .reference-product-column .reference-product-card:hover .product-promotions{background:#e9e9e9}
+.console-shell .reference-product-column .reference-product-card.is-expanded .product-promotions{background:#fff}
 .console-shell .reference-product-column .product-promotions-heading{display:flex;width:100%;align-items:center;justify-content:space-between;height:34px;border:0;border-radius:6px;background:transparent;padding:0 8px;font-size:12px;font-weight:500;color:#737373;cursor:pointer}
 .product-promotions-heading svg.is-expanded{transform:rotate(180deg)}
 .product-promotions-details{padding:0 8px;background:#fff;border-radius:0 0 6px 6px}
