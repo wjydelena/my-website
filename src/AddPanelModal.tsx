@@ -18,7 +18,7 @@ export const panelDescriptions: Record<ModuleId,string> = {
   chat:'View and respond to viewer comments in real time',
   analytics:'Track key LIVE performance metrics',
   activity:'Track orders and viewer activities as they happen during your LIVE',
-  tools:'Manage Billboard, Shop ads and Auto-post messages for your LIVE',
+  tools:'Manage tools to boost LIVE engagement and sales.',
 };
 export function AddPanelModal({panels,availableColumns,onAdd,onClose}:{panels:ModuleId[];availableColumns:number;onAdd:(ids:ModuleId[])=>void;onClose:()=>void}) {
   const [selected,setSelected]=useState<ModuleId[]>([]);

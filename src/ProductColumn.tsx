@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { GripVertical, PencilLine, Trash2, ArrowUpToLine, X, Search, MoreHorizontal, Plus } from 'lucide-react';
+import { GripVertical, PencilLine, Trash2, ArrowUpToLine, X, Search, MoreHorizontal, Plus, PinOff, Pin } from 'lucide-react';
 import PinIcon from './PinIcon';
 import SellingModes, { CouponEntry } from './SellingModes';
 import './selling-modes.css';
@@ -81,11 +81,11 @@ export default function ProductColumn() {
             <div className="reference-product-thumb"><img src={product.image} alt={['Green knit top','Beige pants','Yellow handbag','Red handbag','Blue blazer','Beige sweater','Cosmetics'][(product.id-1)%7]}/><input type="checkbox" checked={checked.includes(product.id)} disabled={editing} aria-label={`Select product ${product.id}`} onChange={()=>toggle(product.id)}/></div>
             <div className="reference-product-info"><p className="reference-product-name">{product.name}</p><span className="reference-product-stock">Stocks: {product.stock}</span><div className="product-price-line"><strong className="reference-product-price">${product.price}</strong>{product.oldPrice&&<del>${product.oldPrice}</del>}</div></div>
           </div>
-          <button type="button" className="reference-product-pin" aria-label={`${pinned===product.id?'Unpin':'Pin'} product ${product.id}`} aria-pressed={pinned===product.id} disabled={editing} onClick={()=>setPinned(pinned===product.id?null:product.id)}><PinIcon/>Pin</button>
+          <button type="button" className="reference-product-pin" aria-label={`${pinned===product.id?'Unpin':'Pin'} product ${product.id}`} aria-pressed={pinned===product.id} disabled={editing} onClick={()=>setPinned(pinned===product.id?null:product.id)}>{pinned===product.id?<PinOff size={16}/>:<PinIcon/>}{pinned===product.id?'Unpin':'Pin'}</button>
           <div className="reference-product-stats"><span>Clicks <b>0</b></span><i/><span>Add to cart <b>0</b></span><i/><span>Items sold <b>0</b></span></div>
         </div>
         <div className="reference-product-actions"><button type="button" className="product-actions-trigger" aria-label={`More actions for product ${product.id}`} aria-haspopup="menu" aria-expanded={actionsFor===product.id} disabled={editing} onClick={()=>setActionsFor(actionsFor===product.id?null:product.id)}><MoreHorizontal size={18}/></button>{actionsFor===product.id&&<div className="product-actions-menu" role="menu" aria-label={`Actions for product ${product.id}`}><button type="button" role="menuitem" aria-label={`Edit product ${product.id}`} onClick={()=>{setActionsFor(null);setDraft({...product});}}><PencilLine size={16}/>Edit</button><button type="button" role="menuitem" aria-label={`Delete product ${product.id}`} onClick={()=>{setActionsFor(null);setDeleting(product);}}><Trash2 size={16}/>Delete</button><button type="button" role="menuitem" aria-label={`Move product ${product.id} to top`} onClick={()=>{setActionsFor(null);moveTo(product.id,0);}}><ArrowUpToLine size={16}/>Move to top</button></div>}</div>
-        {pinned===product.id&&<div className="pinned-product-status"><PinIcon/>Pinned</div>}
+        {pinned===product.id&&<div className="pinned-product-status"><Pin size={12} fill="currentColor" aria-hidden="true"/>Pinned</div>}
         {hasPromotions&&<ProductPromotions expanded={expanded} onToggle={()=>setExpanded(!expanded)} disabled={editing}/>}
       </article>})}
       {!visible.length&&<div className="reference-products-empty" role="status">{products.length?<><p>No products found.</p><button type="button" onClick={()=>{setQuery('');setFilter('All products');}}>Clear search and filters</button></>:<p>No products yet. Add a product to get started.</p>}</div>}

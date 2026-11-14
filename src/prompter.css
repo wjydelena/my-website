@@ -26,7 +26,7 @@
 .console-shell .prompter-product-info{flex:1;min-width:0}
 .console-shell .prompter-product-info p{font-size:14px;line-height:20px;margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:break-word}
 .console-shell .prompter-product-info strong{font-size:16px;font-weight:500;line-height:24px}
-.console-shell .prompter-pin{width:60px;height:28px;flex-shrink:0;border:0;border-radius:18px;background:#009b9e;color:white;font-size:12px;font-weight:500;cursor:pointer}
+.console-shell .prompter-pin{width:78px;height:28px;flex-shrink:0;border:0;border-radius:18px;background:#009b9e;color:white;font-size:12px;font-weight:500;cursor:pointer}
 .console-shell .prompter-pin:hover{background:#00898c}
 .console-shell .prompter-empty-copy{margin:16px 0 -2px;text-align:center;font-size:14px;line-height:20px;color:#bcbcbc;font-weight:400}
 .console-shell .prompter-preferences{position:absolute;top:48px;right:16px;width:244px;padding:12px;background:#3e3e3e;border:1px solid #656565;border-radius:6px;box-shadow:0 6px 20px #0003;z-index:1;font-size:12px}
@@ -45,6 +45,9 @@
 .console-shell .reference-product-column .reference-product-card.is-pinned:hover{background:#e5f4f5}
 .console-shell .reference-product-column .reference-product-card.is-pinned .reference-product-rank>span{background:#fff}
 .console-shell .reference-product-column .reference-product-card.is-pinned .product-actions-trigger{background:#fff}
+.console-shell .reference-product-column .reference-product-pin[aria-pressed="true"]{background:#fff;color:#141414;border:1px solid #dedede}
+.console-shell .reference-product-column .reference-product-pin[aria-pressed="true"] svg{transform:none}
+.console-shell .reference-product-column .reference-product-card.is-pinned .product-actions-trigger{border:1px solid #e5e5e5}
 .console-shell .pinned-product-status{display:flex;align-items:center;gap:4px;width:max-content;height:20px;margin:12px 0 -8px -8px;padding:0 8px;background:#c5ebec;color:#00868a;font-size:12px;font-weight:500;border-radius:0 4px 0 6px}
 .console-shell .pinned-product-status .annotation-pin-icon{width:12px!important;height:12px!important}
 @media(max-width:560px){.console-shell .prompter-positioner{right:8px;max-width:calc(100vw - 76px)}.console-shell .prompter-product{gap:6px}.console-shell .prompter-product-image{width:52px;height:64px}}

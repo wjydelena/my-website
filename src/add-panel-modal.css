@@ -30,10 +30,11 @@
 .console-shell .add-panel-modal-header button:focus-visible,.console-shell .add-panel-modal-footer button:focus-visible{outline:2px solid #009995;outline-offset:2px}
 @media(max-width:680px){.console-shell .add-panel-backdrop{padding:16px}.console-shell .add-panel-modal{padding:20px}.console-shell .add-panel-card-grid{grid-template-columns:minmax(0,1fr)}.console-shell .panel-choice-preview{height:260px}.console-shell .panel-choice-art{height:230px}}
 
-.panel-tools-preview{display:flex;flex-direction:column;gap:14px;width:100%;padding:18px 14px;color:#161616;text-align:left}
-.panel-tools-preview>strong{font-size:15px}
-.panel-tools-preview>span{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
-.panel-tools-preview>span>span{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;padding:10px 4px;border-radius:6px;background:#f1f1f1}
-.panel-tools-preview small{font-size:9px;text-align:center;line-height:12px}
+.console-shell .panel-tools-preview{display:flex;flex-direction:column;gap:16px;width:78%;height:calc(100% - 37px);box-sizing:border-box;padding:12px;color:#161616;text-align:left;background:#fff;border:1px solid #e5e5e5;border-radius:8px 8px 0 0;filter:drop-shadow(0 -2px 16px #0002);mask-image:linear-gradient(#000 0%,#000 84%,transparent 100%);pointer-events:none}
+.console-shell .panel-tools-preview>strong{font-size:12px;line-height:16px;font-weight:500}
+.console-shell .panel-tools-preview>span{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.console-shell .panel-tools-preview>span>span{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;height:45px;padding:4px;box-sizing:border-box;min-width:0;border-radius:4px;background:#f5f5f5}
+.console-shell .panel-tools-preview img{width:13px;height:13px;object-fit:contain}
+.console-shell .panel-tools-preview small{display:block;max-width:min(100%,80px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:9px;text-align:center;line-height:12px}
 
 .panel-capacity-message{margin:12px 0 0;color:#737373;font-size:12px;line-height:18px}
