@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {SlidersHorizontal, X} from 'lucide-react';
+import {Settings, X} from 'lucide-react';
 import {usePrompter} from './PrompterContext';
 import {useConsoleLayout} from './ResizableLayout';
 import {isCustomizeEducationBlankTarget} from './customize-education';
@@ -68,11 +68,11 @@ export function PrompterOverlay(){
           <button type="button" aria-label={compact?'Expand Prompter':'Collapse Prompter'} onClick={compact?open:minimize}>
             <img src={collapseIcon} width={16} height={16} alt=""/>
           </button>
-          {!compact&&<><button type="button" aria-label="Prompter settings" aria-expanded={settings} onClick={()=>setSettings(!settings)}><SlidersHorizontal size={16}/></button><button type="button" aria-label="Close Prompter" onClick={close}><X size={16}/></button></>}
+          {!compact&&<><button type="button" aria-label="Prompter settings" aria-expanded={settings} onClick={()=>setSettings(!settings)}><Settings size={16}/></button><button type="button" aria-label="Close Prompter" onClick={close}><X size={16}/></button></>}
         </div>
       </header>
       {!compact&&(suggestion?<div className="prompter-body">
-        <p className="prompter-recommendation"><em>69</em> viewers have recently viewed #1 product. Pin it now!</p>
+        <p className="prompter-recommendation">69 viewers have recently viewed #1 product. Pin it now!</p>
         <div className="prompter-product">
           <div className="prompter-product-image"><img src={product.image} alt="Suggested product"/><span>1</span></div>
           <div className="prompter-product-info"><p>{product.name}</p><strong>${product.price}</strong></div>
