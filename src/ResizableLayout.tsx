@@ -288,12 +288,9 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     const next = removeBoardPanel(visibleBoard,id);
     if(next===visibleBoard)return;
     markAdjusted();setBoard(next);
-    let seen = hintSeen.current;
-    try { seen = seen || localStorage.getItem('live-console.add-panel-hint.v1') === 'seen'; } catch {}
-    if(!seen) {
+    if(!hintSeen.current) {
       hintSeen.current = true;
       setShowRestoreHint(true);
-      try { localStorage.setItem('live-console.add-panel-hint.v1','seen'); } catch {}
     }
   };
   const restorePanels = (ids: ModuleId[]) => {
