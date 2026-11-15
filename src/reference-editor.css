@@ -14,7 +14,6 @@
 .console-shell .preset-only-editor .layout-editor-actions .layout-cancel{width:64px;min-width:64px;padding:0;background:#fff;border:1px solid #d4dddd;color:#202020}
 .console-shell .preset-only-editor .layout-editor-actions .layout-cancel:hover{background:#f5f5f5}
 .console-shell .preset-only-editor .layout-editor-actions .add-panel-trigger{min-width:0;padding:0;background:transparent;border:0;color:#009995;font-weight:500}
-.console-shell .preset-only-editor .add-panel-trigger:hover{background:#d4edeb}
 .console-shell .customize-title{font-size:16px;font-weight:500;line-height:24px}
 .console-shell .layout-mode-field{width:300px}
 .console-shell .layout-mode-trigger{width:300px;height:32px;background:#fff;border:1px solid #d4d4d4;border-radius:4px;padding:0 12px;gap:8px;font-size:14px;font-weight:400}
@@ -67,7 +66,7 @@
 .console-shell .has-add-panel .layout-cancel{min-width:52px}
 .add-panel-control{position:relative;flex:none;z-index:120}
 .console-shell .layout-editor-actions .add-panel-trigger{height:28px;min-width:102px;padding:0 10px;gap:4px;background:#fff;color:#171717;border:1px solid #d4d4d4;border-radius:4px;font-size:12px;font-weight:500;white-space:nowrap}
-.console-shell .layout-editor-actions .add-panel-trigger:hover,.console-shell .add-panel-trigger[aria-expanded="true"]{background:#f5f5f5}
+.console-shell .add-panel-trigger[aria-expanded="true"]{background:#f5f5f5}
 .add-panel-divider{width:1px;height:12px;background:#c4d4d3;flex:none}
 .console-shell .add-panel-hint{position:absolute;top:37px;left:50%;transform:translateX(-50%);width:312px;padding:12px;background:#0b9c99;color:#fff;border-radius:8px;box-shadow:0 8px 24px #0003;white-space:normal;text-align:left;z-index:121}
 .add-panel-hint::before{content:'';position:absolute;bottom:100%;left:calc(50% - 5px);border:5px solid transparent;border-bottom-color:#0b9c99}
