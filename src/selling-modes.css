@@ -125,7 +125,7 @@
 .selling-detail-products>div{display:flex;flex-direction:column;gap:4px;font-size:12px;color:#737373}
 .selling-detail-products img{height:60px;width:60px;border-radius:6px;object-fit:cover}
 .console-shell .selling-mode-content button:focus-visible,.console-shell .coupon-entry:focus-visible{outline:2px solid #009995;outline-offset:2px}
-.layout-editing .selling-subtabs,.layout-editing .auction-toolbar,.layout-editing .selling-status-tabs,.layout-editing .selling-scroll,.layout-editing .selling-footer{opacity:.3;pointer-events:none}
+.layout-editing .selling-subtabs,.layout-editing .auction-toolbar,.layout-editing .selling-status-tabs,.layout-editing .selling-scroll,.layout-editing .selling-footer{opacity:1;pointer-events:none}
 @container(max-width:480px){.auction-price{flex-wrap:wrap}.auction-price .selling-row-actions{margin-left:auto}.auction-bidder{font-size:11px}.auction-set{display:grid;grid-template-columns:70px minmax(0,1fr)}.auction-set .selling-row-info{min-width:0;margin-right:0}.auction-set .set-actions{grid-column:2;justify-self:end;margin:0}.rush-bottom{flex-wrap:wrap}.rush-bottom .selling-row-actions{margin-left:auto}.rush-conditions{font-size:13px}.tier-summary{flex-wrap:wrap}.tier-images{margin-left:auto}.selling-subtabs{gap:6px}.selling-subtabs>button{padding:0 10px}.purchase-gift-panel>header{white-space:normal;flex-wrap:wrap}}
 @media(prefers-reduced-motion:reduce){.selling-mode-content *{scroll-behavior:auto}}
 

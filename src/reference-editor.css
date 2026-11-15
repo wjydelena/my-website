@@ -35,9 +35,10 @@
 .console-shell .layout-editor-actions .layout-cancel:hover{background:#d4edeb}
 .console-shell .layout-editing .editing-products-heading{height:44px;border:0;justify-content:space-between}
 .console-shell .layout-editing .promotion-tools{height:56px;min-height:56px;pointer-events:none}
-.console-shell .layout-editing .promotion-content,.console-shell .layout-editing .promo-more{opacity:.3}
+.console-shell .layout-editing .reference-product-column .promotion-content,.console-shell .layout-editing .reference-product-column .promo-more{opacity:1}
 .console-shell .layout-editing .reference-product-controls,.console-shell .layout-editing .reference-product-actions,.console-shell .layout-editing .reference-product-stats{opacity:1}
-.console-shell .layout-editing .reference-product-pin{opacity:.3}
+.console-shell .layout-editing .reference-product-pin{opacity:1}
+.console-shell .layout-editing .reference-product-column .product-footer>*{opacity:1}
 .console-shell .layout-editing .module-title{font-size:16px;font-weight:500;gap:4px}
 .console-shell .layout-editing .module-title>svg,.console-shell .layout-editing .activity-edit-grip{color:#737373}
 .console-shell .layout-editing .video-edit-label .module-title>svg{color:#fff}
