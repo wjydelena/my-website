@@ -21,6 +21,47 @@ export function PrompterOverlay(){
   const [settings,setSettings]=useState(false);
   const [recommendations,setRecommendations]=useState(true);
   const root=useRef<HTMLElement>(null);
+  const [position,setPosition]=useState<{x:number;y:number}|null>(null);
+  const [dragging,setDragging]=useState(false);
+  const drag=useRef<{pointer:number;startX:number;startY:number;x:number;y:number}|null>(null);
+  const movePanel=(x:number,y:number)=>{
+    const width=root.current?.offsetWidth??368;
+    const height=root.current?.offsetHeight??206;
+    setPosition({x:Math.max(8,Math.min(x,window.innerWidth-width-8)),y:Math.max(8,Math.min(y,window.innerHeight-height-8))});
+  };
+  const startDrag=(event:React.PointerEvent<HTMLElement>)=>{
+    if(event.button!==0||!event.isPrimary||(event.target as Element).closest('button,input'))return;
+    const anchor=root.current?.parentElement;
+    if(!anchor)return;
+    event.preventDefault();event.stopPropagation();
+    drag.current={pointer:event.pointerId,startX:event.clientX,startY:event.clientY,x:anchor.offsetLeft,y:anchor.offsetTop};
+    event.currentTarget.setPointerCapture(event.pointerId);
+    setDragging(true);
+  };
+  const onDrag=(event:React.PointerEvent<HTMLElement>)=>{
+    const active=drag.current;
+    if(!active||active.pointer!==event.pointerId)return;
+    movePanel(active.x+event.clientX-active.startX,active.y+event.clientY-active.startY);
+  };
+  const endDrag=(event:React.PointerEvent<HTMLElement>)=>{
+    if(drag.current?.pointer!==event.pointerId)return;
+    drag.current=null;setDragging(false);
+    if(event.currentTarget.hasPointerCapture(event.pointerId))event.currentTarget.releasePointerCapture(event.pointerId);
+  };
+  useEffect(()=>{
+    if(!visible||editing){drag.current=null;setDragging(false);return;}
+    const element=root.current;
+    if(!element)return;
+    const constrain=()=>setPosition(previous=>{
+      if(!previous)return previous;
+      const x=Math.max(8,Math.min(previous.x,window.innerWidth-element.offsetWidth-8));
+      const y=Math.max(8,Math.min(previous.y,window.innerHeight-element.offsetHeight-8));
+      return x===previous.x&&y===previous.y?previous:{x,y};
+    });
+    const observer=new ResizeObserver(constrain);observer.observe(element);
+    window.addEventListener('resize',constrain);
+    return()=>{observer.disconnect();window.removeEventListener('resize',constrain);};
+  },[visible,editing]);
   const preview=collapsed&&(hovered||focused);
   const compact=collapsed&&!preview;
   const product=state.products[0];
@@ -55,7 +96,7 @@ export function PrompterOverlay(){
     return()=>{document.removeEventListener('keydown',escape);document.removeEventListener('pointerdown',outside);};
   },[visible,settings,close]);
   if(editing||!visible)return null;
-  return <div className="prompter-positioner">
+  return <div className={`prompter-positioner${dragging?' is-dragging':''}`} style={position?{left:position.x,top:position.y,right:'auto'}:undefined}>
     <section ref={root} className={`prompter-popover${compact?' is-compact':suggestion?' has-suggestion':' is-empty'}`}
       style={{backdropFilter:'blur(3px)',WebkitBackdropFilter:'blur(3px)'}}
       id="prompter-panel" role="region" aria-label="Prompter suggestions" data-testid={compact?'prompter-collapsed':suggestion?'prompter-suggestion':'prompter-empty'}
@@ -64,7 +105,15 @@ export function PrompterOverlay(){
       onPointerLeave={()=>setHovered(false)}
       onFocusCapture={()=>{if(collapsed){setFocused(true);state.setVideoPreviewVisible(false);}}}
       onBlurCapture={event=>{if(!event.currentTarget.contains(event.relatedTarget as Node|null))setFocused(false);}}>
-      <header className="prompter-header">
+      <header className="prompter-header" tabIndex={0} aria-label="Move Prompter panel" aria-describedby="prompter-drag-instructions"
+        onPointerDown={startDrag} onPointerMove={onDrag} onPointerUp={endDrag} onPointerCancel={endDrag} onLostPointerCapture={endDrag}
+        onKeyDown={event=>{
+          if(event.target!==event.currentTarget||!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(event.key))return;
+          event.preventDefault();event.stopPropagation();
+          const anchor=root.current?.parentElement;if(!anchor)return;
+          const step=event.shiftKey?40:10;
+          movePanel(anchor.offsetLeft+(event.key==='ArrowLeft'?-step:event.key==='ArrowRight'?step:0),anchor.offsetTop+(event.key==='ArrowUp'?-step:event.key==='ArrowDown'?step:0));
+        }}>
         <PrompterLogo monochrome/><strong>Prompter</strong>
         <div className="prompter-controls">
           <button type="button" aria-label={compact?'Expand Prompter':'Collapse Prompter'} onClick={compact?open:minimize}>
@@ -73,6 +122,7 @@ export function PrompterOverlay(){
           {!compact&&<><button type="button" aria-label="Prompter settings" aria-expanded={settings} onClick={()=>setSettings(!settings)}><Settings size={16}/></button><button type="button" aria-label="Close Prompter" onClick={close}><X size={16}/></button></>}
         </div>
       </header>
+      <span id="prompter-drag-instructions" className="move-sr-only">Drag the title bar to move this panel. When focused, use arrow keys to move; hold Shift for larger steps.</span>
       {!compact&&(suggestion?<div className="prompter-body">
         <p className="prompter-recommendation">69 viewers have recently viewed #1 product. Pin it now!</p>
         <div className="prompter-product">
