@@ -14,6 +14,12 @@ type PrompterState = {
   collapsed:boolean;
   setCollapsed:React.Dispatch<React.SetStateAction<boolean>>;
   handled:boolean;
+  realTimeSuggestions:boolean;
+  setRealTimeSuggestions:React.Dispatch<React.SetStateAction<boolean>>;
+  smartScripts:boolean;
+  setSmartScripts:React.Dispatch<React.SetStateAction<boolean>>;
+  autoPostGiveaway:boolean;
+  setAutoPostGiveaway:React.Dispatch<React.SetStateAction<boolean>>;
   open:()=>void;
   close:()=>void;
   scheduleLayoutSuggestion:()=>void;
@@ -36,19 +42,23 @@ export function PrompterProvider({children}:{children:React.ReactNode}){
   const [visible,setVisible]=useState(false);
   const [collapsed,setCollapsed]=useState(false);
   const [handled,setHandled]=useState(false);
+  const [realTimeSuggestions,setRealTimeSuggestions]=useState(true);
+  const [smartScripts,setSmartScripts]=useState(true);
+  const [autoPostGiveaway,setAutoPostGiveaway]=useState(true);
   const firstLayoutSuggestion=useRef(false);
   const pushTimer=useRef<ReturnType<typeof setTimeout>>();
   const cancelPush=useCallback(()=>{clearTimeout(pushTimer.current);pushTimer.current=undefined;},[]);
   useEffect(()=>cancelPush,[cancelPush]);
   const open=useCallback(()=>{cancelPush();setVisible(true);setCollapsed(false);},[cancelPush]);
   const close=useCallback(()=>{cancelPush();setVisible(false);setCollapsed(false);},[cancelPush]);
+  useEffect(()=>{if(!realTimeSuggestions)cancelPush();},[realTimeSuggestions,cancelPush]);
   const scheduleLayoutSuggestion=useCallback(()=>{
-    if(firstLayoutSuggestion.current)return;
+    if(firstLayoutSuggestion.current||!realTimeSuggestions)return;
     firstLayoutSuggestion.current=true;
     pushTimer.current=setTimeout(open,2000);
-  },[open]);
+  },[open,realTimeSuggestions]);
   const pinSuggestion=useCallback((id:number)=>{
     setPinned(id);setHandled(true);setCollapsed(true);
   },[setPinned]);
-  return <Context.Provider value={{layoutCompleted,setLayoutCompleted,products,setProducts,pinned,setPinned,videoPreviewVisible,setVideoPreviewVisible,visible,collapsed,setCollapsed,handled,open,close,scheduleLayoutSuggestion,pinSuggestion}}>{children}</Context.Provider>;
+  return <Context.Provider value={{layoutCompleted,setLayoutCompleted,products,setProducts,pinned,setPinned,videoPreviewVisible,setVideoPreviewVisible,visible,collapsed,setCollapsed,handled,realTimeSuggestions,setRealTimeSuggestions,smartScripts,setSmartScripts,autoPostGiveaway,setAutoPostGiveaway,open,close,scheduleLayoutSuggestion,pinSuggestion}}>{children}</Context.Provider>;
 }

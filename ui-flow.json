@@ -2040,7 +2040,7 @@
     },
     {
       "id": "host-focus-save-restore",
-      "title": "Save Video focus and Cancel back to default layout",
+      "title": "Save Video focus, verify three Prompter preferences, and Cancel back to default layout",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -2138,6 +2138,81 @@
           "target": {
             "role": "button",
             "name": "Prompter"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Prompter settings"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "role": "dialog",
+            "name": "Prompter settings"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "switch",
+            "name": "Real-time suggestions"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "testId": "prompter-empty"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "switch",
+            "name": "Smart scripts"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "switch",
+            "name": "Auto-post giveaway"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "switch",
+            "name": "Auto-post giveaway"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "switch",
+            "name": "Smart scripts"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "switch",
+            "name": "Real-time suggestions"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "testId": "prompter-suggestion"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Prompter settings"
           }
         },
         {

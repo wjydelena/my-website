@@ -1,4 +1,5 @@
 import {PrompterVideoProduct} from './Prompter';
+import {usePrompter} from './PrompterContext';
 import { CartIcon, BagIcon, CustomerIcon, ModeratorIcon, FanHeartIcon } from './AttachmentIcons';
 import React, { useRef, useState } from 'react';
 import LiveTools from './LiveTools';
@@ -59,7 +60,7 @@ function Chat() {
 }
 export function LiveColumn(){
   const {editing,arrangement,moduleStyle}=useConsoleLayout();const drag=useModuleHeader('video');
-  const [scripts,setScripts]=useState(true);const [microphone,setMicrophone]=useState(true);const [playing,setPlaying]=useState(true);const video=useRef<HTMLVideoElement>(null);
+  const {smartScripts:scripts,setSmartScripts:setScripts}=usePrompter();const [microphone,setMicrophone]=useState(true);const [playing,setPlaying]=useState(true);const video=useRef<HTMLVideoElement>(null);
   return <section className="live-column"><div className="video-preview" data-module-id="video" style={moduleStyle('video')}><video ref={video} className="live-image" src={liveVideo} autoPlay loop muted playsInline preload="auto" aria-label="LIVE video preview"/>{editing&&<div className="video-edit-label" {...drag}><ModuleTitle>Video</ModuleTitle><RemovePanelButton id="video"/></div>}<div className="video-control-bar"><img className="video-collapse-icon" src={videoCollapse} width={16} height={16} alt=""/><span className="divider"/><label className="scripts-control">Scripts<button type="button" role="switch" aria-label="Scripts" aria-checked={scripts} disabled={editing} onClick={()=>setScripts(!scripts)}><i/></button></label><span className="divider"/><button type="button" className="video-mic" aria-label={microphone?'Mute microphone preview':'Unmute microphone preview'} aria-pressed={!microphone} disabled={editing} onClick={()=>setMicrophone(!microphone)}>{microphone?<Mic size={18}/>:<MicOff size={18}/>}</button><span className="control-space"/><img className="live-indicator" src={videoLiveIndicator} width={24} height={14} alt="Live"/><span className="timer">01:12:05</span><span className="divider"/><button type="button" aria-label={playing?'Pause video preview':'Play video preview'} disabled={editing} onClick={()=>{if(playing)video.current?.pause();else video.current?.play();setPlaying(!playing);}}><Power size={19}/></button></div><PrompterVideoProduct/><ResizeHandle kind="video" label={arrangement==='chat-focus'?'Resize live preview and analytics':'Resize live preview and chat'}/></div><Chat/></section>;
 }
 const metrics=[['$0','GMV'],['123','Current viewers'],['2.7K','Impressions'],['3.00%','Enter room rate'],['25s','Avg. duration'],['79','Product clicks']];

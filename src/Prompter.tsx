@@ -6,6 +6,7 @@ import {isCustomizeEducationBlankTarget} from './customize-education';
 import logo from './assets/prompter-logo.png';
 import captionLogo from './assets/annotation-icons/prompter-caption.png';
 import collapseIcon from './assets/video-collapse.png';
+import PrompterSettings from './PrompterSettings';
 import './prompter.css';
 
 export function PrompterLogo({monochrome=false}:{monochrome?:boolean}){
@@ -19,8 +20,9 @@ export function PrompterOverlay(){
   const [hovered,setHovered]=useState(false);
   const [focused,setFocused]=useState(false);
   const [settings,setSettings]=useState(false);
-  const [recommendations,setRecommendations]=useState(true);
   const root=useRef<HTMLElement>(null);
+  const settingsButton=useRef<HTMLButtonElement>(null);
+  const settingsPopover=useRef<HTMLDivElement>(null);
   const [position,setPosition]=useState<{x:number;y:number}|null>(null);
   const [dragging,setDragging]=useState(false);
   const drag=useRef<{pointer:number;startX:number;startY:number;x:number;y:number}|null>(null);
@@ -65,7 +67,7 @@ export function PrompterOverlay(){
   const preview=collapsed&&(hovered||focused);
   const compact=collapsed&&!preview;
   const product=state.products[0];
-  const suggestion=product&&!state.handled&&state.pinned!==product.id&&recommendations;
+  const suggestion=product&&!state.handled&&state.pinned!==product.id&&state.realTimeSuggestions;
   const minimize=()=>{setCollapsed(true);setHovered(false);setFocused(false);setSettings(false);};
   useEffect(()=>{
     if(editing)close();
@@ -77,7 +79,7 @@ export function PrompterOverlay(){
     if(editing||!layoutCompleted)return;
     const click=(event:MouseEvent)=>{
       if(event.button!==0||event.defaultPrevented||document.visibilityState!=='visible')return;
-      if(event.target instanceof Element&&event.target.closest('.prompter-popover,.prompter-video-product'))return;
+      if(event.target instanceof Element&&event.target.closest('.prompter-popover,.prompter-preferences,.prompter-video-product'))return;
       if(isCustomizeEducationBlankTarget(event.target))open();
     };
     document.addEventListener('click',click,true);
@@ -86,25 +88,25 @@ export function PrompterOverlay(){
   useEffect(()=>{
     if(!visible)return;
     const escape=(event:KeyboardEvent)=>{
-      if(event.key==='Escape'){if(settings)setSettings(false);else close();}
+      if(event.key==='Escape'){if(settings){setSettings(false);settingsButton.current?.focus({preventScroll:true});}else close();}
     };
     const outside=(event:PointerEvent)=>{
-      if(settings&&event.target instanceof Node&&!root.current?.contains(event.target))setSettings(false);
+      if(settings&&event.target instanceof Node&&!root.current?.contains(event.target)&&!settingsPopover.current?.contains(event.target))setSettings(false);
     };
     document.addEventListener('keydown',escape);
     document.addEventListener('pointerdown',outside);
     return()=>{document.removeEventListener('keydown',escape);document.removeEventListener('pointerdown',outside);};
   },[visible,settings,close]);
   if(editing||!visible)return null;
-  return <div className={`prompter-positioner${dragging?' is-dragging':''}`} style={position?{left:position.x,top:position.y,right:'auto'}:undefined}>
-    <section ref={root} className={`prompter-popover${compact?' is-compact':suggestion?' has-suggestion':' is-empty'}`}
+  return <div className={`prompter-positioner${dragging?' is-dragging':''}`} style={position?{left:position.x,top:position.y,right:'auto'}:undefined}
+    onFocusCapture={()=>{if(collapsed){setFocused(true);state.setVideoPreviewVisible(false);}}}
+    onBlurCapture={event=>{if(!event.currentTarget.contains(event.relatedTarget as Node|null))setFocused(false);}}>
+    <section ref={root} className={`prompter-popover${compact?' is-compact':suggestion?' has-suggestion':' is-empty'}${settings?' has-settings':''}`}
       style={{backdropFilter:'blur(3px)',WebkitBackdropFilter:'blur(3px)'}}
       id="prompter-panel" role="region" aria-label="Prompter suggestions" data-testid={compact?'prompter-collapsed':suggestion?'prompter-suggestion':'prompter-empty'}
       onPointerDown={event=>event.stopPropagation()}
       onPointerEnter={()=>{if(collapsed){setHovered(true);state.setVideoPreviewVisible(false);}}}
-      onPointerLeave={()=>setHovered(false)}
-      onFocusCapture={()=>{if(collapsed){setFocused(true);state.setVideoPreviewVisible(false);}}}
-      onBlurCapture={event=>{if(!event.currentTarget.contains(event.relatedTarget as Node|null))setFocused(false);}}>
+      onPointerLeave={()=>setHovered(false)}>
       <header className="prompter-header" tabIndex={0} aria-label="Move Prompter panel" aria-describedby="prompter-drag-instructions"
         onPointerDown={startDrag} onPointerMove={onDrag} onPointerUp={endDrag} onPointerCancel={endDrag} onLostPointerCapture={endDrag}
         onKeyDown={event=>{
@@ -119,7 +121,7 @@ export function PrompterOverlay(){
           <button type="button" aria-label={compact?'Expand Prompter':'Collapse Prompter'} onClick={compact?open:minimize}>
             <img src={collapseIcon} width={16} height={16} alt=""/>
           </button>
-          {!compact&&<><button type="button" aria-label="Prompter settings" aria-expanded={settings} onClick={()=>setSettings(!settings)}><Settings size={16}/></button><button type="button" aria-label="Close Prompter" onClick={close}><X size={16}/></button></>}
+          {!compact&&<><button type="button" ref={settingsButton} aria-label="Prompter settings" aria-expanded={settings} aria-haspopup="dialog" aria-controls="prompter-settings-popover" onClick={()=>setSettings(!settings)}><Settings size={16}/></button><button type="button" aria-label="Close Prompter" onClick={close}><X size={16}/></button></>}
         </div>
       </header>
       <span id="prompter-drag-instructions" className="move-sr-only">Drag the title bar to move this panel. When focused, use arrow keys to move; hold Shift for larger steps.</span>
@@ -131,8 +133,8 @@ export function PrompterOverlay(){
           <button type="button" className="prompter-pin" aria-label="Pin suggested product" onClick={()=>{setHovered(false);setFocused(false);setSettings(false);state.pinSuggestion(product.id);}}>Pin</button>
         </div>
       </div>:<p className="prompter-empty-copy">All good for now. Suggestions will appear when there’s a good moment.</p>)}
-      {settings&&!compact&&<div className="prompter-preferences"><strong>Suggestions</strong><label><span>Product recommendations</span><input type="checkbox" checked={recommendations} onChange={event=>setRecommendations(event.target.checked)}/></label></div>}
     </section>
+    {settings&&!compact&&<PrompterSettings anchor={settingsButton} container={root} panelPosition={position} popoverRef={settingsPopover}/>}
   </div>;
 }
 export function PrompterVideoProduct(){

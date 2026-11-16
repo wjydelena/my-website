@@ -31,10 +31,18 @@
 .console-shell .prompter-pin{width:78px;height:28px;flex-shrink:0;border:0;border-radius:18px;background:#009b9e;color:white;font-size:12px;font-weight:500;cursor:pointer}
 .console-shell .prompter-pin:hover{background:#00898c}
 .console-shell .prompter-empty-copy{margin:16px 0 -2px;text-align:center;font-size:14px;line-height:20px;color:#bcbcbc;font-weight:400}
-.console-shell .prompter-preferences{position:absolute;top:48px;right:16px;width:244px;padding:12px;background:#3e3e3e;border:1px solid #656565;border-radius:6px;box-shadow:0 6px 20px #0003;z-index:1;font-size:12px}
-.console-shell .prompter-preferences strong{font-size:12px;font-weight:500}
-.console-shell .prompter-preferences label{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:12px;cursor:pointer}
-.console-shell .prompter-preferences input{accent-color:#009b9e}
+.console-shell .prompter-popover.is-empty.has-settings{height:138px}
+.console-shell .prompter-controls button[aria-label="Prompter settings"][aria-expanded="true"]{background:rgba(255,255,255,.1)}
+.console-shell .prompter-preferences{position:absolute;width:260px;max-width:calc(100vw - 16px);padding:12px 12px 18px;box-sizing:border-box;background:rgba(51,51,51,.85);border:0;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.25);z-index:2;font-size:12px;color:#e6e6e6;outline:none;pointer-events:auto}
+.console-shell .prompter-preferences button:focus-visible{outline:2px solid #20d5ec;outline-offset:2px}
+.console-shell .prompter-preferences-title{display:block;margin:0 0 12px;font-size:12px;line-height:16px;font-weight:500}
+.console-shell .prompter-preferences-options{display:grid;gap:12px}
+.console-shell .prompter-preference-row{display:flex;gap:8px;height:20px;align-items:center;justify-content:space-between;cursor:pointer;font-size:12px;line-height:20px;font-weight:400}
+.console-shell .prompter-preference-switch{position:relative;display:block;width:36px;height:18px;padding:0;flex:none;border:0;border-radius:18px;background:#565656;cursor:pointer}
+.console-shell .prompter-preference-switch[aria-checked="true"]{background:#009995}
+.console-shell .prompter-preference-switch i{position:absolute;top:2px;left:2px;width:14px;height:14px;background:#fff;border-radius:50%;transition:transform 120ms ease}
+.console-shell .prompter-preference-switch[aria-checked="true"] i{transform:translateX(18px)}
+@media(prefers-reduced-motion:reduce){.console-shell .prompter-preference-switch i{transition:none}}
 .console-shell .prompter-video-product{position:absolute;left:8px;right:8px;bottom:8px;height:94px;padding:8px;display:flex;gap:8px;box-sizing:border-box;background:white;border-radius:8px;color:#171717;z-index:5}
 .console-shell .prompter-video-thumbnail{position:relative;flex-shrink:0;width:78px;height:78px;border-radius:6px;overflow:hidden;background:#eee}
 .console-shell .prompter-video-thumbnail img{width:100%;height:100%;object-fit:cover}
