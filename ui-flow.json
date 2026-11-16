@@ -394,7 +394,7 @@
     },
     {
       "id": "promotion-tools",
-      "title": "Complete promotion tool content",
+      "title": "Create promotion paused: footer hover and keyboard activation do not open the catalogue",
       "viewport": {
         "width": 1280,
         "height": 900
@@ -412,48 +412,49 @@
           "title": "Static three-column LIVE Console"
         },
         {
-          "action": "click",
+          "action": "hover",
           "target": {
             "role": "button",
-            "name": "More promotions"
+            "name": "Create promotion"
           }
         },
         {
           "action": "capture",
           "id": "all-promotions",
-          "title": "All categorized promotion tools"
-        },
-        {
-          "action": "hover",
-          "target": {
-            "role": "button",
-            "name": "Open Group Deal"
-          }
-        },
-        {
-          "action": "capture",
-          "id": "promotion-card-hover",
-          "title": "Promotion catalogue card shared gray hover"
-        },
-        {
-          "action": "hover",
-          "target": {
-            "role": "button",
-            "name": "Close promotions"
-          }
+          "title": "Create promotion paused — product list unchanged, catalogue not opened"
         },
         {
           "action": "press",
           "target": {
             "role": "button",
-            "name": "More promotions"
+            "name": "Create promotion"
           },
-          "key": "Escape"
+          "key": "Enter"
+        },
+        {
+          "action": "capture",
+          "id": "promotion-card-hover",
+          "title": "Create promotion paused — product list unchanged, catalogue not opened"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Create promotion"
+          },
+          "key": "Space"
+        },
+        {
+          "action": "hover",
+          "target": {
+            "role": "button",
+            "name": "Create promotion"
+          }
         },
         {
           "action": "capture",
           "id": "promotions-closed",
-          "title": "Products restored with Create promotion footer entry"
+          "title": "Create promotion paused — product list unchanged, catalogue not opened"
         }
       ]
     },
@@ -2484,7 +2485,7 @@
     },
     {
       "id": "promotion-pinned-panel",
-      "title": "Expand promotion tools, customize pins and close the overlay",
+      "title": "Create promotion paused: catalogue and pin customization remain unavailable",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -2502,104 +2503,109 @@
           "title": "1440px LIVE Console"
         },
         {
-          "action": "click",
+          "action": "hover",
           "target": {
             "role": "button",
-            "name": "More promotions"
+            "name": "Create promotion"
           }
         },
         {
           "action": "capture",
           "id": "promotion-pinned-overlay",
-          "title": "Pinned and categorized tools overlay the product list"
-        },
-        {
-          "action": "click",
-          "target": {
-            "role": "button",
-            "name": "Customize"
-          }
-        },
-        {
-          "action": "capture",
-          "id": "promotion-pin-customization",
-          "title": "Customize pinned promotions"
-        },
-        {
-          "action": "click",
-          "target": {
-            "role": "button",
-            "name": "Pin Coupon"
-          }
-        },
-        {
-          "action": "click",
-          "target": {
-            "role": "button",
-            "name": "Close promotions"
-          }
-        },
-        {
-          "action": "click",
-          "target": {
-            "role": "button",
-            "name": "More promotions"
-          }
-        },
-        {
-          "action": "capture",
-          "id": "promotion-coupon-pinned",
-          "title": "Coupon added to pinned tools"
-        },
-        {
-          "action": "click",
-          "target": {
-            "role": "button",
-            "name": "Close promotions"
-          }
-        },
-        {
-          "action": "capture",
-          "id": "promotion-updated-toolbar",
-          "title": "Updated catalog pins and unchanged product list with footer entry"
-        },
-        {
-          "action": "click",
-          "target": {
-            "role": "button",
-            "name": "More promotions"
-          }
-        },
-        {
-          "action": "click",
-          "target": {
-            "role": "button",
-            "name": "Open Group Deal"
-          }
-        },
-        {
-          "action": "capture",
-          "id": "promotion-tool-click-disabled",
-          "title": "Other tools keep the catalog open without detail navigation"
+          "title": "Create promotion paused — product list unchanged, catalogue not opened"
         },
         {
           "action": "press",
           "target": {
             "role": "button",
-            "name": "Close promotions"
+            "name": "Create promotion"
           },
-          "key": "Escape"
+          "key": "Enter"
+        },
+        {
+          "action": "capture",
+          "id": "promotion-pin-customization",
+          "title": "Create promotion paused — product list unchanged, catalogue not opened"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Create promotion"
+          },
+          "key": "Space"
+        },
+        {
+          "action": "hover",
+          "target": {
+            "role": "button",
+            "name": "Create promotion"
+          }
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Create promotion"
+          },
+          "key": "Enter"
+        },
+        {
+          "action": "capture",
+          "id": "promotion-coupon-pinned",
+          "title": "Create promotion paused — product list unchanged, catalogue not opened"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Create promotion"
+          },
+          "key": "Space"
+        },
+        {
+          "action": "capture",
+          "id": "promotion-updated-toolbar",
+          "title": "Create promotion paused — product list unchanged, catalogue not opened"
+        },
+        {
+          "action": "hover",
+          "target": {
+            "role": "button",
+            "name": "Create promotion"
+          }
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Create promotion"
+          },
+          "key": "Enter"
+        },
+        {
+          "action": "capture",
+          "id": "promotion-tool-click-disabled",
+          "title": "Create promotion paused — product list unchanged, catalogue not opened"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Create promotion"
+          },
+          "key": "Space"
         },
         {
           "action": "capture",
           "id": "promotion-panel-dismissed",
-          "title": "Escape closes the overlay"
+          "title": "Create promotion paused — product list unchanged, catalogue not opened"
         }
       ]
     },
     {
       "id": "coupon-pin-and-open",
-      "title": "Coupon pinning and panel through the footer promotion entry",
+      "title": "Coupon remains available through toolbar shortcuts while Create promotion is paused",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -2617,35 +2623,35 @@
           "title": "1440px LIVE Console"
         },
         {
-          "action": "click",
+          "action": "hover",
           "target": {
             "role": "button",
-            "name": "More promotions"
+            "name": "Create promotion"
           }
         },
         {
           "action": "hover",
           "target": {
             "role": "button",
-            "name": "Open Coupon"
+            "name": "Open coupons, 3 available"
           }
         },
         {
           "action": "capture",
           "id": "coupon-tool-hover",
-          "title": "Coupon card hover surface"
+          "title": "Coupon toolbar shortcut hover; Create promotion remains paused"
         },
         {
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Open Coupon"
+            "name": "Open coupons, 3 available"
           }
         },
         {
           "action": "capture",
           "id": "coupon-active-panel",
-          "title": "Coupon pinned in the catalog and opened; catalog closes"
+          "title": "Coupon opened from the toolbar shortcut"
         },
         {
           "action": "click",
@@ -2676,26 +2682,26 @@
         {
           "action": "capture",
           "id": "coupon-panel-closed",
-          "title": "Products restored; Coupon stays pinned in the catalog"
+          "title": "Coupon closed; product list restored"
         },
         {
-          "action": "click",
+          "action": "hover",
           "target": {
             "role": "button",
-            "name": "More promotions"
+            "name": "Create promotion"
           }
         },
         {
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Open Coupon"
+            "name": "Open coupons, 3 available"
           }
         },
         {
           "action": "capture",
           "id": "coupon-reopened",
-          "title": "Coupon reopens from the Create promotion catalog"
+          "title": "Coupon reopened from the toolbar shortcut"
         },
         {
           "action": "click",
@@ -2705,23 +2711,23 @@
           }
         },
         {
-          "action": "click",
+          "action": "hover",
           "target": {
             "role": "button",
-            "name": "More promotions"
+            "name": "Create promotion"
           }
         },
         {
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Open Coupon"
+            "name": "Open coupons, 3 available"
           }
         },
         {
           "action": "capture",
           "id": "coupon-no-duplicate",
-          "title": "Coupon remains a single pinned catalog entry"
+          "title": "Repeated shortcut opens one Coupon panel"
         },
         {
           "action": "click",
@@ -2786,7 +2792,7 @@
     },
     {
       "id": "customize-pinned-order",
-      "title": "Customize pin status and save reordered tools",
+      "title": "Create promotion paused: previously available catalogue reorder actions are suspended",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -2804,103 +2810,108 @@
           "title": "1440px LIVE Console"
         },
         {
-          "action": "click",
+          "action": "hover",
           "target": {
             "role": "button",
-            "name": "More promotions"
+            "name": "Create promotion"
           }
-        },
-        {
-          "action": "click",
-          "target": {
-            "role": "button",
-            "name": "Customize"
-          }
-        },
-        {
-          "action": "capture",
-          "id": "pinned-sort-edit",
-          "title": "Drag handles and card pin states"
         },
         {
           "action": "press",
           "target": {
             "role": "button",
-            "name": "Move Group Deal"
+            "name": "Create promotion"
           },
-          "key": "ArrowRight"
+          "key": "Enter"
+        },
+        {
+          "action": "capture",
+          "id": "pinned-sort-edit",
+          "title": "Create promotion paused — product list unchanged, catalogue not opened"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Create promotion"
+          },
+          "key": "Space"
         },
         {
           "action": "capture",
           "id": "pinned-reordered",
-          "title": "Group Deal moved after Price Cut via accessible reorder"
+          "title": "Create promotion paused — product list unchanged, catalogue not opened"
         },
         {
-          "action": "click",
+          "action": "hover",
           "target": {
             "role": "button",
-            "name": "Pin Flashsale"
+            "name": "Create promotion"
           }
         },
         {
           "action": "capture",
           "id": "flashsale-pinned",
-          "title": "Flashsale pinned and reflected in Pinned tools"
+          "title": "Create promotion paused — product list unchanged, catalogue not opened"
         },
         {
-          "action": "click",
+          "action": "press",
           "target": {
             "role": "button",
-            "name": "Unpin Surprise set"
-          }
+            "name": "Create promotion"
+          },
+          "key": "Enter"
         },
         {
           "action": "capture",
           "id": "surprise-unpinned",
-          "title": "Surprise set unpinned from both views"
+          "title": "Create promotion paused — product list unchanged, catalogue not opened"
         },
         {
-          "action": "click",
+          "action": "press",
           "target": {
             "role": "button",
-            "name": "Done"
-          }
+            "name": "Create promotion"
+          },
+          "key": "Space"
         },
         {
           "action": "capture",
           "id": "customized-done-saved",
-          "title": "Done saves pin settings and order while keeping the panel open"
+          "title": "Create promotion paused — product list unchanged, catalogue not opened"
         },
         {
-          "action": "click",
+          "action": "hover",
           "target": {
             "role": "button",
-            "name": "Close promotions"
+            "name": "Create promotion"
           }
         },
         {
           "action": "capture",
           "id": "customized-toolbar",
-          "title": "Saved catalog order retained with footer promotion entry"
+          "title": "Create promotion paused — product list unchanged, catalogue not opened"
         },
         {
-          "action": "click",
+          "action": "press",
           "target": {
             "role": "button",
-            "name": "More promotions"
-          }
+            "name": "Create promotion"
+          },
+          "key": "Enter"
         },
         {
-          "action": "click",
+          "action": "press",
           "target": {
             "role": "button",
-            "name": "Customize"
-          }
+            "name": "Create promotion"
+          },
+          "key": "Space"
         },
         {
           "action": "capture",
           "id": "customized-order-retained",
-          "title": "Order and pin states retained when reopened"
+          "title": "Create promotion paused — product list unchanged, catalogue not opened"
         }
       ]
     },
