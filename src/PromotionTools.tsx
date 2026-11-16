@@ -16,6 +16,7 @@ import adsIcon from './assets/promotion-tools/advertisement-fill.png';
 import { useConsoleLayout } from './ResizableLayout';
 import couponEmpty from './assets/promotion-tools/coupon-empty.png';
 import PinnedTools from './PinnedTools';
+import CreatePromotionPopover from './CreatePromotionPopover';
 import './promotion-tools.css';
 
 const common = 'Let viewers team up to buy your products at a great price.';
@@ -75,7 +76,8 @@ export default function PromotionTools({compact=false,createPromotion=false,coup
   useEffect(() => { setOpen(false); setCustomizing(false); setCouponActive(false); }, [editing, mode]);
   useEffect(() => {
     if (!open) return;
-    closeButton.current?.focus({ preventScroll: true });
+    if(createPromotion)panel.current?.focus({ preventScroll: true });
+    else closeButton.current?.focus({ preventScroll: true });
     const dismiss = (event: PointerEvent) => {
       if (!root.current?.contains(event.target as Node) && !panel.current?.contains(event.target as Node)) close();
     };
@@ -121,7 +123,7 @@ export default function PromotionTools({compact=false,createPromotion=false,coup
       }}>
       {pinned.map(label => { const item = items.find(value => value.label === label)!; return <button type="button" className={`promo-pill${couponActive && label === 'Coupon' ? ' is-active' : ''}`} ref={label === 'Coupon' ? couponButton : undefined} aria-pressed={label === 'Coupon' ? couponActive : undefined} key={label} onClick={() => showTool(label)}>{graphic(item)}{label === 'Rush reward' ? 'Rush Reward' : label}</button>; })}
     </div>
-    <button className="promo-more" ref={trigger} type="button" aria-label={createPromotion?'Create promotion':'More promotions'} aria-disabled={createPromotion||undefined} aria-expanded={createPromotion?undefined:open} aria-controls={createPromotion?undefined:'promotion-tools-list'} disabled={editing} onClick={createPromotion?undefined:() => { if (open) close(); else { setOpen(true); } }}>{compact?<Plus size={20}/>:<ChevronDown size={18}/>} {createPromotion&&'Create promotion'}</button>
+    <button className="promo-more" ref={trigger} type="button" aria-label={createPromotion?'Create promotion':'More promotions'} aria-expanded={open} aria-haspopup={createPromotion?'menu':undefined} aria-controls={createPromotion?'create-promotion-menu':'promotion-tools-list'} disabled={editing} onClick={() => { if (open) close(); else { setOpen(true); } }}>{compact?<Plus size={20}/>:<ChevronDown size={18}/>} {createPromotion&&'Create promotion'}</button>
     {couponActive && host && createPortal(<div className="coupon-panel-viewport"><section key={couponEntry} className="coupon-panel" aria-label="Coupon panel" onPointerDown={event => event.stopPropagation()}>
       <div className="coupon-heading"><h2>Coupon</h2><button type="button" aria-label="Close Coupon" onClick={closeCoupon}><X size={18}/></button></div>
       <div className="coupon-tabs" role="tablist" aria-label="Coupon source">{['My shop', 'Co-funded'].map(tab => <button type="button" key={tab} role="tab" aria-selected={couponTab === tab} onClick={() => setCouponTab(tab)}>{tab}</button>)}</div>
@@ -130,7 +132,8 @@ export default function PromotionTools({compact=false,createPromotion=false,coup
       </div>
       <footer className="coupon-footer"><button type="button"><Plus size={20}/>Create new</button></footer>
     </section></div>, host)}
-    {open && host && createPortal(<div className="promotion-panel-viewport"><div className={`promotion-tools-list${customizing ? ' is-customizing' : ''}`} id="promotion-tools-list" ref={panel} role="region" aria-label="All promotions" onPointerDown={event => event.stopPropagation()}>
+    {open && createPromotion && createPortal(<CreatePromotionPopover anchor={trigger} panelRef={panel}/>,root.current?.closest('.console-shell')||document.body)}
+    {open && !createPromotion && host && createPortal(<div className="promotion-panel-viewport"><div className={`promotion-tools-list${customizing ? ' is-customizing' : ''}`} id="promotion-tools-list" ref={panel} role="region" aria-label="All promotions" onPointerDown={event => event.stopPropagation()}>
       <div className="promotion-panel-scroll">
         <div className="promotion-panel-heading"><h2>Pinned</h2><button className="promotion-customize" onClick={() => setCustomizing(previous => !previous)}>{customizing ? 'Done' : 'Customize'}</button><span className="promotion-heading-divider"/><button className="promotion-close" ref={closeButton} aria-label="Close promotions" onClick={close}><X size={18}/></button></div>
         <PinnedTools labels={pinned} customizing={customizing} onOrderChange={setPinned} onOpen={showTool} graphic={label => graphic(items.find(item => item.label === label)!)} />

@@ -1,0 +1,13 @@
+.console-shell .create-promotion-popover{position:fixed;width:364px;max-width:calc(100vw - 16px);max-height:calc(100vh - 16px);overflow-y:auto;box-sizing:border-box;z-index:140;background:#fff;color:#000;border:0;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.15);outline:none;scrollbar-width:thin}
+.console-shell .create-promotion-section{padding:12px 12px 8px}
+.console-shell .create-promotion-section h2{margin:0 0 4px;font-size:12px!important;line-height:16px;font-weight:500;color:#757575}
+.console-shell .create-promotion-section.is-order-level{padding-bottom:5px;border-top:1px solid #d5d5d5}
+.console-shell .create-promotion-section.is-order-level h2{margin-bottom:8px}
+.console-shell .create-promotion-option{display:flex;align-items:center;gap:8px;width:100%;min-height:56px;padding:8px 0;border:0;border-radius:4px;background:transparent;color:#000;text-align:left;cursor:pointer}
+.console-shell .create-promotion-option>img{width:32px;height:32px;flex:none;object-fit:contain;filter:none;opacity:1;border-radius:6px}
+.console-shell .create-promotion-option>span{display:block;flex:1;min-width:0}
+.console-shell .create-promotion-option strong{display:block;font-size:14px;font-weight:500;line-height:20px}
+.console-shell .create-promotion-description{display:block;font-size:12px;font-weight:400;line-height:18px;color:#757575;white-space:normal}
+.console-shell .is-order-level .create-promotion-option{align-items:flex-start}
+.console-shell .is-order-level .create-promotion-description{max-width:276px}
+.console-shell .create-promotion-option:focus-visible{outline:2px solid #009995;outline-offset:2px}

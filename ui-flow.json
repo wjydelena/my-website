@@ -394,7 +394,7 @@
     },
     {
       "id": "promotion-tools",
-      "title": "Create promotion paused: footer hover and keyboard activation do not open the catalogue",
+      "title": "Create promotion reference popover: grouped options, hover and dismissal",
       "viewport": {
         "width": 1280,
         "height": 900
@@ -412,7 +412,7 @@
           "title": "Static three-column LIVE Console"
         },
         {
-          "action": "hover",
+          "action": "click",
           "target": {
             "role": "button",
             "name": "Create promotion"
@@ -421,28 +421,27 @@
         {
           "action": "capture",
           "id": "all-promotions",
-          "title": "Create promotion paused — product list unchanged, catalogue not opened"
+          "title": "Create promotion reference popover with five options"
         },
         {
-          "action": "press",
+          "action": "hover",
           "target": {
-            "role": "button",
-            "name": "Create promotion"
-          },
-          "key": "Enter"
+            "role": "menuitem",
+            "name": "Group deal"
+          }
         },
         {
           "action": "capture",
           "id": "promotion-card-hover",
-          "title": "Create promotion paused — product list unchanged, catalogue not opened"
+          "title": "Group deal option hover; no catalogue cards"
         },
         {
           "action": "press",
           "target": {
-            "role": "button",
-            "name": "Create promotion"
+            "role": "menu",
+            "name": "Create promotion options"
           },
-          "key": "Space"
+          "key": "Escape"
         },
         {
           "action": "hover",
@@ -454,7 +453,7 @@
         {
           "action": "capture",
           "id": "promotions-closed",
-          "title": "Create promotion paused — product list unchanged, catalogue not opened"
+          "title": "Create promotion popover dismissed"
         }
       ]
     },
@@ -2485,7 +2484,7 @@
     },
     {
       "id": "promotion-pinned-panel",
-      "title": "Create promotion paused: catalogue and pin customization remain unavailable",
+      "title": "Create promotion menu: keyboard navigation, unchanged option action and reopening",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -2503,7 +2502,7 @@
           "title": "1440px LIVE Console"
         },
         {
-          "action": "hover",
+          "action": "click",
           "target": {
             "role": "button",
             "name": "Create promotion"
@@ -2512,100 +2511,99 @@
         {
           "action": "capture",
           "id": "promotion-pinned-overlay",
-          "title": "Create promotion paused — product list unchanged, catalogue not opened"
+          "title": "Product-level and Order-level promotion groups"
         },
         {
           "action": "press",
           "target": {
-            "role": "button",
-            "name": "Create promotion"
+            "role": "menu",
+            "name": "Create promotion options"
           },
-          "key": "Enter"
+          "key": "ArrowDown"
         },
         {
           "action": "capture",
           "id": "promotion-pin-customization",
-          "title": "Create promotion paused — product list unchanged, catalogue not opened"
-        },
-        {
-          "action": "press",
-          "target": {
-            "role": "button",
-            "name": "Create promotion"
-          },
-          "key": "Space"
+          "title": "Keyboard focuses the first promotion option"
         },
         {
           "action": "hover",
           "target": {
-            "role": "button",
-            "name": "Create promotion"
+            "role": "menuitem",
+            "name": "Price cut"
           }
         },
         {
           "action": "press",
           "target": {
-            "role": "button",
-            "name": "Create promotion"
+            "role": "menu",
+            "name": "Create promotion options"
           },
-          "key": "Enter"
+          "key": "End"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "menu",
+            "name": "Create promotion options"
+          },
+          "key": "Home"
         },
         {
           "action": "capture",
           "id": "promotion-coupon-pinned",
-          "title": "Create promotion paused — product list unchanged, catalogue not opened"
+          "title": "Home returns focus to LIVE flash sale"
         },
         {
           "action": "press",
           "target": {
-            "role": "button",
-            "name": "Create promotion"
+            "role": "menu",
+            "name": "Create promotion options"
           },
-          "key": "Space"
+          "key": "Escape"
         },
         {
           "action": "capture",
           "id": "promotion-updated-toolbar",
-          "title": "Create promotion paused — product list unchanged, catalogue not opened"
+          "title": "Escape restores the product list"
         },
         {
-          "action": "hover",
+          "action": "click",
           "target": {
             "role": "button",
             "name": "Create promotion"
           }
         },
         {
-          "action": "press",
+          "action": "click",
           "target": {
-            "role": "button",
-            "name": "Create promotion"
-          },
-          "key": "Enter"
+            "role": "menuitem",
+            "name": "Group deal"
+          }
         },
         {
           "action": "capture",
           "id": "promotion-tool-click-disabled",
-          "title": "Create promotion paused — product list unchanged, catalogue not opened"
+          "title": "Clicking Group deal keeps the reference menu open; no creation form"
         },
         {
           "action": "press",
           "target": {
-            "role": "button",
-            "name": "Create promotion"
+            "role": "menu",
+            "name": "Create promotion options"
           },
-          "key": "Space"
+          "key": "Escape"
         },
         {
           "action": "capture",
           "id": "promotion-panel-dismissed",
-          "title": "Create promotion paused — product list unchanged, catalogue not opened"
+          "title": "Escape dismisses the Create promotion menu"
         }
       ]
     },
     {
       "id": "coupon-pin-and-open",
-      "title": "Coupon remains available through toolbar shortcuts while Create promotion is paused",
+      "title": "Coupon toolbar shortcuts remain independent from the Create promotion menu",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -2627,7 +2625,8 @@
           "target": {
             "role": "button",
             "name": "Create promotion"
-          }
+          },
+          "label": "Hover Create promotion without opening the menu"
         },
         {
           "action": "hover",
@@ -2639,7 +2638,7 @@
         {
           "action": "capture",
           "id": "coupon-tool-hover",
-          "title": "Coupon toolbar shortcut hover; Create promotion remains paused"
+          "title": "Coupon toolbar shortcut hover; Create promotion popover remains closed"
         },
         {
           "action": "click",
@@ -2689,7 +2688,8 @@
           "target": {
             "role": "button",
             "name": "Create promotion"
-          }
+          },
+          "label": "Hover Create promotion without opening the menu"
         },
         {
           "action": "click",
@@ -2715,7 +2715,8 @@
           "target": {
             "role": "button",
             "name": "Create promotion"
-          }
+          },
+          "label": "Hover Create promotion without opening the menu"
         },
         {
           "action": "click",
@@ -2792,7 +2793,7 @@
     },
     {
       "id": "customize-pinned-order",
-      "title": "Create promotion paused: previously available catalogue reorder actions are suspended",
+      "title": "Create promotion reference menu: keyboard focus and unchanged contents on reopen",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -2810,7 +2811,7 @@
           "title": "1440px LIVE Console"
         },
         {
-          "action": "hover",
+          "action": "click",
           "target": {
             "role": "button",
             "name": "Create promotion"
@@ -2819,99 +2820,99 @@
         {
           "action": "press",
           "target": {
-            "role": "button",
-            "name": "Create promotion"
+            "role": "menu",
+            "name": "Create promotion options"
           },
-          "key": "Enter"
+          "key": "ArrowDown"
         },
         {
           "action": "capture",
           "id": "pinned-sort-edit",
-          "title": "Create promotion paused — product list unchanged, catalogue not opened"
+          "title": "Five reference promotion options; old pin customization is not shown"
         },
         {
           "action": "press",
           "target": {
-            "role": "button",
-            "name": "Create promotion"
+            "role": "menu",
+            "name": "Create promotion options"
           },
-          "key": "Space"
+          "key": "ArrowDown"
         },
         {
           "action": "capture",
           "id": "pinned-reordered",
-          "title": "Create promotion paused — product list unchanged, catalogue not opened"
+          "title": "Keyboard moves to Group deal"
         },
         {
-          "action": "hover",
+          "action": "press",
           "target": {
-            "role": "button",
-            "name": "Create promotion"
-          }
+            "role": "menu",
+            "name": "Create promotion options"
+          },
+          "key": "ArrowDown"
         },
         {
           "action": "capture",
           "id": "flashsale-pinned",
-          "title": "Create promotion paused — product list unchanged, catalogue not opened"
+          "title": "Keyboard moves to Price cut"
         },
         {
           "action": "press",
           "target": {
-            "role": "button",
-            "name": "Create promotion"
+            "role": "menu",
+            "name": "Create promotion options"
           },
-          "key": "Enter"
+          "key": "End"
         },
         {
           "action": "capture",
           "id": "surprise-unpinned",
-          "title": "Create promotion paused — product list unchanged, catalogue not opened"
+          "title": "End focuses Mix and match"
         },
         {
           "action": "press",
           "target": {
-            "role": "button",
-            "name": "Create promotion"
+            "role": "menu",
+            "name": "Create promotion options"
           },
-          "key": "Space"
+          "key": "Home"
         },
         {
           "action": "capture",
           "id": "customized-done-saved",
-          "title": "Create promotion paused — product list unchanged, catalogue not opened"
+          "title": "Home focuses LIVE flash sale"
         },
         {
-          "action": "hover",
+          "action": "press",
+          "target": {
+            "role": "menu",
+            "name": "Create promotion options"
+          },
+          "key": "Escape"
+        },
+        {
+          "action": "capture",
+          "id": "customized-toolbar",
+          "title": "Escape closes the menu"
+        },
+        {
+          "action": "click",
           "target": {
             "role": "button",
             "name": "Create promotion"
           }
         },
         {
-          "action": "capture",
-          "id": "customized-toolbar",
-          "title": "Create promotion paused — product list unchanged, catalogue not opened"
-        },
-        {
-          "action": "press",
+          "action": "hover",
           "target": {
-            "role": "button",
-            "name": "Create promotion"
-          },
-          "key": "Enter"
-        },
-        {
-          "action": "press",
-          "target": {
-            "role": "button",
-            "name": "Create promotion"
-          },
-          "key": "Space"
+            "role": "menuitem",
+            "name": "Mix and match"
+          }
         },
         {
           "action": "capture",
           "id": "customized-order-retained",
-          "title": "Create promotion paused — product list unchanged, catalogue not opened"
+          "title": "Reopened menu retains the same five reference options"
         }
       ]
     },
