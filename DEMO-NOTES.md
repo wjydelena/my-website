@@ -22,3 +22,5 @@
 - Fixed viewport clips were used after narrow-width testing; a stale beyond-viewport screenshot was discarded.
 - An automatic final comparison mispaired the Chat region with an Analytics row, so its aggregate score is not treated as reliable. Full paired screenshots were visually reviewed instead.
 - Frozen Flow retains all 32 original journey identities and 256 capture occurrences. Repeated overview/education captures with equivalent coverage in other journeys were reassigned to the pre-LIVE entry, both picker tabs and confirmed result; original non-capture interaction steps were retained. All legacy journeys include the local Go LIVE setup. Full replay is deferred, not claimed as tested.
+
+- Create promotion menus show only LIVE flash sale, Group deal and Price cut. Order-level promotion options and their section are removed; existing visuals and option-click behavior are unchanged.

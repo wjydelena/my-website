@@ -597,7 +597,7 @@
         {
           "action": "capture",
           "id": "all-promotions",
-          "title": "Create promotion reference popover with five options"
+          "title": "Create promotion popover with three product-level options"
         },
         {
           "action": "hover",
@@ -2874,7 +2874,7 @@
         {
           "action": "capture",
           "id": "promotion-pinned-overlay",
-          "title": "Product-level and Order-level promotion groups"
+          "title": "Three product-level promotions: LIVE flash sale, Group deal and Price cut"
         },
         {
           "action": "press",
@@ -3205,7 +3205,7 @@
         {
           "action": "capture",
           "id": "pinned-sort-edit",
-          "title": "Five reference promotion options; old pin customization is not shown"
+          "title": "Three product-level promotion options; old pin customization is not shown"
         },
         {
           "action": "press",
@@ -3244,7 +3244,7 @@
         {
           "action": "capture",
           "id": "surprise-unpinned",
-          "title": "End focuses Mix and match"
+          "title": "End focuses Price cut"
         },
         {
           "action": "press",
@@ -3283,13 +3283,13 @@
           "action": "hover",
           "target": {
             "role": "menuitem",
-            "name": "Mix and match"
+            "name": "Price cut"
           }
         },
         {
           "action": "capture",
           "id": "customized-order-retained",
-          "title": "Reopened menu retains the same five reference options"
+          "title": "Reopened menu retains the same three product-level options"
         }
       ]
     },

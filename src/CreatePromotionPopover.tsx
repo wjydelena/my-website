@@ -2,8 +2,6 @@ import React, {useEffect, useLayoutEffect, useState} from 'react';
 import flashSale from './assets/create-promotion/flash-sale.png';
 import groupDeal from './assets/create-promotion/group-deal.png';
 import priceCut from './assets/create-promotion/price-cut.png';
-import buyMore from './assets/create-promotion/buy-more.png';
-import mixMatch from './assets/create-promotion/mix-match.png';
 import './create-promotion-popover.css';
 
 const sections=[
@@ -11,10 +9,6 @@ const sections=[
     {title:'LIVE flash sale',description:'Offer limited-time deals to incentivize swift purchases',icon:flashSale},
     {title:'Group deal',description:'Let people team up to buy with limited-time deal',icon:groupDeal},
     {title:'Price cut',description:'Let people collectively cut to a lower deal with fun',icon:priceCut},
-  ]},
-  {title:'Order-level promotions',items:[
-    {title:'Buy more save more',description:'Offer product combination deals with discounts to increase spending',icon:buyMore},
-    {title:'Mix and match',description:'Let users by M items for N money',icon:mixMatch},
   ]},
 ];
 
