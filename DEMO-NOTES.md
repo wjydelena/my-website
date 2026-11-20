@@ -11,7 +11,8 @@
 ## Boundaries
 - All shop data, selection and broadcasting transitions are local simulation. No business backend is connected.
 - LIVE product set, Product URL, price/category/more filtering and Copy from previous LIVE are visible but disabled. Their content/workflows were not supplied.
-- Added-product layout and cross-tab selection behavior use conservative local prototype assumptions; no populated pre-LIVE reference was supplied.
+- Added-product layout now follows supplied 11.png: ranks, 70px thumbnails, pricing, Promo/Edit/More actions and Coupon count. Actual selected product names, stock and prices are retained because reference data conflicts with picker data. Product quantity is not forced to the seven example rows. Row operations reuse local editor, promotion chooser and deletion-confirmation conventions.
+- Drawer entry motion: 10px left-to-right over 200ms, disabled under reduced-motion preference. The pre-LIVE Coupon image remains static with no popup.
 - Original live-console features remain inherited. Version 1 source and Canvas node are not changed.
 
 ## Validation

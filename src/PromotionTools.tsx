@@ -52,7 +52,7 @@ const initialPinned = () => {
   } catch { return fallback; }
 };
 
-export default function PromotionTools({compact=false,createPromotion=false,couponRequest=0,couponReturnFocus,listPinned=false,onToggleListPin}:{compact?:boolean;createPromotion?:boolean;couponRequest?:number;couponReturnFocus?:React.RefObject<HTMLButtonElement>;listPinned?:boolean;onToggleListPin?:()=>void}) {
+export default function PromotionTools({compact=false,createPromotion=false,couponRequest=0,couponReturnFocus,listPinned=false,onToggleListPin,triggerLabel,triggerAriaLabel}:{compact?:boolean;createPromotion?:boolean;couponRequest?:number;couponReturnFocus?:React.RefObject<HTMLButtonElement>;listPinned?:boolean;onToggleListPin?:()=>void;triggerLabel?:string;triggerAriaLabel?:string}) {
   const { editing, mode } = useConsoleLayout();
   const [open, setOpen] = useState(false);
   const [customizing, setCustomizing] = useState(false);
@@ -123,7 +123,7 @@ export default function PromotionTools({compact=false,createPromotion=false,coup
       }}>
       {pinned.map(label => { const item = items.find(value => value.label === label)!; return <button type="button" className={`promo-pill${couponActive && label === 'Coupon' ? ' is-active' : ''}`} ref={label === 'Coupon' ? couponButton : undefined} aria-pressed={label === 'Coupon' ? couponActive : undefined} key={label} onClick={() => showTool(label)}>{graphic(item)}{label === 'Rush reward' ? 'Rush Reward' : label}</button>; })}
     </div>
-    <button className="promo-more" ref={trigger} type="button" aria-label={createPromotion?'Create promotion':'More promotions'} aria-expanded={open} aria-haspopup={createPromotion?'menu':undefined} aria-controls={createPromotion?'create-promotion-menu':'promotion-tools-list'} disabled={editing} onClick={() => { if (open) close(); else { setOpen(true); } }}>{compact?<Plus size={20}/>:<ChevronDown size={18}/>} {createPromotion&&'Create promotion'}</button>
+    <button className="promo-more" ref={trigger} type="button" aria-label={triggerAriaLabel||(createPromotion?'Create promotion':'More promotions')} aria-expanded={open} aria-haspopup={createPromotion?'menu':undefined} aria-controls={createPromotion?'create-promotion-menu':'promotion-tools-list'} disabled={editing} onClick={() => { if (open) close(); else { setOpen(true); } }}>{compact?<Plus size={20}/>:<ChevronDown size={18}/>} {createPromotion&&(triggerLabel||'Create promotion')}</button>
     {couponActive && host && createPortal(<div className="coupon-panel-viewport"><section key={couponEntry} className="coupon-panel" aria-label="Coupon panel" onPointerDown={event => event.stopPropagation()}>
       <div className="coupon-heading"><h2>Coupon</h2><button type="button" aria-label="Close Coupon" onClick={closeCoupon}><X size={18}/></button></div>
       <div className="coupon-tabs" role="tablist" aria-label="Coupon source">{['My shop', 'Co-funded'].map(tab => <button type="button" key={tab} role="tab" aria-selected={couponTab === tab} onClick={() => setCouponTab(tab)}>{tab}</button>)}</div>

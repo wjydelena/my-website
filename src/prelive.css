@@ -26,18 +26,42 @@
 .prelive-right .live-tool-cards button:disabled{opacity:1;cursor:default}
 .prelive-right .live-tool-cards img{width:18px;height:18px;object-fit:contain;mix-blend-mode:multiply}
 .prelive-right .live-tools-collapse img{width:16px;height:16px}
-.prelive-added-list{padding:8px 16px}
-.prelive-added-list article{display:flex;align-items:center;gap:8px;padding:12px 0;border-bottom:1px solid #eee}
-.prelive-added-list article>span{width:32px;text-align:center}
-.prelive-added-list article>label{position:relative;flex:none}
-.prelive-added-list article>label img{width:70px;height:70px;object-fit:contain}
-.prelive-added-list article>label input{position:absolute;top:4px;left:4px}
-.prelive-added-list article>div{flex:1;min-width:0}
-.prelive-added-list p{font-size:14px;margin:0 0 4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.prelive-added-list small{display:block;color:#757575;margin-bottom:6px;font-size:12px}
-.prelive-added-list strong{display:block;font-weight:500;font-size:16px}
-.prelive-added-list article>button{display:flex;align-items:center;gap:4px;background:#009995;color:white;border:0;border-radius:24px;height:24px;padding:0 12px;font-size:12px;cursor:pointer}
-.prelive-added-list article>button svg{height:16px;width:16px}
+/* Post-add product cards: reference 11.png, while retaining selected row data. */
+.prelive-added-list{padding:8px 16px 20px;display:flex;flex-direction:column;gap:20px}
+.prelive-added-list article{position:relative;display:grid;grid-template-columns:40px 70px minmax(0,1fr);column-gap:8px;height:70px;flex:none;border:0;min-width:0}
+.prelive-added-list article:nth-child(-n+2){height:72px}
+.prelive-added-rank{width:40px;height:70px;flex:none}
+.prelive-added-rank>span{height:32px;width:40px;display:grid;place-items:center;background:#f5f5f5;border-radius:4px;font-size:14px;line-height:20px;color:#161616}
+.prelive-added-rank>button{width:18px;height:18px;margin-top:5px;border:0;background:none;padding:0;display:block;cursor:grab}
+.prelive-added-rank img{display:block;width:18px;height:18px}
+.prelive-added-thumbnail{width:70px;height:70px;position:relative;display:block}
+.prelive-added-thumbnail>img{width:70px;height:70px;object-fit:contain;background:#ededed;border-radius:6px;display:block}
+.prelive-added-thumbnail input{position:absolute!important;left:4px;top:4px}
+.prelive-added-info{min-width:0;height:72px}
+.prelive-added-info p{font-size:14px;font-weight:400;line-height:20px;color:#161616;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prelive-added-info small{display:block;font-size:12px;line-height:18px;color:#757575;margin-top:4px}
+.prelive-added-price{display:flex;align-items:center;gap:4px;margin-top:6px;line-height:24px;min-width:0;padding-right:140px}
+.prelive-added-price strong{font-size:16px;font-weight:500;white-space:nowrap;color:#161616}
+.prelive-added-price del{font-size:12px;line-height:18px;color:#a3a3a3;white-space:nowrap}
+.prelive-added-actions{position:absolute;right:0;top:48px;display:flex;gap:8px;align-items:center;height:24px;flex:none}
+.prelive-added-actions button{cursor:pointer}
+.prelive-row-edit,.prelive-row-more>button{height:24px;width:24px;border:0;background:none;padding:2px;display:grid;place-items:center}
+.prelive-row-edit img,.prelive-row-more>button img{display:block;width:20px;height:20px;object-fit:contain}
+.prelive-row-more{position:relative}
+.prelive-row-promotion{width:70px;height:24px;flex:none}
+.console-shell .reference-product-column .prelive-row-promotion .promotion-tools.promotion-tools-compact{width:70px;height:24px;min-height:24px}
+.console-shell .prelive-row-promotion .promotion-tools{position:relative;width:70px;height:24px;min-height:24px;flex:none;padding:0;border:0;background:none;overflow:visible}
+.console-shell .prelive-row-promotion .promotion-tools .promo-more{position:static;display:flex;align-items:center;justify-content:center;gap:4px;width:70px;min-width:70px;height:24px;border:0;border-radius:4px;background:#f1f1f1;padding:0 8px;color:#161616;font-size:14px;font-weight:500;line-height:20px}
+.console-shell .prelive-row-promotion .promotion-tools .promo-more svg{width:16px;height:16px;transform:none}
+.prelive-added-menu{position:absolute;right:0;top:28px;z-index:40;min-width:144px;padding:4px;border:1px solid #e3e3e3;border-radius:6px;background:#fff;box-shadow:0 4px 16px #0002}
+.prelive-added-menu button{display:block;width:100%;padding:8px 12px;text-align:left;border:0;background:none;color:#161616;font-size:14px;border-radius:4px}
+.prelive-added-menu button:hover{background:#f5f5f5}
+.prelive-added-actions button:disabled,.prelive-added-rank button:disabled{cursor:default;opacity:.5}
+.prelive-added-no-results{font-size:14px;text-align:center;color:#757575;padding:24px}
+.prelive-added-modal{z-index:600}
+.console-shell.is-prelive:has(.has-added-products) .console-topnav{background:#fff}
+.prelive-coupon-count{position:absolute;right:-1px;bottom:3px;width:14px;height:14px;border:1px solid white;border-radius:50%;background:#ff8000;color:#fff;font-size:12px;font-weight:500;line-height:12px;text-align:center}
+@media(max-width:1120px){.prelive-added-price{padding-right:0}.prelive-added-actions{top:76px}.prelive-added-list article,.prelive-added-list article:nth-child(-n+2){height:100px}}
 .prelive-picker-shade{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.5);display:flex;justify-content:flex-end;font-family:'TikTok Text',Arial,sans-serif;color:#161616}
 .prelive-picker{width:min(1000px,100vw);height:100%;background:white;display:flex;flex-direction:column;padding:24px;box-sizing:border-box;position:relative;box-shadow:-12px 0 32px #0002}
 .prelive-picker *{box-sizing:border-box;font-family:'TikTok Text',Arial,sans-serif}
