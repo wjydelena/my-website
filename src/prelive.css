@@ -105,3 +105,5 @@
 .prelive-chat .prelive-chat-empty{transform:translateY(-21px)}
 .prelive-picker-tabs button{padding-bottom:16px}
 .prelive-picker header button{padding-top:5px}
+.console-shell .prelive-coupon-static{cursor:default}
+.prelive-coupon-static img{width:18px;height:18px;object-fit:contain;filter:none;opacity:1}
