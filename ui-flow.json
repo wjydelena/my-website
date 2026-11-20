@@ -2,19 +2,12 @@
   "flows": [
     {
       "id": "customize-first-education",
-      "title": "Automatic entry education and blank-area replay",
+      "title": "Automatic entry education; blank clicks no longer replay the introduction",
       "viewport": {
         "width": 1440,
         "height": 900
       },
       "steps": [
-        {
-          "action": "click",
-          "target": {
-            "role": "button",
-            "name": "Go LIVE now"
-          }
-        },
         {
           "action": "capture",
           "id": "console-education-entry",
@@ -64,13 +57,13 @@
         {
           "action": "waitFor",
           "target": {
-            "text": "Customize your LIVE console"
+            "testId": "customize-without-education"
           }
         },
         {
           "action": "capture",
           "id": "education-replayed",
-          "title": "Blank click replays the introduction after returning from editing"
+          "title": "Blank click keeps the introduction closed after returning from editing"
         },
         {
           "action": "click",
@@ -81,7 +74,7 @@
         {
           "action": "capture",
           "id": "education-demo-closed",
-          "title": "Another blank click closes the demonstration"
+          "title": "Repeated blank clicks do not replay the introduction"
         }
       ]
     },
@@ -213,7 +206,7 @@
     },
     {
       "id": "visual-review",
-      "title": "Pre-LIVE: select products from My shop and Showcase, cancel, confirm, and enter the local LIVE console",
+      "title": "Pre-LIVE: pick products, open per-product Promo, configure Flash Sale and enter the local LIVE console",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -312,6 +305,41 @@
           }
         },
         {
+          "action": "capture",
+          "id": "prelive-product-promo",
+          "title": "Compact product Promo: Create Flash Sale, Create Price Cut and Create Group Deal"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Create Flash Sale"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "prelive-flash-products",
+          "title": "Create Flash Sale step 1: clicked product and editable product settings"
+        },
+        {
+          "action": "click",
+          "target": {
+            "css": ".fs-footer button"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "prelive-flash-settings",
+          "title": "Create Flash Sale step 2: start mode, countdown and duration"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Close Create Flash Sale"
+          }
+        },
+        {
           "action": "press",
           "key": "Escape",
           "target": {
@@ -380,12 +408,6 @@
           "target": {
             "role": "button",
             "name": "Go LIVE now"
-          }
-        },
-        {
-          "action": "waitFor",
-          "target": {
-            "testId": "customize-education-ready"
           }
         },
         {
@@ -656,7 +678,7 @@
         {
           "action": "waitFor",
           "target": {
-            "testId": "customize-education-ready"
+            "testId": "customize-without-education"
           }
         },
         {
@@ -2860,11 +2882,6 @@
           }
         },
         {
-          "action": "capture",
-          "id": "wide-overview",
-          "title": "1440px LIVE Console"
-        },
-        {
           "action": "click",
           "target": {
             "role": "button",
@@ -2984,11 +3001,6 @@
           "target": {
             "testId": "console-blank-area"
           }
-        },
-        {
-          "action": "capture",
-          "id": "wide-overview",
-          "title": "1440px LIVE Console"
         },
         {
           "action": "hover",
@@ -3181,11 +3193,6 @@
           "target": {
             "testId": "console-blank-area"
           }
-        },
-        {
-          "action": "capture",
-          "id": "wide-overview",
-          "title": "1440px LIVE Console"
         },
         {
           "action": "click",

@@ -24,3 +24,9 @@
 - Frozen Flow retains all 32 original journey identities and 256 capture occurrences. Repeated overview/education captures with equivalent coverage in other journeys were reassigned to the pre-LIVE entry, both picker tabs and confirmed result; original non-capture interaction steps were retained. All legacy journeys include the local Go LIVE setup. Full replay is deferred, not claimed as tested.
 
 - Create promotion menus show only LIVE flash sale, Group deal and Price cut. Order-level promotion options and their section are removed; existing visuals and option-click behavior are unchanged.
+
+- Per-product Promo now follows 4.png: compact Create Flash Sale / Create Price Cut / Create Group Deal menu. The footer Create promotion chooser is unchanged.
+- Flash Sale follows 5.png and 6.png through the product step and configuration step. The clicked product is carried in; original name, price and stock use actual picker data rather than conflicting screenshot examples. Product inputs, checked-row batch edits and nested Add product use local draft state.
+- Scope ends at the supplied configuration screen. Its final Next does not open an invented following screen or submit a real promotion; no Price Cut/Group Deal creation screens, variation SKU rows, recurring schedule or scheduled-start date form were supplied.
+- Blank-area clicks no longer replay Customize layout education; automatic first-entry introduction and the layout editor are retained.
+- New Flow states reuse three redundant 1440px overview capture occurrences. All previous distinct capture IDs remain represented, with 32 journeys and 256 capture occurrences.
