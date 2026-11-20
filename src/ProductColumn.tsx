@@ -22,10 +22,10 @@ import cosmetics from './assets/reference-products/promotion-cosmetics.png';
 
 type Product = { id: number; image: string; name: string; price: string; stock: string; oldPrice?: string };
 const defaults: Product[] = [top,pants,yellowBag,redBag,blazer,sweater,cosmetics].map((image,index) => ({id:index+1,image,name:"Skechers Men's Classic Fit Delsx Fit Delson Fit Skechers Men's Shoes",price:['100.00','40.00','60.00-80.00','60.00-80.00','69.99','100.00','100.00'][index],stock:'200',oldPrice:index===0||index===3?'150.00':undefined}));
-export default function ProductColumn() {
+export default function ProductColumn({initialProducts}:{initialProducts?:Product[]}={}) {
   const { editing, moduleStyle } = useConsoleLayout();
   const drag = useModuleHeader('products');
-  const [products, setProducts] = useState(defaults);
+  const [products, setProducts] = useState(initialProducts?.length?initialProducts:defaults);
   const [checked, setChecked] = useState<number[]>([]);
   const {pinned,setPinned,setProducts:setPrompterProducts}=usePrompter();
   useEffect(()=>setPrompterProducts(products),[products,setPrompterProducts]);

@@ -9,6 +9,13 @@
       },
       "steps": [
         {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
+        {
           "action": "capture",
           "id": "console-education-entry",
           "title": "Entry education appears automatically on entering LIVE Console"
@@ -86,6 +93,13 @@
         "height": 900
       },
       "steps": [
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
         {
           "action": "click",
           "target": {
@@ -199,16 +213,103 @@
     },
     {
       "id": "visual-review",
-      "title": "Visual review and automatic introduction completion",
+      "title": "Pre-LIVE: select products from My shop and Showcase, cancel, confirm, and enter the local LIVE console",
       "viewport": {
-        "width": 1280,
+        "width": 1440,
         "height": 900
       },
       "steps": [
         {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Add product"
+          }
+        },
+        {
           "action": "capture",
-          "id": "overview",
-          "title": "LIVE Console with restored entry education"
+          "id": "prelive-my-shop",
+          "title": "Add products — My shop"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Select Classic Red Satin Lipstick bun..."
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "tab",
+            "name": "Showcase products"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "prelive-showcase",
+          "title": "Add products — Showcase products with cross-tab draft"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Select Blue & Navy Retro Sneakers"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Add product"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Select Classic Red Satin Lipstick bun..."
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "tab",
+            "name": "Showcase products"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Select Blue & Navy Retro Sneakers"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Add selected products"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "prelive-products-added",
+          "title": "Selected products from both sources added to Buy now"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
         },
         {
           "action": "waitFor",
@@ -217,20 +318,10 @@
           }
         },
         {
-          "action": "capture",
-          "id": "education-two-play-start",
-          "title": "Introduction plays the GIF at most twice"
-        },
-        {
           "action": "waitFor",
           "target": {
             "testId": "customize-without-education"
           }
-        },
-        {
-          "action": "capture",
-          "id": "education-auto-dismissed",
-          "title": "Introduction closes automatically after two GIF plays"
         }
       ]
     },
@@ -242,6 +333,13 @@
         "height": 900
       },
       "steps": [
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
         {
           "action": "click",
           "target": {
@@ -403,6 +501,13 @@
         {
           "action": "click",
           "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
             "testId": "console-blank-area"
           }
         },
@@ -465,6 +570,13 @@
         "height": 800
       },
       "steps": [
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
         {
           "action": "capture",
           "id": "page-1120",
@@ -587,6 +699,13 @@
         "height": 900
       },
       "steps": [
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
         {
           "action": "click",
           "target": {
@@ -757,6 +876,13 @@
         {
           "action": "click",
           "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
             "testId": "console-blank-area"
           }
         },
@@ -910,6 +1036,13 @@
         {
           "action": "click",
           "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
             "testId": "console-blank-area"
           }
         },
@@ -971,6 +1104,13 @@
         "height": 900
       },
       "steps": [
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
         {
           "action": "click",
           "target": {
@@ -1119,6 +1259,13 @@
         {
           "action": "click",
           "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
             "testId": "console-blank-area"
           }
         },
@@ -1199,6 +1346,13 @@
         "height": 900
       },
       "steps": [
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
         {
           "action": "click",
           "target": {
@@ -1312,6 +1466,13 @@
         "height": 900
       },
       "steps": [
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
         {
           "action": "click",
           "target": {
@@ -1439,6 +1600,13 @@
         "height": 900
       },
       "steps": [
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
         {
           "action": "click",
           "target": {
@@ -1637,6 +1805,13 @@
         {
           "action": "click",
           "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
             "testId": "console-blank-area"
           }
         },
@@ -1719,6 +1894,13 @@
         {
           "action": "click",
           "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
             "testId": "console-blank-area"
           }
         },
@@ -1791,6 +1973,13 @@
         "height": 900
       },
       "steps": [
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
         {
           "action": "click",
           "target": {
@@ -1977,6 +2166,13 @@
         {
           "action": "click",
           "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
             "testId": "console-blank-area"
           }
         },
@@ -2046,6 +2242,13 @@
         "height": 900
       },
       "steps": [
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
         {
           "action": "click",
           "target": {
@@ -2249,6 +2452,13 @@
         "height": 900
       },
       "steps": [
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
         {
           "action": "click",
           "target": {
@@ -2568,6 +2778,13 @@
         {
           "action": "click",
           "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
             "testId": "console-blank-area"
           }
         },
@@ -2684,6 +2901,13 @@
         "height": 900
       },
       "steps": [
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
         {
           "action": "click",
           "target": {
@@ -2877,6 +3101,13 @@
         {
           "action": "click",
           "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
             "testId": "console-blank-area"
           }
         },
@@ -3002,6 +3233,13 @@
         {
           "action": "click",
           "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
             "testId": "console-blank-area"
           }
         },
@@ -3064,15 +3302,22 @@
       },
       "steps": [
         {
+          "action": "capture",
+          "id": "prelive-entry",
+          "title": "Pre-LIVE console — Buy now empty state"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
+        {
           "action": "click",
           "target": {
             "testId": "console-blank-area"
           }
-        },
-        {
-          "action": "capture",
-          "id": "wide-overview",
-          "title": "1440px LIVE Console"
         },
         {
           "action": "fill",
@@ -3800,6 +4045,13 @@
         {
           "action": "click",
           "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
             "testId": "console-blank-area"
           }
         },
@@ -3882,6 +4134,13 @@
         "height": 900
       },
       "steps": [
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
         {
           "action": "click",
           "target": {
@@ -4025,6 +4284,13 @@
         {
           "action": "click",
           "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
             "testId": "console-blank-area"
           }
         },
@@ -4158,6 +4424,13 @@
         {
           "action": "click",
           "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
             "testId": "console-blank-area"
           }
         },
@@ -4287,6 +4560,13 @@
         {
           "action": "click",
           "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
             "testId": "console-blank-area"
           }
         },
@@ -4375,6 +4655,13 @@
         "height": 900
       },
       "steps": [
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
         {
           "action": "click",
           "target": {
@@ -4606,6 +4893,13 @@
         "height": 900
       },
       "steps": [
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
         {
           "action": "click",
           "target": {
