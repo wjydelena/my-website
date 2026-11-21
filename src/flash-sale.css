@@ -4,7 +4,7 @@
 .product-promo-menu>button>img{width:16px;height:16px;object-fit:contain;flex:none}
 .product-promo-menu>button:hover{background:#f8f8f8}
 .product-promo-menu>button:focus-visible{outline:2px solid #009995;outline-offset:-2px}
-.fs-backdrop{position:fixed;inset:0;z-index:480;display:flex;justify-content:flex-end;background:#7b7b7b;font-family:'TikTok Text',Arial,sans-serif;color:#161616}
+.fs-backdrop{position:fixed;inset:0;z-index:480;display:flex;justify-content:flex-end;background:rgba(0,0,0,.4);font-family:'TikTok Text',Arial,sans-serif;color:#161616}
 .flash-sale-drawer{position:relative;width:min(1000px,100vw);height:100%;display:flex;flex-direction:column;box-sizing:border-box;padding:24px;background:#fff;box-shadow:-12px 0 32px #0002}
 .fs-header{position:relative;flex:none}
 .fs-header h2{font-size:20px;font-weight:500;line-height:28px;margin:0}

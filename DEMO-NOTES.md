@@ -75,3 +75,9 @@
 - Empty-state Add products gets a subtle gray darkening; footer and picker Add product(s) get a subtle darker teal. Background feedback uses 120ms and respects reduced motion.
 - +Promo right padding is 12px; its wrapper/button width adapts to prevent crowding. Product-card hover makes the enabled Promo button white.
 - Native computed-style and menu checks passed after restoring a stopped preview service. No functional or data changes; UI Flow remains unchanged.
+
+
+## v1.12 · Flash Sale translucent modal drawer
+- Replace the opaque #7b7b7b backdrop with 40% translucent black so underlying navigation and product information remain visible. This supersedes the earlier opaque-backdrop reference requirement.
+- Modal semantics, original 1000px right drawer, steps, saved values and close behavior are unchanged.
+- Build and native checks passed for transparency, retained underlying content in both steps, original width and Escape return. Fresh screenshot visually reviewed. UI Flow unchanged.
