@@ -108,16 +108,16 @@
           }
         },
         {
-          "action": "click",
+          "action": "fill",
           "target": {
-            "role": "tab",
-            "name": "Showcase products"
-          }
+            "label": "Search products to add"
+          },
+          "value": "Blue & Navy"
         },
         {
           "action": "capture",
           "id": "prelive-showcase",
-          "title": "Add products — Showcase products with cross-tab draft"
+          "title": "My shop — migrated products searchable with selection draft retained"
         },
         {
           "action": "click",
@@ -148,11 +148,11 @@
           }
         },
         {
-          "action": "click",
+          "action": "fill",
           "target": {
-            "role": "tab",
-            "name": "Showcase products"
-          }
+            "label": "Search products to add"
+          },
+          "value": "Blue & Navy"
         },
         {
           "action": "click",
@@ -171,7 +171,7 @@
         {
           "action": "capture",
           "id": "prelive-products-added",
-          "title": "Selected products from both sources added to Buy now"
+          "title": "Original shop and migrated products added together from My shop"
         },
         {
           "action": "click",
@@ -196,6 +196,150 @@
           "action": "capture",
           "id": "prelive-flash-products",
           "title": "Single-page Flash Sale: start, countdown, duration and product settings"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "When to start flash sale"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "flash-prelive-start-options",
+          "title": "Before LIVE: exactly manual start or start at a specific time"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Start at a specific time"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "flash-specific-date-time",
+          "title": "Scheduled start with date/time inputs and 30-day guidance"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Choose flash sale date"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "flash-start-calendar",
+          "title": "Navigable calendar using current dates and valid range"
+        },
+        {
+          "action": "press",
+          "target": {
+            "label": "Flash sale start date"
+          },
+          "key": "Escape"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Choose flash sale time"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "flash-start-clock",
+          "title": "Hour/minute draft lists with Current time and Apply"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Current time"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "css": ".fs-time-apply"
+          }
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "When to start flash sale"
+          },
+          "key": "Escape"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "When to start flash sale"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Manually start during LIVE"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Add products to flash sale"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "flash-add-more-live",
+          "title": "Shared centered Add more modal using actual LIVE products"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "tab",
+            "name": "My shop products"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "flash-add-more-unified-shop",
+          "title": "Unified My shop catalog including migrated Showcase products"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Search add more products"
+          },
+          "value": "showcase-1"
+        },
+        {
+          "action": "capture",
+          "id": "flash-add-more-id-search",
+          "title": "Search preserves original migrated record IDs"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Select additional Classic Gray Everyday Backpack"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "css": ".am-confirm"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "flash-add-more-confirmed-draft",
+          "title": "Confirmed additional product while existing Flash Sale settings remain"
         },
         {
           "action": "click",

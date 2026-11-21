@@ -6,6 +6,8 @@ export type ProductFlashSale = {
   level: string;
   recurring: boolean;
   start: string;
+  startDate?: string;
+  startTime?: string;
   countdown: string;
   duration: string;
 };
