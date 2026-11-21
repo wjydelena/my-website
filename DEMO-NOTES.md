@@ -60,3 +60,12 @@
 - The existing confirmation UI Flow explicitly enters 50 before capturing that configured example; all 32 journeys / 256 captures remain.
 
 - v1.9 verification passed: $59.90/17/customer2 creation; $19.95/32/customer4 edit; cancelled edits retain saved values; batch $27.30/45/customer6 applies to both products; zero and cleared values do not trigger fallbacks. Fresh screenshot reviewed; no runtime exceptions.
+
+
+## v1.10 · 3.png navigation and Version 1 product feedback
+- Navigation is white with the 3.png divider, light-gray Customize button and white Prompter capsule; globe is retained in both entry and LIVE states. Sidebar assets/spacing are unchanged from the shared reference.
+- Customize layout is now a static button. Its education and editor entry are not mounted. This supersedes the earlier first-entry education requirement for this Demo only; Version 1 remains untouched.
+- Product cards reuse the Version 1 8px frame and 120ms gray hover feedback, including darker rank and collapsed promotion backgrounds. Promotions start collapsed, expand from the card metadata/blank region or heading and use the exact shared Version 1 white details/row/More-Start styling and original flash asset.
+- Actual campaign values are retained. Edit and remove remain available from the promotion More menu; Start/Stop is local demo state, as in Version 1, not a business request. Checkbox, Promo, drag and row actions remain independent of the expansion overlay.
+- Targeted native checks passed: white navigation on entry, mouse/keyboard no-op layout entry before/after Go LIVE and at 1120px; collapsed default, hover colors, full-card expansion, white aligned panel, checkbox/Promo isolation, edit/remove; expanded heading and row computed styles match Version 1 source. Screenshots reviewed after correcting inherited double margin. Entered price/total/customer, batch, zero, blank and cancel-edit regression passed with no runtime exceptions.
+- UI Flow keeps its 32 journeys. 21 now-unreachable editor journeys are replaced by mouse/keyboard no-op coverage; other valid journeys stay intact. Product editing no longer tries an editor Cancel. Flash Sale captures explicitly expand the newly collapsed block and use the More menu for edit/remove. 156 capture occurrences, within bounds. No full Flow replay requested or claimed.
