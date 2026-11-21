@@ -1232,7 +1232,7 @@
     },
     {
       "id": "price-cut-settings",
-      "title": "Price Cut duration, conditional batch editing and saved values",
+      "title": "Price Cut and Group Deal duration, conditional batch editing and saved values",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -1520,6 +1520,146 @@
           "action": "capture",
           "id": "price-cut-footer-cancel",
           "title": "Cancel footer Price Cut leaves products unchanged"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Promo for added product 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Create Group Deal"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "group-deal-drawer",
+          "title": "Reference Create Group Deal with actual clicked product"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Select group deal duration"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "group-deal-duration-options",
+          "title": "Numeric Duration dropdown has exactly 1 through 6"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "6"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Group size for Classic Red Satin Lipstick bun..."
+          }
+        },
+        {
+          "action": "capture",
+          "id": "group-deal-size-options",
+          "title": "Matching numeric Group size selector"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "4"
+          }
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Group deal price for Classic Red Satin Lipstick bun..."
+          },
+          "value": "79.90"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Group deal stock for Classic Red Satin Lipstick bun..."
+          },
+          "value": "17"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Create"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Expand or collapse promotions for added product 1"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "group-deal-confirmed",
+          "title": "Group Deal preserves entered duration 6, size 4, price 79.90 and stock 17"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "More group deal 1 actions for added product 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Edit group deal 1 for added product 1"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "group-deal-edit-restored",
+          "title": "All saved values restored on Group Deal edit"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "group-deal-cancel-preserved",
+          "title": "Cancel preserves saved Group Deal"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "More group deal 1 actions for added product 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Delete group deal 1 for added product 1"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "group-deal-removed",
+          "title": "Remove Group Deal only, preserving the product"
         }
       ]
     },
