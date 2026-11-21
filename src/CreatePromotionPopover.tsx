@@ -12,7 +12,7 @@ const sections=[
   ]},
 ];
 
-export default function CreatePromotionPopover({anchor,panelRef}:{anchor:React.RefObject<HTMLButtonElement>;panelRef:React.RefObject<HTMLDivElement>}){
+export default function CreatePromotionPopover({anchor,panelRef,onPriceCut}:{anchor:React.RefObject<HTMLButtonElement>;panelRef:React.RefObject<HTMLDivElement>;onPriceCut?:()=>void}){
   const [position,setPosition]=useState<{left:number;top:number}|null>(null);
   const placed=position!==null;
   useEffect(()=>{if(placed)panelRef.current?.focus({preventScroll:true});},[placed,panelRef]);
@@ -44,7 +44,7 @@ export default function CreatePromotionPopover({anchor,panelRef}:{anchor:React.R
     }}>
     {sections.map((section,index)=><section className={`create-promotion-section${index?' is-order-level':''}`} key={section.title} role="group" aria-label={section.title}>
       <h2>{section.title}</h2>
-      {section.items.map(item=><button type="button" role="menuitem" className="create-promotion-option" key={item.title} aria-label={item.title}>
+      {section.items.map(item=><button type="button" role="menuitem" className="create-promotion-option" key={item.title} aria-label={item.title} onClick={item.title==='Price cut'?onPriceCut:undefined}>
         <img src={item.icon} width={32} height={32} alt="" draggable={false}/>
         <span><strong>{item.title}</strong><span className="create-promotion-description">{item.description}</span></span>
       </button>)}

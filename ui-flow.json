@@ -1231,43 +1231,295 @@
       ]
     },
     {
-      "id": "editor-hover-overlays",
-      "title": "Layout entry temporarily inactive · editor-hover-overlays",
+      "id": "price-cut-settings",
+      "title": "Price Cut duration, conditional batch editing and saved values",
       "viewport": {
         "width": 1440,
         "height": 900
       },
       "steps": [
         {
+          "action": "capture",
+          "id": "prelive-entry",
+          "title": "Pre-LIVE entry"
+        },
+        {
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Go LIVE now"
+            "name": "Add product"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Select Classic Red Satin Lipstick bun..."
           }
         },
         {
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Customize layout"
+            "name": "Add selected products"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Promo for added product 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Create Price Cut"
           }
         },
         {
           "action": "capture",
-          "id": "editor-hover-overlays-inactive",
-          "title": "Customize layout click does not open education or editor"
+          "id": "price-cut-drawer",
+          "title": "Create Price Cut with clicked product"
         },
         {
-          "action": "press",
+          "action": "click",
           "target": {
-            "testId": "customize-layout-inactive"
+            "role": "button",
+            "name": "Batch edit price cut products"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "price-cut-batch-disabled",
+          "title": "Batch menu opens but all options are disabled without selected rows"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Select all price cut products"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Batch edit price cut products"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "price-cut-batch-enabled",
+          "title": "All batch actions are enabled only after selecting product"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Bulk edit lowest price"
+          }
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Lowest price for Classic Red Satin Lipstick bun..."
           },
-          "key": "Enter"
+          "value": "59.90"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Batch edit price cut products"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Bulk edit participants"
+          }
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Target participants for Classic Red Satin Lipstick bun..."
+          },
+          "value": "5"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Batch edit price cut products"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Bulk edit quantities"
+          }
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Price cut quantity for Classic Red Satin Lipstick bun..."
+          },
+          "value": "17"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Select price cut duration"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "radio",
+            "name": "Custom"
+          }
         },
         {
           "action": "capture",
-          "id": "editor-hover-overlays-keyboard-inactive",
-          "title": "Keyboard activation also leaves the console unchanged"
+          "id": "price-cut-duration-custom",
+          "title": "Reference Custom duration active state: 00 h 02 min 30 s"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Custom duration hours"
+          },
+          "value": "00"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Custom duration minutes"
+          },
+          "value": "02"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Custom duration seconds"
+          },
+          "value": "30"
+        },
+        {
+          "action": "click",
+          "target": {
+            "css": ".pc-custom-fields button"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "price-cut-ready",
+          "title": "Entered bulk values and custom duration are ready"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Create"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Expand or collapse promotions for added product 1"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "price-cut-confirmed",
+          "title": "Confirmed Price Cut uses entered price, participants, quantity and duration"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "More price cut 1 actions for added product 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Edit price cut 1 for added product 1"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "price-cut-edit-restored",
+          "title": "Saved values restored on edit"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "price-cut-cancel-preserved",
+          "title": "Cancel keeps confirmed promotion unchanged"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "More price cut 1 actions for added product 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Delete price cut 1 for added product 1"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "price-cut-removed",
+          "title": "Remove only Price Cut, preserving the base product"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Create promotion"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Price cut"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "price-cut-footer-entry",
+          "title": "Footer Price cut opens the shared drawer with current products"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "price-cut-footer-cancel",
+          "title": "Cancel footer Price Cut leaves products unchanged"
         }
       ]
     },
