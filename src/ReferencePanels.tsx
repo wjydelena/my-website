@@ -1,3 +1,4 @@
+import { PRODUCT_PRICE } from './product-pricing';
 import {PrompterVideoProduct} from './Prompter';
 import {usePrompter} from './PrompterContext';
 import { CartIcon, BagIcon, CustomerIcon, ModeratorIcon, FanHeartIcon } from './AttachmentIcons';
@@ -33,11 +34,11 @@ import pancakes from './assets/reference-panels/pancakes.png';
 const initialMessages = [
   { name:'Bobbie Dickinson', image:chat0, role:'customer', customer:1, bag:true, text:"The Air Jordan 3 is no longer a top-of-the-line on-court performer, but it's still one of the sleekest and most sought-after models of the Jordan line" },
   { name:'Jeanlovescat', image:chat1, role:'fan', text:'Can you please take a look at the Jordan 3?' },
-  { name:'Alex Johnson', image:chat2, role:'mod', text:'This product is $9.99, only in today’s LIVE' },
+  { name:'Alex Johnson', image:chat2, role:'mod', text:`This product is $${PRODUCT_PRICE}, only in today’s LIVE` },
   { name:'Jeanlovescat', image:chat3, role:'fan', customer:2, text:'Can you please take a look at the Jordan 3?' },
   { name:'SandyHukins', image:chat4, role:'normal', text:'170/62kg, which size to choose?' },
   { name:'Bobbie Dickinson', image:chat5, role:'customer', customer:3, text:'Next round please' },
-  { name:'Alex Johnson', image:chat6, role:'mod', text:'This product is $9.99, only in today’s LIVE' },
+  { name:'Alex Johnson', image:chat6, role:'mod', text:`This product is $${PRODUCT_PRICE}, only in today’s LIVE` },
 ];
 function Chat() {
   const {editing,moduleStyle,mergedChatActivity}=useConsoleLayout(); const drag=useModuleHeader('chat');
@@ -85,7 +86,7 @@ function CombinedChatActivity({comment,setComment,sent,submit}:{comment:string;s
   const event=(i:number)=><div className={'feed-item'+(i<2?' plain-event':'')} key={`event-${i}`}><img className="avatar" src={events[i].image} alt=""/><p><span className="person-name">{events[i].name}</span> {events[i].action} {events[i].product&&<img className="mini-product" src={shoe} alt="Shoe"/>}{events[i].no&&<strong> No.6</strong>}{events[i].gift&&<><img className="gift-product" src={pancakes} alt="Pancakes"/><strong> x4</strong></>}</p></div>;
   return <div className="chat reference-chat merged-chat-activity" data-module-id="chat" data-merged-modules="chat activity" style={moduleStyle('chat')}>
     <div className="combined-tabs" {...drag}><button type="button" role="tab" aria-selected={tab==='Chat'} className={tab==='Chat'?'active':''} disabled={editing} onClick={()=>setTab('Chat')}><ModuleTitle>Chat</ModuleTitle></button><button type="button" role="tab" aria-selected={tab==='Top customer'} className={tab==='Top customer'?'active':''} disabled={editing} onClick={()=>setTab('Top customer')}>Top customer</button><RemovePanelButton id="chat"/></div>
-    <div className="activity-list combined-purchases">{purchases.map((p,i)=><div className="activity" key={p.name}><img className="avatar" src={p.image} alt=""/><p><span className="person-name">{p.name}</span>{tab==='Chat'?' made a purchase ':` · No.${i+1} customer `}<img className="mini-product" src={shoe} alt="Shoe"/><strong> No.6</strong><span className="purchase-divider"/><strong>$100.00</strong></p></div>)}</div>
+    <div className="activity-list combined-purchases">{purchases.map((p,i)=><div className="activity" key={p.name}><img className="avatar" src={p.image} alt=""/><p><span className="person-name">{p.name}</span>{tab==='Chat'?' made a purchase ':` · No.${i+1} customer `}<img className="mini-product" src={shoe} alt="Shoe"/><strong> No.6</strong><span className="purchase-divider"/><strong>${PRODUCT_PRICE}</strong></p></div>)}</div>
     <div className="chat-scroll combined-stream">{tab==='Chat'&&<>
       {message(initialMessages[0],'message-0')}{event(0)}{event(1)}{event(2)}
       {message(initialMessages[1],'message-1')}{message(initialMessages[3],'message-3')}{event(3)}{event(4)}
@@ -101,7 +102,7 @@ export function AnalyticsColumn(){
   return <section className="analytics-column"><LiveTools/><div className="analytics" data-module-id="analytics" style={moduleStyle('analytics')}><div className="analytics-content-scroll"><div className="analytics-section"><div className="analytics-title" {...analyticsDrag}><ModuleTitle>Analytics</ModuleTitle><RemovePanelButton id="analytics"/><span>LIVE Dashboard<ExternalLink size={15}/></span></div><div className="metric-grid">{metrics.map(([value,label])=><div className="metric" key={label}><strong>{value}</strong><span>{label}</span></div>)}</div></div></div><ResizeHandle kind="analytics" label="Resize analytics and activity"/></div>
     <div className="activity-module" data-module-id="activity" style={moduleStyle('activity')}><div className="activity-tabs tabs" {...activityDrag}>{['Activity','Top customer'].map(value=><button type="button" role="tab" aria-selected={tab===value} className={tab===value?'active':''} disabled={editing} key={value} onClick={()=>setTab(value)}>{editing&&value==='Activity'&&<GripVertical className="activity-edit-grip" size={16}/>} {value}</button>)}<RemovePanelButton id="activity"/><button type="button" className="activity-filter" aria-label="Activity filters" disabled={editing} onClick={()=>setFilters(!filters)}><img className="annotation-console-icon" src={filterIcon} width={16} height={16} alt=""/></button></div>
       {filters&&!editing&&<div className="reference-activity-options"><label><input type="checkbox" checked={purchasesOnly} onChange={e=>setPurchasesOnly(e.target.checked)}/>Purchases only</label></div>}
-      <div className="activity-list">{purchases.map((p,i)=><div className="activity" key={p.name}><img className="avatar" src={p.image} alt=""/><p><span className="person-name">{p.name}</span>{tab==='Activity'?' made a purchase ':` · No.${i+1} customer `}<img className="mini-product" src={shoe} alt="Shoe"/><strong> No.6</strong><span className="purchase-divider"/><strong>$100.00</strong></p></div>)}</div>
+      <div className="activity-list">{purchases.map((p,i)=><div className="activity" key={p.name}><img className="avatar" src={p.image} alt=""/><p><span className="person-name">{p.name}</span>{tab==='Activity'?' made a purchase ':` · No.${i+1} customer `}<img className="mini-product" src={shoe} alt="Shoe"/><strong> No.6</strong><span className="purchase-divider"/><strong>${PRODUCT_PRICE}</strong></p></div>)}</div>
       <div className="event-feed"><ResizeHandle kind="feed" label="Resize activity and event feed"/><div className="feed-scroll">{!purchasesOnly&&tab==='Activity'&&events.map((e,i)=><div className={'feed-item'+(i<2?' plain-event':'')} key={i}><img className="avatar" src={e.image} alt=""/><p><span className="person-name">{e.name}</span> {e.action} {e.product&&<img className="mini-product" src={shoe} alt="Shoe"/>}{e.no&&<strong> No.6</strong>}{e.gift&&<><img className="gift-product" src={pancakes} alt="Pancakes"/><strong> x4</strong></>}</p></div>)}</div></div>
     </div></section>;
 }

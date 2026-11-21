@@ -29,19 +29,20 @@ import show2 from './assets/prelive/showcase-2.png';
 import show3 from './assets/prelive/showcase-3.png';
 import './prelive.css';
 
+import { PRODUCT_PRICE } from './product-pricing';
 type Item={id:string;name:string;image:string;sku:string;price:string;old?:string;updated:string;badge?:boolean;stock?:string};
 const idText='23324124341232332';
 const shop:Item[]=[
- {id:'shop-0',name:'Classic Red Satin Lipstick bun...',image:shop0,sku:'Green',price:'0.40',updated:'5'},
- {id:'shop-1',name:'Silver Beaded Hoop Earrings',image:shop1,sku:'10 variants',price:'10.00',old:'18.00',updated:'100k'},
- {id:'shop-2',name:'Soft-Blending Makeup Sponge...',image:shop2,sku:'Yellow',price:'10.00',updated:'100k'},
- {id:'shop-3',name:'Black Wireless Support Bra',image:shop3,sku:'10 variants',price:'10.00',updated:'100k'},
- {id:'shop-4',name:'Retro Tortoiseshell Sunglasses...',image:shop4,sku:'Women',price:'10.00',updated:'100k'}];
+ {id:'shop-0',name:'Classic Red Satin Lipstick bun...',image:shop0,sku:'Green',price:PRODUCT_PRICE,updated:'5'},
+ {id:'shop-1',name:'Silver Beaded Hoop Earrings',image:shop1,sku:'10 variants',price:PRODUCT_PRICE,old:PRODUCT_PRICE,updated:'100k'},
+ {id:'shop-2',name:'Soft-Blending Makeup Sponge...',image:shop2,sku:'Yellow',price:PRODUCT_PRICE,updated:'100k'},
+ {id:'shop-3',name:'Black Wireless Support Bra',image:shop3,sku:'10 variants',price:PRODUCT_PRICE,updated:'100k'},
+ {id:'shop-4',name:'Retro Tortoiseshell Sunglasses...',image:shop4,sku:'Women',price:PRODUCT_PRICE,updated:'100k'}];
 const showcase:Item[]=[
- {id:'showcase-0',name:'Light Blue Double-Breasted Bl...',image:show0,sku:'10 variants',price:'10.00',old:'18.00',updated:'100k'},
- {id:'showcase-1',name:'Classic Gray Everyday Backpack',image:show1,sku:'Variants',price:'10.00',old:'18.00',updated:'100k'},
- {id:'showcase-2',name:'Golden Bloom Eau de Parfum',image:show2,sku:'Variants',price:'10.00',updated:'100k'},
- {id:'showcase-3',name:'Blue & Navy Retro Sneakers',image:show3,sku:'Variants',price:'10.00',updated:'100k',badge:true}];
+ {id:'showcase-0',name:'Light Blue Double-Breasted Bl...',image:show0,sku:'10 variants',price:PRODUCT_PRICE,old:PRODUCT_PRICE,updated:'100k'},
+ {id:'showcase-1',name:'Classic Gray Everyday Backpack',image:show1,sku:'Variants',price:PRODUCT_PRICE,old:PRODUCT_PRICE,updated:'100k'},
+ {id:'showcase-2',name:'Golden Bloom Eau de Parfum',image:show2,sku:'Variants',price:PRODUCT_PRICE,updated:'100k'},
+ {id:'showcase-3',name:'Blue & Navy Retro Sneakers',image:show3,sku:'Variants',price:PRODUCT_PRICE,updated:'100k',badge:true}];
 
 function ProductPicker({close,commit,existing,initialTab='My shop'}:{close:()=>void;commit:(rows:Item[])=>void;existing:Item[];initialTab?:string}){
  const [tab,setTab]=useState(initialTab);const [selected,setSelected]=useState<string[]>([]);const [query,setQuery]=useState('');

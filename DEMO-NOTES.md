@@ -30,3 +30,10 @@
 - Scope ends at the supplied configuration screen. Its final Next does not open an invented following screen or submit a real promotion; no Price Cut/Group Deal creation screens, variation SKU rows, recurring schedule or scheduled-start date form were supplied.
 - Blank-area clicks no longer replay Customize layout education; automatic first-entry introduction and the layout editor are retained.
 - New Flow states reuse three redundant 1440px overview capture occurrences. All previous distinct capture IDs remain represented, with 32 journeys and 256 capture occurrences.
+
+
+## v1.7 · All product-related demo prices $100.00
+- User-authorized pricing override supersedes the earlier choice to preserve picker source prices. My shop, Showcase, selected product cards, default LIVE products, crossed-out prices, Flash Sale original/deal prices, nested product addition, Price Cut/Group Deal examples, auction/bid prices, gift amount/minimum-spend examples, product purchase activity and moderator product-price messages all use $100.00.
+- Prompter product and video-preview prices continue to derive from the same product data. Editing remains supported; clearing a deal-price input remains possible without changing its default for untouched/new rows.
+- Product names/images, stock, purchase limits, quantities, claim counts, timings, percentages, GMV, existing layout/animations and the two-step Flash Sale scope are unchanged.
+- Promotion action labels in UI Flow are synchronized; all 32 journeys and 256 capture occurrences are retained. Version 1 is not modified.
