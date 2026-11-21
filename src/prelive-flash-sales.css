@@ -8,3 +8,22 @@
 .console-shell .prelive-reference-card.is-expanded .prelive-sale-heading{height:32px}
 .prelive-sale-heading:focus-visible{outline:2px solid #009995;outline-offset:2px}
 @media(max-width:1120px){.console-shell .prelive-added-list article.has-flash-sales{grid-template-rows:100px auto}}
+
+/* Reference promo rows: direct delete/edit controls, scoped to the Demo pre-LIVE cards. */
+.console-shell .prelive-sale-summary .direct-promotion-actions{position:absolute;right:4px;top:24px;margin-top:0;gap:4px;flex:none;align-items:center}
+.console-shell .prelive-sale-summary .product-promotion-copy{padding-right:56px}
+.console-shell .prelive-sale-heading svg.is-expanded{transform:rotate(180deg)}
+.console-shell .prelive-sale-summary .direct-promotion-actions button{display:grid;place-items:center;min-width:24px;width:24px;height:24px;padding:0;border-radius:4px;color:#606060;background:transparent}
+.console-shell .prelive-sale-summary .direct-promotion-actions button:hover:not(:disabled){background:#eee;color:#161616}
+.console-shell .prelive-sale-summary .direct-promotion-actions button:focus-visible{outline:2px solid #009995;outline-offset:1px}
+.console-shell .prelive-sale-summary .direct-promotion-actions button:disabled{color:#aaa;cursor:default}
+.console-shell .prelive-sale-summary .product-promotions-details{padding:0 8px}
+.console-shell .prelive-sale-summary .product-promotion-row:hover::before{content:none}
+.console-shell .prelive-sale-summary .promotion-icon-meta{display:inline-flex;align-items:center;gap:4px}
+.console-shell .prelive-reference-card .prelive-sale-summary{background:#f5f5f5}
+.console-shell .prelive-reference-card:hover .prelive-sale-summary{background:#f5f5f5}
+.console-shell .prelive-reference-card.is-expanded .prelive-sale-summary{background:#fff}
+.console-shell .prelive-reference-card .product-promo-trigger{background:transparent}
+.console-shell .prelive-reference-card.is-expanded .product-promo-trigger:not(:disabled){background:#fff}
+.console-shell .prelive-reference-card .prelive-row-edit,.console-shell .prelive-reference-card .prelive-row-more>button{background:#f5f5f5;border-radius:4px}
+.console-shell .prelive-reference-card:hover .prelive-row-edit,.console-shell .prelive-reference-card:hover .prelive-row-more>button,.console-shell .prelive-reference-card.is-expanded .prelive-row-edit,.console-shell .prelive-reference-card.is-expanded .prelive-row-more>button{background:transparent}

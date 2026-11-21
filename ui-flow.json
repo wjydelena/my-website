@@ -297,13 +297,6 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "More flash sale 1 actions for added product 1"
-          }
-        },
-        {
-          "action": "click",
-          "target": {
-            "role": "menuitem",
             "name": "Edit flash sale 1 for added product 1"
           }
         },
@@ -354,13 +347,6 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "More flash sale 1 actions for added product 1"
-          }
-        },
-        {
-          "action": "click",
-          "target": {
-            "role": "menuitem",
             "name": "Delete flash sale 1 for added product 1"
           }
         },
@@ -1444,13 +1430,6 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "More price cut 1 actions for added product 1"
-          }
-        },
-        {
-          "action": "click",
-          "target": {
-            "role": "menuitem",
             "name": "Edit price cut 1 for added product 1"
           }
         },
@@ -1475,13 +1454,6 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "More price cut 1 actions for added product 1"
-          }
-        },
-        {
-          "action": "click",
-          "target": {
-            "role": "menuitem",
             "name": "Delete price cut 1 for added product 1"
           }
         },
@@ -1615,13 +1587,6 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "More group deal 1 actions for added product 1"
-          }
-        },
-        {
-          "action": "click",
-          "target": {
-            "role": "menuitem",
             "name": "Edit group deal 1 for added product 1"
           }
         },
@@ -1646,13 +1611,6 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "More group deal 1 actions for added product 1"
-          }
-        },
-        {
-          "action": "click",
-          "target": {
-            "role": "menuitem",
             "name": "Delete group deal 1 for added product 1"
           }
         },
@@ -1660,6 +1618,159 @@
           "action": "capture",
           "id": "group-deal-removed",
           "title": "Remove Group Deal only, preserving the product"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Promo for added product 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Create Flash Sale"
+          }
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Total purchase limit for Classic Red Satin Lipstick bun..."
+          },
+          "value": "50"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Next"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Confirm"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Expand or collapse flash sales for added product 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Promo for added product 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Create Group Deal"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Select group deal duration"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "6"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Group size for Classic Red Satin Lipstick bun..."
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "3"
+          }
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Group deal price for Classic Red Satin Lipstick bun..."
+          },
+          "value": "9.00"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Group deal stock for Classic Red Satin Lipstick bun..."
+          },
+          "value": "20"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Create"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "promo-card-two-expanded",
+          "title": "Reference card with two expanded promos and direct delete/edit icons"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Delete group deal 1 for added product 1"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "promo-card-one-expanded",
+          "title": "Delete only Group Deal: one Flash Sale remains expanded"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Expand or collapse flash sales for added product 1"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "promo-card-one-collapsed",
+          "title": "Reference collapsed card: gray heading, no promo detail rows"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Expand or collapse flash sales for added product 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Delete flash sale 1 for added product 1"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "promo-card-no-promos",
+          "title": "Delete last promo: keep base product and hide promo summary"
         }
       ]
     },
