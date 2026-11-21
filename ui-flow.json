@@ -1320,16 +1320,9 @@
           "title": "Create Price Cut with clicked product"
         },
         {
-          "action": "click",
-          "target": {
-            "role": "button",
-            "name": "Batch edit price cut products"
-          }
-        },
-        {
           "action": "capture",
           "id": "price-cut-batch-disabled",
-          "title": "Batch menu opens but all options are disabled without selected rows"
+          "title": "Batch entry is disabled until a product is selected"
         },
         {
           "action": "click",
@@ -1354,13 +1347,18 @@
           "action": "click",
           "target": {
             "role": "menuitem",
-            "name": "Bulk edit lowest price"
+            "name": "Batch edit lowest price"
           }
+        },
+        {
+          "action": "capture",
+          "id": "pc-batch-lowest-modal",
+          "title": "Batch lowest modal with selected-product count and disabled empty Confirm"
         },
         {
           "action": "fill",
           "target": {
-            "label": "Lowest price for Classic Red Satin Lipstick bun..."
+            "label": "Batch lowest price"
           },
           "value": "59.90"
         },
@@ -1368,22 +1366,13 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Batch edit price cut products"
+            "name": "Confirm"
           }
         },
         {
-          "action": "click",
-          "target": {
-            "role": "menuitem",
-            "name": "Bulk edit participants"
-          }
-        },
-        {
-          "action": "fill",
-          "target": {
-            "label": "Target participants for Classic Red Satin Lipstick bun..."
-          },
-          "value": "5"
+          "action": "capture",
+          "id": "pc-batch-lowest-applied",
+          "title": "Confirmed lowest applies only to selected product rows"
         },
         {
           "action": "click",
@@ -1396,15 +1385,70 @@
           "action": "click",
           "target": {
             "role": "menuitem",
-            "name": "Bulk edit quantities"
+            "name": "Batch edit participants"
           }
+        },
+        {
+          "action": "capture",
+          "id": "pc-batch-participants-modal",
+          "title": "Batch participants modal with selected-product count and disabled empty Confirm"
         },
         {
           "action": "fill",
           "target": {
-            "label": "Price cut quantity for Classic Red Satin Lipstick bun..."
+            "label": "Batch participants"
+          },
+          "value": "5"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Confirm"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "pc-batch-participants-applied",
+          "title": "Confirmed participants applies only to selected product rows"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Batch edit price cut products"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Batch edit quantities"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "pc-batch-quantity-modal",
+          "title": "Batch quantity modal with selected-product count and disabled empty Confirm"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Batch quantities"
           },
           "value": "17"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Confirm"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "pc-batch-quantity-applied",
+          "title": "Confirmed quantity applies only to selected product rows"
         },
         {
           "action": "fill",

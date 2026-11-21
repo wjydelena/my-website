@@ -1,0 +1,26 @@
+.pc-batch-backdrop{position:fixed;inset:0;z-index:610;display:grid;place-items:center;padding:16px;box-sizing:border-box;background:rgba(0,0,0,.4);font-family:'TikTok Text',Arial,sans-serif;color:#161616}
+.pc-batch-modal{width:min(592px,100%);min-width:0;max-height:calc(100dvh - 32px);overflow:auto;box-sizing:border-box;padding:24px;border-radius:8px;background:#fff;box-shadow:0 6px 24px #0002;margin:0}
+.pc-batch-modal header{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:28px;margin-top:13px}
+.pc-batch-modal h2{margin:0;font-size:20px;line-height:28px;font-weight:500}
+.pc-batch-modal button,.pc-batch-modal input{font-family:inherit;box-sizing:border-box}
+.pc-batch-modal .pc-batch-close{border:0;background:none;color:#757575;width:20px;height:20px;padding:0;margin-top:-1px;flex:none;cursor:pointer;align-self:flex-start}
+.pc-batch-field{margin-top:20px}
+.pc-batch-modal-lowest .pc-batch-field{margin-top:22px}
+.pc-batch-input{display:flex;align-items:center;gap:8px;height:36px;border:1px solid #d7d7d7;border-radius:4px;padding:0 12px;box-sizing:border-box;color:#757575}
+.pc-batch-modal-lowest .pc-batch-input{height:32px}
+.pc-batch-input span{flex:none;font-size:14px;line-height:20px}
+.pc-batch-input input{background:transparent;color:#161616;font-size:14px;line-height:20px;width:100%;min-width:0;height:100%;padding:0;border:0;outline:none}
+.pc-batch-input input::placeholder{color:#a8abad}
+.pc-batch-guidance{margin:11px 0 0;color:#757575;font-size:12px;line-height:18px;letter-spacing:.15px}
+.pc-batch-modal footer{display:flex;align-items:center;gap:12px;margin-top:25px}
+.pc-batch-modal-lowest footer{margin-top:24px}
+.pc-batch-modal footer span{margin-right:auto;font-size:14px;line-height:20px;color:#757575}
+.pc-batch-modal footer button{height:44px;min-width:96px;padding:0 24px;border:0;border-radius:4px;background:#f1f1f1;color:#161616;font-size:14px;line-height:20px;font-weight:500;cursor:pointer}
+.pc-batch-modal footer .pc-batch-confirm{min-width:103px;background:#009995;color:#fff}
+.pc-batch-confirm:not(:disabled):hover{background:#008783}
+.pc-batch-modal footer .pc-batch-confirm:disabled{opacity:.3;cursor:default}
+.pc-batch-modal button:focus-visible{outline:2px solid #009995;outline-offset:2px}
+.pc-batch-input:focus-within{border-color:#009995}
+.pc-batch-input.is-error{border-color:#fe2c55}
+.pc-batch-error{margin:4px 0 0;font-size:12px;line-height:18px;color:#fe2c55}
+@media(max-width:480px){.pc-batch-modal{padding:20px}.pc-batch-modal h2{font-size:18px}.pc-batch-modal footer{flex-wrap:wrap;justify-content:flex-end}.pc-batch-modal footer span{flex-basis:100%;margin-right:0}.pc-batch-modal footer button{padding:0 20px}}
