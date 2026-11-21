@@ -51,3 +51,12 @@
 - Repeated fresh runs of the confirmation paths recorded no runtime exceptions. A one-off initial event did not recur in the two following complete runs. Later ancillary tests failed to load because the preview service had stopped; after restoring it they passed.
 - Exact summary bounds at 1440x900: x117,y253,w473.39,h88; next product y361, preserving 20px list gap. Footer Cancel/Confirm: 86/94 by 40px, gap8px, right/bottom20px.
 - Reviewed fresh full-page screenshots and the cropped promotion comparison. Promotion segmentation follows its header/details; final crop score97.33. The full configuration score99.2 is not relied on as a fidelity claim because some automatically segmented bands cut through cards. Manual source/reference geometry and full screenshots are the layout evidence; no pixel-perfect claim.
+
+
+## v1.9 · Restore the user's entered Flash Sale price and purchase limits
+- Confirm now stores the actual deal-price, total purchase limit and customer purchase limit strings, without replacing cleared/empty values with $100.00 or 50. The new requirement supersedes the v1.8 hidden 50-limit fallback.
+- The per-product summary displays the saved deal price in currency format and the saved total limit. Empty settings display an em dash rather than a fabricated numeric setting. Editing reloads these same stored values, including zero or deliberately cleared fields; Cancel still does not change the saved settings.
+- Base-product default prices remain $100.00. Flash Sale prices can differ when entered by the user. Layout, other promotion examples and existing interactions are unchanged.
+- The existing confirmation UI Flow explicitly enters 50 before capturing that configured example; all 32 journeys / 256 captures remain.
+
+- v1.9 verification passed: $59.90/17/customer2 creation; $19.95/32/customer4 edit; cancelled edits retain saved values; batch $27.30/45/customer6 applies to both products; zero and cleared values do not trigger fallbacks. Fresh screenshot reviewed; no runtime exceptions.

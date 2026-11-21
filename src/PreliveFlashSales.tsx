@@ -21,7 +21,7 @@ export default function PreliveFlashSales({sales,index,disabled,onEdit,onDelete}
     </button>
     {expanded&&<div className="prelive-sale-details">{sales.map((sale,k)=><div className="prelive-sale-row" key={sale.id} data-created-flash-sale={sale.id}>
       <div className="prelive-sale-title"><img src={flashIcon} alt="" width={16} height={16}/><strong>LIVE Flash sale</strong></div>
-      <div className="prelive-sale-bottom"><p>Price: <strong>${Number(sale.price).toFixed(2)}</strong><i aria-hidden="true"/>Total purchase limit: {sale.total}</p>
+      <div className="prelive-sale-bottom"><p>Price: <strong>{sale.price.trim()?`$${Number(sale.price).toFixed(2)}`:'—'}</strong><i aria-hidden="true"/>Total purchase limit: {sale.total||'—'}</p>
         <div className="prelive-sale-actions"><button type="button" disabled={disabled} aria-label={`Delete flash sale ${k+1} for added product ${index}`} onClick={event=>{const trigger=event.currentTarget.closest('article')?.querySelector<HTMLButtonElement>('.product-promo-trigger');onDelete(sale);requestAnimationFrame(()=>trigger?.focus());}}><img src={deleteIcon} alt="" width={16} height={16}/></button><button type="button" disabled={disabled} aria-label={`Edit flash sale ${k+1} for added product ${index}`} onClick={event=>onEdit(sale,event.currentTarget)}><img src={editIcon} alt="" width={16} height={16}/></button></div>
       </div>
     </div>)}</div>}

@@ -360,6 +360,13 @@
           }
         },
         {
+          "action": "fill",
+          "target": {
+            "label": "Total purchase limit for Classic Red Satin Lipstick bun..."
+          },
+          "value": "50"
+        },
+        {
           "action": "click",
           "target": {
             "role": "button",
@@ -382,7 +389,7 @@
         {
           "action": "capture",
           "id": "flash-confirm-created-product",
-          "title": "Confirmed LIVE Flash sale under its product: $100.00, total purchase limit 50, original icons"
+          "title": "Confirmed LIVE Flash sale under its product: default $100.00 and user-entered total purchase limit 50"
         },
         {
           "action": "click",

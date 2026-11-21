@@ -25,7 +25,7 @@ export default function FlashSaleDrawer({product,close,returnFocus,renderPicker,
  const all=products.length>0&&products.every(p=>selected.includes(p.id));
  const confirm=()=>{
   const id=initialSale?.id||crypto.randomUUID();
-  onConfirm(products.map(item=>({ ...item,flashSales:[...(item.flashSales||[]).filter(sale=>sale.id!==id),{id,price:field(item.id,'deal').trim()||PRODUCT_PRICE,total:field(item.id,'total').trim()||'50',customer:field(item.id,'customer').trim(),level,recurring,start,countdown,duration}] })));
+  onConfirm(products.map(item=>({ ...item,flashSales:[...(item.flashSales||[]).filter(sale=>sale.id!==id),{id,price:field(item.id,'deal').trim(),total:field(item.id,'total').trim(),customer:field(item.id,'customer').trim(),level,recurring,start,countdown,duration}] })));
   close();
  };
  return createPortal(<div className="fs-backdrop" onPointerDown={e=>{if(e.target===e.currentTarget)close()}}><div className="flash-sale-drawer" ref={dialog} role="dialog" aria-modal="true" aria-label="Create Flash Sale">
