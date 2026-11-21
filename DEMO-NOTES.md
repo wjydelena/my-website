@@ -101,6 +101,9 @@
 - Build and targeted native checks passed: single-product entry, six Duration options, numeric selection / Escape, suggestion Apply, add products, all three batch edits and selection gating, actual saved values, edit/cancel/delete, promotion coexistence, narrow viewport containment and runtime errors (none). Price Cut and Flash Sale entered-value regressions also passed. Fresh drawer / duration screenshots reviewed. Initial drawer-region visual comparison was 98.87 with no low regions; final minor spacing and metadata wrapping refinements reviewed visually. Product images/content differ intentionally because actual product data is preserved.
 - Existing UI Flow journeys remain; Group Deal states appended to the existing promotion settings journey. 32 journeys / 173 capture occurrences. Definition frozen without a full replay. Version 1 remains unchanged.
 
+## v1.17 · Default +Promo gray background
+- Restore #F5F5F5 on default product-card +Promo buttons. Expanded and hover states remain white; dimensions, menus, edit/delete behavior and product data are unchanged. This supersedes v1.16's transparent default background. UI Flow is unchanged.
+
 ## v1.16 · Promotion card states and direct edit/delete
 - Restore Section 1.png's two-expanded, one-expanded and one-collapsed card states. Expanded details are white, collapsed summaries are light gray, and the heading arrow reflects expansion. Direct delete/edit icons align with each promotion's metadata. Promo and product-level action backgrounds follow expanded/hover/default states.
 - Flash Sale, Price Cut and Group Deal rows use direct Delete and Edit settings buttons, replacing the pre-LIVE More/Start controls. Delete removes only that campaign and updates the count; deleting the last campaign hides the promo summary without deleting the product. A later new campaign defaults to collapsed; other remaining expanded campaigns stay expanded.

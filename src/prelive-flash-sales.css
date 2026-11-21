@@ -23,7 +23,7 @@
 .console-shell .prelive-reference-card .prelive-sale-summary{background:#f5f5f5}
 .console-shell .prelive-reference-card:hover .prelive-sale-summary{background:#f5f5f5}
 .console-shell .prelive-reference-card.is-expanded .prelive-sale-summary{background:#fff}
-.console-shell .prelive-reference-card .product-promo-trigger{background:transparent}
+.console-shell .prelive-reference-card .product-promo-trigger{background:#f5f5f5}
 .console-shell .prelive-reference-card.is-expanded .product-promo-trigger:not(:disabled){background:#fff}
 .console-shell .prelive-reference-card .prelive-row-edit,.console-shell .prelive-reference-card .prelive-row-more>button{background:#f5f5f5;border-radius:4px}
 .console-shell .prelive-reference-card:hover .prelive-row-edit,.console-shell .prelive-reference-card:hover .prelive-row-more>button,.console-shell .prelive-reference-card.is-expanded .prelive-row-edit,.console-shell .prelive-reference-card.is-expanded .prelive-row-more>button{background:transparent}
