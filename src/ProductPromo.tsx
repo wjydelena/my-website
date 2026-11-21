@@ -11,7 +11,7 @@ import './flash-sale.css';
 export type ProductPickerRenderer=(existing:AddedItem[],close:()=>void,commit:(items:AddedItem[])=>void)=>React.ReactNode;
 const options=[{label:'Create Flash Sale',icon:flash},{label:'Create Price Cut',icon:price},{label:'Create Group Deal',icon:group}];
 
-export default function ProductPromo({product,index,disabled,renderPicker}:{product:AddedItem;index:number;disabled:boolean;renderPicker:ProductPickerRenderer}){
+export default function ProductPromo({product,index,disabled,renderPicker,onConfirm}:{product:AddedItem;index:number;disabled:boolean;renderPicker:ProductPickerRenderer;onConfirm:(products:AddedItem[])=>void}){
  const [open,setOpen]=useState(false),[sale,setSale]=useState(false),[position,setPosition]=useState({left:0,top:0});
  const trigger=useRef<HTMLButtonElement>(null),menu=useRef<HTMLDivElement>(null);
  const dismiss=()=>{setOpen(false);trigger.current?.focus()};
@@ -20,6 +20,6 @@ export default function ProductPromo({product,index,disabled,renderPicker}:{prod
  useEffect(()=>{if(disabled){setOpen(false);setSale(false)}},[disabled]);
  return <><button type="button" className="product-promo-trigger" ref={trigger} aria-label={`Promo for added product ${index}`} disabled={disabled} aria-haspopup="menu" aria-expanded={open} onClick={()=>open?dismiss():setOpen(true)}><Plus size={16}/>Promo</button>
  {open&&createPortal(<div className="product-promo-menu" ref={menu} role="menu" aria-label={`Promotions for added product ${index}`} tabIndex={-1} style={position} onKeyDown={e=>{if(!['ArrowDown','ArrowUp','Home','End'].includes(e.key))return;e.preventDefault();const buttons=[...e.currentTarget.querySelectorAll<HTMLButtonElement>('[role=menuitem]')],at=buttons.indexOf(document.activeElement as HTMLButtonElement),next=e.key==='Home'?0:e.key==='End'?2:e.key==='ArrowDown'?(at+1)%3:(at<0?2:(at+2)%3);buttons[next].focus()}}>{options.map((option,k)=><button type="button" role="menuitem" key={option.label} onClick={()=>{if(k===0){setOpen(false);setSale(true)}}}><img src={option.icon} alt="" width={16} height={16}/>{option.label}</button>)}</div>,document.body)}
- {sale&&<FlashSaleDrawer product={product} returnFocus={trigger} close={()=>setSale(false)} renderPicker={renderPicker}/>}
+ {sale&&<FlashSaleDrawer product={product} returnFocus={trigger} close={()=>setSale(false)} renderPicker={renderPicker} onConfirm={onConfirm}/>}
  </>;
 }

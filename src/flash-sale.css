@@ -16,7 +16,8 @@
 .fs-step-track{display:flex;align-items:center;gap:12px;width:282px;flex:none}
 .fs-step-track>span{flex:none}
 .fs-step-track i{height:4px;flex:1;background:repeating-linear-gradient(90deg,#ddd 0 2px,transparent 2px 6px)}
-.fs-step-track.is-complete{gap:10px;color:#757575}
+.fs-step-track.is-complete{width:312px;gap:10px;color:#757575}
+.fs-step-track.is-complete>span{margin-right:6px}
 .fs-step-track.is-complete>img{width:18px;height:18px;flex:none}
 .fs-future-step{color:#a3a3a3;font-weight:400}
 .fs-content{margin-top:24px;flex:1;min-height:0;overflow:auto;scrollbar-width:thin}
@@ -63,7 +64,7 @@
 .fs-customer-label img{width:18px;height:18px;object-fit:contain}
 .fs-settings{display:flex;flex-direction:column;gap:16px;margin-right:8px}
 .fs-setting{height:92px;box-sizing:border-box;display:grid;grid-template-columns:352px minmax(0,1fr);gap:16px;padding:16px;border-radius:8px;background:#f8f8f8}
-.fs-setting.fs-when{height:116px}
+.fs-setting.fs-when{height:92px}
 .fs-setting-copy h3{font-size:14px;font-weight:500;line-height:20px;margin:0}
 .fs-setting-copy p{max-width:300px;font-size:12px;font-weight:400;line-height:18px;margin:4px 0 0;color:#757575}
 .fs-start-options{display:flex;flex-direction:column;gap:12px}
@@ -74,4 +75,7 @@
 .fs-seconds input{width:100%;min-width:0;border:0;outline:none;padding:0;background:none;font-size:14px;line-height:20px}
 .fs-footer{display:flex;justify-content:flex-end;padding-top:24px;flex:none}
 .fs-footer>button{height:40px;min-width:72px;padding:0 20px;border:0;border-radius:4px;background:#009995;color:white;font-size:14px;font-weight:500;line-height:20px;cursor:pointer}
+.fs-confirm-footer{gap:8px;margin-right:-4px;margin-bottom:-4px}
+.fs-confirm-footer>.fs-cancel{min-width:86px;background:#ededed;color:#161616}
+.fs-confirm-footer>.fs-confirm{min-width:94px}
 @media(max-width:1120px){.fs-actions{height:auto;min-height:36px;flex-wrap:wrap}.fs-actions .fs-add-product{margin-left:0}.fs-setting{grid-template-columns:40% minmax(0,1fr)}.fs-seconds{width:min(278px,100%)}.fs-recurring{font-size:12px}.fs-level{width:160px}}

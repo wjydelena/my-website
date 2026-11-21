@@ -100,11 +100,6 @@
           }
         },
         {
-          "action": "capture",
-          "id": "wide-overview",
-          "title": "1440px LIVE Console"
-        },
-        {
           "action": "click",
           "target": {
             "role": "button",
@@ -330,14 +325,151 @@
         {
           "action": "capture",
           "id": "prelive-flash-settings",
-          "title": "Create Flash Sale step 2: start mode, countdown and duration"
+          "title": "Flash Sale step 2: manual start default, 10-second countdown, Cancel / Confirm footer"
         },
         {
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Close Create Flash Sale"
+            "name": "Cancel"
           }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": "[data-added-product=\"shop-0\"]:not(.has-flash-sales)"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "flash-cancel-without-creation",
+          "title": "Cancel returns to unchanged product list without creating a promotion"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Promo for added product 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Create Flash Sale"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Next"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Confirm"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": "[data-testid=\"created-flash-sales\"]"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "flash-confirm-created-product",
+          "title": "Confirmed LIVE Flash sale under its product: $100.00, total purchase limit 50, original icons"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Expand or collapse flash sales for added product 1"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "flash-created-collapsed",
+          "title": "Collapse confirmed product promotions"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Expand or collapse flash sales for added product 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Edit flash sale 1 for added product 1"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "flash-edit-preserved-product-values",
+          "title": "Edit uses the existing Flash Sale product step with saved values"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Total purchase limit for Classic Red Satin Lipstick bun..."
+          },
+          "value": "75"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Next"
+          }
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Duration"
+          },
+          "value": "120"
+        },
+        {
+          "action": "capture",
+          "id": "flash-edit-preserved-config",
+          "title": "Edit manual Flash Sale configuration and duration"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Confirm"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "flash-confirm-edited-summary",
+          "title": "Save edits to the same promotion without duplicating; price remains $100.00"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Delete flash sale 1 for added product 1"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": "[data-added-product=\"shop-0\"]:not(.has-flash-sales)"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "flash-confirm-deleted-summary",
+          "title": "Delete only the promotion; the product and + Promo remain"
         },
         {
           "action": "press",
@@ -1211,11 +1343,6 @@
           }
         },
         {
-          "action": "capture",
-          "id": "wide-overview",
-          "title": "1440px LIVE Console"
-        },
-        {
           "action": "click",
           "target": {
             "role": "button",
@@ -1363,11 +1490,6 @@
           }
         },
         {
-          "action": "capture",
-          "id": "wide-overview",
-          "title": "1440px LIVE Console"
-        },
-        {
           "action": "hover",
           "target": {
             "role": "button",
@@ -1451,11 +1573,6 @@
           "target": {
             "testId": "console-blank-area"
           }
-        },
-        {
-          "action": "capture",
-          "id": "wide-overview",
-          "title": "1440px LIVE Console"
         },
         {
           "action": "click",
@@ -1705,11 +1822,6 @@
           "target": {
             "testId": "console-blank-area"
           }
-        },
-        {
-          "action": "capture",
-          "id": "wide-overview",
-          "title": "1440px LIVE Console"
         },
         {
           "action": "click",
@@ -1998,11 +2110,6 @@
           }
         },
         {
-          "action": "capture",
-          "id": "wide-overview",
-          "title": "1440px LIVE Console"
-        },
-        {
           "action": "click",
           "target": {
             "role": "button",
@@ -2078,11 +2185,6 @@
           "target": {
             "testId": "console-blank-area"
           }
-        },
-        {
-          "action": "capture",
-          "id": "wide-overview",
-          "title": "1440px LIVE Console"
         },
         {
           "action": "click",
