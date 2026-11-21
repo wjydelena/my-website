@@ -1407,11 +1407,90 @@
           "value": "17"
         },
         {
+          "action": "fill",
+          "target": {
+            "label": "Price cut quantity for Classic Red Satin Lipstick bun..."
+          },
+          "value": "4"
+        },
+        {
+          "action": "capture",
+          "id": "pc-quantity-below-participants",
+          "title": "Quantity below participants: inline red field error"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Create"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "pc-duration-required-inline",
+          "title": "Missing Duration and quantity errors appear under their own fields"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Price cut quantity for Classic Red Satin Lipstick bun..."
+          },
+          "value": "17"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Add more products"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "pc-add-more-live-products",
+          "title": "Centered Add more products modal, Products in this LIVE"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "tab",
+            "name": "My shop products"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "pc-add-more-shop-products",
+          "title": "Available catalog with unified product identity and checkbox styling"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Select additional Silver Beaded Hoop Earrings"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "pc-add-more-selected",
+          "title": "Additional product selection is a draft until Confirm"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        },
+        {
           "action": "click",
           "target": {
             "role": "button",
             "name": "Select price cut duration"
           }
+        },
+        {
+          "action": "capture",
+          "id": "pc-duration-presets-only",
+          "title": "Clock selector is absent until Custom is selected"
         },
         {
           "action": "click",

@@ -1,0 +1,9 @@
+/* The existing Showcase Blue & Navy Retro Sneakers is the visual source. */
+:root .demo-product-identity[data-product-identity]{display:flex;align-items:flex-start;gap:6px;min-width:0;padding-right:8px}
+:root .demo-product-identity[data-product-identity]>img{width:42px;height:42px;flex:none;border:0;border-radius:4px;object-fit:contain;background:transparent;box-sizing:border-box}
+:root .demo-product-identity[data-product-identity]>.demo-product-text{min-width:0;flex:1}
+:root .demo-product-identity[data-product-identity] .demo-product-label{display:flex;align-items:center;gap:8px;height:42px;min-width:0}
+:root .demo-product-identity[data-product-identity] .demo-product-name{display:block;min-width:0;max-width:100%;flex:0 1 auto;font-size:14px;line-height:20px;font-weight:400;padding:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;-webkit-line-clamp:unset;-webkit-box-orient:unset;color:#161616}
+:root .demo-product-identity[data-product-identity] .demo-product-id{display:inline-block;flex:none;white-space:nowrap;padding:0 3px;margin:0;border-radius:4px;background:#757575;color:#fff;font-size:12px;line-height:18px;font-weight:400;cursor:default}
+:root .demo-product-identity[data-product-identity] .demo-product-details{margin-top:2px;color:#757575;font-size:12px;line-height:18px}
+:root .demo-product-identity[data-product-identity] .demo-product-details p{font-size:12px;line-height:18px;margin:0}

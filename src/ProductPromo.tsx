@@ -10,7 +10,8 @@ import GroupDealDrawer from './GroupDealDrawer';
 import type {AddedItem} from './PreliveProductList';
 import './flash-sale.css';
 
-export type ProductPickerRenderer=(existing:AddedItem[],close:()=>void,commit:(items:AddedItem[])=>void)=>React.ReactNode;
+export type ProductPickerOptions={kind:'add-more';returnFocus?:React.RefObject<HTMLButtonElement>};
+export type ProductPickerRenderer=(existing:AddedItem[],close:()=>void,commit:(items:AddedItem[])=>void,options?:ProductPickerOptions)=>React.ReactNode;
 const options=[{label:'Create Flash Sale',icon:flash},{label:'Create Price Cut',icon:price},{label:'Create Group Deal',icon:group}];
 
 export default function ProductPromo({product,index,disabled,renderPicker,onConfirm}:{product:AddedItem;index:number;disabled:boolean;renderPicker:ProductPickerRenderer;onConfirm:(products:AddedItem[])=>void}){
