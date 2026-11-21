@@ -19,3 +19,12 @@
 .prelive-reference-card .prelive-added-thumbnail input{position:absolute}
 @media(max-width:1120px){.console-shell .prelive-added-list .prelive-reference-card{height:116px}.console-shell .prelive-reference-card .prelive-added-actions{top:84px}}
 @media(prefers-reduced-motion:reduce){.console-shell .prelive-added-list .prelive-reference-card{transition:none}}
+
+/* Small button feedback refinement; keep the existing actions unchanged. */
+.prelive-empty-actions button:not(:disabled),.prelive-picker footer .picker-add,.console-shell .prelive-product-footer .buy-now-add,.console-shell .prelive-reference-card .product-promo-trigger{transition:background-color 120ms ease}
+.prelive-empty-actions button:not(:disabled):hover{background:#f0f0f0}
+.prelive-picker footer button.picker-add:not(:disabled):hover,.console-shell .reference-product-column .prelive-product-footer .buy-now-add:not(:disabled):hover{background:#008e8a}
+.console-shell .prelive-reference-card .prelive-row-promotion{width:auto}
+.console-shell .prelive-reference-card .product-promo-trigger{width:auto;min-width:74px;padding-right:12px}
+.console-shell .prelive-reference-card:hover .product-promo-trigger:not(:disabled){background:#fff}
+@media(prefers-reduced-motion:reduce){.prelive-empty-actions button:not(:disabled),.prelive-picker footer .picker-add,.console-shell .prelive-product-footer .buy-now-add,.console-shell .prelive-reference-card .product-promo-trigger{transition:none}}

@@ -69,3 +69,9 @@
 - Actual campaign values are retained. Edit and remove remain available from the promotion More menu; Start/Stop is local demo state, as in Version 1, not a business request. Checkbox, Promo, drag and row actions remain independent of the expansion overlay.
 - Targeted native checks passed: white navigation on entry, mouse/keyboard no-op layout entry before/after Go LIVE and at 1120px; collapsed default, hover colors, full-card expansion, white aligned panel, checkbox/Promo isolation, edit/remove; expanded heading and row computed styles match Version 1 source. Screenshots reviewed after correcting inherited double margin. Entered price/total/customer, batch, zero, blank and cancel-edit regression passed with no runtime exceptions.
 - UI Flow keeps its 32 journeys. 21 now-unreachable editor journeys are replaced by mouse/keyboard no-op coverage; other valid journeys stay intact. Product editing no longer tries an editor Cancel. Flash Sale captures explicitly expand the newly collapsed block and use the More menu for edit/remove. 156 capture occurrences, within bounds. No full Flow replay requested or claimed.
+
+
+## v1.11 · Subtle Add products hover and white Promo
+- Empty-state Add products gets a subtle gray darkening; footer and picker Add product(s) get a subtle darker teal. Background feedback uses 120ms and respects reduced motion.
+- +Promo right padding is 12px; its wrapper/button width adapts to prevent crowding. Product-card hover makes the enabled Promo button white.
+- Native computed-style and menu checks passed after restoring a stopped preview service. No functional or data changes; UI Flow remains unchanged.
