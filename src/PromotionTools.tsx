@@ -52,7 +52,7 @@ const initialPinned = () => {
   } catch { return fallback; }
 };
 
-export default function PromotionTools({compact=false,createPromotion=false,couponRequest=0,couponReturnFocus,listPinned=false,onToggleListPin,triggerLabel,triggerAriaLabel,onCreatePriceCut}:{compact?:boolean;createPromotion?:boolean;couponRequest?:number;couponReturnFocus?:React.RefObject<HTMLButtonElement>;listPinned?:boolean;onToggleListPin?:()=>void;triggerLabel?:string;triggerAriaLabel?:string;onCreatePriceCut?:()=>void}) {
+export default function PromotionTools({compact=false,createPromotion=false,couponRequest=0,couponReturnFocus,listPinned=false,onToggleListPin,triggerLabel,triggerAriaLabel,onCreatePriceCut,onCreateFlashSale,onCreateGroupDeal}:{compact?:boolean;createPromotion?:boolean;couponRequest?:number;couponReturnFocus?:React.RefObject<HTMLButtonElement>;listPinned?:boolean;onToggleListPin?:()=>void;triggerLabel?:string;triggerAriaLabel?:string;onCreatePriceCut?:()=>void;onCreateFlashSale?:()=>void;onCreateGroupDeal?:()=>void}) {
   const { editing, mode } = useConsoleLayout();
   const [open, setOpen] = useState(false);
   const [customizing, setCustomizing] = useState(false);
@@ -132,7 +132,7 @@ export default function PromotionTools({compact=false,createPromotion=false,coup
       </div>
       <footer className="coupon-footer"><button type="button"><Plus size={20}/>Create new</button></footer>
     </section></div>, host)}
-    {open && createPromotion && createPortal(<CreatePromotionPopover anchor={trigger} panelRef={panel} onPriceCut={onCreatePriceCut?()=>{close();onCreatePriceCut()}:undefined}/>,root.current?.closest('.console-shell')||document.body)}
+    {open && createPromotion && createPortal(<CreatePromotionPopover anchor={trigger} panelRef={panel} onFlashSale={onCreateFlashSale?()=>{close();onCreateFlashSale()}:undefined} onGroupDeal={onCreateGroupDeal?()=>{close();onCreateGroupDeal()}:undefined} onPriceCut={onCreatePriceCut?()=>{close();onCreatePriceCut()}:undefined}/>,root.current?.closest('.console-shell')||document.body)}
     {open && !createPromotion && host && createPortal(<div className="promotion-panel-viewport"><div className={`promotion-tools-list${customizing ? ' is-customizing' : ''}`} id="promotion-tools-list" ref={panel} role="region" aria-label="All promotions" onPointerDown={event => event.stopPropagation()}>
       <div className="promotion-panel-scroll">
         <div className="promotion-panel-heading"><h2>Pinned</h2><button className="promotion-customize" onClick={() => setCustomizing(previous => !previous)}>{customizing ? 'Done' : 'Customize'}</button><span className="promotion-heading-divider"/><button className="promotion-close" ref={closeButton} aria-label="Close promotions" onClick={close}><X size={18}/></button></div>

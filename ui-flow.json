@@ -1528,14 +1528,40 @@
         },
         {
           "action": "capture",
-          "id": "price-cut-footer-entry",
-          "title": "Footer Price cut opens the shared drawer with current products"
+          "id": "price-cut-footer-select",
+          "title": "Footer Price Cut first step: select Buy now products"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Select all promotion products"
+          }
         },
         {
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Cancel"
+            "name": "Next"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "price-cut-footer-entry",
+          "title": "Footer Price Cut step 2 uses the same product configuration"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Back"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Close Create Price Cut product selection"
           }
         },
         {
@@ -1814,6 +1840,311 @@
           "action": "capture",
           "id": "promo-card-no-promos",
           "title": "Delete last promo: keep base product and hide promo summary"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Create promotion"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "LIVE flash sale"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "footer-flash-sale-select",
+          "title": "Shared selection step for Flash Sale"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Select promotion product Classic Red Satin Lipstick bun..."
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Next"
+          }
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Deal price for Classic Red Satin Lipstick bun..."
+          },
+          "value": "59.90"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Total purchase limit for Classic Red Satin Lipstick bun..."
+          },
+          "value": "17"
+        },
+        {
+          "action": "capture",
+          "id": "footer-flash-sale-configure",
+          "title": "Configure Flash Sale with actual selected-product settings"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Back"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "footer-flash-sale-back",
+          "title": "Back preserves selection and unsaved Flash Sale draft"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Next"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Confirm"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Expand or collapse flash sales for added product 1"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "footer-flash-sale-created",
+          "title": "Confirmed Flash Sale retained alongside other product promotions"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Create promotion"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Price cut"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "footer-price-cut-select",
+          "title": "Shared selection step for Price Cut"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Select promotion product Classic Red Satin Lipstick bun..."
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Next"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Select price cut duration"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "radio",
+            "name": "2 minutes"
+          }
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Lowest price for Classic Red Satin Lipstick bun..."
+          },
+          "value": "49.90"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Target participants for Classic Red Satin Lipstick bun..."
+          },
+          "value": "5"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Price cut quantity for Classic Red Satin Lipstick bun..."
+          },
+          "value": "20"
+        },
+        {
+          "action": "capture",
+          "id": "footer-price-cut-configure",
+          "title": "Configure Price Cut with actual selected-product settings"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Back"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "footer-price-cut-back",
+          "title": "Back preserves selection and unsaved Price Cut draft"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Next"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Confirm"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "footer-price-cut-created",
+          "title": "Confirmed Price Cut retained alongside other product promotions"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Create promotion"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Group deal"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "footer-group-deal-select",
+          "title": "Shared selection step for Group Deal"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Select promotion product Classic Red Satin Lipstick bun..."
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Next"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Select group deal duration"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "6"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Group size for Classic Red Satin Lipstick bun..."
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "3"
+          }
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Group deal price for Classic Red Satin Lipstick bun..."
+          },
+          "value": "9.00"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Group deal stock for Classic Red Satin Lipstick bun..."
+          },
+          "value": "20"
+        },
+        {
+          "action": "capture",
+          "id": "footer-group-deal-configure",
+          "title": "Configure Group Deal with actual selected-product settings"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Back"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "footer-group-deal-back",
+          "title": "Back preserves selection and unsaved Group Deal draft"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Next"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Confirm"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "footer-group-deal-created",
+          "title": "Confirmed Group Deal retained alongside other product promotions"
         }
       ]
     },
