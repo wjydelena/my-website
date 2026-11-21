@@ -79,3 +79,40 @@
 .fs-confirm-footer>.fs-cancel{min-width:86px;background:#ededed;color:#161616}
 .fs-confirm-footer>.fs-confirm{min-width:94px}
 @media(max-width:1120px){.fs-actions{height:auto;min-height:36px;flex-wrap:wrap}.fs-actions .fs-add-product{margin-left:0}.fs-setting{grid-template-columns:40% minmax(0,1fr)}.fs-seconds{width:min(278px,100%)}.fs-recurring{font-size:12px}.fs-level{width:160px}}
+
+/* Single-product Flash Sale reference: one-page settings and product table. */
+.fs-single{background:#f8f8f8}
+.fs-single .fs-content{margin-top:24px}
+.fs-config-card{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:16px;margin-right:8px;background:#fff;border-radius:8px}
+.fs-config-card h3{display:flex;align-items:center;gap:4px;font-size:14px;font-weight:500;line-height:20px;margin:0 0 8px}
+.fs-config-card h3>span{color:#fe2c55}
+.fs-config-card .fs-help{margin:0}
+.fs-config-input,.fs-start-select{display:flex;align-items:center;height:32px;box-sizing:border-box;border:1px solid #d5d5d5;border-radius:4px;background:#fff;font-size:14px;line-height:20px}
+.fs-config-input{padding:0 10px;gap:8px}
+.fs-config-input input{width:100%;min-width:0;outline:0;border:0;padding:0;background:transparent;font-size:14px;line-height:20px}
+.fs-config-input>span{color:#757575;white-space:nowrap}
+.fs-start-select{position:relative}
+.fs-start-select select{appearance:none;width:100%;height:100%;min-width:0;border:0;padding:0 32px 0 10px;background:transparent;font:inherit;color:#161616;outline-color:#009995;cursor:pointer}
+.fs-start-select svg{position:absolute;right:12px;pointer-events:none;color:#757575}
+.fs-product-card{padding:16px;margin-top:16px;border-radius:8px;background:#fff}
+.fs-single .fs-level-bar,.fs-single .fs-level{height:40px}
+.fs-single .fs-level{border-radius:6px}
+.fs-single .fs-actions{margin-top:16px;height:32px;gap:12px}
+.fs-single .fs-actions .fs-add-product{height:32px;background:#009995;color:#fff;margin-left:auto;padding:0 12px}
+.fs-single .fs-actions .fs-add-product:hover{background:#008e8a}
+.fs-batch{position:relative;flex:none}
+.fs-batch-trigger{display:flex;align-items:center;justify-content:center;gap:6px;height:32px;padding:0 16px;border:0;border-radius:4px;background:#f1f1f1;color:#161616;font-size:14px;line-height:20px;font-weight:500;cursor:pointer}
+.fs-batch-menu{position:absolute;left:0;top:38px;z-index:4;width:256px;max-width:calc(100vw - 64px);padding:4px;background:#fff;border:1px solid #eee;border-radius:8px;box-shadow:0 6px 20px #0002}
+.fs-batch-menu button{display:block;text-align:left;width:100%;height:36px;border:0;border-radius:4px;background:none;padding:0 12px;font-size:14px;color:#161616;cursor:pointer}
+.fs-batch-menu button:disabled{color:#aaa;cursor:default}
+.fs-batch-menu button:hover:not(:disabled){background:#f5f5f5}
+.fs-batch-trigger:focus-visible,.fs-batch-menu button:focus-visible{outline:2px solid #009995;outline-offset:1px}
+.fs-single .fs-table-wrap{margin:16px 0 0}
+.fs-single .fs-products-table{width:920px}
+.fs-single .fs-product{gap:8px}
+.fs-single .fs-product>img{width:40px;height:40px}
+.fs-single .fs-product>span{max-width:150px}
+.fs-single .fs-confirm-footer{gap:12px;margin:0}
+.fs-single .fs-confirm-footer>.fs-cancel{min-width:74px;background:#fff;border:1px solid #ddd}
+.fs-single .fs-confirm-footer>.fs-confirm{min-width:94px}
+@media(max-width:800px){.fs-config-card{grid-template-columns:minmax(0,1fr);margin-right:0}.fs-single .fs-actions{height:auto;min-height:32px;flex-wrap:wrap}.fs-single .fs-actions .fs-add-product{margin-left:0}.fs-single .fs-level-bar{height:auto;flex-wrap:wrap}.fs-single .fs-recurring{margin-left:0}.fs-single .fs-level{width:160px}}

@@ -84,6 +84,11 @@
       },
       "steps": [
         {
+          "action": "capture",
+          "id": "flash-reference-entry",
+          "title": "Product console before single-product Flash Sale creation"
+        },
+        {
           "action": "click",
           "target": {
             "role": "button",
@@ -190,24 +195,83 @@
         {
           "action": "capture",
           "id": "prelive-flash-products",
-          "title": "Create Flash Sale step 1: clicked product and editable product settings"
-        },
-        {
-          "action": "click",
-          "target": {
-            "css": ".fs-footer button"
-          }
-        },
-        {
-          "action": "capture",
-          "id": "prelive-flash-settings",
-          "title": "Flash Sale step 2: manual start default, 10-second countdown, Cancel / Confirm footer"
+          "title": "Single-page Flash Sale: start, countdown, duration and product settings"
         },
         {
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Cancel"
+            "name": "Flash sale batch edit"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "flash-batch-disabled",
+          "title": "Batch edit opens; all options disabled without selected rows"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "Flash sale batch edit"
+          },
+          "key": "Escape"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Select all flash sale products"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Flash sale batch edit"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "flash-batch-enabled",
+          "title": "Selected product enables existing three batch actions"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Batch edit deal price"
+          }
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Deal price for Classic Red Satin Lipstick bun..."
+          },
+          "value": "59.90"
+        },
+        {
+          "action": "capture",
+          "id": "flash-batch-entered-value",
+          "title": "Batch edit applies actual entered deal price to selected row"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Select all flash sale products"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "prelive-flash-settings",
+          "title": "Single-page Flash Sale: start, countdown, duration and product settings"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Back"
           }
         },
         {
@@ -219,7 +283,7 @@
         {
           "action": "capture",
           "id": "flash-cancel-without-creation",
-          "title": "Cancel returns to unchanged product list without creating a promotion"
+          "title": "Back returns to unchanged product list without creating a promotion"
         },
         {
           "action": "click",
@@ -241,13 +305,6 @@
             "label": "Total purchase limit for Classic Red Satin Lipstick bun..."
           },
           "value": "50"
-        },
-        {
-          "action": "click",
-          "target": {
-            "role": "button",
-            "name": "Next"
-          }
         },
         {
           "action": "click",
@@ -311,13 +368,6 @@
             "label": "Total purchase limit for Classic Red Satin Lipstick bun..."
           },
           "value": "75"
-        },
-        {
-          "action": "click",
-          "target": {
-            "role": "button",
-            "name": "Next"
-          }
         },
         {
           "action": "fill",
@@ -1639,13 +1689,6 @@
             "label": "Total purchase limit for Classic Red Satin Lipstick bun..."
           },
           "value": "50"
-        },
-        {
-          "action": "click",
-          "target": {
-            "role": "button",
-            "name": "Next"
-          }
         },
         {
           "action": "click",
