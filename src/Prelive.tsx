@@ -1,4 +1,4 @@
-import {hasPromotion,onePromotion,promotionUnavailable} from './promotion-eligibility';
+import {hasPromotion,onePromotion,mergeFlashSales,promotionUnavailable} from './promotion-eligibility';
 import type {ProductPickerRenderer} from './ProductPromo';
 import AddMoreProductsModal from './AddMoreProductsModal';
 import ProductIdentity from './ProductIdentity';
@@ -70,7 +70,7 @@ export function PreliveProducts({onProductsChange}:{onProductsChange:(products:a
  useEffect(()=>onProductsChange(products.map((i,k)=>({id:k+100,image:i.image,name:i.name,price:i.price,stock:i.stock||'100k',oldPrice:i.old,flashSales:i.flashSales,priceCuts:i.priceCuts,groupDeals:i.groupDeals}))),[products,onProductsChange]);
  const [footerPromotion,setFooterPromotion]=useState<PromotionKind|null>(null);const footerCutRef=useRef<HTMLButtonElement>(null);
  const openFooterPromotion=(kind:PromotionKind)=>{footerCutRef.current=document.querySelector<HTMLButtonElement>('.prelive-product-footer [aria-label="Create promotion"]');setFooterPromotion(kind)};
- const savePromotions=rows=>setProducts(previous=>{const next=previous.map(item=>{const incoming=rows.find(row=>row.id===item.id);return incoming?{...item,flashSales:onePromotion(item.flashSales,incoming.flashSales),priceCuts:onePromotion(item.priceCuts,incoming.priceCuts),groupDeals:onePromotion(item.groupDeals,incoming.groupDeals)}:item});return [...next,...rows.filter(row=>!previous.some(item=>item.id===row.id)).map(row=>({...row,flashSales:onePromotion([],row.flashSales),priceCuts:onePromotion([],row.priceCuts),groupDeals:onePromotion([],row.groupDeals)}))]});
+ const savePromotions=rows=>setProducts(previous=>{const next=previous.map(item=>{const incoming=rows.find(row=>row.id===item.id);return incoming?{...item,flashSales:mergeFlashSales(item.flashSales,incoming.flashSales),priceCuts:onePromotion(item.priceCuts,incoming.priceCuts),groupDeals:onePromotion(item.groupDeals,incoming.groupDeals)}:item});return [...next,...rows.filter(row=>!previous.some(item=>item.id===row.id)).map(row=>({...row,flashSales:mergeFlashSales([],row.flashSales),priceCuts:onePromotion([],row.priceCuts),groupDeals:onePromotion([],row.groupDeals)}))]});
  const catalog=shop.map(item=>products.find(p=>p.id===item.id)||item);
  const renderPromotionPicker:ProductPickerRenderer=(existing,close,commit,options)=>options?.kind==='add-more'?<AddMoreProductsModal existing={existing} liveProducts={products} catalog={catalog} promotionKind={options.promotionKind} close={close} commit={commit} returnFocus={options.returnFocus}/>:<ProductPicker existing={existing} catalog={catalog} promotionKind={options?.promotionKind} close={close} commit={commit}/>;
  const open=()=>{setInitialTab('My shop');setPicker(true);};const visible=products.filter(i=>i.name.toLowerCase().includes(query.toLowerCase()));

@@ -484,6 +484,18 @@
           }
         },
         {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Confirm"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "flash-total-required",
+          "title": "Blank total purchase limit: inline error below input and save blocked"
+        },
+        {
           "action": "fill",
           "target": {
             "label": "Total purchase limit for Classic Red Satin Lipstick bun..."
@@ -545,6 +557,25 @@
           "action": "capture",
           "id": "flash-edit-preserved-product-values",
           "title": "Edit uses the existing Flash Sale product step with saved values"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Total purchase limit for Classic Red Satin Lipstick bun..."
+          },
+          "value": ""
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Confirm"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "flash-edit-total-required",
+          "title": "Existing Flash Sale edit also requires total purchase limit"
         },
         {
           "action": "fill",
@@ -2165,7 +2196,7 @@
         {
           "action": "capture",
           "id": "footer-flash-sale-select",
-          "title": "Shared selection step for Flash Sale — all My shop products with same-type eligibility"
+          "title": "Flash Sale selection keeps all My shop products available, including products with existing flash sales"
         },
         {
           "action": "click",
@@ -2187,6 +2218,18 @@
             "label": "Deal price for Classic Red Satin Lipstick bun..."
           },
           "value": "59.90"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Confirm"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "footer-flash-total-required",
+          "title": "Footer configuration requires total for each selected product"
         },
         {
           "action": "fill",
@@ -2463,7 +2506,7 @@
         {
           "action": "capture",
           "id": "promotion-types-once-menu",
-          "title": "All three types exist: duplicate create entries disabled; existing Edit remains available"
+          "title": "Group Deal and Price Cut duplicates disabled; Flash Sale creation remains available"
         },
         {
           "action": "click",
@@ -2471,6 +2514,361 @@
             "role": "button",
             "name": "Promo for added product 1"
           }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Promo for added product 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Create Flash Sale"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "flash-occupied-manual-default-scheduled",
+          "title": "Existing manual sale: creation remains available and defaults to scheduled"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Total purchase limit for Classic Red Satin Lipstick bun..."
+          },
+          "value": "20"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "When to start flash sale"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Manually start during LIVE"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Confirm"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "flash-second-manual-blocked",
+          "title": "Second manual sale rejected with start-field validation"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "When to start flash sale"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Start at a specific time"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Choose flash sale time"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Hour 23"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Minute 59"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "css": ".fs-time-apply"
+          }
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "When to start flash sale"
+          },
+          "key": "Escape"
+        },
+        {
+          "action": "capture",
+          "id": "flash-specific-valid-config",
+          "title": "Scheduled sale with required total and local-date/time configuration"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Confirm"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "flash-manual-plus-scheduled",
+          "title": "One manual and one scheduled sale coexist on the same product"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Create promotion"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "LIVE flash sale"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Select promotion product Classic Red Satin Lipstick bun..."
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Next"
+          }
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Total purchase limit for Classic Red Satin Lipstick bun..."
+          },
+          "value": "30"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "When to start flash sale"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Start at a specific time"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Choose flash sale time"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Hour 23"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Minute 59"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "css": ".fs-time-apply"
+          }
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "When to start flash sale"
+          },
+          "key": "Escape"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Confirm"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "flash-multiple-scheduled-created",
+          "title": "Footer appends another scheduled sale without truncating existing campaigns"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Edit flash sale 2 for added product 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "When to start flash sale"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Manually start during LIVE"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Confirm"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "flash-scheduled-manual-edit-conflict",
+          "title": "Scheduled-to-manual edit blocked while another manual sale exists"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Back"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Edit flash sale 1 for added product 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "When to start flash sale"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Start at a specific time"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Choose flash sale time"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Hour 23"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Minute 59"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "css": ".fs-time-apply"
+          }
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "When to start flash sale"
+          },
+          "key": "Escape"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Confirm"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "flash-manual-converted-scheduled",
+          "title": "Converting the existing manual sale preserves its ID and frees the manual slot"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Promo for added product 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Create Flash Sale"
+          }
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Total purchase limit for Classic Red Satin Lipstick bun..."
+          },
+          "value": "40"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Confirm"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "flash-manual-slot-reused",
+          "title": "New manual sale can coexist with all retained scheduled sales"
         },
         {
           "action": "click",
@@ -2673,7 +3071,7 @@
         {
           "action": "capture",
           "id": "my-shop-flash-eligibility",
-          "title": "Existing Flash Sale disables only that type"
+          "title": "Existing Flash Sales do not disable the product or Flash Sale entry"
         },
         {
           "action": "click",
@@ -2706,7 +3104,7 @@
         {
           "action": "capture",
           "id": "flash-add-more-type-blocked",
-          "title": "Shared Add more also blocks existing Flash Sale products"
+          "title": "Shared Add more keeps existing Flash Sale products selectable"
         },
         {
           "action": "click",

@@ -58,6 +58,10 @@
 .fs-deal>input{width:100%;min-width:0;border:0;outline:0;padding:0;background:none;font-size:14px;line-height:20px}
 .fs-total,.fs-customer{width:136px;height:36px;border:1px solid #ddd;border-radius:4px;box-sizing:border-box;padding:0 12px;font-size:14px;line-height:20px;outline-color:#009995}
 .fs-customer{width:110px}
+.fs-total-field{width:136px;padding:8px 0}
+.fs-total[aria-invalid=true]{border-color:#fe2c55;outline-color:#fe2c55}
+.fs-total-error{margin:4px 0 0;color:#fe2c55;font-size:12px;line-height:18px}
+.fs-required{color:#fe2c55}
 .flash-sale-drawer input::placeholder{color:#b3b3b3;opacity:1}
 .fs-customer-label{display:flex;align-items:center;gap:4px;white-space:nowrap}
 .fs-customer-label button{display:grid;place-items:center;width:20px;height:20px;padding:1px;border:0;background:none;cursor:pointer}
