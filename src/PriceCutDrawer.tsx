@@ -52,5 +52,5 @@ export default function PriceCutDrawer({product,initialProducts,close,returnFocu
    {!products.length&&<p className="pc-empty">Add a product to create a price cut.</p>}</div></div>
   </section></div>
   <footer className="pc-footer">{submitted&&!products.length&&<p className="pc-error" role="alert">Add at least one product.</p>}<button type="button" onClick={()=>wizard?wizard.back(products):close()}>{wizard?'Back':'Cancel'}</button><button type="button" className="pc-primary" onClick={create}>{wizard?'Confirm':'Create'}</button></footer>
- </div>{batch&&<PriceCutBatchModal field={batch} count={batchIds.length} close={()=>setBatch(null)} confirm={confirmBatch} returnFocus={batchButton}/>} {picker&&renderPicker(products,()=>setPicker(false),rows=>setProducts(p=>[...p,...rows.filter(row=>!p.some(item=>item.id===row.id))]),{kind:'add-more',returnFocus:addButton})}</div>,document.body);
+ </div>{batch&&<PriceCutBatchModal field={batch} count={batchIds.length} close={()=>setBatch(null)} confirm={confirmBatch} returnFocus={batchButton}/>} {picker&&renderPicker(products,()=>setPicker(false),rows=>setProducts(p=>[...p,...rows.filter(row=>!p.some(item=>item.id===row.id))]),{kind:'add-more',promotionKind:'Price Cut',returnFocus:addButton})}</div>,document.body);
 }

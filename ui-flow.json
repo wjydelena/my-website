@@ -2125,7 +2125,7 @@
         {
           "action": "capture",
           "id": "footer-flash-sale-select",
-          "title": "Shared selection step for Flash Sale"
+          "title": "Shared selection step for Flash Sale — all My shop products with same-type eligibility"
         },
         {
           "action": "click",
@@ -2215,7 +2215,7 @@
         {
           "action": "capture",
           "id": "footer-price-cut-select",
-          "title": "Shared selection step for Price Cut"
+          "title": "Shared selection step for Price Cut — all My shop products with same-type eligibility"
         },
         {
           "action": "click",
@@ -2319,7 +2319,7 @@
         {
           "action": "capture",
           "id": "footer-group-deal-select",
-          "title": "Shared selection step for Group Deal"
+          "title": "Shared selection step for Group Deal — all My shop products with same-type eligibility"
         },
         {
           "action": "click",
@@ -2412,6 +2412,376 @@
           "action": "capture",
           "id": "footer-group-deal-created",
           "title": "Confirmed Group Deal retained alongside other product promotions"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Promo for added product 1"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "promotion-types-once-menu",
+          "title": "All three types exist: duplicate create entries disabled; existing Edit remains available"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Promo for added product 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Create promotion"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Group deal"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "my-shop-group-eligibility",
+          "title": "Full My shop catalog with existing Group Deal products disabled and explained"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Select all promotion products"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "my-shop-eligible-select-all",
+          "title": "Select all chooses only products without this promotion type"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Select all promotion products"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Select promotion product Classic Gray Everyday Backpack"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Next"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "my-shop-only-group-configure",
+          "title": "Configure a My shop product not yet added to Buy now"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Select group deal duration"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "2"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Group size for Classic Gray Everyday Backpack"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "3"
+          }
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Group deal price for Classic Gray Everyday Backpack"
+          },
+          "value": "50"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Group deal stock for Classic Gray Everyday Backpack"
+          },
+          "value": "10"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Confirm"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "my-shop-only-promotion-saved",
+          "title": "Confirm adds the selected My shop product and its Group Deal to Buy now"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Create promotion"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Price cut"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "my-shop-price-cut-eligibility",
+          "title": "Existing Price Cut disables only that type, not Group Deal or Flash Sale"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Select promotion product Classic Gray Everyday Backpack"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Next"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Add more product"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "tab",
+            "name": "My shop products"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "price-cut-add-more-type-blocked",
+          "title": "Shared Add more also blocks existing Price Cut products"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Back"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Close Create Price Cut product selection"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Create promotion"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "LIVE flash sale"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "my-shop-flash-eligibility",
+          "title": "Existing Flash Sale disables only that type"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Select promotion product Classic Gray Everyday Backpack"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Next"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Add products to flash sale"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "tab",
+            "name": "My shop products"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "flash-add-more-type-blocked",
+          "title": "Shared Add more also blocks existing Flash Sale products"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Back"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Close Create Flash Sale product selection"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Create promotion"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Group deal"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Select promotion product Soft-Blending Makeup Sponge..."
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Next"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Add more product"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "group-add-more-type-blocked",
+          "title": "Group Deal Add more also blocks existing Group Deal products"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Back"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Close Create Group Deal product selection"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Delete group deal 1 for added product 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Create promotion"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Group deal"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "promotion-deleted-type-reeligible",
+          "title": "Deleting Group Deal re-enables that type while preserving Price Cut and Flash Sale"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Close Create Group Deal product selection"
+          }
         }
       ]
     },

@@ -15,3 +15,5 @@
 .fw-step-label{display:inline-flex;align-items:center;gap:8px}.fw-index{font-weight:500}
 .promotion-config-wizard .fw-steps{height:25px}
 .fw-steps.is-second .fw-first{width:310px}
+
+.promotion-unavailable{display:block;margin-top:4px;color:#888;font-size:12px;line-height:16px}.product-promo-menu button:disabled{color:#aaa;cursor:not-allowed}.product-promo-menu button:disabled img{opacity:.4}.product-promo-menu button:disabled:hover{background:transparent}
