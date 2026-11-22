@@ -20,9 +20,9 @@ import pants from './assets/reference-products/promotion-pants.png';
 import sweater from './assets/reference-products/promotion-sweater.png';
 import cosmetics from './assets/reference-products/promotion-cosmetics.png';
 
-import { PRODUCT_PRICE } from './product-pricing';
+import { PRODUCT_PRICE, PRODUCT_OLD_PRICE } from './product-pricing';
 type Product = { id: number; image: string; name: string; price: string; stock: string; oldPrice?: string };
-const defaults: Product[] = [top,pants,yellowBag,redBag,blazer,sweater,cosmetics].map((image,index) => ({id:index+1,image,name:"Skechers Men's Classic Fit Delsx Fit Delson Fit Skechers Men's Shoes",price:PRODUCT_PRICE,stock:'200',oldPrice:index===0||index===3?PRODUCT_PRICE:undefined}));
+const defaults: Product[] = [top,pants,yellowBag,redBag,blazer,sweater,cosmetics].map((image,index) => ({id:index+1,image,name:"Skechers Men's Classic Fit Delsx Fit Delson Fit Skechers Men's Shoes",price:PRODUCT_PRICE,stock:'200',oldPrice:index===0||index===3?PRODUCT_OLD_PRICE:undefined}));
 export default function ProductColumn({initialProducts}:{initialProducts?:Product[]}={}) {
   const { editing, moduleStyle } = useConsoleLayout();
   const drag = useModuleHeader('products');

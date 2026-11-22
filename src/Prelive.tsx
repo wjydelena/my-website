@@ -34,7 +34,7 @@ import show2 from './assets/prelive/added/showcase-2-clean.png';
 import show3 from './assets/prelive/added/showcase-3-clean.png';
 import './prelive.css';
 
-import { PRODUCT_PRICE } from './product-pricing';
+import { PRODUCT_PRICE, PRODUCT_OLD_PRICE } from './product-pricing';
 import FooterPromotionWizard from './FooterPromotionWizard';
 import BatchPromotionBar from './BatchPromotionBar';
 import FlashSaleDrawer from './FlashSaleDrawer';
@@ -45,12 +45,12 @@ type Item=AddedItem;
 const idText='23324124341232332';
 const shop:Item[]=[
  {id:'shop-0',name:'Classic Red Satin Lipstick bun...',image:shop0,sku:'Green',price:PRODUCT_PRICE,updated:'5'},
- {id:'shop-1',name:'Silver Beaded Hoop Earrings',image:shop1,sku:'10 variants',price:PRODUCT_PRICE,old:PRODUCT_PRICE,updated:'100k'},
+ {id:'shop-1',name:'Silver Beaded Hoop Earrings',image:shop1,sku:'10 variants',price:PRODUCT_PRICE,old:PRODUCT_OLD_PRICE,updated:'100k'},
  {id:'shop-2',name:'Soft-Blending Makeup Sponge...',image:shop2,sku:'Yellow',price:PRODUCT_PRICE,updated:'100k'},
  {id:'shop-3',name:'Black Wireless Support Bra',image:shop3,sku:'10 variants',price:PRODUCT_PRICE,updated:'100k'},
  {id:'shop-4',name:'Retro Tortoiseshell Sunglasses...',image:shop4,sku:'Women',price:PRODUCT_PRICE,updated:'100k'},
- {id:'showcase-0',name:'Light Blue Double-Breasted Bl...',image:show0,sku:'10 variants',price:PRODUCT_PRICE,old:PRODUCT_PRICE,updated:'100k'},
- {id:'showcase-1',name:'Classic Gray Everyday Backpack',image:show1,sku:'Variants',price:PRODUCT_PRICE,old:PRODUCT_PRICE,updated:'100k'},
+ {id:'showcase-0',name:'Light Blue Double-Breasted Bl...',image:show0,sku:'10 variants',price:PRODUCT_PRICE,old:PRODUCT_OLD_PRICE,updated:'100k'},
+ {id:'showcase-1',name:'Classic Gray Everyday Backpack',image:show1,sku:'Variants',price:PRODUCT_PRICE,old:PRODUCT_OLD_PRICE,updated:'100k'},
  {id:'showcase-2',name:'Golden Bloom Eau de Parfum',image:show2,sku:'Variants',price:PRODUCT_PRICE,updated:'100k'},
  {id:'showcase-3',name:'Blue & Navy Retro Sneakers',image:show3,sku:'Variants',price:PRODUCT_PRICE,updated:'100k',badge:true}].map(item=>({...item,displayId:idText}));
 

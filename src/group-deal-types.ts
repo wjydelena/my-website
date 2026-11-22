@@ -1,1 +1,1 @@
-export type ProductGroupDeal={id:string;type:'Single';duration:number;size:string;price:string;quantity:string};
+export type ProductGroupDeal={id:string;createdAt?:number;type:'Single';duration:number;size:string;price:string;quantity:string};

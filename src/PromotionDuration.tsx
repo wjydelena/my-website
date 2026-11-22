@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from 'react';
 import {ChevronDown} from 'lucide-react';
 export const promotionDurations=[['15 seconds',15],['30 seconds',30],['45 seconds',45],['1 minute',60],['2 minutes',120],['5 minutes',300],['10 minutes',600],['20 minutes',1200]] as const;
+export function compactPromotionDuration(seconds:number){const h=Math.floor(seconds/3600),m=Math.floor(seconds%3600/60),s=seconds%60;return [h?`${h}h`:'',m?`${m}min`:'',s?`${s}s`:''].filter(Boolean).join(' ')||'0s'}
 export function promotionDuration(seconds:number){const preset=promotionDurations.find(d=>d[1]===seconds);if(preset)return preset[0];const h=Math.floor(seconds/3600),m=Math.floor(seconds%3600/60),s=seconds%60;return [h?`${h} h`:'',m?`${m} min`:'',s?`${s} s`:''].filter(Boolean).join(' ')}
 export default function PromotionDuration({kind,value,change,open,setOpen,root,invalid,errorId,hidden,beforeOpen}:{kind:'Price cut'|'Group deal';value:number;change:(n:number)=>void;open:boolean;setOpen:(v:boolean)=>void;root:React.RefObject<HTMLDivElement>;invalid:boolean;errorId:string;hidden?:boolean;beforeOpen?:()=>void}){
  const [custom,setCustom]=useState(value>0&&!promotionDurations.some(d=>d[1]===value)),[clock,setClock]=useState(()=>value?[String(Math.floor(value/3600)).padStart(2,'0'),String(Math.floor(value%3600/60)).padStart(2,'0'),String(value%60).padStart(2,'0')]:['00','02','30']),[clockError,setClockError]=useState(false);

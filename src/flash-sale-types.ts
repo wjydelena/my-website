@@ -1,5 +1,6 @@
 export type ProductFlashSale = {
   id: string;
+  createdAt?: number;
   price: string;
   total: string;
   customer: string;

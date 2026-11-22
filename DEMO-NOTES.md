@@ -286,3 +286,12 @@
 ## v1.41 · Group Deal Duration width matches Type
 - Override only the Group Deal settings duration root to width 100% of its equal grid column, matching Type. Keep Price Cut's existing half-width duration layout and all options/validation unchanged.
 - Build, whitespace and 47 component/CSS checks passed, including equal-column width declarations and existing Group product/bulk behavior. No native layout screenshot or Flow replay claimed; UI Flow unchanged.
+
+## v1.42 · Product card promotion chronology and uploaded metadata icons
+- Change existing struck-through product prices from $100.00 to $150.00 in catalog and product cards. Keep current prices and products without a struck-through value unchanged.
+- Reorder pre-LIVE card actions to More → Script → + Promo in DOM order. Preserve each existing action, accessible label, size, positioning and 8px gap.
+- Interpret the user's final “creation order from far to near” instruction as oldest first, newest last. Mix Flash Sale, Group Deal and Price Cut by their saved creation time instead of grouping by type. New batch records share a creation time; edits preserve it; deleting and recreating appends the new record. Records lacking historical creation metadata retain their stable legacy order ahead of newly created records.
+- Use the exact uploaded customer_group and clock_circle PNG bytes for Group Deal / Price Cut participant and duration metadata, at 12×12px, without regeneration or recoloring. Apply them to the static sample card as well.
+- Price Cut title now displays its saved original starting price, a vertical divider, and participant count “N cuts to” the lowest price. Keep saved product/promotion data rather than replacing it with screenshot sample quantities. Compact card duration text uses 30s / 2min notation; picker labels and full accessible duration labels remain unchanged. Keep the actual promotion count rather than the reference screenshot's inconsistent count.
+- 63 product-card/Group Deal component, DOM and CSS checks plus 38 batch-creation regression checks passed. This includes actual Group → Cut → Flash creation, stable edit IDs/order, middle deletion, newest recreation, $150 struck-through values, the original 8px action gap, title composition, 12px icon sizes and exact uploaded image bytes. The existing 47-check Group suite also passed separately. These are not native screenshot/pixel-fidelity or complete Flow replay evidence.
+- Preserve the existing complete UI Flow definition and Version 1. Publish with deferred Flow capture.

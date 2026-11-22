@@ -44,6 +44,7 @@
 .promotion-cut-title{display:flex!important;align-items:center;flex-wrap:wrap;column-gap:6px}
 .promotion-title-divider{display:inline-block;width:1px;height:12px;background:#d9d9d9;flex:none}
 .promotion-meta-dot{color:#d9d9d9}
+.product-promotion-row .promotion-meta-icon{width:12px;height:12px;flex:none;object-fit:contain}
 .product-promotion-copy{min-width:0;flex:1}
 .product-promotion-copy strong{display:block;font-size:12px;line-height:18px;font-weight:500}
 .product-promotion-copy p{display:flex;align-items:center;gap:4px;flex-wrap:wrap;font-size:12px;line-height:18px;color:#737373;margin:2px 0 0}

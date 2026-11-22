@@ -1,3 +1,4 @@
+import {nextPromotionCreation} from './promotion-creation-order';
 import NumericSelect from './GroupDealSizeSelect';
 import GroupDealBulkModal from './GroupDealBulkModal';
 import RequiredMark from './RequiredMark';
@@ -40,7 +41,7 @@ export default function GroupDealDrawer({product,close,returnFocus,renderPicker,
  const validateBatch=(value:string)=>{if(!batch)return '';for(const p of products.filter(p=>selected.includes(p.id))){const error=errorFor(p,batch,true,value);if(error)return selected.length>1?`${p.name}: ${error}`:error}return ''};
  const confirmBatch=(value:string)=>{if(!batch||!selected.length||validateBatch(value))return;const key=batch;setValues(old=>{const next={...old};for(const p of products.filter(p=>selected.includes(p.id)))next[p.id]={size:'',price:'',quantity:'',...next[p.id],[key]:value};return next});setBatch(null)};
  useEffect(()=>{dialog.current?.toggleAttribute('inert',!!batch);return()=>dialog.current?.removeAttribute('inert')},[batch]);
- const create=()=>{setSubmitted(true);if(!Number.isFinite(duration)||duration<=0||!products.length||!products.every(valid))return;const id=initialDeal?.id||crypto.randomUUID();onConfirm(products.map(p=>({...p,groupDeals:[...(p.groupDeals||[]).filter(g=>g.id!==id),{id,type:'Single',duration:Number(duration),size:field(p,'size'),price:field(p,'price').trim(),quantity:field(p,'quantity').trim()}]})));close()};
+ const create=()=>{setSubmitted(true);if(!Number.isFinite(duration)||duration<=0||!products.length||!products.every(valid))return;const id=initialDeal?.id||crypto.randomUUID(),createdAt=initialDeal?initialDeal.createdAt:nextPromotionCreation();onConfirm(products.map(p=>({...p,groupDeals:[...(p.groupDeals||[]).filter(g=>g.id!==id),{id,createdAt,type:'Single',duration:Number(duration),size:field(p,'size'),price:field(p,'price').trim(),quantity:field(p,'quantity').trim()}]})));close()};
  useEffect(()=>{if(wizard){setProducts(wizard.products);setSelected(old=>old.filter(id=>wizard.products.some(p=>p.id===id))) }},[wizard?.products]);
  useEffect(()=>{if(wizard&&!wizard.hidden)closeButton.current?.focus()},[wizard?.hidden]);
  useEffect(()=>{closeButton.current?.focus();return()=>returnFocus.current?.focus()},[]);
