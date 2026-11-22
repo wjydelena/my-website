@@ -1,6 +1,7 @@
 import {orderedProductPromotions} from './promotion-creation-order';
 import React from 'react';
 import {ChevronDown} from 'lucide-react';
+import './product-promotions.css';
 import './prelive-flash-sales.css';
 import type {ProductFlashSale} from './flash-sale-types';
 import flashIcon from './assets/annotation-icons/promotion-flash.png';

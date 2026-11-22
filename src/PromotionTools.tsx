@@ -115,14 +115,14 @@ export default function PromotionTools({compact=false,createPromotion=false,coup
   const closeCoupon = () => { setCouponActive(false); (couponReturnFocus?.current||(compact?trigger.current:couponButton.current))?.focus({ preventScroll: true }); };
 
   return <div className={`promotion-bar promotion-tools${compact?' promotion-tools-compact':''}${createPromotion?' promotion-create-entry':''}`} ref={root}>
-    <div className="promotion-content" ref={toolbar} role="region" aria-label="Promotion tools" tabIndex={0}
+    {!createPromotion&&<div className="promotion-content" ref={toolbar} role="region" aria-label="Promotion tools" tabIndex={0}
       onKeyDown={event => {
         if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
           event.preventDefault(); event.currentTarget.scrollBy({ left: event.key === 'ArrowRight' ? 240 : -240, behavior: 'smooth' });
         }
       }}>
       {pinned.map(label => { const item = items.find(value => value.label === label)!; return <button type="button" className={`promo-pill${couponActive && label === 'Coupon' ? ' is-active' : ''}`} ref={label === 'Coupon' ? couponButton : undefined} aria-pressed={label === 'Coupon' ? couponActive : undefined} key={label} onClick={() => showTool(label)}>{graphic(item)}{label === 'Rush reward' ? 'Rush Reward' : label}</button>; })}
-    </div>
+    </div>}
     <button className="promo-more" ref={trigger} type="button" aria-label={triggerAriaLabel||(createPromotion?'Create promotion':'More promotions')} aria-expanded={open} aria-haspopup={createPromotion?'menu':undefined} aria-controls={createPromotion?'create-promotion-menu':'promotion-tools-list'} disabled={editing} onClick={() => { if (open) close(); else { setOpen(true); } }}>{compact?<Plus size={20}/>:<ChevronDown size={18}/>} {createPromotion&&(triggerLabel||'Create promotion')}</button>
     {couponActive && host && createPortal(<div className="coupon-panel-viewport"><section key={couponEntry} className="coupon-panel" aria-label="Coupon panel" onPointerDown={event => event.stopPropagation()}>
       <div className="coupon-heading"><h2>Coupon</h2><button type="button" aria-label="Close Coupon" onClick={closeCoupon}><X size={18}/></button></div>
