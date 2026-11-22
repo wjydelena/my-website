@@ -363,8 +363,8 @@
         {
           "action": "click",
           "target": {
-            "role": "option",
-            "name": "2"
+            "role": "radio",
+            "name": "2 minutes"
           }
         },
         {
@@ -2301,13 +2301,13 @@
         {
           "action": "capture",
           "id": "group-deal-duration-options",
-          "title": "Numeric Duration dropdown has exactly 1 through 6"
+          "title": "Group Deal duration presets and Custom match Price Cut"
         },
         {
           "action": "click",
           "target": {
-            "role": "option",
-            "name": "6"
+            "role": "radio",
+            "name": "5 minutes"
           }
         },
         {
@@ -2457,8 +2457,8 @@
         {
           "action": "click",
           "target": {
-            "role": "option",
-            "name": "6"
+            "role": "radio",
+            "name": "5 minutes"
           }
         },
         {
@@ -2793,8 +2793,8 @@
         {
           "action": "click",
           "target": {
-            "role": "option",
-            "name": "6"
+            "role": "radio",
+            "name": "5 minutes"
           }
         },
         {
@@ -3302,8 +3302,8 @@
         {
           "action": "click",
           "target": {
-            "role": "option",
-            "name": "2"
+            "role": "radio",
+            "name": "2 minutes"
           }
         },
         {

@@ -17,7 +17,7 @@ export function mergeFlashSales(current:ProductFlashSale[]=[],incoming:ProductFl
  }
  return next;
 }
-export const promotionUnavailable=(kind:PromotionKind)=>`Already has a ${kind}. Edit or delete the existing promotion first.`;
+export const promotionUnavailable=(kind:PromotionKind)=>kind==='Group Deal'?'A Group Deal has already been created for this product.':`Already has a ${kind}. Edit or delete the existing promotion first.`;
 // Group Deal and Price Cut may coexist, but only one record of each type is saved.
 // Matching IDs update the existing record; a different ID cannot append a duplicate.
 export function onePromotion<T extends {id:string}>(current:T[]=[],incoming:T[]=[]):T[]{
