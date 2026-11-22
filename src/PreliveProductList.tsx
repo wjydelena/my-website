@@ -18,9 +18,12 @@ import bag from './assets/prelive/added/shop-2.png';
 import bra from './assets/prelive/added/shop-3.png';
 import glasses from './assets/prelive/added/shop-4.png';
 import blazer from './assets/prelive/added/showcase-0.png';
+import backpack from './assets/prelive/added/showcase-1-clean.png';
+import perfume from './assets/prelive/added/showcase-2-clean.png';
+import sneakers from './assets/prelive/added/showcase-3-clean.png';
 
 export type AddedItem={id:string;name:string;image:string;sku:string;price:string;old?:string;updated:string;badge?:boolean;displayId?:string;stock?:string;flashSales?:ProductFlashSale[];priceCuts?:ProductPriceCut[];groupDeals?:ProductGroupDeal[]};
-const images:Record<string,string>={'shop-0':top,'shop-1':pants,'shop-2':bag,'shop-3':bra,'shop-4':glasses,'showcase-0':blazer};
+const images:Record<string,string>={'shop-0':top,'shop-1':pants,'shop-2':bag,'shop-3':bra,'shop-4':glasses,'showcase-0':blazer,'showcase-1':backpack,'showcase-2':perfume,'showcase-3':sneakers};
 
 export default function PreliveProductList({items,checked,setChecked,disabled,update,remove,move,renderPicker,onFlashSaleConfirm}:{items:AddedItem[];checked:string[];setChecked:React.Dispatch<React.SetStateAction<string[]>>;disabled:boolean;update:(item:AddedItem)=>void;remove:(id:string)=>void;move:(id:string,target:number)=>void;renderPicker:ProductPickerRenderer;onFlashSaleConfirm:(products:AddedItem[])=>void}){
  const [menu,setMenu]=useState<string|null>(null),[draft,setDraft]=useState<AddedItem|null>(null),[deleting,setDeleting]=useState<AddedItem|null>(null);

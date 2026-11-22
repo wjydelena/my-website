@@ -1,0 +1,10 @@
+.pc-batch-modal.gd-bulk-modal{width:min(432px,100%);color:#171718}
+.gd-bulk-modal .pc-batch-input,.gd-bulk-modal .gd-select{height:36px}
+.gd-bulk-modal .pc-batch-guidance{margin:4px 0 0;letter-spacing:0}
+.gd-bulk-modal-size footer{margin-top:31px}
+.gd-bulk-modal-size{overflow:visible}
+.gd-bulk-modal .pc-placeholder,.gd-bulk-modal-quantity input::placeholder{color:#b6b6b7}
+.gd-bulk-modal .gd-number-menu{top:40px;max-height:216px;overflow:auto}
+.gd-bulk-modal footer{gap:12px}
+@media(max-width:480px){.pc-batch-modal.gd-bulk-modal{padding:24px}.gd-bulk-modal h2{font-size:20px}.gd-bulk-modal footer{flex-wrap:nowrap}.gd-bulk-modal footer span{flex-basis:auto;font-size:14px}.gd-bulk-modal footer button{padding:0 24px}}
+@media(max-width:420px){.gd-bulk-modal footer{flex-wrap:wrap}.gd-bulk-modal footer span{flex-basis:100%}}

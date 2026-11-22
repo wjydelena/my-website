@@ -2374,6 +2374,106 @@
         {
           "action": "click",
           "target": {
+            "role": "checkbox",
+            "name": "Select all group deal products"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Batch edit group deal products"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Bulk edit group size"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Bulk Group Deal group size"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "4"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "css": ".gd-bulk-modal .pc-batch-confirm"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Batch edit group deal products"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Bulk edit Group Deal price"
+          }
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Bulk Group Deal price"
+          },
+          "value": "79.90"
+        },
+        {
+          "action": "click",
+          "target": {
+            "css": ".gd-bulk-modal .pc-batch-confirm"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Batch edit group deal products"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Bulk edit quantity"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "group-deal-bulk-quantity",
+          "title": "Group Deal bulk quantity modal matches the reference and reports the selected-product count"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Bulk Group Deal quantity"
+          },
+          "value": "17"
+        },
+        {
+          "action": "click",
+          "target": {
+            "css": ".gd-bulk-modal .pc-batch-confirm"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
             "role": "button",
             "name": "Create"
           }

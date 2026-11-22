@@ -29,9 +29,9 @@ import shop2 from './assets/prelive/shop-2.png';
 import shop3 from './assets/prelive/shop-3.png';
 import shop4 from './assets/prelive/shop-4.png';
 import show0 from './assets/prelive/showcase-0.png';
-import show1 from './assets/prelive/showcase-1.png';
-import show2 from './assets/prelive/showcase-2.png';
-import show3 from './assets/prelive/showcase-3.png';
+import show1 from './assets/prelive/added/showcase-1-clean.png';
+import show2 from './assets/prelive/added/showcase-2-clean.png';
+import show3 from './assets/prelive/added/showcase-3-clean.png';
 import './prelive.css';
 
 import { PRODUCT_PRICE } from './product-pricing';
