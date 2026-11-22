@@ -2,3 +2,12 @@
 
 .gd-table-row .gd-field-error,.gd-settings .gd-field-error{margin:4px 0 0;font-size:12px;line-height:18px;color:#fe2c55}
 .gd-stock-input[aria-invalid=true]{border-color:#fe2c55!important;outline-color:#fe2c55}
+
+/* Group Deal uses the reference's compact two-line product cell, not the shared ID chip layout. */
+:root .group-deal-drawer .gd-product.demo-product-identity[data-product-identity]{gap:8px;padding-right:0}
+:root .group-deal-drawer .gd-product.demo-product-identity[data-product-identity]>img{width:40px;height:40px;border:1px solid #d7d7d7;border-radius:8px;background:#fafafa}
+:root .group-deal-drawer .gd-product.demo-product-identity[data-product-identity] .demo-product-label{height:20px}
+:root .group-deal-drawer .gd-product.demo-product-identity[data-product-identity] .demo-product-name{font-size:14px;line-height:20px;font-weight:400;color:#171718}
+:root .group-deal-drawer .gd-product.demo-product-identity[data-product-identity] .demo-product-details{margin-top:2px;font-size:14px;line-height:20px;color:#737373}
+:root .group-deal-drawer .gd-product.demo-product-identity[data-product-identity] .demo-product-details p{display:flex;align-items:center;white-space:nowrap;margin:0;font-size:14px;line-height:20px;color:#737373}
+:root .group-deal-drawer .gd-product.demo-product-identity[data-product-identity] .demo-product-details p i{height:8px;flex:none}
