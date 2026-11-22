@@ -418,19 +418,19 @@
         {
           "action": "fill",
           "target": {
-            "label": "Group deal stock for Classic Red Satin Lipstick bun..."
+            "label": "Group Deal quantity for Classic Red Satin Lipstick bun..."
           },
           "value": "2"
         },
         {
           "action": "capture",
           "id": "batch-group-below-size",
-          "title": "Quantity below group size errors under Group deal stock, not price"
+          "title": "Quantity below group size errors under Group Deal quantity, not price"
         },
         {
           "action": "fill",
           "target": {
-            "label": "Group deal stock for Classic Red Satin Lipstick bun..."
+            "label": "Group Deal quantity for Classic Red Satin Lipstick bun..."
           },
           "value": "100001"
         },
@@ -2437,9 +2437,37 @@
           }
         },
         {
+          "action": "fill",
+          "target": {
+            "label": "Starting price for Classic Red Satin Lipstick bun..."
+          },
+          "value": "90.00"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Lowest price for Classic Red Satin Lipstick bun..."
+          },
+          "value": "60.00"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Update"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Edit price cut 1 for added product 1"
+          }
+        },
+        {
           "action": "capture",
           "id": "price-cut-edit-restored",
-          "title": "Saved values restored on edit"
+          "title": "Updated values restored in Price Cut settings"
         },
         {
           "action": "click",
@@ -2589,7 +2617,7 @@
         {
           "action": "fill",
           "target": {
-            "label": "Group deal stock for Classic Red Satin Lipstick bun..."
+            "label": "Group Deal quantity for Classic Red Satin Lipstick bun..."
           },
           "value": "17"
         },
@@ -2720,9 +2748,37 @@
           }
         },
         {
+          "action": "fill",
+          "target": {
+            "label": "Group deal price for Classic Red Satin Lipstick bun..."
+          },
+          "value": "65.00"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Group Deal quantity for Classic Red Satin Lipstick bun..."
+          },
+          "value": "30"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Update"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Edit group deal 1 for added product 1"
+          }
+        },
+        {
           "action": "capture",
           "id": "group-deal-edit-restored",
-          "title": "All saved values restored on Group Deal edit"
+          "title": "Updated values restored in Group Deal settings"
         },
         {
           "action": "click",
@@ -2849,7 +2905,7 @@
         {
           "action": "fill",
           "target": {
-            "label": "Group deal stock for Classic Red Satin Lipstick bun..."
+            "label": "Group Deal quantity for Classic Red Satin Lipstick bun..."
           },
           "value": "20"
         },
@@ -3199,7 +3255,7 @@
         {
           "action": "fill",
           "target": {
-            "label": "Group deal stock for Classic Red Satin Lipstick bun..."
+            "label": "Group Deal quantity for Classic Red Satin Lipstick bun..."
           },
           "value": "20"
         },
@@ -3725,7 +3781,7 @@
         {
           "action": "fill",
           "target": {
-            "label": "Group deal stock for Classic Gray Everyday Backpack"
+            "label": "Group Deal quantity for Classic Gray Everyday Backpack"
           },
           "value": "10"
         },
