@@ -177,6 +177,46 @@
           "action": "click",
           "target": {
             "role": "button",
+            "name": "More actions for added product 1"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "prelive-first-product-more",
+          "title": "First product More menu: Delete only; dedicated Edit remains outside the menu"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "More actions for added product 1"
+          },
+          "key": "Escape"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "More actions for added product 2"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "prelive-other-product-more",
+          "title": "Other product More menu: Move to top and Delete; no Edit"
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "button",
+            "name": "More actions for added product 2"
+          },
+          "key": "Escape"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
             "name": "Promo for added product 1"
           }
         },
@@ -2063,7 +2103,7 @@
         {
           "action": "capture",
           "id": "promo-card-two-expanded",
-          "title": "Reference card with two expanded promos and direct delete/edit icons"
+          "title": "Reference card with two expanded promos and direct delete/edit icons; participant/group-size icon uses Version 1 Users at 12px"
         },
         {
           "action": "click",
