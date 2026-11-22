@@ -131,11 +131,12 @@
 .prelive-picker header button{padding-top:5px}
 .console-shell .prelive-coupon-static{cursor:default}
 .prelive-coupon-static img{width:18px;height:18px;object-fit:contain;filter:none;opacity:1}
-.prelive-picker{animation:prelive-picker-enter 200ms cubic-bezier(.22,.8,.25,1) both}
+/* All right-side drawers share the existing Add products entrance motion. */
+.prelive-picker,.flash-sale-drawer,.price-cut-drawer,.fw-drawer{animation:prelive-picker-enter 200ms cubic-bezier(.22,.8,.25,1) both}
 @keyframes prelive-picker-enter{
   from{transform:translateX(10px)}
   to{transform:none}
 }
 @media(prefers-reduced-motion:reduce){
-  .prelive-picker{animation:none}
+  .prelive-picker,.flash-sale-drawer,.price-cut-drawer,.fw-drawer{animation:none}
 }
