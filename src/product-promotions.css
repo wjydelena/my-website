@@ -28,16 +28,16 @@
 .console-shell .reference-product-column .product-actions-menu button{justify-content:flex-start;gap:8px;white-space:nowrap;width:100%;height:32px;padding:0 8px;font-size:12px}
 .console-shell .reference-product-column .product-card-promotion-toggle{position:absolute;inset:0;z-index:1;border:0;border-radius:8px;background:transparent;cursor:pointer}
 .console-shell .reference-product-column .product-card-promotion-toggle:focus-visible{outline:2px solid #009995;outline-offset:2px}
-.console-shell .reference-product-column .product-promotions{position:relative;z-index:2;margin:10px 0 0 48px;background:#f1f1f1;border-radius:8px}
+.console-shell .reference-product-column .product-promotions{position:relative;z-index:2;margin:10px 0 0 118px;background:#f1f1f1;border-radius:8px}
 .console-shell .reference-product-column .reference-product-card:hover .product-promotions{background:#e9e9e9}
 .console-shell .reference-product-column .reference-product-card.is-expanded .product-promotions{background:#fff}
 .console-shell .reference-product-column .product-promotions-heading{display:flex;width:100%;align-items:center;justify-content:space-between;height:34px;border:0;border-radius:6px;background:transparent;padding:0 8px;font-size:12px;font-weight:500;color:#737373;cursor:pointer}
 .product-promotions-heading svg.is-expanded{transform:none}
 .console-shell .reference-product-column .reference-product-card.is-expanded .product-promotions-heading{height:32px}
 .product-promotions-details{padding:0 8px 4px;background:#fff;border-radius:0 0 8px 8px}
-.product-promotion-row{position:relative;display:flex;gap:4px;align-items:flex-start;min-height:54px;padding:7px 4px;border-bottom:1px solid #eee}
+.product-promotion-row{position:relative;display:flex;gap:4px;align-items:flex-start;min-height:54px;padding:7px 0;border-bottom:1px solid #eee}
 .product-promotion-row:last-child{border-bottom:0}
-.product-promotion-icon{flex:none;width:14px;height:20px;object-fit:contain;margin-top:-2px;filter:none}
+.product-promotion-icon{flex:none;width:12px;height:12px;object-fit:contain;margin-top:3px;filter:none}
 .console-shell:not(:has(.layout-editing)) .product-promotion-row:hover::before{content:"";position:absolute;inset:3px 0;background:#f5f5f5;border-radius:8px;pointer-events:none}
 .product-promotion-icon,.product-promotion-copy,.product-promotion-actions{position:relative;z-index:1}
 .promotion-muted{color:#737373}

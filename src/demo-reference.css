@@ -26,5 +26,5 @@
 .prelive-picker footer button.picker-add:not(:disabled):hover,.console-shell .reference-product-column .prelive-product-footer .buy-now-add:not(:disabled):hover{background:#008e8a}
 .console-shell .prelive-reference-card .prelive-row-promotion{width:auto}
 .console-shell .prelive-reference-card .product-promo-trigger{width:auto;min-width:74px;padding-right:12px}
-.console-shell .prelive-reference-card:hover .product-promo-trigger:not(:disabled){background:#fff}
+.console-shell .prelive-reference-card:hover .product-promo-trigger:not(:disabled){background:#ededed}
 @media(prefers-reduced-motion:reduce){.prelive-empty-actions button:not(:disabled),.prelive-picker footer .picker-add,.console-shell .prelive-product-footer .buy-now-add,.console-shell .prelive-reference-card .product-promo-trigger{transition:none}}
