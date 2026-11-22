@@ -1317,6 +1317,20 @@
           "target": {
             "testId": "customize-layout-inactive"
           }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          },
+          "label": "Enter LIVE without replacing configured products"
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "testId": "live-console"
+          }
         }
       ]
     },

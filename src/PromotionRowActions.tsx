@@ -1,6 +1,10 @@
 import React from 'react';
+import {Trash2} from 'lucide-react';
+import LiveActionMenu from './LiveActionMenu';
 import editIcon from './assets/prelive/promotion-edit.png';
 import deleteIcon from './assets/prelive/promotion-delete.png';
-export default function PromotionRowActions({kind,index,number,disabled,onEdit,onDelete}:{kind:string;index:number;number:number;disabled:boolean;onEdit:(button:HTMLButtonElement)=>void;onDelete:()=>void}){
+export type LivePromotionActionProps={live?:boolean;started?:boolean;onStart?:()=>void};
+export default function PromotionRowActions({kind,index,number,disabled,onEdit,onDelete,live=false,started=false,onStart}:{kind:string;index:number;number:number;disabled:boolean;onEdit:(button:HTMLButtonElement)=>void;onDelete:()=>void}&LivePromotionActionProps){
+ if(live)return <div className="product-promotion-actions live-promotion-actions"><LiveActionMenu compact disabled={disabled} label={`More actions for ${kind} ${number} for added product ${index}`} items={[{label:`Edit ${kind}`,ariaLabel:`Edit ${kind} ${number} for added product ${index}`,icon:<img src={editIcon} alt=""/>,action:onEdit},{label:'Delete',ariaLabel:`Delete ${kind} ${number} for added product ${index}`,icon:<Trash2 size={16}/>,danger:true,action:onDelete}]}/><button type="button" className="live-promotion-start" aria-label={`${started?'Started':'Start'} ${kind} ${number} for added product ${index}`} disabled={disabled||started} onClick={onStart}>{started?'Started':'Start'}</button></div>;
  return <div className="product-promotion-actions direct-promotion-actions"><button type="button" aria-label={`Delete ${kind} ${number} for added product ${index}`} title="Delete promotion" disabled={disabled} onClick={e=>{const focus=e.currentTarget.closest('article')?.querySelector<HTMLButtonElement>('.product-promo-trigger');onDelete();requestAnimationFrame(()=>focus?.focus())}}><img className="promotion-action-icon" src={deleteIcon} width={16} height={16} alt="" aria-hidden="true" draggable={false}/></button><button type="button" aria-label={`Edit ${kind} ${number} for added product ${index}`} title="Edit settings" disabled={disabled} onClick={e=>onEdit(e.currentTarget)}><img className="promotion-action-icon" src={editIcon} width={16} height={16} alt="" aria-hidden="true" draggable={false}/></button></div>;
 }
