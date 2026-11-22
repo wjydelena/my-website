@@ -49,6 +49,7 @@
 .product-promotion-copy strong{display:block;font-size:12px;line-height:18px;font-weight:500}
 .product-promotion-copy p{display:flex;align-items:center;gap:4px;flex-wrap:wrap;font-size:12px;line-height:18px;color:#737373;margin:2px 0 0}
 .product-promotion-actions{display:flex;align-items:center;gap:8px;flex:none;margin-top:-2px}
+.direct-promotion-actions .promotion-action-icon{display:block;width:16px;height:16px;flex:none;object-fit:contain;filter:none}
 .product-promotion-actions button{height:24px;padding:0;border:0;background:none;color:#009995;font-size:12px;line-height:18px;font-weight:500;cursor:pointer}
 .product-promotion-actions button:first-child{display:grid;place-items:center;width:24px;border-radius:50%}
 .product-promotion-actions button:first-child:hover{background:#e0e0e0}
