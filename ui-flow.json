@@ -2,7 +2,7 @@
   "flows": [
     {
       "id": "customize-first-education",
-      "title": "Layout entry temporarily inactive · customize-first-education",
+      "title": "Layout entry temporarily inactive \u00b7 customize-first-education",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -36,7 +36,7 @@
     },
     {
       "id": "add-panel-restore",
-      "title": "Layout entry temporarily inactive · add-panel-restore",
+      "title": "Layout entry temporarily inactive \u00b7 add-panel-restore",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -98,7 +98,7 @@
         {
           "action": "capture",
           "id": "prelive-my-shop",
-          "title": "Add products — My shop"
+          "title": "Add products \u2014 My shop"
         },
         {
           "action": "click",
@@ -117,7 +117,7 @@
         {
           "action": "capture",
           "id": "prelive-showcase",
-          "title": "My shop — migrated products searchable with selection draft retained"
+          "title": "My shop \u2014 migrated products searchable with selection draft retained"
         },
         {
           "action": "click",
@@ -279,6 +279,20 @@
             "label": "Customer purchase limit for Classic Red Satin Lipstick bun..."
           },
           "value": "50"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "When to start flash sale"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Manually start during LIVE"
+          }
         },
         {
           "action": "click",
@@ -871,6 +885,20 @@
           "action": "click",
           "target": {
             "role": "button",
+            "name": "When to start flash sale"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Manually start during LIVE"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
             "name": "Confirm"
           }
         },
@@ -1438,7 +1466,7 @@
     },
     {
       "id": "customize-layout",
-      "title": "Layout entry temporarily inactive · customize-layout",
+      "title": "Layout entry temporarily inactive \u00b7 customize-layout",
       "viewport": {
         "width": 1280,
         "height": 900
@@ -1479,7 +1507,7 @@
     },
     {
       "id": "preset-adjustments",
-      "title": "Layout entry temporarily inactive · preset-adjustments",
+      "title": "Layout entry temporarily inactive \u00b7 preset-adjustments",
       "viewport": {
         "width": 1280,
         "height": 900
@@ -1520,7 +1548,7 @@
     },
     {
       "id": "customize-narrow",
-      "title": "Layout entry temporarily inactive · customize-narrow",
+      "title": "Layout entry temporarily inactive \u00b7 customize-narrow",
       "viewport": {
         "width": 1120,
         "height": 800
@@ -1561,7 +1589,7 @@
     },
     {
       "id": "chat-focus-structure",
-      "title": "Layout entry temporarily inactive · chat-focus-structure",
+      "title": "Layout entry temporarily inactive \u00b7 chat-focus-structure",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -1602,7 +1630,7 @@
     },
     {
       "id": "editor-neutral-borders",
-      "title": "Layout entry temporarily inactive · editor-neutral-borders",
+      "title": "Layout entry temporarily inactive \u00b7 editor-neutral-borders",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -1643,7 +1671,7 @@
     },
     {
       "id": "preset-apply-guard",
-      "title": "Layout entry temporarily inactive · preset-apply-guard",
+      "title": "Layout entry temporarily inactive \u00b7 preset-apply-guard",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -1684,7 +1712,7 @@
     },
     {
       "id": "module-four-columns",
-      "title": "Layout entry temporarily inactive · module-four-columns",
+      "title": "Layout entry temporarily inactive \u00b7 module-four-columns",
       "viewport": {
         "width": 1600,
         "height": 900
@@ -1725,7 +1753,7 @@
     },
     {
       "id": "module-stack-three",
-      "title": "Layout entry temporarily inactive · module-stack-three",
+      "title": "Layout entry temporarily inactive \u00b7 module-stack-three",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -1766,7 +1794,7 @@
     },
     {
       "id": "module-narrow-four",
-      "title": "Layout entry temporarily inactive · module-narrow-four",
+      "title": "Layout entry temporarily inactive \u00b7 module-narrow-four",
       "viewport": {
         "width": 1120,
         "height": 800
@@ -1807,7 +1835,7 @@
     },
     {
       "id": "module-activity-column",
-      "title": "Layout entry temporarily inactive · module-activity-column",
+      "title": "Layout entry temporarily inactive \u00b7 module-activity-column",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -2423,6 +2451,20 @@
           "action": "click",
           "target": {
             "role": "button",
+            "name": "When to start flash sale"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Manually start during LIVE"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
             "name": "Confirm"
           }
         },
@@ -2588,6 +2630,20 @@
           "action": "click",
           "target": {
             "role": "button",
+            "name": "When to start flash sale"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Manually start during LIVE"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
             "name": "Confirm"
           }
         },
@@ -2663,7 +2719,7 @@
         {
           "action": "capture",
           "id": "footer-price-cut-select",
-          "title": "Shared selection step for Price Cut — all My shop products with same-type eligibility"
+          "title": "Shared selection step for Price Cut \u2014 all My shop products with same-type eligibility"
         },
         {
           "action": "click",
@@ -2767,7 +2823,7 @@
         {
           "action": "capture",
           "id": "footer-group-deal-select",
-          "title": "Shared selection step for Group Deal — all My shop products with same-type eligibility"
+          "title": "Shared selection step for Group Deal \u2014 all My shop products with same-type eligibility"
         },
         {
           "action": "click",
@@ -2897,7 +2953,7 @@
         {
           "action": "capture",
           "id": "flash-occupied-manual-default-scheduled",
-          "title": "Existing manual sale: creation remains available and defaults to scheduled"
+          "title": "New Flash Sale has no start selection; existing manual sale disables the manual option"
         },
         {
           "action": "fill",
@@ -2914,23 +2970,28 @@
           }
         },
         {
-          "action": "click",
+          "action": "hover",
           "target": {
-            "role": "option",
-            "name": "Manually start during LIVE"
+            "css": ".fs-blocked-start-choice"
           }
         },
         {
-          "action": "click",
+          "action": "waitFor",
           "target": {
-            "role": "button",
-            "name": "Confirm"
+            "css": ".fs-manual-start-tooltip"
           }
         },
         {
           "action": "capture",
           "id": "flash-second-manual-blocked",
-          "title": "Second manual sale rejected with start-field validation"
+          "title": "Disabled manual-start option explains the existing LIVE flash sale on hover"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "When to start flash sale"
+          }
         },
         {
           "action": "click",
@@ -3109,23 +3170,21 @@
           }
         },
         {
-          "action": "click",
+          "action": "hover",
           "target": {
-            "role": "option",
-            "name": "Manually start during LIVE"
+            "css": ".fs-blocked-start-choice"
           }
         },
         {
-          "action": "click",
+          "action": "waitFor",
           "target": {
-            "role": "button",
-            "name": "Confirm"
+            "css": ".fs-manual-start-tooltip"
           }
         },
         {
           "action": "capture",
           "id": "flash-scheduled-manual-edit-conflict",
-          "title": "Scheduled-to-manual edit blocked while another manual sale exists"
+          "title": "Scheduled edit retains its start setting and disables manual conversion with a reason tooltip"
         },
         {
           "action": "click",
@@ -3222,6 +3281,20 @@
             "label": "Total purchase limit for Classic Red Satin Lipstick bun..."
           },
           "value": "40"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "When to start flash sale"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "Manually start during LIVE"
+          }
         },
         {
           "action": "click",
@@ -3576,7 +3649,7 @@
     },
     {
       "id": "module-body-hover-and-ghost",
-      "title": "Layout entry temporarily inactive · module-body-hover-and-ghost",
+      "title": "Layout entry temporarily inactive \u00b7 module-body-hover-and-ghost",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -3617,7 +3690,7 @@
     },
     {
       "id": "host-focus-save-restore",
-      "title": "Layout entry temporarily inactive · host-focus-save-restore",
+      "title": "Layout entry temporarily inactive \u00b7 host-focus-save-restore",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -3658,7 +3731,7 @@
     },
     {
       "id": "host-focus-adjustments",
-      "title": "Layout entry temporarily inactive · host-focus-adjustments",
+      "title": "Layout entry temporarily inactive \u00b7 host-focus-adjustments",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -4219,7 +4292,7 @@
         {
           "action": "capture",
           "id": "prelive-entry",
-          "title": "Pre-LIVE console — Buy now empty state"
+          "title": "Pre-LIVE console \u2014 Buy now empty state"
         },
         {
           "action": "click",
@@ -5183,7 +5256,7 @@
     },
     {
       "id": "editor-two-presets",
-      "title": "Layout entry temporarily inactive · editor-two-presets",
+      "title": "Layout entry temporarily inactive \u00b7 editor-two-presets",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -5224,7 +5297,7 @@
     },
     {
       "id": "remove-panel-cancel-default",
-      "title": "Layout entry temporarily inactive · remove-panel-cancel-default",
+      "title": "Layout entry temporarily inactive \u00b7 remove-panel-cancel-default",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -5265,7 +5338,7 @@
     },
     {
       "id": "saved-layout-cancel-default",
-      "title": "Layout entry temporarily inactive · saved-layout-cancel-default",
+      "title": "Layout entry temporarily inactive \u00b7 saved-layout-cancel-default",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -5306,7 +5379,7 @@
     },
     {
       "id": "add-panels-after-apply",
-      "title": "Layout entry temporarily inactive · add-panels-after-apply",
+      "title": "Layout entry temporarily inactive \u00b7 add-panels-after-apply",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -5347,7 +5420,7 @@
     },
     {
       "id": "add-panel-hint-auto-dismiss",
-      "title": "Layout entry temporarily inactive · add-panel-hint-auto-dismiss",
+      "title": "Layout entry temporarily inactive \u00b7 add-panel-hint-auto-dismiss",
       "viewport": {
         "width": 1440,
         "height": 900

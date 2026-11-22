@@ -1,0 +1,4 @@
+.required-mark{display:inline-block;flex:none;color:#a92024!important;font-size:inherit;font-weight:700;line-height:inherit}
+.fs-config-card h3.required-label,.pc-duration-label.required-label,.selling-dialog .required-label{color:#171718;font-weight:500}
+.pc-duration-label.required-label svg{color:#6c6d6f}
+.selling-dialog .required-label{display:inline-flex;align-items:center;gap:4px}
