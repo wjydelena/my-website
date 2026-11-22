@@ -4,15 +4,8 @@ import {ArrowUpToLine,ChevronDown,Trash2,X} from 'lucide-react';
 import type {AddedItem} from './PreliveProductList';
 import type {PromotionKind} from './PromotionWizardSteps';
 import {hasPromotion} from './promotion-eligibility';
-import flash from './assets/create-promotion/flash-sale.png';
-import group from './assets/create-promotion/group-deal.png';
-import price from './assets/create-promotion/price-cut.png';
+import {PromotionOptions} from './CreatePromotionPopover';
 import './batch-promotion-bar.css';
-const options=[
- {kind:'Flash Sale',label:'LIVE flash sale',copy:'Offer limited-time deals to incentivize swift purchases',icon:flash},
- {kind:'Group Deal',label:'Group deal',copy:'Let people team up to buy with limited-time deal',icon:group},
- {kind:'Price Cut',label:'Price cut',copy:'Let people collectively cut to a lower deal with fun',icon:price}
-] as const;
 export default function BatchPromotionBar({products,canMove,clear,move,remove,create}:{products:AddedItem[];canMove:boolean;clear:()=>void;move:()=>void;remove:()=>void;create:(kind:PromotionKind,button:HTMLButtonElement)=>void}){
  const [open,setOpen]=useState(false),[deleting,setDeleting]=useState(false);
  const root=useRef<HTMLDivElement>(null),trigger=useRef<HTMLButtonElement>(null),modal=useRef<HTMLElement>(null);
@@ -22,7 +15,7 @@ export default function BatchPromotionBar({products,canMove,clear,move,remove,cr
   <button type="button" className="batch-clear" aria-label="Clear selected products" onClick={clear}><X size={18}/></button><span className="batch-count"><b>{products.length}</b> selected</span>
   <button type="button" className="batch-create" ref={trigger} aria-label="Create promotion for selected products" aria-haspopup="menu" aria-expanded={open} onClick={()=>setOpen(!open)} onKeyDown={e=>{if(e.key==='ArrowDown'){e.preventDefault();setOpen(true);requestAnimationFrame(()=>root.current?.querySelector<HTMLButtonElement>('[role=menuitem]:not(:disabled)')?.focus())}}}>Create promotion<ChevronDown size={16} className={open?'is-open':''}/></button>
   <button type="button" className="batch-move" aria-label="Move selected products to top" disabled={!canMove} onClick={move}><ArrowUpToLine size={18}/></button><button type="button" className="batch-delete" aria-label="Delete selected products" onClick={()=>{setOpen(false);setDeleting(true)}}><Trash2 size={18}/></button>
-  {open&&<div className="batch-promo-menu" role="menu" aria-label="Create promotion for selected products" onKeyDown={e=>{if(!['ArrowDown','ArrowUp','Home','End'].includes(e.key))return;e.preventDefault();const buttons=[...e.currentTarget.querySelectorAll<HTMLButtonElement>('button:not(:disabled)')],i=buttons.indexOf(document.activeElement as HTMLButtonElement);buttons[e.key==='Home'?0:e.key==='End'?buttons.length-1:(i+(e.key==='ArrowDown'?1:buttons.length-1))%buttons.length]?.focus()}}>{options.map(option=>{const blocked=products.some(p=>hasPromotion(p,option.kind));return <button type="button" role="menuitem" key={option.kind} aria-label={option.label} disabled={blocked} title={blocked?`A selected product already has a ${option.kind}. Edit or delete it first.`:undefined} onClick={()=>{setOpen(false);create(option.kind,trigger.current!)}}><span className={`batch-promo-icon ${option.kind==='Flash Sale'?'flash':''}`}><img src={option.icon} alt=""/></span><span><strong>{option.label}</strong><small>{blocked?`A selected product already has a ${option.kind}.`:option.copy}</small></span></button>})}</div>}
+  {open&&<div className="batch-promo-menu" role="menu" aria-label="Create promotion for selected products" onKeyDown={e=>{if(!['ArrowDown','ArrowUp','Home','End'].includes(e.key))return;e.preventDefault();const buttons=[...e.currentTarget.querySelectorAll<HTMLButtonElement>('button:not(:disabled)')],i=buttons.indexOf(document.activeElement as HTMLButtonElement);buttons[e.key==='Home'?0:e.key==='End'?buttons.length-1:(i+(e.key==='ArrowDown'?1:buttons.length-1))%buttons.length]?.focus()}}><PromotionOptions isBlocked={kind=>products.some(p=>hasPromotion(p,kind))} onSelect={kind=>{setOpen(false);create(kind,trigger.current!)}}/></div>}
   {deleting&&createPortal(<div className="reference-product-modal prelive-added-modal" onPointerDown={e=>{if(e.target===e.currentTarget)setDeleting(false)}}><section ref={modal} role="dialog" aria-modal="true" aria-label="Delete selected products"><h2>Delete {products.length} products?</h2><p>This removes the selected products from this prototype’s list.</p><footer><button type="button" onClick={()=>setDeleting(false)}>Cancel</button><button type="button" onClick={()=>{setDeleting(false);remove()}}>Delete</button></footer></section></div>,document.body)}
  </div>;
 }

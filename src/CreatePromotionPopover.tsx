@@ -1,16 +1,25 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
+import type {PromotionKind} from './PromotionWizardSteps';
 import flashSale from './assets/create-promotion/flash-sale.png';
 import groupDeal from './assets/create-promotion/group-deal.png';
 import priceCut from './assets/create-promotion/price-cut.png';
 import './create-promotion-popover.css';
 
-const sections=[
-  {title:'Product-level promotions',items:[
-    {title:'LIVE flash sale',description:'Offer limited-time deals to incentivize swift purchases',icon:flashSale},
-    {title:'Group deal',description:'Let people team up to buy with limited-time deal',icon:groupDeal},
-    {title:'Price cut',description:'Let people collectively cut to a lower deal with fun',icon:priceCut},
-  ]},
-];
+const items=[
+  {kind:'Flash Sale',title:'LIVE flash sale',description:'Offer limited-time deals to incentivize swift purchases',icon:flashSale},
+  {kind:'Group Deal',title:'Group deal',description:'Let people team up to buy with limited-time deal',icon:groupDeal},
+  {kind:'Price Cut',title:'Price cut',description:'Let people collectively cut to a lower deal with fun',icon:priceCut},
+] as const;
+
+export function PromotionOptions({onSelect,isBlocked}:{onSelect:(kind:PromotionKind)=>void;isBlocked?:(kind:PromotionKind)=>boolean}){
+  return <div className="promotion-options">{items.map(item=>{
+    const blocked=isBlocked?.(item.kind)||false;
+    return <button type="button" role="menuitem" className="create-promotion-option" key={item.kind} aria-label={item.title} disabled={blocked} title={blocked?`A selected product already has a ${item.kind}. Edit or delete it first.`:undefined} onClick={()=>onSelect(item.kind)}>
+      <img src={item.icon} width={32} height={32} alt="" draggable={false}/>
+      <span><strong>{item.title}</strong><span className="create-promotion-description">{item.description}</span></span>
+    </button>;
+  })}</div>;
+}
 
 export default function CreatePromotionPopover({anchor,panelRef,onPriceCut,onFlashSale,onGroupDeal}:{anchor:React.RefObject<HTMLButtonElement>;panelRef:React.RefObject<HTMLDivElement>;onPriceCut?:()=>void;onFlashSale?:()=>void;onGroupDeal?:()=>void}){
   const [position,setPosition]=useState<{left:number;top:number}|null>(null);
@@ -42,12 +51,6 @@ export default function CreatePromotionPopover({anchor,panelRef,onPriceCut,onFla
       const next=event.key==='Home'?0:event.key==='End'?buttons.length-1:event.key==='ArrowDown'?(current+1)%buttons.length:(current<0?buttons.length-1:(current-1+buttons.length)%buttons.length);
       buttons[next]?.focus();
     }}>
-    {sections.map((section,index)=><section className={`create-promotion-section${index?' is-order-level':''}`} key={section.title} role="group" aria-label={section.title}>
-      <h2>{section.title}</h2>
-      {section.items.map(item=><button type="button" role="menuitem" className="create-promotion-option" key={item.title} aria-label={item.title} onClick={item.title==='Price cut'?onPriceCut:item.title==='LIVE flash sale'?onFlashSale:onGroupDeal}>
-        <img src={item.icon} width={32} height={32} alt="" draggable={false}/>
-        <span><strong>{item.title}</strong><span className="create-promotion-description">{item.description}</span></span>
-      </button>)}
-    </section>)}
+    <PromotionOptions onSelect={kind=>{if(kind==='Flash Sale')onFlashSale?.();else if(kind==='Price Cut')onPriceCut?.();else onGroupDeal?.();}}/>
   </div>;
 }
