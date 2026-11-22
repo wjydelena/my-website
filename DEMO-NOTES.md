@@ -282,3 +282,7 @@
 - Match the reference's first product-information column in Group Deal: 40px thumbnail with 1px #D7D7D7 border, 8px corners, 8px text gap; single-line ellipsized regular 14px product name in a 20px row; Price / Stock beneath in gray 14px/20px with a centered 1px-by-8px separator. Keep the original product images, names, prices and comma-formatted stock rather than substituting sample screenshot data.
 - Omit the shared ID chip only in Group Deal via default-preserving ProductIdentity showId option. Other product views keep their existing ID chips and styling. Single remains in its existing Type column; group size, price, stock input, Apply, removal, selection and batch behavior unchanged.
 - Build/whitespace and 46 component/DOM/CSS checks passed: 12 product-column checks plus 34 Group bulk/regression checks. Native browser still unavailable; no screenshot/pixel-fidelity claim or full Flow replay. UI Flow and Version 1 unchanged.
+
+## v1.41 · Group Deal Duration width matches Type
+- Override only the Group Deal settings duration root to width 100% of its equal grid column, matching Type. Keep Price Cut's existing half-width duration layout and all options/validation unchanged.
+- Build, whitespace and 47 component/CSS checks passed, including equal-column width declarations and existing Group product/bulk behavior. No native layout screenshot or Flow replay claimed; UI Flow unchanged.

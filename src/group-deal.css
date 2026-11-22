@@ -11,3 +11,4 @@
 :root .group-deal-drawer .gd-product.demo-product-identity[data-product-identity] .demo-product-details{margin-top:2px;font-size:14px;line-height:20px;color:#737373}
 :root .group-deal-drawer .gd-product.demo-product-identity[data-product-identity] .demo-product-details p{display:flex;align-items:center;white-space:nowrap;margin:0;font-size:14px;line-height:20px;color:#737373}
 :root .group-deal-drawer .gd-product.demo-product-identity[data-product-identity] .demo-product-details p i{height:8px;flex:none}
+.group-deal-drawer .gd-settings .pc-duration-root{width:100%}
