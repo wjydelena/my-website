@@ -1,0 +1,15 @@
+.batch-product-bar{position:absolute;z-index:160;left:16px;right:16px;bottom:16px;display:flex;align-items:center;gap:6px;padding:8px;border-radius:8px;background:#3f4040;color:#fff;box-shadow:0 8px 24px #0002;font-size:14px;line-height:20px}
+.batch-product-bar button{display:flex;align-items:center;justify-content:center;flex:none;border:0;border-radius:4px;height:32px;cursor:pointer;font:inherit}
+.batch-product-bar>.batch-clear{width:20px;padding:0;background:none;color:#fff}
+.batch-count{white-space:nowrap;color:#c1c1c1;flex:none}.batch-count b{color:#fff;font-weight:400;margin-right:4px}
+.batch-product-bar>.batch-create{flex:1;min-width:0;gap:4px;padding:0 8px;background:#fff;color:#161616;white-space:nowrap;font-weight:500}
+.batch-create svg{flex:none}.batch-create .is-open{transform:rotate(180deg)}
+.batch-product-bar>.batch-move,.batch-product-bar>.batch-delete{width:28px;padding:0;background:#fff;color:#161616}.batch-product-bar>.batch-delete{color:#e3334e}.batch-product-bar>button:disabled{color:#aaa;cursor:default}
+.batch-product-bar button:focus-visible{outline:2px solid #009995;outline-offset:2px}
+.batch-promo-menu{position:absolute;bottom:100%;margin-bottom:4px;left:0;right:0;padding:8px;background:#fff;color:#161616;border-radius:8px;box-shadow:0 -4px 24px #0001;max-height:min(320px,60vh);overflow:auto}
+.batch-promo-menu>button{width:100%;height:auto;min-height:68px;text-align:left;justify-content:flex-start;gap:8px;padding:8px 4px;background:#fff}
+.batch-promo-menu>button:hover:not(:disabled){background:#f8f8f8}.batch-promo-menu>button:disabled{opacity:.55;cursor:default}
+.batch-promo-icon{display:grid;place-items:center;flex:none;width:32px;height:32px;border-radius:6px}.batch-promo-icon img{width:32px;height:32px;object-fit:contain;border-radius:6px}
+.batch-promo-menu strong{display:block;font-size:14px;font-weight:500;line-height:20px}.batch-promo-menu small{display:block;color:#757575;font-size:12px;line-height:18px;margin-top:2px}
+.prelive-products{position:relative;container-type:inline-size}.prelive-products.has-batch-selection .prelive-product-body{padding-bottom:80px}
+@container (max-width:360px){.batch-product-bar{left:8px;right:8px;gap:4px;padding:6px;font-size:12px}.batch-product-bar>.batch-create{padding:0 4px}.batch-count b{margin-right:2px}}

@@ -62,6 +62,8 @@
 .fs-total[aria-invalid=true]{border-color:#fe2c55;outline-color:#fe2c55}
 .fs-total-error{margin:4px 0 0;color:#fe2c55;font-size:12px;line-height:18px}
 .fs-required{color:#fe2c55}
+.fs-customer[aria-invalid=true]{border-color:#fe2c55;outline-color:#fe2c55}
+.fs-customer-field{width:110px;padding:8px 0}
 .flash-sale-drawer input::placeholder{color:#b3b3b3;opacity:1}
 .fs-customer-label{display:flex;align-items:center;gap:4px;white-space:nowrap}
 .fs-customer-label button{display:grid;place-items:center;width:20px;height:20px;padding:1px;border:0;background:none;cursor:pointer}

@@ -176,6 +176,371 @@
         {
           "action": "click",
           "target": {
+            "role": "checkbox",
+            "name": "Select added Classic Red Satin Lipstick bun..."
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Select added Blue & Navy Retro Sneakers"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "batch-selected-black-bar",
+          "title": "Two selected products: black floating bar replaces original footer"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Create promotion for selected products"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "batch-promo-three-options",
+          "title": "Floating menu offers LIVE flash sale, Group deal and Price cut"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "LIVE flash sale"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "batch-flash-direct-config",
+          "title": "Step 2 directly shows every product selected in the list"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Confirm"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "batch-flash-all-totals-required",
+          "title": "Each missing total has its own inline error directly below the input"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Total purchase limit for Classic Red Satin Lipstick bun..."
+          },
+          "value": "100001"
+        },
+        {
+          "action": "capture",
+          "id": "batch-flash-over-stock",
+          "title": "Total purchase limit above this product stock is rejected"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Total purchase limit for Classic Red Satin Lipstick bun..."
+          },
+          "value": "50"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Total purchase limit for Blue & Navy Retro Sneakers"
+          },
+          "value": "50"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Edit customer purchase limit for Classic Red Satin Lipstick bun..."
+          }
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Customer purchase limit for Classic Red Satin Lipstick bun..."
+          },
+          "value": "100001"
+        },
+        {
+          "action": "capture",
+          "id": "batch-flash-customer-over-stock",
+          "title": "Configured customer limit above stock errors directly under its input"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Customer purchase limit for Classic Red Satin Lipstick bun..."
+          },
+          "value": "50"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Confirm"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "batch-flash-confirmed-all-products",
+          "title": "Batch saves Flash Sale for both selected products and restores normal footer"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Expand or collapse flash sales for added product 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Delete flash sale 1 for added product 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Expand or collapse flash sales for added product 2"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Delete flash sale 1 for added product 2"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Select added Classic Red Satin Lipstick bun..."
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "checkbox",
+            "name": "Select added Blue & Navy Retro Sneakers"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Create promotion for selected products"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Group deal"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "batch-group-direct-config",
+          "title": "Batch Group Deal directly echoes both selected products"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Select group deal duration"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "2"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Group size for Classic Red Satin Lipstick bun..."
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "option",
+            "name": "3"
+          }
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Group deal price for Classic Red Satin Lipstick bun..."
+          },
+          "value": "50"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Group deal stock for Classic Red Satin Lipstick bun..."
+          },
+          "value": "2"
+        },
+        {
+          "action": "capture",
+          "id": "batch-group-below-size",
+          "title": "Quantity below group size errors under Group deal stock, not price"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Group deal stock for Classic Red Satin Lipstick bun..."
+          },
+          "value": "100001"
+        },
+        {
+          "action": "capture",
+          "id": "batch-group-over-stock",
+          "title": "Group quantity cannot exceed actual product stock"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Confirm"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "batch-group-per-field-required",
+          "title": "Unconfigured second product gets errors beside its own missing fields"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Back"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Create promotion for selected products"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Price cut"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "batch-price-direct-config",
+          "title": "Batch Price Cut directly echoes both selected products"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Select price cut duration"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "radio",
+            "name": "5 minutes"
+          }
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Lowest price for Classic Red Satin Lipstick bun..."
+          },
+          "value": "40"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Target participants for Classic Red Satin Lipstick bun..."
+          },
+          "value": "3"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Price cut quantity for Classic Red Satin Lipstick bun..."
+          },
+          "value": "2"
+        },
+        {
+          "action": "capture",
+          "id": "batch-price-below-target",
+          "title": "Quantity below target participants errors directly under quantity"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "label": "Price cut quantity for Classic Red Satin Lipstick bun..."
+          },
+          "value": "100001"
+        },
+        {
+          "action": "capture",
+          "id": "batch-price-over-stock",
+          "title": "Quantity above product stock errors directly under quantity"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Confirm"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "batch-price-per-field-required",
+          "title": "Every missing field on the second product retains its own inline error"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Back"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "batch-cancel-selection-retained",
+          "title": "Cancel returns to the same list selection and floating bar"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Clear selected products"
+          }
+        },
+        {
+          "action": "capture",
+          "id": "batch-clear-footer-restored",
+          "title": "Clearing selection removes the floating bar and restores original footer"
+        },
+        {
+          "action": "click",
+          "target": {
             "role": "button",
             "name": "More actions for added product 1"
           }

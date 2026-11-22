@@ -1,4 +1,5 @@
 import ProductIdentity from './ProductIdentity';
+import {stockOf} from './promotion-validation';
 import PriceCutBatchModal,{type PriceCutBatchField} from './PriceCutBatchModal';
 import PromotionWizardSteps,{type PromotionWizardConfig} from './PromotionWizardSteps';
 import './promotion-wizard.css';
@@ -14,7 +15,6 @@ type Fields={starting:string;lowest:string;participants:string;quantity:string};
 const durations=[['15 seconds',15],['30 seconds',30],['45 seconds',45],['1 minute',60],['2 minutes',120],['5 minutes',300],['10 minutes',600],['20 minutes',1200]] as const;
 const batchOptions=[['Batch edit lowest price','lowest'],['Batch edit participants','participants'],['Batch edit quantities','quantity']] as const;
 export function priceCutDuration(seconds:number){const preset=durations.find(d=>d[1]===seconds);if(preset)return preset[0];const h=Math.floor(seconds/3600),m=Math.floor(seconds%3600/60),s=seconds%60;return [h?`${h} h`:'',m?`${m} min`:'',s?`${s} s`:''].filter(Boolean).join(' ')}
-function stockOf(item:AddedItem){const value=item.stock||'100000';const n=parseFloat(value.replace(/,/g,''));return Number.isFinite(n)?Math.round(n*(/k$/i.test(value)?1000:1)):100000}
 
 export default function PriceCutDrawer({product,initialProducts,close,returnFocus,renderPicker,onConfirm,initialCut,wizard}:{product?:AddedItem;initialProducts?:AddedItem[];wizard?:PromotionWizardConfig;close:()=>void;returnFocus:React.RefObject<HTMLButtonElement>;renderPicker:ProductPickerRenderer;onConfirm:(rows:AddedItem[])=>void;initialCut?:ProductPriceCut}){
  const drawerTitle=`${initialCut?'Edit':'Create'} Price Cut`;
