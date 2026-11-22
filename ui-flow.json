@@ -3383,26 +3383,19 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Add more product"
-          }
-        },
-        {
-          "action": "click",
-          "target": {
-            "role": "tab",
-            "name": "My shop products"
+            "name": "Back"
           }
         },
         {
           "action": "capture",
           "id": "price-cut-add-more-type-blocked",
-          "title": "Shared Add more also blocks existing Price Cut products"
+          "title": "Back returns to product selection with selected products retained and Price Cut eligibility enforced"
         },
         {
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Cancel"
+            "name": "Next"
           }
         },
         {
@@ -3456,26 +3449,19 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Add products to flash sale"
-          }
-        },
-        {
-          "action": "click",
-          "target": {
-            "role": "tab",
-            "name": "My shop products"
+            "name": "Back"
           }
         },
         {
           "action": "capture",
           "id": "flash-add-more-type-blocked",
-          "title": "Shared Add more keeps existing Flash Sale products selectable"
+          "title": "Back returns to product selection with selected products retained and Flash Sale eligibility enforced"
         },
         {
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Cancel"
+            "name": "Next"
           }
         },
         {
@@ -3524,19 +3510,19 @@
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Add more product"
+            "name": "Back"
           }
         },
         {
           "action": "capture",
           "id": "group-add-more-type-blocked",
-          "title": "Group Deal Add more also blocks existing Group Deal products"
+          "title": "Back returns to product selection with selected products retained and Group Deal eligibility enforced"
         },
         {
           "action": "click",
           "target": {
             "role": "button",
-            "name": "Cancel"
+            "name": "Next"
           }
         },
         {
