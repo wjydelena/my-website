@@ -60,7 +60,7 @@
 .prelive-added-no-results{font-size:14px;text-align:center;color:#757575;padding:24px}
 .prelive-added-modal{z-index:600}
 .console-shell.is-prelive:has(.has-added-products) .console-topnav{background:#fff}
-.prelive-coupon-count{position:absolute;right:-1px;bottom:3px;width:14px;height:14px;border:1px solid white;border-radius:50%;background:#ff8000;color:#fff;font-size:12px;font-weight:500;line-height:12px;text-align:center}
+.prelive-coupon-count{position:absolute;right:-1px;bottom:3px;width:14px;height:14px;border:1px solid white;border-radius:50%;background:#ff8000;color:#fff;font-size:10px;font-weight:500;line-height:12px;text-align:center}
 @media(max-width:1120px){.prelive-added-price{padding-right:0}.prelive-added-actions{top:76px}.prelive-added-list article,.prelive-added-list article:nth-child(-n+2){height:100px}}
 .prelive-picker-shade{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.5);display:flex;justify-content:flex-end;font-family:'TikTok Text',Arial,sans-serif;color:#161616}
 .prelive-picker{width:min(1000px,100vw);height:100%;background:white;display:flex;flex-direction:column;padding:24px;box-sizing:border-box;position:relative;box-shadow:-12px 0 32px #0002}

@@ -268,3 +268,7 @@
 ## v1.37 · Remove Updated from Add products
 - Remove the Updated header, colgroup entry and row cells from the Add products picker. Preserve catalog data, search, selection and all remaining columns; allocate the freed width to Product. No promotion workflows or UI Flow definitions changed.
 - Build, whitespace and source-structure checks passed; Version 1 unchanged. No browser screenshot or full-flow replay claimed.
+
+## v1.38 · Coupon count typography
+- Set the pre-LIVE coupon badge numeral to 10px Medium (500), matching the existing coupon entry numeral. Preserve the badge dimensions, line height, color, position and interaction.
+- Build and whitespace checks passed; no UI Flow or Version 1 changes.
