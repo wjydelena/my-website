@@ -1,8 +1,8 @@
 .product-promo-trigger{display:flex;align-items:center;justify-content:center;gap:4px;width:70px;height:24px;padding:0 8px;border:0;border-radius:4px;background:#f1f1f1;color:#161616;font-family:inherit;font-size:14px;font-weight:500;line-height:20px;cursor:pointer}
-.product-promo-menu{position:fixed;z-index:150;width:168px;height:auto;padding:4px;box-sizing:border-box;outline:none;border-radius:8px;background:#fff;color:#161616;box-shadow:0 8px 24px #0002;font-family:'TikTok Text',Arial,sans-serif}
-.product-promo-menu>button{display:flex;align-items:center;gap:4px;width:100%;height:38px;padding:0 12px;border:0;background:none;color:inherit;white-space:nowrap;font-family:inherit;font-size:14px;font-weight:400;line-height:20px;cursor:pointer}
+.product-promo-menu{position:fixed;z-index:150;width:168px;max-width:calc(100vw - 16px);height:auto;padding:4px;display:flex;flex-direction:column;gap:2px;box-sizing:border-box;outline:none;border-radius:8px;background:#fff;color:#161616;box-shadow:0 8px 24px rgba(0,0,0,.15);font-family:'TikTok Text',Arial,sans-serif}
+.product-promo-menu>button{display:flex;align-items:center;gap:4px;width:100%;height:36px;flex:none;padding:0 8px;box-sizing:border-box;border:0;border-radius:4px;background:none;color:inherit;white-space:nowrap;font-family:inherit;font-size:14px;font-weight:400;line-height:20px;cursor:pointer}
 .product-promo-menu>button>img{width:16px;height:16px;object-fit:contain;flex:none}
-.product-promo-menu>button:hover{background:#f8f8f8}
+.product-promo-menu>button:hover:not(:disabled),.product-promo-menu>button:focus-visible{background:#f5f5f5}
 .product-promo-menu>button:focus-visible{outline:2px solid #009995;outline-offset:-2px}
 .fs-backdrop{position:fixed;inset:0;z-index:480;display:flex;justify-content:flex-end;background:rgba(0,0,0,.4);font-family:'TikTok Text',Arial,sans-serif;color:#161616}
 .flash-sale-drawer{position:relative;width:min(1000px,100vw);height:100%;display:flex;flex-direction:column;box-sizing:border-box;padding:24px;background:#fff;box-shadow:-12px 0 32px #0002}

@@ -1,8 +1,8 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
 import type {PromotionKind} from './PromotionWizardSteps';
-import flashSale from './assets/create-promotion/flash-sale.png';
-import groupDeal from './assets/create-promotion/group-deal.png';
-import priceCut from './assets/create-promotion/price-cut.png';
+import flashSale from './assets/flash-sale/flash.png';
+import groupDeal from './assets/flash-sale/group.png';
+import priceCut from './assets/flash-sale/price.png';
 import './create-promotion-popover.css';
 
 const items=[
@@ -15,8 +15,8 @@ export function PromotionOptions({onSelect,isBlocked}:{onSelect:(kind:PromotionK
   return <div className="promotion-options">{items.map(item=>{
     const blocked=isBlocked?.(item.kind)||false;
     return <button type="button" role="menuitem" className="create-promotion-option" key={item.kind} aria-label={item.title} disabled={blocked} title={blocked?`A selected product already has a ${item.kind}. Edit or delete it first.`:undefined} onClick={()=>onSelect(item.kind)}>
-      <img src={item.icon} width={32} height={32} alt="" draggable={false}/>
-      <span><strong>{item.title}</strong><span className="create-promotion-description">{item.description}</span></span>
+      <span className={`create-promotion-icon${item.kind==='Flash Sale'?' is-flash':''}`}><img src={item.icon} width={20} height={20} alt="" draggable={false}/></span>
+      <span className="create-promotion-copy"><strong>{item.title}</strong><span className="create-promotion-description">{item.description}</span></span>
     </button>;
   })}</div>;
 }

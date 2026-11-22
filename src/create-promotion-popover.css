@@ -1,11 +1,14 @@
-.console-shell .create-promotion-popover,.batch-promo-menu{width:364px;max-width:calc(100vw - 16px);max-height:calc(100vh - 16px);overflow-y:auto;box-sizing:border-box;background:#fff;color:#000;border:0;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.15);outline:none;scrollbar-width:thin}
+.console-shell .create-promotion-popover,.batch-promo-menu{width:377px;max-width:calc(100vw - 16px);max-height:calc(100vh - 16px);overflow-y:auto;box-sizing:border-box;background:#fff;color:#000;border:0;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.15);outline:none;scrollbar-width:thin}
 .console-shell .create-promotion-popover{position:fixed;z-index:140}
-.promotion-options{padding:12px 12px 8px}
-.promotion-options .create-promotion-option{display:flex;align-items:center;justify-content:flex-start;gap:8px;width:100%;height:auto;min-height:56px;padding:8px 0;border:0;border-radius:4px;background:transparent;color:#000;text-align:left;cursor:pointer;font:inherit}
-.promotion-options .create-promotion-option>img{width:32px;height:32px;flex:none;object-fit:contain;filter:none;opacity:1;border-radius:6px}
-.promotion-options .create-promotion-option>span{display:block;flex:1;min-width:0}
+.promotion-options{display:flex;flex-direction:column;gap:2px;padding:4px}
+.promotion-options .create-promotion-option{display:flex;align-items:center;justify-content:flex-start;gap:8px;width:100%;height:auto;min-height:54px;padding:8px;box-sizing:border-box;border:0;border-radius:4px;background:transparent;color:#000;text-align:left;cursor:pointer;font:inherit}
+.promotion-options .create-promotion-icon{display:flex;align-items:center;justify-content:center;width:32px;height:32px;flex:none;background:#ffeff2;border-radius:8px}
+.promotion-options .create-promotion-icon.is-flash{background:#fff4ef}
+.promotion-options .create-promotion-icon img{width:20px;height:20px;flex:none;object-fit:contain;filter:none;opacity:1}
+.promotion-options .create-promotion-copy{display:block;flex:1;min-width:0}
 .promotion-options .create-promotion-option strong{display:block;font-size:14px;font-weight:500;line-height:20px}
 .promotion-options .create-promotion-description{display:block;font-size:12px;font-weight:400;line-height:18px;color:#757575;white-space:normal}
-.promotion-options .create-promotion-option:hover:not(:disabled){background:#f8f8f8}
+.promotion-options .create-promotion-option:hover:not(:disabled),.promotion-options .create-promotion-option:focus-visible{background:#f5f5f5}
+.promotion-options .create-promotion-option:hover:not(:disabled) .create-promotion-icon.is-flash{background:#f6ebe5}
 .promotion-options .create-promotion-option:disabled{opacity:.55;cursor:default}
 .promotion-options .create-promotion-option:focus-visible{outline:2px solid #009995;outline-offset:2px}
