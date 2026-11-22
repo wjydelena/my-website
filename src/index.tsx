@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
 import './checkbox.css';
+import './promotion-errors.css';
 
 declare const __INSPIRE_SOURCE_ROOT__: string;
 (globalThis as typeof globalThis & { __INSPIRE_ELEMENT_INSPECTOR_PROJECT_ROOT__?: string })

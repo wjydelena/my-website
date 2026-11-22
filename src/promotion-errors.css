@@ -1,0 +1,6 @@
+/* Match the reference error treatment without resizing the existing controls. */
+:is(.flash-sale-drawer,.price-cut-drawer,.pc-batch-modal) :is(.fs-total[aria-invalid=true],.fs-customer[aria-invalid=true],.fs-start-select.is-error,.fs-schedule-input.is-error,.pc-duration-select.is-error,.pc-custom-fields label.is-error,.pc-input-cell input[aria-invalid=true],.gd-select.is-error,.gd-money.is-error,.gd-stock-input[aria-invalid=true],.pc-batch-input.is-error){border-color:#e14652!important;background-color:#fff!important;border-radius:4px;box-shadow:none!important;outline:none!important}
+:is(.flash-sale-drawer,.price-cut-drawer,.pc-batch-modal) :is(input[aria-invalid=true],.is-error input):focus-visible{outline:none!important;box-shadow:none!important}
+:is(.flash-sale-drawer,.price-cut-drawer,.pc-batch-modal) :is(.fs-total-error,.fs-schedule-error,.pc-error,.pc-field-error,.gd-field-error,.pc-batch-error){margin:8px 0 0!important;color:#e14652!important;font-size:12px;line-height:18px;font-weight:400;text-align:left;white-space:normal;overflow-wrap:anywhere}
+/* Let the settings card contain its error rather than overlap the product card. */
+.pc-duration-card:has(>.pc-duration-error),.pc-duration-card.gd-settings:has(.gd-field-error){height:auto;min-height:92px}
