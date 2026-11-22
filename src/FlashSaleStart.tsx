@@ -23,6 +23,8 @@ export default function FlashSaleStart({value,date,time,change,changeDate,change
  const [open,setOpen]=useState(false),[panel,setPanel]=useState<'date'|'time'|null>(null),[month,setMonth]=useState(()=>parseDate(date)||new Date()),[hour,setHour]=useState('00'),[minute,setMinute]=useState('00');
  const root=useRef<HTMLDivElement>(null),trigger=useRef<HTMLButtonElement>(null),dateInput=useRef<HTMLInputElement>(null),timeInput=useRef<HTMLInputElement>(null),hours=useRef<HTMLDivElement>(null),minutes=useRef<HTMLDivElement>(null);
  const scheduled=value===SCHEDULED_START;
+ const scheduleComplete=scheduled&&!scheduleError(date,time);
+ const displayValue=scheduled&&!scheduleComplete?'':value;
  const openDate=()=>{setMonth(parseDate(date)||new Date());setPanel('date')};
  const openTime=()=>{const now=new Date(),valid=/^([01]\d|2[0-3]):[0-5]\d$/.test(time);setHour(valid?time.slice(0,2):pad(now.getHours()));setMinute(valid?time.slice(3,5):pad(now.getMinutes()));setPanel('time')};
  useEffect(()=>{if(hidden){setOpen(false);setPanel(null)}},[hidden]);
@@ -34,8 +36,8 @@ export default function FlashSaleStart({value,date,time,change,changeDate,change
  const room=(input:React.RefObject<HTMLInputElement>)=>Math.max(120,(root.current?.closest('.fs-content')?.getBoundingClientRect().bottom||window.innerHeight)-(input.current?.getBoundingClientRect().bottom||0)-8);
  const startOption=(name:string)=><button type="button" role="option" aria-selected={value===name} disabled={name===MANUAL_START&&!!manualDisabledReason} aria-disabled={name===MANUAL_START&&!!manualDisabledReason} onClick={()=>{if(name===MANUAL_START&&manualDisabledReason)return;change(name);setPanel(null);if(name===MANUAL_START){setOpen(false);trigger.current?.focus()}}} onKeyDown={e=>{if(!['ArrowDown','ArrowUp','Home','End'].includes(e.key))return;e.preventDefault();const options=[...root.current!.querySelectorAll<HTMLButtonElement>('.fs-start-choices [role=option]:not(:disabled)')],index=options.indexOf(e.currentTarget);options[e.key==='Home'?0:e.key==='End'?options.length-1:(index+(e.key==='ArrowDown'?1:-1)+options.length)%options.length]?.focus()}}><i className="fs-start-radio"/>{name}</button>;
  return <div className="fs-start-root" ref={root}>
-  <button type="button" className={`fs-start-select${!value?' is-placeholder':''}${open?' is-open':''}${error?' is-error':''}`} ref={trigger} aria-label="When to start flash sale" aria-haspopup="listbox" aria-expanded={open} aria-required="true" aria-invalid={!!error} aria-describedby={error?'fs-schedule-error':undefined} onClick={()=>{setOpen(!open);setPanel(null)}}>{value||'Select when to start'}<ChevronDown size={16}/></button>
-  {scheduled&&<p className="fs-schedule-summary">{date}{time&&` · ${time}`}</p>}
+  <button type="button" className={`fs-start-select${!displayValue?' is-placeholder':''}${open?' is-open':''}${error?' is-error':''}`} ref={trigger} aria-label="When to start flash sale" aria-haspopup="listbox" aria-expanded={open} aria-required="true" aria-invalid={!!error} aria-describedby={error?'fs-schedule-error':undefined} onClick={()=>{setOpen(!open);setPanel(null)}}>{displayValue||'Select when to start'}<ChevronDown size={16}/></button>
+  {scheduleComplete&&<p className="fs-schedule-summary">{date} · {time}</p>}
   {error&&<p className="fs-schedule-error" id="fs-schedule-error" role="alert">{error}</p>}
   {open&&<div className={`fs-start-menu${scheduled?' is-scheduled':''}`}>
    <div className="fs-start-choices" role="listbox" aria-label="Flash sale start options">

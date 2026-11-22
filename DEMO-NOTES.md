@@ -272,3 +272,8 @@
 ## v1.38 · Coupon count typography
 - Set the pre-LIVE coupon badge numeral to 10px Medium (500), matching the existing coupon entry numeral. Preserve the badge dimensions, line height, color, position and interaction.
 - Build and whitespace checks passed; no UI Flow or Version 1 changes.
+
+## v1.39 · Delay scheduled-start display until date/time complete
+- Keep the start dropdown placeholder and omit partial date/time summary after selecting Start at a specific time until both date and time pass the existing schedule validation. Keep the scheduled choice and fields open as a draft; incomplete/invalid edits remove the displayed selection again. Valid completed schedules display the existing label and full summary. Manual selection remains immediate; existing parent save guards unchanged.
+- Remove hover/focus background from selected start-mode options only. Keep calendar dates, hour/minute selected styling, radio selection and field focus borders unchanged.
+- Build, whitespace and 15 focused component/CSS checks passed (pending, partial, valid, cleared, invalid/past, recovery, manual and selected-background cases). No native screenshot or full-flow replay claimed. UI Flow definitions and Version 1 unchanged.

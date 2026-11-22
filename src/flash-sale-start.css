@@ -8,6 +8,7 @@
 .fs-start-choices{display:flex;flex-direction:column;gap:2px}
 .fs-start-choice{border-radius:4px}
 .fs-start-choice:hover,.fs-start-choice:focus-within{background:#f5f5f5}
+.fs-start-choice:has([role=option][aria-selected=true]):hover,.fs-start-choice:has([role=option][aria-selected=true]):focus-within{background:transparent}
 .fs-start-choice>button,.fs-blocked-start-choice>button{display:flex;align-items:center;gap:8px;width:100%;height:36px;padding:8px;box-sizing:border-box;border:0;background:none;text-align:left;color:inherit;font:inherit;cursor:pointer;border-radius:4px}
 .fs-start-root .fs-start-select.is-placeholder{color:#a9abad}
 .fs-blocked-start-choice{display:flex;width:100%;border-radius:4px}
