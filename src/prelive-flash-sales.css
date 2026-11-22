@@ -1,7 +1,7 @@
 /* Same heading, surface and detail layout as Version 1; data remains per product. */
 .console-shell .prelive-added-list article.has-flash-sales{height:auto;grid-template-rows:70px auto;row-gap:10px}
 .console-shell .prelive-sale-summary{grid-column:2 / -1;min-width:0;position:relative;z-index:2;background:#f1f1f1;border-radius:8px;box-sizing:border-box}
-.console-shell .prelive-reference-card .prelive-sale-summary.product-promotions{grid-column:3 / -1;margin:0 0 0 -8px}
+.console-shell .prelive-reference-card .prelive-sale-summary.product-promotions{grid-column:2 / -1;margin:0}
 .console-shell .prelive-reference-card:hover .prelive-sale-summary{background:#e9e9e9}
 .console-shell .prelive-reference-card.is-expanded .prelive-sale-summary{background:#fff}
 .console-shell .prelive-sale-heading{display:flex;width:100%;align-items:center;justify-content:space-between;height:34px;border:0;border-radius:6px;background:transparent;padding:0 8px;font-family:inherit;font-size:12px;font-weight:500;color:#737373;cursor:pointer}
