@@ -1,0 +1,24 @@
+.console-shell .active-video-promotion.price-cut-video-pin{left:3.75cqw;right:3.75cqw;bottom:4cqw;height:25.2cqw;padding:2cqw;gap:2cqw;border-radius:2.4cqw;box-shadow:none;align-items:stretch;box-sizing:border-box;font-family:'TikTok Text',Arial,sans-serif}
+.cut-video-thumbnail{position:relative;width:20.6cqw;height:20.6cqw;flex:none;background:#f4f4f4;border-radius:2cqw}
+.cut-video-thumbnail>img{display:block;width:100%;height:100%;object-fit:contain;border-radius:inherit}
+.cut-video-countdown{position:absolute;top:-1.3cqw;left:-1.5cqw;display:flex;align-items:flex-end;white-space:nowrap;height:6.7cqw;min-width:18.125cqw;padding-right:2cqw;background:linear-gradient(90deg,#ff3165 0%,#ff4b7b 66%,#ff6a9100 100%);background-size:100% 4.3cqw;background-position:left bottom;background-repeat:no-repeat}
+.cut-video-countdown>img{width:6.7cqw;height:6.7cqw;flex:none;object-fit:contain;margin-right:-.3cqw}
+.cut-video-countdown>[role=timer]{color:#fff;font-weight:700;font-size:3.45cqw;line-height:4.3cqw;letter-spacing:0;font-variant-numeric:tabular-nums}
+.cut-video-copy{flex:1;min-width:0;display:flex;flex-direction:column}
+.cut-video-prices{display:flex;align-items:baseline;justify-content:space-between;gap:8px;white-space:nowrap;line-height:6cqw}
+.cut-video-prices strong{color:#000;font-weight:700;font-size:5cqw;letter-spacing:-.08cqw}
+.cut-video-prices strong small{font-size:60%;font-weight:700;letter-spacing:0}
+.cut-video-prices>span{font-size:3.2cqw;font-weight:600;color:#242424}
+/* Reference price-range treatment, not simulated buyer progress. */
+.cut-video-price-track{position:relative;height:1.4cqw;flex:none;background:#f2f2f2;border-radius:1cqw;margin:.9cqw 0 1.6cqw}
+.cut-video-price-track>span{display:block;width:38%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#ff81b3,#ff2460 92%,#fff3d1);position:relative}
+.cut-video-price-track>span:after{content:'';position:absolute;right:0;top:-.1cqw;width:1.8cqw;height:1.6cqw;border:1px solid #ffb7a0;border-radius:50%;box-shadow:-.5cqw 0 1cqw #ff386b66}
+.cut-video-price-track>i{position:absolute;right:-.1cqw;top:-.1cqw;width:1.7cqw;height:1.7cqw;background:#e6e6e6;border:1px solid white;border-radius:50%}
+.cut-video-ticker{height:4.8cqw;overflow:hidden;flex:none;font-size:3.5cqw;line-height:4.8cqw;font-weight:500;color:#242424}
+.cut-video-ticker-track{transition:transform 300ms ease-in-out;will-change:transform}
+.cut-video-ticker-track>div{height:4.8cqw;white-space:nowrap}
+.cut-video-ticker em{font-style:normal;color:#fe2c55}
+.cut-video-name{margin-top:auto;color:#606060;font-size:3cqw;line-height:4cqw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:400}
+.cut-video-ended-badge{position:absolute;left:0;top:0;padding:.3cqw 1.4cqw .5cqw;border-radius:2cqw 0 2cqw 0;background:#595959;color:white;font-size:3cqw;line-height:4cqw;white-space:nowrap}
+.cut-video-ended-copy{font-size:3.5cqw;line-height:4.8cqw;font-weight:500;color:#242424;margin-top:1.4cqw;white-space:nowrap}
+@media(prefers-reduced-motion:reduce){.cut-video-ticker-track{transition:none}}

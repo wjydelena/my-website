@@ -141,7 +141,7 @@ export function PrompterVideoProduct(){
   const {products,pinned,setPinned,videoPreviewVisible}=usePrompter();
   const {editing}=useConsoleLayout();
   const product=products.find(item=>item.id===pinned);
-  if(editing||!product||!videoPreviewVisible||products.some(item=>item.activePromotion))return null;
+  if(editing||!product||!videoPreviewVisible||products.some(item=>item.activePromotion||item.endedPriceCut))return null;
   return <div className="prompter-video-product" data-testid="pinned-video-product" onPointerDown={event=>event.stopPropagation()}>
     <div className="prompter-video-thumbnail"><img src={product.image} alt="Pinned product"/><span>{products.indexOf(product)+1}</span></div>
     <div className="prompter-video-info"><strong title={product.name}>{product.name}</strong><b>${product.price}</b></div>

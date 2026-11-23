@@ -31,6 +31,149 @@
           "action": "capture",
           "id": "customize-first-education-keyboard-inactive",
           "title": "Keyboard activation also leaves the console unchanged"
+        },
+        {
+          "action": "click",
+          "target": {
+            "css": ".prelive-product-footer [aria-label=\"Create promotion\"]"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "css": ".create-promotion-popover [aria-label=\"Price cut\"]"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "css": "[data-promotion-choice=\"showcase-1\"] input"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "css": ".fw-next"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Select price cut duration"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "15 seconds"
+          }
+        },
+        {
+          "action": "fill",
+          "target": {
+            "css": "[data-pc-field=starting]"
+          },
+          "value": "100"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "css": "[data-pc-field=lowest]"
+          },
+          "value": "70"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "css": "[data-pc-field=participants]"
+          },
+          "value": "3"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "css": "[data-pc-field=quantity]"
+          },
+          "value": "10"
+        },
+        {
+          "action": "click",
+          "target": {
+            "css": ".pc-footer .pc-primary"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": "[data-added-product]"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Expand or collapse promotions for added product 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Start price cut 1 for added product 1"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": "[data-price-cut-state=running] .cut-video-ticker[data-current-line=\"0\"]"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": "[data-price-cut-state=running] .cut-video-ticker[data-current-line=\"1\"]"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "End promotion for added product 1"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": "[data-price-cut-state=ended]"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Restart price cut 1 for added product 1"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": "[data-price-cut-state=running] .cut-video-ticker[data-current-line=\"0\"]"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": "[data-price-cut-state=ended]"
+          }
         }
       ]
     },

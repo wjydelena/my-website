@@ -3,7 +3,7 @@ import type {AddedItem} from './PreliveProductList';
 import {orderedProductPromotions} from './promotion-creation-order';
 
 export type PromotionEntry = ReturnType<typeof orderedProductPromotions>[number];
-export type ProductPromotionRuntime = {active: {id: string; deadline: number; startedOrder?:number} | null; ended: Record<string, number>};
+export type ProductPromotionRuntime = {active: {id: string; deadline: number; startedOrder?:number} | null; ended: Record<string, number>; lastFinished?: {id:string;startedOrder:number}};
 export type PromotionRuntimeState = {sequence: number; startSequence?:number; products: Record<string, ProductPromotionRuntime>};
 const emptyState = (): PromotionRuntimeState => ({sequence: 0, products: {}});
 export const productPromotions = (item: AddedItem) => orderedProductPromotions(item.flashSales || [], item.priceCuts || [], item.groupDeals || []);
@@ -16,7 +16,7 @@ export function finishPromotion(state: PromotionRuntimeState, productId: string,
  const product = state.products[productId];
  if (!product?.active || (expectedId && expectedId !== product.active.id)) return state;
  const sequence = state.sequence + 1;
- return {...state, sequence, products: {...state.products, [productId]: {active: null, ended: {...product.ended, [product.active.id]: sequence}}}};
+ return {...state, sequence, products: {...state.products, [productId]: {active: null, ended: {...product.ended, [product.active.id]: sequence},lastFinished:{id:product.active.id,startedOrder:product.active.startedOrder||0}}}};
 }
 export function expirePromotions(state: PromotionRuntimeState, now: number): PromotionRuntimeState {
  // Resolve simultaneous expiries by their deadlines, then by stable product order.
@@ -32,8 +32,9 @@ function pruneRuntime(state: PromotionRuntimeState, items: AddedItem[]) {
   const ids = new Set(productPromotions(item).map(p => p.value.id));
   const active = runtime.active && ids.has(runtime.active.id) ? runtime.active : null;
   const ended = Object.fromEntries(Object.entries(runtime.ended).filter(([promoId]) => ids.has(promoId)));
-  if (active !== runtime.active || Object.keys(ended).length !== Object.keys(runtime.ended).length) changed = true;
-  products[id] = active === runtime.active && Object.keys(ended).length === Object.keys(runtime.ended).length ? runtime : {active, ended};
+  const lastFinished=runtime.lastFinished&&ids.has(runtime.lastFinished.id)?runtime.lastFinished:undefined;
+  if (active !== runtime.active || Object.keys(ended).length !== Object.keys(runtime.ended).length || lastFinished!==runtime.lastFinished) changed = true;
+  products[id] = active === runtime.active && Object.keys(ended).length === Object.keys(runtime.ended).length && lastFinished===runtime.lastFinished ? runtime : {active, ended,lastFinished};
  }
  return changed ? {...state, products} : state;
 }
