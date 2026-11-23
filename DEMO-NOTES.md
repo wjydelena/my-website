@@ -407,3 +407,9 @@
 - Price Cut left/right padding is exactly 8px. Copy height matches the product thumbnail, with the full-width ellipsized product name anchored to its bottom and ending at the card's 8px right inset.
 - Separate the countdown's image layers so only the gradient strip grows by 10 CSS pixels. Preserve countdown text geometry, icon size, yellow handbag and lifecycle behavior.
 - Build and 260 source/DOM/CSS/interaction checks pass. The native preview tab crashed and subsequent tab creation/listing timed out; no new native screenshot or rendered measurement claimed. Container-unit plus 10px expression verified in source, numeric font/padding and flex alignment constraints checked in DOM/CSS. Complete inherited Flow remains unchanged.
+
+## v1.62 · Target price and upward-only offer ticker
+- Set the complete Price Cut target price, including dollar sign, to 13px. Current price stays 20px; price boxes use bottom alignment and matching unit line-height.
+- Keep 2.5-second switching, but always translate upward through first / second / duplicate-first rows. After the 300ms upward transition, reset to the identical first row without animation. Restart still starts with the first offer; timers clean up on unmount and end.
+- Ended Price cut label has exactly 12px horizontal padding. Preserve all other accepted geometry, price behavior and states.
+- Build and 265 source/DOM/CSS/interaction checks pass, including both upward transitions, invisible loop reset, 13px target and 12px tag padding. No new native-browser visual review claimed; inherited Flow unchanged.

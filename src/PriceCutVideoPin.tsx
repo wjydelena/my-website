@@ -7,8 +7,12 @@ import yellowBagEnded from './assets/price-cut-yellow-bag-ended.png';
 import './price-cut-video-pin.css';
 
 export default function PriceCutVideoPin({product,entry,seconds,ended=false}:{product:PrompterProduct;entry:Extract<PromotionEntry,{kind:'cut'}>;seconds:number;ended?:boolean}){
- const [line,setLine]=useState(0);
- useEffect(()=>{if(ended)return;const timer=window.setInterval(()=>setLine(value=>1-value),2500);return()=>window.clearInterval(timer);},[ended]);
+ const [step,setStep]=useState(0);
+ const [animate,setAnimate]=useState(true);
+ const line=step%2;
+ useEffect(()=>{if(ended)return;const timer=window.setInterval(()=>{setAnimate(true);setStep(value=>value+1);},2500);return()=>window.clearInterval(timer);},[ended]);
+ // Move upward into a duplicate first row, then snap invisibly to its identical original.
+ useEffect(()=>{if(step!==2)return;const reset=window.setTimeout(()=>{setAnimate(false);setStep(0);},320);return()=>window.clearTimeout(reset);},[step]);
  const value=entry.value,starting=Number(value.starting).toFixed(2),lowest=Number(value.lowest).toFixed(2);
  const cuts=Math.max(1,Number(value.participants)||1);
  // No buyer events exist in this local demo. The first-cut offer uses an even split of the configured discount.
@@ -22,9 +26,10 @@ export default function PriceCutVideoPin({product,entry,seconds,ended=false}:{pr
    <div className="cut-video-prices"><strong aria-label={`Current price $${starting}`}>${whole}<small>.{decimal}</small></strong>{!ended&&<span>${lowest}</span>}</div>
    {!ended&&<div className="cut-video-price-track" aria-hidden="true"><span/><i/></div>}
    {ended?<div className="cut-video-ended-copy">No one joined the Price Cut</div>:<div className="cut-video-ticker" data-current-line={line}>
-    <div className="cut-video-ticker-track" style={{transform:`translateY(-${line*50}%)`}}>
+    <div className="cut-video-ticker-track" data-step={step} style={{transform:`translateY(-${step*100/3}%)`,transition:animate?undefined:'none'}}>
      <div aria-hidden={line!==0}>1st cut gets <em>${firstCut}</em> off</div>
      <div aria-hidden={line!==1}>{cuts} {cuts===1?'cut':'cuts'} to ${lowest}</div>
+     <div aria-hidden="true">1st cut gets <em>${firstCut}</em> off</div>
     </div>
    </div>}
    <div className="cut-video-name" title={product.name}>{product.name}</div>
