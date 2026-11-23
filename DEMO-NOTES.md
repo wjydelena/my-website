@@ -401,3 +401,9 @@
 - Replaced the Price Cut video-card thumbnail with the newly supplied yellow-handbag composition. Kept its photo, scissors artwork, fade strip and geometry rather than rebuilding them with a different product image or gradient.
 - The reference is 188×188 with a 172×172 thumbnail at (16,16). Live digits use reference-space x=58/y=16, 26px bold TikTok Text (700), 32px line-height, scaled uniformly with the existing card. Only the baked-in digits are removed from the source art; the actual promotion countdown is rendered on top. The ended thumbnail uses the same yellow handbag without the countdown.
 - Other card content, sizing and price logic, 2.5-second message switching, End/expiry/Restart, Group Deal and Flash Sale rules unchanged. 256 regression checks pass. Actual browser running-thumbnail capture at 00:20 inspected at the reference's 188×188 size.
+
+## v1.61 · Pin pricing and Price Cut spacing
+- Fix Price Cut current price (including decimals) and target price to 20px. Group Deal prices stay 20px at narrow widths instead of dropping to 18px.
+- Price Cut left/right padding is exactly 8px. Copy height matches the product thumbnail, with the full-width ellipsized product name anchored to its bottom and ending at the card's 8px right inset.
+- Separate the countdown's image layers so only the gradient strip grows by 10 CSS pixels. Preserve countdown text geometry, icon size, yellow handbag and lifecycle behavior.
+- Build and 260 source/DOM/CSS/interaction checks pass. The native preview tab crashed and subsequent tab creation/listing timed out; no new native screenshot or rendered measurement claimed. Container-unit plus 10px expression verified in source, numeric font/padding and flex alignment constraints checked in DOM/CSS. Complete inherited Flow remains unchanged.

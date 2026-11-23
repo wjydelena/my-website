@@ -25,4 +25,4 @@
 .group-video-slots>span{display:flex;align-items:center;justify-content:center;width:24px;height:24px;border:1px solid #e2e2e2;border-radius:50%;background:#fafafa;color:#aaa;font:400 20px/22px Arial,sans-serif}
 .group-video-remaining{font-size:14px;line-height:20px;font-weight:500;white-space:nowrap}
 .group-video-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#606060;font-size:12px;line-height:18px;font-weight:400}
-@container (max-width:370px){.group-video-slots{gap:3px}.group-video-slots>span{width:20px;height:20px}.group-video-members{gap:5px}.group-video-remaining{font-size:12px}.group-video-thumbnail{width:60px;height:72px}.group-video-price b,.group-video-price del{font-size:18px}}
+@container (max-width:370px){.group-video-slots{gap:3px}.group-video-slots>span{width:20px;height:20px}.group-video-members{gap:5px}.group-video-remaining{font-size:12px}.group-video-thumbnail{width:60px;height:72px}}

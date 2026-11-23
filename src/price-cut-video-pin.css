@@ -1,16 +1,16 @@
-.console-shell .active-video-promotion.price-cut-video-pin{left:3.75cqw;right:3.75cqw;bottom:4cqw;height:25.2cqw;padding:2cqw;gap:2cqw;border-radius:2.4cqw;box-shadow:none;align-items:stretch;box-sizing:border-box;font-family:'TikTok Text',Arial,sans-serif}
+.console-shell .active-video-promotion.price-cut-video-pin{left:3.75cqw;right:3.75cqw;bottom:4cqw;height:25.2cqw;padding:2cqw 8px;gap:2cqw;border-radius:2.4cqw;box-shadow:none;align-items:flex-start;box-sizing:border-box;font-family:'TikTok Text',Arial,sans-serif}
 .cut-video-thumbnail{position:relative;width:20.6cqw;height:20.6cqw;flex:none;background:#f4f4f4;border-radius:2cqw}
 .cut-video-thumbnail>img{display:block;width:100%;height:100%;object-fit:contain;border-radius:inherit}
-/* Reference is 188×188: the 172×172 photo starts at (16,16).
-   Preserve that exact composition; only the baked-in timer digits are replaced by live text. */
-.cut-video-thumbnail>img.cut-video-bag-composite{position:absolute;left:-9.30232558%;top:-9.30232558%;width:109.30232558%;height:109.30232558%;max-width:none;border-radius:0}
+/* Keep the photo and scissors at their reference scale; extend only the banner by 10 CSS px. */
+.cut-video-thumbnail>img.cut-video-countdown-strip{position:absolute;left:2.3255814%;top:0;width:calc(15.56976744cqw + 10px);height:4.07209302cqw;max-width:none;object-fit:fill;border-radius:0}
+.cut-video-thumbnail>img.cut-video-countdown-scissors{position:absolute;left:-9.30232558%;top:-9.30232558%;width:6.70697674cqw;height:6.70697674cqw;max-width:none;border-radius:0}
 .cut-video-countdown{position:absolute;left:24.41860465%;top:0;height:3.83255814cqw;white-space:nowrap}
 .cut-video-countdown>[role=timer]{display:block;color:#fff;font-family:'TikTok Text',Arial,sans-serif;font-weight:700;font-size:3.11395349cqw;line-height:3.83255814cqw;letter-spacing:0;font-variant-numeric:tabular-nums}
-.cut-video-copy{flex:1;min-width:0;display:flex;flex-direction:column}
+.cut-video-copy{flex:1;min-width:0;height:20.6cqw;display:flex;flex-direction:column}
 .cut-video-prices{display:flex;align-items:baseline;justify-content:space-between;gap:8px;white-space:nowrap;line-height:6cqw}
-.cut-video-prices strong{color:#000;font-weight:700;font-size:5cqw;letter-spacing:-.08cqw}
-.cut-video-prices strong small{font-size:60%;font-weight:700;letter-spacing:0}
-.cut-video-prices>span{font-size:3.2cqw;font-weight:600;color:#242424}
+.cut-video-prices strong{color:#000;font-weight:700;font-size:20px;letter-spacing:-.08cqw}
+.cut-video-prices strong small{font-size:20px;font-weight:700;letter-spacing:0}
+.cut-video-prices>span{font-size:20px;font-weight:600;color:#242424}
 /* Reference price-range treatment, not simulated buyer progress. */
 .cut-video-price-track{position:relative;height:1.4cqw;flex:none;background:#f2f2f2;border-radius:1cqw;margin:.9cqw 0 1.6cqw}
 .cut-video-price-track>span{display:block;width:38%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#ff81b3,#ff2460 92%,#fff3d1);position:relative}
@@ -20,7 +20,7 @@
 .cut-video-ticker-track{transition:transform 300ms ease-in-out;will-change:transform}
 .cut-video-ticker-track>div{height:4.8cqw;white-space:nowrap}
 .cut-video-ticker em{font-style:normal;color:#fe2c55}
-.cut-video-name{margin-top:auto;color:#606060;font-size:3cqw;line-height:4cqw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:400}
+.cut-video-name{margin-top:auto;width:100%;flex-shrink:0;min-width:0;color:#606060;font-size:3cqw;line-height:4cqw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:400}
 .cut-video-ended-badge{position:absolute;left:0;top:0;padding:.3cqw 1.4cqw .5cqw;border-radius:2cqw 0 2cqw 0;background:#595959;color:white;font-size:3cqw;line-height:4cqw;white-space:nowrap}
 .cut-video-ended-copy{font-size:3.5cqw;line-height:4.8cqw;font-weight:500;color:#242424;margin-top:1.4cqw;white-space:nowrap}
 @media(prefers-reduced-motion:reduce){.cut-video-ticker-track{transition:none}}
