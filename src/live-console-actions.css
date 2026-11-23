@@ -1,7 +1,8 @@
 .live-action-menu{position:fixed;z-index:470;width:160px;box-sizing:border-box;padding:4px;background:#fff;border-radius:8px;box-shadow:0 8px 24px #0002;font-family:'TikTok Text',Arial,sans-serif;color:#161616}
 .console-shell.is-live .video-control-bar .scripts-control,.console-shell.is-live .video-control-bar>.divider:nth-of-type(2){display:none}
 .console-shell.is-live .topbar.console-topnav{height:54px}
-.live-action-menu.is-promotion-menu{width:140px}
+.live-action-menu.is-promotion-menu{width:176px}
+.live-action-menu.is-promotion-menu button{white-space:nowrap}
 .live-action-menu button{display:flex;align-items:center;gap:6px;width:100%;min-height:40px;padding:8px 12px;border:0;border-radius:4px;background:#fff;text-align:left;font:400 14px/20px 'TikTok Text',Arial,sans-serif;color:#161616;cursor:pointer}
 .live-action-menu button svg,.live-action-menu button img{width:16px;height:16px;flex:none}
 .live-action-menu button:hover,.live-action-menu button:focus-visible{background:#f5f5f5;outline:none}

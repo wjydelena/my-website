@@ -351,3 +351,7 @@
 - Correct the LIVE promotion heading to count every promotion still present in the lower list, including ended Restart rows. Only the active promotion, displayed in the product header, is excluded. With three saved promotions: idle/ended = 3, one active = 2; finishing all three never reduces the count to zero while those rows remain.
 - Remove the pinned Demo card's teal inset outline and inherited teal text color. Preserve Pin/Unpin behavior, button actions and promotion lifecycle/order.
 - 209 real-source component/interaction/DOM/CSS checks pass, including revised lower-list count checks across Start/End/Restart and neutral pinned-card styling. This focused update uses DOM/CSS evidence; no new native screenshot review is claimed. Preserve complete Flow definition (32 flows / 256 captures / 896 steps), original Demo node identity/position and Version 1.
+
+## v1.51 · Single-line promotion action menu
+- Widen only the compact LIVE promotion action menu from 140px to 176px and apply nowrap to its item labels, preventing Edit flash sale from wrapping. Retain Edit/Delete order, icon sizes, padding, handlers, keyboard focus and viewport-aware menu placement. Product action menus stay 160px.
+- 210 real-source component/interaction/DOM/CSS checks passed, including the 176px/nowrap assertion and retained lifecycle/count/pinning behavior. Preserve the inherited Flow definition and original Demo node position. No new native screenshot review claimed for this focused CSS change.
