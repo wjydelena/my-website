@@ -1,9 +1,11 @@
 .console-shell .active-video-promotion.price-cut-video-pin{left:3.75cqw;right:3.75cqw;bottom:4cqw;height:25.2cqw;padding:2cqw;gap:2cqw;border-radius:2.4cqw;box-shadow:none;align-items:stretch;box-sizing:border-box;font-family:'TikTok Text',Arial,sans-serif}
 .cut-video-thumbnail{position:relative;width:20.6cqw;height:20.6cqw;flex:none;background:#f4f4f4;border-radius:2cqw}
 .cut-video-thumbnail>img{display:block;width:100%;height:100%;object-fit:contain;border-radius:inherit}
-.cut-video-countdown{position:absolute;top:-1.3cqw;left:-1.5cqw;display:flex;align-items:flex-end;white-space:nowrap;height:6.7cqw;min-width:18.125cqw;padding-right:2cqw;background:linear-gradient(90deg,#ff3165 0%,#ff4b7b 66%,#ff6a9100 100%);background-size:100% 4.3cqw;background-position:left bottom;background-repeat:no-repeat}
-.cut-video-countdown>img{width:6.7cqw;height:6.7cqw;flex:none;object-fit:contain;margin-right:-.3cqw}
-.cut-video-countdown>[role=timer]{color:#fff;font-weight:700;font-size:3.45cqw;line-height:4.3cqw;letter-spacing:0;font-variant-numeric:tabular-nums}
+/* Reference is 188×188: the 172×172 photo starts at (16,16).
+   Preserve that exact composition; only the baked-in timer digits are replaced by live text. */
+.cut-video-thumbnail>img.cut-video-bag-composite{position:absolute;left:-9.30232558%;top:-9.30232558%;width:109.30232558%;height:109.30232558%;max-width:none;border-radius:0}
+.cut-video-countdown{position:absolute;left:24.41860465%;top:0;height:3.83255814cqw;white-space:nowrap}
+.cut-video-countdown>[role=timer]{display:block;color:#fff;font-family:'TikTok Text',Arial,sans-serif;font-weight:700;font-size:3.11395349cqw;line-height:3.83255814cqw;letter-spacing:0;font-variant-numeric:tabular-nums}
 .cut-video-copy{flex:1;min-width:0;display:flex;flex-direction:column}
 .cut-video-prices{display:flex;align-items:baseline;justify-content:space-between;gap:8px;white-space:nowrap;line-height:6cqw}
 .cut-video-prices strong{color:#000;font-weight:700;font-size:5cqw;letter-spacing:-.08cqw}

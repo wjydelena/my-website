@@ -1,7 +1,8 @@
 import React,{useEffect,useState} from 'react';
 import type {PrompterProduct} from './PrompterContext';
 import {promotionClock,type PromotionEntry} from './usePromotionLifecycle';
-import scissors from './assets/price-cut-countdown-scissors.png';
+import yellowBagLive from './assets/price-cut-yellow-bag-live.png';
+import yellowBagEnded from './assets/price-cut-yellow-bag-ended.png';
 import './price-cut-video-pin.css';
 
 export default function PriceCutVideoPin({product,entry,seconds,ended=false}:{product:PrompterProduct;entry:Extract<PromotionEntry,{kind:'cut'}>;seconds:number;ended?:boolean}){
@@ -13,8 +14,8 @@ export default function PriceCutVideoPin({product,entry,seconds,ended=false}:{pr
  const firstCut=(Math.max(0,Number(value.starting)-Number(value.lowest))/cuts).toFixed(2);
  const [whole,decimal]=starting.split('.');
  return <div className={`active-video-promotion price-cut-video-pin${ended?' is-ended':''}`} data-video-promotion={value.id} data-video-promotion-kind="cut" data-price-cut-state={ended?'ended':'running'} aria-label={ended?'Ended Price cut in video':'Active Price cut in video'} onPointerDown={event=>event.stopPropagation()}>
-  <div className="cut-video-thumbnail"><img src={product.image} alt={product.name}/>
-   {ended?<span className="cut-video-ended-badge">Price cut</span>:<div className="cut-video-countdown"><img src={scissors} alt=""/><span role="timer" aria-live="off" aria-label={`Ends in ${promotionClock(seconds)}`}>{promotionClock(seconds)}</span></div>}
+  <div className="cut-video-thumbnail"><img className={ended?'cut-video-bag-ended':'cut-video-bag-composite'} src={ended?yellowBagEnded:yellowBagLive} alt="Yellow handbag"/>
+   {ended?<span className="cut-video-ended-badge">Price cut</span>:<div className="cut-video-countdown"><span role="timer" aria-live="off" aria-label={`Ends in ${promotionClock(seconds)}`}>{promotionClock(seconds)}</span></div>}
   </div>
   <div className="cut-video-copy">
    <div className="cut-video-prices"><strong aria-label={`Current price $${starting}`}>${whole}<small>.{decimal}</small></strong>{!ended&&<span>${lowest}</span>}</div>
