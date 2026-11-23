@@ -10,19 +10,19 @@
 .active-video-promotion-price del{font-size:12px;line-height:18px;color:#999}
 .active-video-promotion-copy p{margin:0;font-size:11px;line-height:16px;color:#737373}
 .console-shell.is-live .prelive-reference-card.has-active-promotion:not(.has-flash-sales){grid-template-rows:auto}
-.console-shell .active-video-promotion.group-video-pin{left:16px;right:16px;bottom:16px;height:93px;padding:10px 8px;gap:8px;border-radius:10px;box-shadow:none;align-items:center}
-.group-video-thumbnail{position:relative;width:72px;height:72px;flex:none;background:#fafafa;border-radius:8px}
+.console-shell .active-video-promotion.group-video-pin{left:16px;right:16px;bottom:16px;height:93px;padding:9px 8px;gap:8px;border-radius:10px;box-shadow:none;align-items:center;box-sizing:border-box}
+.group-video-thumbnail{position:relative;width:74px;height:74px;flex:none;background:#fafafa;border-radius:8px}
 .group-video-thumbnail>img{display:block;width:100%;height:100%;object-fit:contain;border-radius:8px}
-.group-video-countdown{position:absolute;top:-6px;left:-6px;height:24px;display:flex;align-items:flex-end;padding-right:10px;background:linear-gradient(90deg,#fe2c55 0%,#ff4e7c 72%,#ff4e7c00 100%);background-size:100% 18px;background-position:left bottom;background-repeat:no-repeat;white-space:nowrap}
-.group-video-countdown>img{width:26px;height:26px;object-fit:contain;flex:none;filter:drop-shadow(1px 0 white) drop-shadow(-1px 0 white) drop-shadow(0 -1px white)}
-.group-video-countdown>[role=timer]{color:#fff;font:700 14px/18px 'TikTok Text',Arial,sans-serif}
-.group-video-copy{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.group-video-countdown{position:absolute;top:-8px;left:-6px;width:78px;height:30px;white-space:nowrap}
+.group-video-countdown>img{display:block;width:78px;height:30px;max-width:none;object-fit:contain;border-radius:0}
+.group-video-countdown>[role=timer]{position:absolute;left:30px;top:9px;color:#fff;font:700 13px/18px 'TikTok Text',Arial,sans-serif;letter-spacing:0;font-variant-numeric:tabular-nums}
+.group-video-copy{flex:1;min-width:0;height:74px;display:flex;flex-direction:column;justify-content:space-between;gap:4px}
 .group-video-price{display:flex;align-items:baseline;gap:3px;white-space:nowrap;line-height:24px}
 .group-video-price b{font-size:20px;font-weight:700;letter-spacing:-.3px;color:#000}
 .group-video-price del{font-size:20px;font-weight:400;color:#a6a6a6}
 .group-video-members{display:flex;align-items:center;gap:8px;min-width:0;height:24px}
-.group-video-slots{display:flex;align-items:center;gap:4px;flex:none}
+.group-video-slots{display:flex;align-items:center;gap:3.5px;flex:none}
 .group-video-slots>span{display:flex;align-items:center;justify-content:center;width:24px;height:24px;border:1px solid #e2e2e2;border-radius:50%;background:#fafafa;color:#aaa;font:400 20px/22px Arial,sans-serif}
-.group-video-remaining{font-size:14px;line-height:20px;font-weight:500;white-space:nowrap}
+.group-video-remaining{font-size:13px;line-height:20px;font-weight:500;white-space:nowrap}
 .group-video-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#606060;font-size:12px;line-height:18px;font-weight:400}
-@container (max-width:370px){.group-video-slots{gap:3px}.group-video-slots>span{width:20px;height:20px}.group-video-members{gap:5px}.group-video-remaining{font-size:12px}.group-video-thumbnail{width:60px;height:72px}}
+@container (max-width:370px){.group-video-slots{gap:3px}.group-video-slots>span{width:20px;height:20px}.group-video-members{gap:5px}.group-video-remaining{font-size:12px}}

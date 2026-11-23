@@ -424,3 +424,9 @@
 - Add a shared button-only 4px radius rule covering normal/disabled buttons, icon buttons, menus, dialogs, drawers and portaled content, without changing dimensions, colors or interactions.
 - Exclude every semantic tab and the legacy selling-status tabs so their existing radii are preserved. Cards, inputs other than button inputs, images and panels are untouched.
 - Build and 282 DOM/CSS/interaction checks pass, including button-radius audits and before/after tab-radius comparisons at 13 representative checkpoints. No native screenshot or full Flow replay claimed; inherited Flow is unchanged.
+
+## v1.67 · Reference-matched Group Deal Pin card
+- Use the supplied 78×30 Group PNG artwork, preserving its group illustration, white outline and translucent pink strip. The derived live asset removes the baked timer lettering; the existing promotion clock renders the actual remaining time.
+- Match the reference card geometry with a 74×74 product image, 8px copy gap, 74px copy column, and upper-left badge offset (-6px, -8px). Preserve card radius 10px, product image radius 8px and 93px card height; product image and text use the active product, not a fixed screenshot product.
+- Keep saved group size/prices, Flash Sale video-card exclusion, Price Cut styling, all non-tab button radii and the complete inherited Flow.
+- Build plus 282 DOM/CSS/interaction regression checks pass. Native browser screenshots of the card and full 1440×900 page reviewed; actual timer advancement (01:19→01:18), End, Restart (02:00), product-image identity and radii verified. The screenshot timer was temporarily set to 00:20 for comparison and restored in the test browser only; application lifecycle code is unchanged.
