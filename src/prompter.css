@@ -43,9 +43,9 @@
 .console-shell .prompter-preference-switch i{position:absolute;top:2px;left:2px;width:14px;height:14px;background:#fff;border-radius:50%;transition:transform 120ms ease}
 .console-shell .prompter-preference-switch[aria-checked="true"] i{transform:translateX(18px)}
 @media(prefers-reduced-motion:reduce){.console-shell .prompter-preference-switch i{transition:none}}
-.console-shell .prompter-video-product{position:absolute;left:8px;right:8px;bottom:8px;height:94px;padding:8px;display:flex;gap:8px;box-sizing:border-box;background:white;border-radius:8px;color:#171717;z-index:5}
-.console-shell .prompter-video-thumbnail{position:relative;flex-shrink:0;width:78px;height:78px;border-radius:6px;overflow:hidden;background:#eee}
-.console-shell .prompter-video-thumbnail img{width:100%;height:100%;object-fit:cover}
+.console-shell .prompter-video-product{position:absolute;left:8px;right:8px;bottom:8px;height:94px;padding:8px;display:flex;gap:8px;box-sizing:border-box;background:white;border-radius:10px;color:#171717;z-index:5}
+.console-shell .prompter-video-thumbnail{position:relative;flex-shrink:0;width:78px;height:78px;border-radius:8px;overflow:hidden;background:#eee}
+.console-shell .prompter-video-thumbnail img{width:100%;height:100%;object-fit:cover;border-radius:8px}
 .console-shell .prompter-video-thumbnail span{font-size:14px;line-height:20px}
 .console-shell .prompter-video-info{display:flex;flex-direction:column;justify-content:space-between;min-width:0;flex:1}
 .console-shell .prompter-video-info strong{margin-right:24px;font-size:14px;line-height:20px;font-weight:500;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
