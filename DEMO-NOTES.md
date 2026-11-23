@@ -355,3 +355,7 @@
 ## v1.51 · Single-line promotion action menu
 - Widen only the compact LIVE promotion action menu from 140px to 176px and apply nowrap to its item labels, preventing Edit flash sale from wrapping. Retain Edit/Delete order, icon sizes, padding, handlers, keyboard focus and viewport-aware menu placement. Product action menus stay 160px.
 - 210 real-source component/interaction/DOM/CSS checks passed, including the 176px/nowrap assertion and retained lifecycle/count/pinning behavior. Preserve the inherited Flow definition and original Demo node position. No new native screenshot review claimed for this focused CSS change.
+
+## v1.52 · Stable navigation and Buy now tabs across Go LIVE
+- Remove the LIVE-only 54px navigation override; both states retain the established 52px top navigation height. Apply existing 10px Buy now tab top padding to the Demo product module in both states instead of only is-prelive, preserving text position on Go LIVE.
+- Keep tab bar height, actions, live content switching and all prior lifecycle/menu/count/pinning fixes unchanged. 211 real-source DOM/CSS/interaction checks pass, including exact before/after comparisons of navigation and tab height, padding and line height. No new native screenshot evidence claimed. Preserve complete Flow definition and original node identity/position.

@@ -112,7 +112,7 @@
 .prelive-picker button:focus-visible,.prelive-picker input:focus-visible,.prelive-picker select:focus-visible{outline:2px solid #009995;outline-offset:2px}
 @media(max-width:1120px){.prelive-picker{width:min(1000px,calc(100vw - 40px))}.prelive-picker-tabs{gap:24px}.prelive-buy-empty{top:calc(50% - 180px)}.prelive-empty-actions{margin-top:32px}}
 .prelive-empty-actions button:disabled{opacity:1;cursor:default}
-.is-prelive .reference-product-tabs button{padding-top:10px}
+.prelive-products .reference-product-tabs button{padding-top:10px}
 .prelive-middle .prelive-no-video{padding-top:108px}
 .prelive-chat .prelive-chat-empty{transform:translateY(-18px)}
 .prelive-right .prelive-purchase-empty{height:136px;flex:none;padding-bottom:16px}
