@@ -21,7 +21,7 @@ export default function PreliveFlashSales({sales,deals=[],onEditGroup,onDeleteGr
 }) {
  const all=orderedProductPromotions(sales,cuts,deals);
  const promotions=live?all.filter(p=>p.value.id!==runtime?.active?.id).sort((a,b)=>{const ae=runtime?.ended[a.value.id],be=runtime?.ended[b.value.id];return ae&&be?ae-be:ae?1:be?-1:0}):all;
- const remaining=live?promotions.filter(p=>!runtime?.ended[p.value.id]).length:all.length;
+ const remaining=promotions.length;
  const hasEnded=live&&promotions.some(p=>runtime?.ended[p.value.id]);
  return <section className={`prelive-sale-summary product-promotions${hasEnded?' has-ended-promotions':''}`} data-testid="created-flash-sales" onClick={event=>{if(!disabled&&!(event.target as Element).closest('button'))onToggle()}}>
   <button type="button" className="prelive-sale-heading product-promotions-heading" aria-label={`Expand or collapse ${sales.length?'flash sales':'promotions'} for added product ${index}`} aria-expanded={expanded} disabled={disabled} onClick={onToggle}>
