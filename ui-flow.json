@@ -2112,7 +2112,7 @@
     },
     {
       "id": "price-cut-settings",
-      "title": "Price Cut and Group Deal duration, conditional batch editing and saved values",
+      "title": "Price Cut and Group Deal saved settings, then single-product LIVE promotion Start / End / Restart",
       "viewport": {
         "width": 1440,
         "height": 900
@@ -4035,6 +4035,229 @@
           "target": {
             "role": "button",
             "name": "Close Create Group Deal product selection"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Promo for added product 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "menuitem",
+            "name": "Create Group Deal"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Select group deal duration"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "radio",
+            "name": "30 seconds"
+          }
+        },
+        {
+          "action": "fill",
+          "target": {
+            "css": "[data-gd-field=\"price\"] input"
+          },
+          "value": "20"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "css": "[data-gd-field=\"quantity\"] input"
+          },
+          "value": "10"
+        },
+        {
+          "action": "click",
+          "target": {
+            "css": ".pc-footer .pc-primary"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Go LIVE now"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "testId": "live-console"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Start flash sale 1 for added product 1"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": "[data-active-kind=\"flash\"]"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "End promotion for added product 1"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "role": "button",
+            "name": "Restart flash sale 1 for added product 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Restart flash sale 1 for added product 1"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": "[data-active-kind=\"flash\"]"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "End promotion for added product 1"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "role": "button",
+            "name": "Restart flash sale 1 for added product 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Start group deal 1 for added product 1"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": "[data-active-kind=\"group\"]"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "End promotion for added product 1"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "role": "button",
+            "name": "Restart group deal 1 for added product 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Restart group deal 1 for added product 1"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": "[data-active-kind=\"group\"]"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "End promotion for added product 1"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "role": "button",
+            "name": "Restart group deal 1 for added product 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Start price cut 1 for added product 1"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": "[data-active-kind=\"cut\"]"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "End promotion for added product 1"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "role": "button",
+            "name": "Restart price cut 1 for added product 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Restart price cut 1 for added product 1"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": "[data-active-kind=\"cut\"]"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "End promotion for added product 1"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "role": "button",
+            "name": "Restart price cut 1 for added product 1"
           }
         }
       ]
