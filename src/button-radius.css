@@ -1,0 +1,5 @@
+/* Shared button geometry across normal, hover, disabled, LIVE, drawers and portals.
+   Tabs (including the legacy selling-status tabs) retain their existing geometry. */
+:is(button, input[type="button"], input[type="submit"], input[type="reset"], [role="button"]):not([role="tab"]):not(.selling-status-tabs > button) {
+  border-radius: 4px !important;
+}

@@ -419,3 +419,8 @@
 - Remove the fixed yellow-handbag image from running and ended Price Cut Pin cards. Use the actual promotion product's image and name in both states, including Restart and switching between products. Countdown uses its independent transparent scissors artwork, without a product-image fragment.
 - Keep current/target price typography, upward-only 2.5-second ticker, strip length and card alignment unchanged.
 - Build and 269 source/DOM/CSS/interaction checks pass, including two distinct products across Start, End, Restart and switching back. No new native screenshot claimed. Inherited Flow unchanged.
+
+## v1.64 · All button corners 4px, tabs unchanged
+- Add a shared button-only 4px radius rule covering normal/disabled buttons, icon buttons, menus, dialogs, drawers and portaled content, without changing dimensions, colors or interactions.
+- Exclude every semantic tab and the legacy selling-status tabs so their existing radii are preserved. Cards, inputs other than button inputs, images and panels are untouched.
+- Build and 282 DOM/CSS/interaction checks pass, including button-radius audits and before/after tab-radius comparisons at 13 representative checkpoints. No native screenshot or full Flow replay claimed; inherited Flow is unchanged.
