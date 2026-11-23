@@ -8,7 +8,8 @@ import './active-video-promotion.css';
 export default function ActiveVideoPromotion(){
  const {products}=usePrompter();
  const {editing}=useConsoleLayout();
- const product=products.filter(p=>p.activePromotion).sort((a,b)=>b.activePromotion!.startedOrder-a.activePromotion!.startedOrder)[0];
+ // Flash Sale remains active in the product list, but has no video Pin card.
+ const product=products.filter(p=>p.activePromotion&&p.activePromotion.entry.kind!=='flash').sort((a,b)=>b.activePromotion!.startedOrder-a.activePromotion!.startedOrder)[0];
  if(editing||!product?.activePromotion)return null;
  const {entry,seconds}=product.activePromotion;
  const label=entry.kind==='group'?'Group deal':entry.kind==='flash'?'LIVE Flash sale':'Price cut';

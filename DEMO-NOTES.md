@@ -385,3 +385,8 @@
 ## v1.57 · Coupon count badge follows added products
 - Render the Buy now Coupon 3 badge only when the actual added-products collection is nonempty. Opening/cancelling the picker does not show it; successful product addition does. Removing all products hides it again, while search filtering does not affect it. Coupon icon, click/popover behavior and all v1.56 Group Deal Pin-card styling remain unchanged.
 - 243 real-source DOM/CSS/interaction checks pass, including absent badge on an empty product list and present badge after successful addition. Preserve inherited Flow definition and original Demo node location. Version 1 untouched.
+
+## v1.58 · Remove LIVE Flash Sale video Pin cards
+- Exclude every running Flash Sale from automatic video Pin-card selection, including Start, Restart and fallback after another active promotion ends. Preserve Flash Sale product-list runtime, countdown, prices, End/expiry/Restart and all saved records/settings.
+- Keep Group Deal reference Pin cards and Price Cut video cards unchanged. Preserve Coupon badge conditions, all other accepted layout/style changes and the complete inherited UI Flow definition.
+- 247 real-source DOM/CSS/interaction checks pass, including no Flash video card on Start/Restart and no fallback Flash card after ending Group Deal. Build verified; no new native screenshot or full-flow replay claimed. Update original Demo node in place, leave Version 1 untouched.
