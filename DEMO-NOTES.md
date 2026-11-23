@@ -413,3 +413,9 @@
 - Keep 2.5-second switching, but always translate upward through first / second / duplicate-first rows. After the 300ms upward transition, reset to the identical first row without animation. Restart still starts with the first offer; timers clean up on unmount and end.
 - Ended Price cut label has exactly 12px horizontal padding. Preserve all other accepted geometry, price behavior and states.
 - Build and 265 source/DOM/CSS/interaction checks pass, including both upward transitions, invisible loop reset, 13px target and 12px tag padding. No new native-browser visual review claimed; inherited Flow unchanged.
+
+## v1.63 · Product-matched Price Cut images
+- Ended Price cut badge horizontal padding is 8px.
+- Remove the fixed yellow-handbag image from running and ended Price Cut Pin cards. Use the actual promotion product's image and name in both states, including Restart and switching between products. Countdown uses its independent transparent scissors artwork, without a product-image fragment.
+- Keep current/target price typography, upward-only 2.5-second ticker, strip length and card alignment unchanged.
+- Build and 269 source/DOM/CSS/interaction checks pass, including two distinct products across Start, End, Restart and switching back. No new native screenshot claimed. Inherited Flow unchanged.
