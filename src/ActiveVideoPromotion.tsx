@@ -22,7 +22,7 @@ export default function ActiveVideoPromotion(){
   return <div className="active-video-promotion group-video-pin" data-video-promotion={entry.value.id} data-video-promotion-kind="group" aria-label="Active Group deal in video" onPointerDown={event=>event.stopPropagation()}>
    <div className="group-video-thumbnail"><img src={product.image} alt={product.name}/><div className="group-video-countdown"><img src={groupCountdown} alt=""/><span role="timer" aria-live="off" aria-label={`Ends in ${promotionClock(seconds)}`}>{promotionClock(seconds)}</span></div></div>
    <div className="group-video-copy"><div className="group-video-price"><b>${Number(price).toFixed(2)}</b><del>${Number(product.price).toFixed(2)}</del></div>
-    <div className="group-video-members" aria-label={`Group size: ${size}; ${size} more to go`}><div className="group-video-slots" aria-hidden="true">{Array.from({length:Math.min(size,4)},(_,index)=><span key={index}>+</span>)}</div><span className="group-video-remaining">{size} more to go</span></div>
+    <div className="group-video-members" aria-label={`Group size: ${size}; ${size} more to go`}><div className="group-video-slots" aria-hidden="true">{Array.from({length:size},(_,index)=><span key={index}><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="currentColor" strokeWidth="1.5"/></svg></span>)}</div><span className="group-video-remaining">{size} more to go</span></div>
     <div className="group-video-name" title={product.name}>{product.name}</div>
    </div>
   </div>;
