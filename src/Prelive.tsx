@@ -7,6 +7,7 @@ import React,{useEffect,useRef,useState} from 'react';
 import {createPortal} from 'react-dom';
 import {Search,X,ChevronDown,Plus,Send,Globe,Settings} from 'lucide-react';
 import {useConsoleLayout,ResizeHandle} from './ResizableLayout';
+import useVideoAnalyticsAlignment from './useVideoAnalyticsAlignment';
 import {useModuleHeader} from './ModuleDrag';
 import {ModuleTitle,RemovePanelButton} from './LayoutEditor';
 import SellingModes from './SellingModes';
@@ -100,8 +101,9 @@ export function PreliveProducts({onProductsChange,live=false}:{live?:boolean;onP
 }
 
 export function PreliveMiddle({goLive}:{goLive:()=>void}){
+ useVideoAnalyticsAlignment();
  const {editing,moduleStyle,change,toolsExpanded,toggleTools}=useConsoleLayout();const videoDrag=useModuleHeader('video');const chatDrag=useModuleHeader('chat');const [options,setOptions]=useState(false);
- const enterLive=()=>{change('video',348);if(toolsExpanded)toggleTools();change('tools',56);goLive()};
+ const enterLive=()=>{if(toolsExpanded)toggleTools();change('tools',56);goLive()};
  return <section className="live-column prelive-middle"><div className="video-preview prelive-video" data-module-id="video" style={moduleStyle('video')}><div className="prelive-no-video">No video</div>{editing?<div className="video-edit-label" {...videoDrag}><ModuleTitle>Video</ModuleTitle><RemovePanelButton id="video"/></div>:<img className="prelive-video-collapse" src={collapse} alt=""/>}<div className="prelive-live-buttons"><button type="button" onClick={enterLive}>Go LIVE now</button><button type="button" onClick={enterLive}>Practice</button></div><ResizeHandle kind="video" label="Resize live preview and chat"/></div><div className="chat reference-chat prelive-chat" data-module-id="chat" style={moduleStyle('chat')}><div className="chat-title" {...chatDrag}><ModuleTitle>Chat</ModuleTitle><RemovePanelButton id="chat"/><button type="button" aria-label="Chat filters" onClick={()=>setOptions(!options)}><img src={filter} alt=""/></button><button type="button" aria-label="Chat settings" onClick={()=>setOptions(!options)}><Settings size={16}/></button></div>{options&&<div className="reference-chat-options">Viewer comments will appear here during your LIVE.</div>}<div className="prelive-chat-empty">Viewer comments will appear here during your LIVE.</div><form className="comment-box" onSubmit={e=>e.preventDefault()}><input placeholder="Enter comment" aria-label="Enter comment" disabled/><span className="comment-count">0/100</span><button type="submit" aria-label="Send comment" disabled><Send size={19}/></button></form></div></section>;
 }
 export function PreliveRight(){
