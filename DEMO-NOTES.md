@@ -359,3 +359,7 @@
 ## v1.52 · Stable navigation and Buy now tabs across Go LIVE
 - Remove the LIVE-only 54px navigation override; both states retain the established 52px top navigation height. Apply existing 10px Buy now tab top padding to the Demo product module in both states instead of only is-prelive, preserving text position on Go LIVE.
 - Keep tab bar height, actions, live content switching and all prior lifecycle/menu/count/pinning fixes unchanged. 211 real-source DOM/CSS/interaction checks pass, including exact before/after comparisons of navigation and tab height, padding and line height. No new native screenshot evidence claimed. Preserve complete Flow definition and original node identity/position.
+
+## v1.53 · Unified required asterisks
+- Style the shared RequiredMark component at 14px, TikTok Text Regular (400), exact #E14653. Retain inherited line height for label alignment, aria-hidden behavior and existing required-label/validation styles. The existing bundled TikTokText-Regular font face remains the font source.
+- 212 real-source DOM/CSS/interaction checks pass, including the exact required-marker font size, family, weight and color across visible Group Deal fields. Preserve all form behavior, earlier Demo fixes, Flow definition, original node position and Version 1. This focused styling update does not apply the unresolved Video alignment request.
