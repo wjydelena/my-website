@@ -9,7 +9,7 @@
 .cut-video-copy{flex:1;min-width:0;height:20.6cqw;display:flex;flex-direction:column}
 .cut-video-prices{display:flex;align-items:flex-end;justify-content:space-between;gap:8px;white-space:nowrap;line-height:6cqw}
 .cut-video-prices strong{color:#000;font-weight:700;font-size:20px;line-height:1;letter-spacing:-.08cqw}
-.cut-video-prices strong small{font-size:20px;font-weight:700;letter-spacing:0}
+.cut-video-prices strong small{font-family:'TikTok Text',Arial,sans-serif;font-size:12px;font-weight:600;letter-spacing:0}
 .cut-video-prices>span{font-size:13px;line-height:1;font-weight:600;color:#242424}
 /* Reference price-range treatment, not simulated buyer progress. */
 .cut-video-price-track{position:relative;height:1.4cqw;flex:none;background:#f2f2f2;border-radius:1cqw;margin:.9cqw 0 1.6cqw}
