@@ -4162,6 +4162,12 @@
         {
           "action": "waitFor",
           "target": {
+            "css": "[data-video-promotion-kind=\"group\"]"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
             "css": "[data-active-kind=\"group\"]"
           }
         },
@@ -4184,6 +4190,12 @@
           "target": {
             "role": "button",
             "name": "Restart group deal 1 for added product 1"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": "[data-video-promotion-kind=\"group\"]"
           }
         },
         {
@@ -4518,6 +4530,27 @@
           "action": "click",
           "target": {
             "role": "button",
+            "name": "Open coupons, 3 available"
+          }
+        },
+        {
+          "action": "hover",
+          "target": {
+            "css": "[data-coupon-pin-wrap=\"coupon-percent\"]"
+          }
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "dialog",
+            "name": "LIVE Coupon (3)"
+          },
+          "key": "Escape"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
             "name": "Go LIVE now"
           }
         },
@@ -4558,6 +4591,27 @@
           "action": "capture",
           "id": "coupon-active-panel",
           "title": "Coupon opened from the toolbar shortcut"
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Pin coupon 6% off"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Unpin coupon 6% off"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Create coupon"
+          }
         },
         {
           "action": "click",
@@ -4611,11 +4665,12 @@
           "title": "Coupon reopened from the toolbar shortcut"
         },
         {
-          "action": "click",
+          "action": "press",
           "target": {
-            "role": "button",
-            "name": "Close Coupon"
-          }
+            "role": "dialog",
+            "name": "LIVE Coupon (3)"
+          },
+          "key": "Escape"
         },
         {
           "action": "hover",
@@ -4638,11 +4693,12 @@
           "title": "Repeated shortcut opens one Coupon panel"
         },
         {
-          "action": "click",
+          "action": "press",
           "target": {
-            "role": "button",
-            "name": "Close Coupon"
-          }
+            "role": "dialog",
+            "name": "LIVE Coupon (3)"
+          },
+          "key": "Escape"
         },
         {
           "action": "click",
@@ -4657,11 +4713,12 @@
           "title": "Buy now toolbar opens Coupon directly"
         },
         {
-          "action": "click",
+          "action": "press",
           "target": {
-            "role": "button",
-            "name": "Close Coupon"
-          }
+            "role": "dialog",
+            "name": "LIVE Coupon (3)"
+          },
+          "key": "Escape"
         },
         {
           "action": "click",
@@ -4683,11 +4740,12 @@
           "title": "Auction toolbar opens Coupon directly"
         },
         {
-          "action": "click",
+          "action": "press",
           "target": {
-            "role": "button",
-            "name": "Close Coupon"
-          }
+            "role": "dialog",
+            "name": "LIVE Coupon (3)"
+          },
+          "key": "Escape"
         },
         {
           "action": "click",

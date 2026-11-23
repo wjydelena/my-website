@@ -1,0 +1,20 @@
+.console-shell .prelive-coupon-trigger{cursor:pointer}
+.console-shell .prelive-coupon-trigger img{width:18px;height:18px;object-fit:contain;filter:none;opacity:1}
+.live-coupon-popover{position:fixed;z-index:220;box-sizing:border-box;padding:12px;background:#fff;color:#161616;border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,.16);font-family:'TikTok Text',Arial,sans-serif}
+.live-coupon-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;height:30px}
+.live-coupon-heading h2{margin:0;font-size:14px;line-height:20px;font-weight:500}
+.live-coupon-create{display:inline-flex;align-items:center;gap:6px;flex:none;border:0;padding:0;background:none;color:#009995;font-family:inherit;font-size:12px;line-height:18px;font-weight:500;cursor:pointer}
+.live-coupon-row{display:flex;align-items:center;gap:6px;min-height:56px;padding:8px 6px;border-radius:8px}
+.live-coupon-row:hover,.live-coupon-row:focus-within{background:#f7f7f7}
+.live-coupon-icon{align-self:flex-start;margin-top:3px;flex:none;display:block;width:16px;height:16px;background:#fe2c55;mask-size:contain;mask-repeat:no-repeat;mask-position:center;-webkit-mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center}
+.live-coupon-copy{flex:1;min-width:0}
+.live-coupon-copy h3{margin:0;font-size:16px;line-height:22px;font-weight:500}
+.live-coupon-copy p{margin:0;color:#737373;font-size:12px;line-height:18px;font-weight:400}
+.live-coupon-pin-wrap{display:inline-flex;flex:none;margin-left:8px;border-radius:4px;outline-offset:2px}
+.live-coupon-pin{display:inline-flex;align-items:center;justify-content:center;gap:4px;min-width:54px;height:24px;border:0;border-radius:4px;padding:0 8px;background:#f7f7f7;color:#161616;font-family:inherit;font-size:12px;line-height:18px;font-weight:500;cursor:pointer}
+.live-coupon-pin:disabled{color:#afafaf;background:#f7f7f7;cursor:not-allowed}
+.live-coupon-row:hover .live-coupon-pin:disabled,.live-coupon-row:focus-within .live-coupon-pin:disabled{background:transparent}
+.live-coupon-pin.is-pinned{background:#e6f5f3;color:#009995}
+.live-coupon-pin-hint{position:fixed;z-index:230;box-sizing:border-box;width:280px;max-width:calc(100vw - 16px);padding:8px 12px;border-radius:8px;background:#404040;color:#fff;font-family:'TikTok Text',Arial,sans-serif;font-size:14px;line-height:20px;font-weight:400;box-shadow:0 8px 24px rgba(0,0,0,.18);pointer-events:none}
+.live-coupon-pin-hint:after{content:'';position:absolute;top:100%;left:var(--hint-arrow,140px);transform:translateX(-50%);border-left:5px solid transparent;border-right:5px solid transparent;border-top:5px solid #404040}
+.live-coupon-create:focus-visible,.live-coupon-pin:focus-visible,.live-coupon-pin-wrap:focus-visible{outline:2px solid #009995;outline-offset:2px}

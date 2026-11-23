@@ -1,0 +1,12 @@
+.console-shell .active-video-promotion{position:absolute;z-index:5;left:8px;right:8px;bottom:8px;display:flex;align-items:center;gap:8px;padding:8px;border-radius:8px;background:#fff;color:#161616;box-shadow:0 2px 12px #0002;font-family:'TikTok Text',Arial,sans-serif}
+.active-video-promotion-image{width:56px;height:56px;flex:none;object-fit:contain;background:#f5f5f5;border-radius:4px}
+.active-video-promotion-copy{flex:1;min-width:0}
+.active-video-product-name{display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:12px;line-height:18px;font-weight:500}
+.active-video-promotion-heading{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:2px;font-size:12px;line-height:18px}
+.active-video-promotion-heading>span:first-child{padding:0 4px;border-radius:4px;background:#fae2e8}
+.active-video-promotion-heading>span:last-child{color:#fe2c55;font-weight:500;white-space:nowrap}
+.active-video-promotion-price{display:flex;gap:6px;align-items:baseline;margin-top:2px}
+.active-video-promotion-price b{font-size:16px;line-height:22px;font-weight:500}
+.active-video-promotion-price del{font-size:12px;line-height:18px;color:#999}
+.active-video-promotion-copy p{margin:0;font-size:11px;line-height:16px;color:#737373}
+.console-shell.is-live .prelive-reference-card.has-active-promotion:not(.has-flash-sales){grid-template-rows:auto}

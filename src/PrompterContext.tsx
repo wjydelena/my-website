@@ -1,6 +1,6 @@
 import React, {createContext, useCallback, useContext, useEffect, useRef, useState} from 'react';
 
-export type PrompterProduct = {id:number;image:string;name:string;price:string};
+export type PrompterProduct = {id:number;image:string;name:string;price:string;activePromotion?:{entry:import('./usePromotionLifecycle').PromotionEntry;seconds:number;startedOrder:number}};
 type PrompterState = {
   layoutCompleted:boolean;
   setLayoutCompleted:React.Dispatch<React.SetStateAction<boolean>>;

@@ -3,8 +3,8 @@ import type {AddedItem} from './PreliveProductList';
 import {orderedProductPromotions} from './promotion-creation-order';
 
 export type PromotionEntry = ReturnType<typeof orderedProductPromotions>[number];
-export type ProductPromotionRuntime = {active: {id: string; deadline: number} | null; ended: Record<string, number>};
-export type PromotionRuntimeState = {sequence: number; products: Record<string, ProductPromotionRuntime>};
+export type ProductPromotionRuntime = {active: {id: string; deadline: number; startedOrder?:number} | null; ended: Record<string, number>};
+export type PromotionRuntimeState = {sequence: number; startSequence?:number; products: Record<string, ProductPromotionRuntime>};
 const emptyState = (): PromotionRuntimeState => ({sequence: 0, products: {}});
 export const productPromotions = (item: AddedItem) => orderedProductPromotions(item.flashSales || [], item.priceCuts || [], item.groupDeals || []);
 export const promotionSeconds = (entry: PromotionEntry) => Number(entry.value.duration);
@@ -16,7 +16,7 @@ export function finishPromotion(state: PromotionRuntimeState, productId: string,
  const product = state.products[productId];
  if (!product?.active || (expectedId && expectedId !== product.active.id)) return state;
  const sequence = state.sequence + 1;
- return {sequence, products: {...state.products, [productId]: {active: null, ended: {...product.ended, [product.active.id]: sequence}}}};
+ return {...state, sequence, products: {...state.products, [productId]: {active: null, ended: {...product.ended, [product.active.id]: sequence}}}};
 }
 export function expirePromotions(state: PromotionRuntimeState, now: number): PromotionRuntimeState {
  // Resolve simultaneous expiries by their deadlines, then by stable product order.
@@ -63,7 +63,8 @@ export default function usePromotionLifecycle(items: AddedItem[], live: boolean)
    const product = previous.products[productId];
    if (product?.active) return previous;
    const ended = Object.fromEntries(Object.entries(product?.ended || {}).filter(([id]) => id !== promoId));
-   return {...previous, products: {...previous.products, [productId]: {active: {id: promoId, deadline}, ended}}};
+   const startSequence=(previous.startSequence||0)+1;
+   return {...previous, startSequence, products: {...previous.products, [productId]: {active: {id: promoId, deadline, startedOrder:startSequence}, ended}}};
   });
   return 'started';
  };
