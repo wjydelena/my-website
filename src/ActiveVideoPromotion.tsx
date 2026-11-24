@@ -1,5 +1,5 @@
 import React from 'react';
-import {usePrompter} from './PrompterContext';
+import {usePrompter,isEndedPinVisible} from './PrompterContext';
 import {useConsoleLayout} from './ResizableLayout';
 import {promotionClock} from './usePromotionLifecycle';
 import groupCountdown from './assets/group-countdown-live.png';
@@ -12,7 +12,7 @@ export default function ActiveVideoPromotion(){
  // Flash Sale remains active in the product list, but has no video Pin card.
  const product=products.find(p=>p.id===pinned);
  if(editing||!videoPreviewVisible||!product)return null;
- const promotion=product.activePromotion||product.endedPromotion;
+ const promotion=product.activePromotion||(isEndedPinVisible(product)?product.endedPromotion:undefined);
  if(!promotion||promotion.entry.kind==='flash')return null;
  const {entry,startedOrder}=promotion,ended=!product.activePromotion;
  const seconds=product.activePromotion?.seconds||0;

@@ -22,11 +22,12 @@ export default function PreliveFlashSales({sales,deals=[],onEditGroup,onDeleteGr
  const all=orderedProductPromotions(sales,cuts,deals);
  const promotions=live?all.filter(p=>p.value.id!==runtime?.active?.id).sort((a,b)=>{const ae=runtime?.ended[a.value.id],be=runtime?.ended[b.value.id];return ae&&be?ae-be:ae?1:be?-1:0}):all;
  const remaining=promotions.length;
+ const unstarted=live?promotions.filter(p=>!runtime?.ended[p.value.id]).length:remaining;
  const hasEnded=live&&promotions.some(p=>runtime?.ended[p.value.id]);
  if(live&&!remaining)return null;
  return <section className={`prelive-sale-summary product-promotions${hasEnded?' has-ended-promotions':''}`} data-testid="created-flash-sales" onClick={event=>{if(!disabled&&!(event.target as Element).closest('button'))onToggle()}}>
   <button type="button" className="prelive-sale-heading product-promotions-heading" aria-label={`Expand or collapse ${sales.length?'flash sales':'promotions'} for added product ${index}`} aria-expanded={expanded} disabled={disabled} onClick={onToggle}>
-   <span>{remaining} {live?'available':'unstarted'} promotions</span><ChevronDown size={16} className={expanded?'is-expanded':''}/>
+   <span>{unstarted} unstarted promotions</span><ChevronDown size={16} className={expanded?'is-expanded':''}/>
   </button>
   {expanded&&<div className="prelive-sale-details product-promotions-details">{promotions.map(entry=>{
    const actions={live,ended:!!runtime?.ended[entry.value.id],busy:!!runtime?.active,onStart:()=>onStart?.(entry.value.id)};

@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {Settings, X} from 'lucide-react';
-import {usePrompter} from './PrompterContext';
+import {usePrompter,isEndedPinVisible} from './PrompterContext';
 import {useConsoleLayout} from './ResizableLayout';
 import {isCustomizeEducationBlankTarget} from './customize-education';
 import logo from './assets/prompter-logo.png';
@@ -141,7 +141,7 @@ export function PrompterVideoProduct(){
   const {products,pinned,setPinned,videoPreviewVisible}=usePrompter();
   const {editing}=useConsoleLayout();
   const product=products.find(item=>item.id===pinned);
-  if(editing||!product||!videoPreviewVisible||product.endedPromotion||(product.activePromotion&&product.activePromotion.entry.kind!=='flash'))return null;
+  if(editing||!product||!videoPreviewVisible||isEndedPinVisible(product)||(product.activePromotion&&product.activePromotion.entry.kind!=='flash'))return null;
   return <div className="prompter-video-product" data-testid="pinned-video-product" onPointerDown={event=>event.stopPropagation()}>
     <div className="prompter-video-thumbnail"><img src={product.image} alt="Pinned product"/><span>{products.indexOf(product)+1}</span></div>
     <div className="prompter-video-info"><strong title={product.name}>{product.name}</strong><b>${product.price}</b></div>

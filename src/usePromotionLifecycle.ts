@@ -3,7 +3,7 @@ import type {AddedItem} from './PreliveProductList';
 import {orderedProductPromotions} from './promotion-creation-order';
 
 export type PromotionEntry = ReturnType<typeof orderedProductPromotions>[number];
-export type ProductPromotionRuntime = {active: {id: string; deadline: number; startedOrder?:number} | null; ended: Record<string, number>; lastFinished?: {id:string;startedOrder:number}};
+export type ProductPromotionRuntime = {active: {id: string; deadline: number; startedOrder?:number} | null; ended: Record<string, number>; lastFinished?: {id:string;startedOrder:number;finishedAt:number}};
 export type PromotionRuntimeState = {sequence: number; startSequence?:number; products: Record<string, ProductPromotionRuntime>};
 const emptyState = (): PromotionRuntimeState => ({sequence: 0, products: {}});
 export const productPromotions = (item: AddedItem) => orderedProductPromotions(item.flashSales || [], item.priceCuts || [], item.groupDeals || []);
@@ -12,16 +12,16 @@ export function promotionClock(seconds: number) {
  const n = Math.max(0, Math.ceil(seconds)), pad = (v: number) => String(v).padStart(2, '0');
  return n >= 3600 ? `${pad(Math.floor(n / 3600))}:${pad(Math.floor(n / 60) % 60)}:${pad(n % 60)}` : `${pad(Math.floor(n / 60))}:${pad(n % 60)}`;
 }
-export function finishPromotion(state: PromotionRuntimeState, productId: string, expectedId?: string): PromotionRuntimeState {
+export function finishPromotion(state: PromotionRuntimeState, productId: string, expectedId?: string, finishedAt=Date.now()): PromotionRuntimeState {
  const product = state.products[productId];
  if (!product?.active || (expectedId && expectedId !== product.active.id)) return state;
  const sequence = state.sequence + 1;
- return {...state, sequence, products: {...state.products, [productId]: {active: null, ended: {...product.ended, [product.active.id]: sequence},lastFinished:{id:product.active.id,startedOrder:product.active.startedOrder||0}}}};
+ return {...state, sequence, products: {...state.products, [productId]: {active: null, ended: {...product.ended, [product.active.id]: sequence},lastFinished:{id:product.active.id,startedOrder:product.active.startedOrder||0,finishedAt}}}};
 }
 export function expirePromotions(state: PromotionRuntimeState, now: number): PromotionRuntimeState {
  // Resolve simultaneous expiries by their deadlines, then by stable product order.
  const expired = Object.entries(state.products).filter(([, p]) => p.active && p.active.deadline <= now).sort((a, b) => a[1].active!.deadline - b[1].active!.deadline);
- return expired.reduce((next, [id, p]) => finishPromotion(next, id, p.active!.id), state);
+ return expired.reduce((next, [id, p]) => finishPromotion(next, id, p.active!.id, p.active!.deadline), state);
 }
 function pruneRuntime(state: PromotionRuntimeState, items: AddedItem[]) {
  let changed = false;

@@ -1,6 +1,8 @@
 import React, {createContext, useCallback, useContext, useEffect, useRef, useState} from 'react';
 
-export type PrompterProduct = {id:number;image:string;name:string;price:string;activePromotion?:{entry:import('./usePromotionLifecycle').PromotionEntry;seconds:number;startedOrder:number};endedPromotion?:{entry:Extract<import('./usePromotionLifecycle').PromotionEntry,{kind:'cut'|'group'}>;startedOrder:number}};
+export const PROMOTION_PIN_GRACE_MS=3500;
+export type PrompterProduct = {id:number;image:string;name:string;price:string;activePromotion?:{entry:import('./usePromotionLifecycle').PromotionEntry;seconds:number;startedOrder:number};endedPromotion?:{entry:import('./usePromotionLifecycle').PromotionEntry;startedOrder:number;finishedAt:number}};
+export const isEndedPinVisible=(product:PrompterProduct)=>!!product.endedPromotion&&product.endedPromotion.entry.kind!=='flash'&&Date.now()<product.endedPromotion.finishedAt+PROMOTION_PIN_GRACE_MS;
 type PrompterState = {
   layoutCompleted:boolean;
   setLayoutCompleted:React.Dispatch<React.SetStateAction<boolean>>;
@@ -35,10 +37,19 @@ export function PrompterProvider({children}:{children:React.ReactNode}){
   const [layoutCompleted,setLayoutCompleted]=useState(false);
   const [products,setProducts]=useState<PrompterProduct[]>([]);
   const [pinned,setPinnedState]=useState<number|null>(null);
+  const pinnedAt=useRef(0);
+  const pinnedEnd=products.find(product=>product.id===pinned)?.endedPromotion;
+  const clearAt=pinnedEnd? pinnedEnd.finishedAt+PROMOTION_PIN_GRACE_MS:undefined;
+  useEffect(()=>{
+    // An explicit pin after this grace period is an ordinary product pin.
+    if(pinned===null||clearAt===undefined||pinnedAt.current>=clearAt)return;
+    const timer=window.setTimeout(()=>setPinnedState(current=>current===pinned?null:current),Math.max(0,clearAt-Date.now()));
+    return ()=>window.clearTimeout(timer);
+  },[pinned,clearAt,pinnedEnd?.entry.value.id,pinnedEnd?.startedOrder]);
   useEffect(()=>{if(pinned!==null&&!products.some(product=>product.id===pinned))setPinnedState(null)},[products,pinned]);
   const [videoPreviewVisible,setVideoPreviewVisible]=useState(true);
   const setPinned=useCallback((value:React.SetStateAction<number|null>)=>{
-    setPinnedState(value);setVideoPreviewVisible(true);
+    pinnedAt.current=Date.now();setPinnedState(value);setVideoPreviewVisible(true);
   },[]);
   const [visible,setVisible]=useState(false);
   const [collapsed,setCollapsed]=useState(false);
