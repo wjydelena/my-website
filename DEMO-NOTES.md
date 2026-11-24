@@ -436,3 +436,8 @@
 - Replace the font-based plus glyph with a symmetric 12×12 SVG, grid-centered in each circle; align all circles to the participant row center.
 - Allow the circles to scale evenly on narrower cards while retaining square bounds, circular outlines, all configured slots, and the adjacent count text.
 - Build succeeds. Native UI-created Group Deals for every size 1–6 show the exact circle count and correct remaining text. At 1440px, plus/round/row centers match exactly; at 1120px the fractional-pixel deviation is below 0.02px, circles stay square, and the row fits. Six-person desktop and narrow screenshots visually reviewed. Other Pin styles, price formatting, lifecycle and Flow definition unchanged.
+
+## v1.69 · Consistent Pin thumbnail countdown typography
+- Group Deal and Price Cut thumbnail countdowns now use the embedded TikTok Sans variable font at fixed 15px, weight 700, line-height 130% (19.5px).
+- Scoped font-family priority prevents the existing global TikTok Text rule from overriding these two countdowns; all other text remains unchanged. Price Cut timer wrapper matches its 19.5px line box.
+- Native browser verifies the loaded font, actual family/size/weight/line-height for both running cards. Both screenshots reviewed. Countdown logic, uploaded artwork, card/image radii and participant count/centering preserved.

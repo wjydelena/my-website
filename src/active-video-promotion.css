@@ -15,7 +15,7 @@
 .group-video-thumbnail>img{display:block;width:100%;height:100%;object-fit:contain;border-radius:8px}
 .group-video-countdown{position:absolute;top:-8px;left:-6px;width:78px;height:30px;white-space:nowrap}
 .group-video-countdown>img{display:block;width:78px;height:30px;max-width:none;object-fit:contain;border-radius:0}
-.group-video-countdown>[role=timer]{position:absolute;left:30px;top:9px;color:#fff;font:700 13px/18px 'TikTok Text',Arial,sans-serif;letter-spacing:0;font-variant-numeric:tabular-nums}
+.group-video-countdown>[role=timer]{position:absolute;left:30px;top:9px;color:#fff;font-family:'TikTok Sans',Arial,sans-serif!important;font-size:15px;font-weight:700;line-height:130%;letter-spacing:0;font-variant-numeric:tabular-nums}
 .group-video-copy{flex:1;min-width:0;height:74px;display:flex;flex-direction:column;justify-content:space-between;gap:4px}
 .group-video-price{display:flex;align-items:baseline;gap:3px;white-space:nowrap;line-height:24px}
 .group-video-price b{font-size:20px;font-weight:700;letter-spacing:-.3px;color:#000}
