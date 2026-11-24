@@ -4923,6 +4923,65 @@
           "action": "click",
           "target": {
             "role": "button",
+            "name": "Open coupons, 0 available"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": ".live-coupon-empty"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": ".live-coupon-create:disabled"
+          }
+        },
+        {
+          "action": "press",
+          "target": {
+            "role": "dialog",
+            "name": "LIVE coupons (0)"
+          },
+          "key": "Escape"
+        },
+        {
+          "action": "click",
+          "target": {
+            "css": ".prelive-buy-empty button"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "css": ".prelive-picker tbody input"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Add selected products"
+          }
+        },
+        {
+          "action": "hover",
+          "target": {
+            "role": "button",
+            "name": "Promo for added product 1"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": ".product-promo-hint"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
             "name": "Open coupons, 3 available"
           }
         },
@@ -4936,7 +4995,7 @@
           "action": "press",
           "target": {
             "role": "dialog",
-            "name": "LIVE Coupon (3)"
+            "name": "LIVE coupons (3)"
           },
           "key": "Escape"
         },
@@ -5061,7 +5120,7 @@
           "action": "press",
           "target": {
             "role": "dialog",
-            "name": "LIVE Coupon (3)"
+            "name": "LIVE coupons (3)"
           },
           "key": "Escape"
         },
@@ -5089,7 +5148,7 @@
           "action": "press",
           "target": {
             "role": "dialog",
-            "name": "LIVE Coupon (3)"
+            "name": "LIVE coupons (3)"
           },
           "key": "Escape"
         },
@@ -5109,7 +5168,7 @@
           "action": "press",
           "target": {
             "role": "dialog",
-            "name": "LIVE Coupon (3)"
+            "name": "LIVE coupons (3)"
           },
           "key": "Escape"
         },
@@ -5136,7 +5195,7 @@
           "action": "press",
           "target": {
             "role": "dialog",
-            "name": "LIVE Coupon (3)"
+            "name": "LIVE coupons (3)"
           },
           "key": "Escape"
         },
@@ -6327,7 +6386,7 @@
         {
           "action": "capture",
           "id": "live-tools-expanded",
-          "title": "Billboard, Shop ads and Auto-post messages restored"
+          "title": "Billboard and Shop ads restored in the two-button layout"
         },
         {
           "action": "hover",

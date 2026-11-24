@@ -16,7 +16,7 @@ type Arrangement = 'balanced' | 'chat-focus' | 'host-focus';
 type Heights = { video: number; tools: number; analytics: number; feed: number };
 type GeometrySource = { ratios: number[]; heights: Heights; arrangement: Arrangement; board: ModuleBoard | null; toolsExpanded: boolean };
 function presetSource(mode: LayoutMode, editing: boolean): GeometrySource {
-  return {ratios:[.4,.3,.3],heights:mode==='Standard'&&editing?{video:262,tools:133,analytics:201,feed:324}:{video:268,tools:133,analytics:201,feed:328},arrangement:mode==='Host focus'?'host-focus':'balanced',board:null,toolsExpanded:true};
+  return {ratios:[.4,.3,.3],heights:mode==='Standard'&&editing?{video:262,tools:107,analytics:201,feed:324}:{video:268,tools:107,analytics:201,feed:328},arrangement:mode==='Host focus'?'host-focus':'balanced',board:null,toolsExpanded:true};
 }
 function resolveValues(source: GeometrySource, box: { width: number; height: number }) {
   const { ratios, heights, arrangement } = source;
@@ -93,7 +93,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
   const ref = useRef<HTMLDivElement>(null);
   const [box, setBox] = useState({ width: 1190, height: 818 });
   const [ratios, setRatios] = useState([.4, .3, .3]);
-  const [heights, setHeights] = useState({ video: 268, tools:133, analytics: 201, feed: 328 });
+  const [heights, setHeights] = useState({ video: 268, tools:107, analytics: 201, feed: 328 });
   const [toolsExpanded,setToolsExpanded]=useState(true);
   const [editing, setEditing] = useState(false);
   const [mode, setMode] = useState<LayoutMode>('Standard');
@@ -112,9 +112,9 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
   const saved = useRef<(GeometrySource & { mode: LayoutMode }) | null>(null);
   const beginEdit = () => {
     saved.current = { ...currentGeometry(), mode };
-    editBaseline.current = !presetEdited&&mode==='Standard'?{...currentGeometry(),heights:{video:262,tools:133,analytics:201,feed:324}}:currentGeometry();
+    editBaseline.current = !presetEdited&&mode==='Standard'?{...currentGeometry(),heights:{video:262,tools:107,analytics:201,feed:324}}:currentGeometry();
     suggestionBaseline.current=editBaseline.current;
-    if(mode === 'Standard'&&!presetEdited) setHeights({video:262,tools:133,analytics:201,feed:324});
+    if(mode === 'Standard'&&!presetEdited) setHeights({video:262,tools:107,analytics:201,feed:324});
     setEditing(true);
   };
   const applyEdit = () => {
@@ -142,7 +142,7 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
     dismissRestoreHint();
     suggestionBaseline.current=null;
     setRatios([.4,.3,.3]);
-    setHeights({video:268,tools:133,analytics:201,feed:328});
+    setHeights({video:268,tools:107,analytics:201,feed:328});
     setToolsExpanded(true);
     setMode('Standard');
     setArrangement('balanced');
@@ -227,11 +227,11 @@ export function ResizableColumns({ children, header }: { children: React.ReactNo
   };
   const reset = (kind: Kind) => {
     if (kind === 'products' || kind === 'live') { markAdjusted(); setRatios(focusedChat ? [.38, .31, .31] : [.4, .3, .3]); }
-    else change(kind, (focusedChat ? { video: 240, tools:133, analytics: 277, feed: 160 } : { video: 268, tools:133, analytics: 201, feed: 328 })[kind]);
+    else change(kind, (focusedChat ? { video: 240, tools:107, analytics: 277, feed: 160 } : { video: 268, tools:107, analytics: 201, feed: 328 })[kind]);
   };
   const toggleTools = () => {
     if(editing)return;
-    const desired=toolsExpanded?54:133;
+    const desired=toolsExpanded?54:107;
     if(absoluteLayout){
       const draft=cloneBoard(visibleBoard), geometry=resolveBoard(visibleBoard,box);
       const c=draft.columns.findIndex(col=>col.modules.includes('tools'));

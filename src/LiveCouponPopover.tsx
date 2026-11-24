@@ -12,7 +12,7 @@ const coupons = [
 ];
 const pinHint = "You haven't gone LIVE yet. Once you go LIVE, you can pin coupons for more viewers to see.";
 
-export default function LiveCouponPopover({open, live, anchorRef, onClose, onCreate}:{open:boolean;live:boolean;anchorRef:React.RefObject<HTMLButtonElement>;onClose:()=>void;onCreate:()=>void}){
+export default function LiveCouponPopover({open, live, hasProducts, anchorRef, onClose, onCreate}:{open:boolean;live:boolean;hasProducts:boolean;anchorRef:React.RefObject<HTMLButtonElement>;onClose:()=>void;onCreate:()=>void}){
   const panel = useRef<HTMLElement>(null);
   const tooltip = useRef<HTMLDivElement>(null);
   const closeRef = useRef(onClose);
@@ -37,11 +37,11 @@ export default function LiveCouponPopover({open, live, anchorRef, onClose, onCre
       setPosition({left, top, width});
     };
     update();
-    panel.current?.querySelector<HTMLButtonElement>('.live-coupon-create')?.focus({preventScroll:true});
+    (hasProducts?panel.current?.querySelector<HTMLButtonElement>('.live-coupon-create'):panel.current)?.focus({preventScroll:true});
     window.addEventListener('resize', update);
     window.addEventListener('scroll', update, true);
     return ()=>{window.removeEventListener('resize', update);window.removeEventListener('scroll', update, true);};
-  }, [open, anchorRef]);
+  }, [open, anchorRef, hasProducts]);
 
   useEffect(()=>{
     if(!open){setHint(null);return;}
@@ -57,6 +57,7 @@ export default function LiveCouponPopover({open, live, anchorRef, onClose, onCre
     return ()=>{document.removeEventListener('pointerdown', outside);document.removeEventListener('keydown', escape);};
   }, [open, anchorRef]);
   useEffect(()=>{setHint(null);}, [live]);
+  useEffect(()=>{if(!hasProducts){setPinned(null);setHint(null);}}, [hasProducts]);
   useLayoutEffect(()=>{
     if(!hint || live || !open || !tooltip.current) return;
     const button=panel.current?.querySelector(`[data-coupon-pin-wrap="${hint}"]`);
@@ -70,15 +71,15 @@ export default function LiveCouponPopover({open, live, anchorRef, onClose, onCre
   if(!open) return null;
   const image=`url("${couponIcon}")`;
   return createPortal(<>
-    <section ref={panel} id="live-coupon-popover" className="live-coupon-popover" role="dialog" aria-label="LIVE Coupon (3)" style={position}>
-      <header className="live-coupon-heading"><h2>LIVE Coupon (3)</h2><button type="button" className="live-coupon-create" onClick={onCreate}><Plus size={16}/>Create coupon</button></header>
-      <div className="live-coupon-list">{coupons.map(coupon=><div className="live-coupon-row" key={coupon.id} data-coupon-id={coupon.id}>
+    <section ref={panel} id="live-coupon-popover" className="live-coupon-popover" role="dialog" aria-label={`LIVE coupons (${hasProducts?coupons.length:0})`} tabIndex={-1} style={position}>
+      <header className="live-coupon-heading"><h2>LIVE coupons ({hasProducts?coupons.length:0})</h2><button type="button" className="live-coupon-create" disabled={!hasProducts} onClick={()=>{if(hasProducts)onCreate();}}><Plus size={16}/>Create coupon</button></header>
+      {!hasProducts?<div className="live-coupon-empty"><span className="live-coupon-icon" aria-hidden="true" style={{maskImage:image,WebkitMaskImage:image}}/><h3>Add products first</h3><p>Coupons for your products will appear here.</p></div>:<div className="live-coupon-list">{coupons.map(coupon=><div className="live-coupon-row" key={coupon.id} data-coupon-id={coupon.id}>
         <span className="live-coupon-icon" aria-hidden="true" style={{maskImage:image, WebkitMaskImage:image}}/>
         <div className="live-coupon-copy"><h3>{coupon.title}</h3><p>{coupon.description}</p></div>
         <span className="live-coupon-pin-wrap" data-coupon-pin-wrap={coupon.id} tabIndex={!live?0:undefined} aria-label={!live?`Pin ${coupon.title}, unavailable before LIVE`:undefined} aria-describedby={!live&&hint===coupon.id?'live-coupon-pin-hint':undefined} onMouseEnter={()=>{if(!live)setHint(coupon.id);}} onMouseLeave={()=>setHint(null)} onFocus={()=>{if(!live)setHint(coupon.id);}} onBlur={()=>setHint(null)}>
           <button type="button" className={`live-coupon-pin${live&&pinned===coupon.id?' is-pinned':''}`} disabled={!live} aria-label={`${pinned===coupon.id?'Unpin':'Pin'} coupon ${coupon.title}`} aria-pressed={pinned===coupon.id} onClick={()=>{if(live)setPinned(previous=>previous===coupon.id?null:coupon.id);}}><PinIcon/>{pinned===coupon.id?'Unpin':'Pin'}</button>
         </span>
-      </div>)}</div>
+      </div>)}</div>}
     </section>
     {!live&&hint&&<div ref={tooltip} id="live-coupon-pin-hint" className="live-coupon-pin-hint" role="tooltip" style={{left:tipPosition.left, top:tipPosition.top, '--hint-arrow':`${tipPosition.arrow}px`} as React.CSSProperties}>{pinHint}</div>}
   </>, document.body);
