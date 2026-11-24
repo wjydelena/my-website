@@ -1,0 +1,17 @@
+.giveaway-confirm-shade{position:fixed;inset:0;z-index:16500;display:flex;align-items:center;justify-content:center;padding:20px;background:#0008;color:#161616}
+.giveaway-confirm-dialog{width:460px;max-width:100%;max-height:calc(100dvh - 40px);overflow:auto;background:#fff;border-radius:8px;padding:24px;box-sizing:border-box;outline:none;box-shadow:0 2px 8px #00000008}
+.giveaway-confirm-dialog>header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 24px}
+.giveaway-confirm-dialog h2{font-size:20px;line-height:28px;font-weight:600;margin:0}
+.giveaway-confirm-dialog>header>button{border:0;background:none;color:#777;width:24px;height:24px;padding:3px;display:grid;place-items:center;cursor:pointer}
+.giveaway-confirm-dialog>p{font-size:14px;line-height:20px;color:#595959;margin:0}
+.giveaway-confirm-dialog>footer{display:flex;justify-content:flex-end;gap:8px;margin-top:24px}
+.giveaway-confirm-dialog>footer>button{height:40px;padding:0 20px;background:#ececee;color:#161616;border:0;font:inherit;font-size:14px;font-weight:500;cursor:pointer}
+.giveaway-confirm-dialog>footer>.giveaway-start{background:#009995;color:#fff;min-width:73px}.giveaway-confirm-dialog>footer>.giveaway-start:disabled{background:#b6e5e4;cursor:not-allowed}
+.giveaway-confirm-dialog button:focus-visible{outline:2px solid #009995;outline-offset:3px}
+.giveaway-actions .giveaway-time-left{font-size:12px;line-height:20px;color:#fe3955;white-space:nowrap}.giveaway-actions .giveaway-finished{font-size:12px;color:#777}
+.giveaway-actions .giveaway-details-button{height:24px;min-width:87px;border:0;background:#ececee;color:#161616;font-size:12px;line-height:20px;padding:2px 12px;font-weight:500;cursor:pointer}
+.giveaway-actions .selling-primary:disabled{background:#b6e5e4;color:#fff;opacity:1;cursor:not-allowed}
+.giveaway-video-badge{position:absolute;top:56px;left:16px;width:48px;height:44px;z-index:5;pointer-events:none;text-align:center;color:#fff}
+.giveaway-video-badge img{position:absolute;inset:0;width:48px;height:44px;object-fit:fill}
+.giveaway-video-badge span{position:absolute;left:0;right:0;top:30px;font-size:10px;line-height:14px;font-weight:600;font-variant-numeric:tabular-nums;text-shadow:0 1px 3px #0009}
+.giveaway-detail-content{font-size:14px;line-height:20px;color:#595959}.giveaway-detail-content>p{margin:12px 0 0}.giveaway-detail-content .giveaway-time-left{color:#fe3955}.giveaway-detail-product{display:flex;gap:12px;margin-bottom:20px}.giveaway-detail-product>img{width:70px;height:70px;object-fit:contain;border-radius:6px;background:#eee}.giveaway-detail-product p{margin:0 0 8px}.giveaway-detail-product small{font-size:12px;color:#777}

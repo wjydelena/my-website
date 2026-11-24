@@ -259,6 +259,26 @@
         {
           "action": "click",
           "target": {
+            "role": "tab",
+            "name": "Gift & rewards"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": "[aria-label=\"Publish giveaway 1\"]:disabled"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "tab",
+            "name": "Buy now"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
             "role": "button",
             "name": "Go LIVE now"
           }
@@ -5855,6 +5875,61 @@
           }
         },
         {
+          "action": "waitFor",
+          "target": {
+            "role": "dialog",
+            "name": "Start giveaway"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Publish giveaway 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Start"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": ".giveaway-video-badge"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "See details for giveaway 1"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "role": "dialog",
+            "name": "Giveaway details"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Done"
+          }
+        },
+        {
           "action": "click",
           "target": {
             "role": "button",
@@ -5874,7 +5949,7 @@
           }
         },
         {
-          "action": "click",
+          "action": "hover",
           "target": {
             "role": "button",
             "name": "Publish giveaway 3"
@@ -5883,13 +5958,12 @@
         {
           "action": "capture",
           "id": "giveaway-under-review",
-          "title": "Under-review giveaway explains why publication is pending"
+          "title": "Under-review giveaway remains disabled during LIVE"
         },
         {
-          "action": "click",
+          "action": "waitFor",
           "target": {
-            "role": "button",
-            "name": "Close selling dialog"
+            "css": "[aria-label=\"Publish giveaway 3\"]:disabled"
           }
         },
         {
