@@ -20,7 +20,7 @@ export default function ProductPromotions({expanded,onToggle,disabled}:{expanded
   const remaining=active.filter(p=>!running.includes(p.id)).length;
   return <section className="product-promotions" id="product-3-promotions" aria-label="Product 3 promotions" onClick={event=>{if(!disabled&&!(event.target as Element).closest('button'))onToggle();}}>
     <button type="button" className="product-promotions-heading" aria-label="Expand or collapse product 3 promotions" aria-expanded={expanded} disabled={disabled} onClick={onToggle}>
-      <span>{remaining} unstarted promotions</span><ChevronDown size={16} className={expanded?'is-expanded':''}/>
+      <span>{remaining} available promotions</span><ChevronDown size={16} className={expanded?'is-expanded':''}/>
     </button>
     {expanded&&<div className="product-promotions-details" data-testid="product-promotions-expanded">
       {active.map(({id,title,icon})=><div className="product-promotion-row" key={id} data-promotion-id={id}>
