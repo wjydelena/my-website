@@ -1,4 +1,5 @@
 import {nextPromotionCreation} from './promotion-creation-order';
+import {notifyPromotionCreated} from './PromotionSuccessToast';
 import ProductIdentity from './ProductIdentity';
 import FlashSaleBatchModal from './FlashSaleBatchModal';
 import CustomerLimitEditor from './CustomerLimitEditor';
@@ -58,6 +59,7 @@ export default function FlashSaleDrawer({product,close,returnFocus,renderPicker,
   const id=initialSale?.id||crypto.randomUUID(),createdAt=initialSale?initialSale.createdAt:nextPromotionCreation();
   const duration=durationMinutes.trim()===''?'':String(Number(durationMinutes)*60);
   onConfirm(products.map(item=>({ ...item,flashSales:[...(item.flashSales||[]).filter(sale=>sale.id!==id),{id,createdAt,price:field(item.id,'deal').trim(),total:field(item.id,'total').trim(),customer:field(item.id,'customer').trim(),level,recurring,start,startDate:start===SCHEDULED_START?startDate:undefined,startTime:start===SCHEDULED_START?startTime:undefined,countdown,duration}] })));
+  if(!initialSale)notifyPromotionCreated('Flash Sale',products);
   close();
  };
  return createPortal(<div className="fs-backdrop" style={wizard?.hidden?{display:'none'}:undefined} aria-hidden={wizard?.hidden||undefined} onPointerDown={e=>{if(e.target===e.currentTarget)close()}}><div className={`flash-sale-drawer fs-single${wizard?' promotion-config-wizard':''}`} ref={dialog} style={picker?{visibility:'hidden'}:undefined} aria-hidden={picker||!!batch||undefined} role="dialog" aria-modal="true" aria-label={drawerTitle}>

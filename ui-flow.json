@@ -107,6 +107,12 @@
         {
           "action": "waitFor",
           "target": {
+            "testId": "promotion-success-toast"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
             "css": "[data-added-product]"
           }
         },

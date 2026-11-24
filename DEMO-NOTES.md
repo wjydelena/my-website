@@ -441,3 +441,9 @@
 - Group Deal and Price Cut thumbnail countdowns now use the embedded TikTok Sans variable font at fixed 15px, weight 700, line-height 130% (19.5px).
 - Scoped font-family priority prevents the existing global TikTok Text rule from overriding these two countdowns; all other text remains unchanged. Price Cut timer wrapper matches its 19.5px line box.
 - Native browser verifies the loaded font, actual family/size/weight/line-height for both running cards. Both screenshots reviewed. Countdown logic, uploaded artwork, card/image radii and participant count/centering preserved.
+
+## v1.70 · Promotion creation success Toast
+- Add one page-level, body-portaled polite live-region Toast: horizontal viewport center, top 50px, height 36px, 14px TikTok Text Medium, dark #393939 surface, green success/check icon, 8px corners and soft shadow. Pointer-transparent and does not move focus.
+- Hook actual successful new Flash Sale, Price Cut and Group Deal confirmations, covering product-level, batch and footer wizard entry points. Do not emit for edit/update, cancellation or rejected validation. Count unique successfully submitted product IDs; use “a product” for one and “N products” for multiple, with the corresponding promotion name.
+- Dismiss after 3 seconds; a newer success replaces the previous toast and restarts its lifetime. Clean up event listeners/timeouts on unmount.
+- Preserve all 32 flows and 256 captures; add one wait for the new success Toast to the existing primary creation flow. Build and 288 DOM/CSS/interaction checks pass, including six success events across all three types and single/multiple counts. Native browser checks confirm exact top/height/font/centering and auto-dismiss for Flash Sale (1), Group Deal (2) and Price Cut (1). Final screenshot visually reviewed. Full Flow replay deferred.

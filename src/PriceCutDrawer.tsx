@@ -1,4 +1,5 @@
 import {nextPromotionCreation} from './promotion-creation-order';
+import {notifyPromotionCreated} from './PromotionSuccessToast';
 import RequiredMark from './RequiredMark';
 import PromotionDuration,{promotionDuration} from './PromotionDuration';
 import ProductIdentity from './ProductIdentity';
@@ -39,7 +40,7 @@ export default function PriceCutDrawer({product,initialProducts,close,returnFocu
  const invalidProps=(item:AddedItem,key:keyof Fields)=>({'aria-invalid':!!errorFor(item,key),'aria-describedby':errorFor(item,key)?`pc-${item.id}-${key}-error`:undefined});
  const error=(item:AddedItem,key:keyof Fields)=>errorFor(item,key)?<p className="pc-error pc-field-error" id={`pc-${item.id}-${key}-error`} role="alert">{errorFor(item,key)}</p>:null;
  const valid=(item:AddedItem)=>(['starting','lowest','participants','quantity'] as const).every(key=>!errorFor(item,key,true));
- const create=()=>{setSubmitted(true);if(!duration||!products.length||!products.every(valid))return;const id=initialCut?.id||crypto.randomUUID(),createdAt=initialCut?initialCut.createdAt:nextPromotionCreation();onConfirm(products.map(item=>({...item,priceCuts:[...(item.priceCuts||[]).filter(c=>c.id!==id),{id,createdAt,starting:field(item,'starting').trim(),lowest:field(item,'lowest').trim(),participants:field(item,'participants').trim(),quantity:field(item,'quantity').trim(),duration}]})));close()};
+ const create=()=>{setSubmitted(true);if(!duration||!products.length||!products.every(valid))return;const id=initialCut?.id||crypto.randomUUID(),createdAt=initialCut?initialCut.createdAt:nextPromotionCreation();onConfirm(products.map(item=>({...item,priceCuts:[...(item.priceCuts||[]).filter(c=>c.id!==id),{id,createdAt,starting:field(item,'starting').trim(),lowest:field(item,'lowest').trim(),participants:field(item,'participants').trim(),quantity:field(item,'quantity').trim(),duration}]})));if(!initialCut)notifyPromotionCreated('Price Cut',products);close()};
 
  const editBatch=(key:PriceCutBatchField)=>{if(!selected.length)return;setBatchIds(selected.filter(id=>products.some(p=>p.id===id)));setBatch(key);setBatchOpen(false);setDurationOpen(false)};
  const confirmBatch=(value:string)=>{if(!batch)return;setValues(old=>{const next={...old};for(const id of batchIds){const item=products.find(p=>p.id===id);if(item)next[id]={starting:item.price,lowest:'',participants:'',quantity:'',...old[id],[batch]:value}}return next});setBatch(null)};
