@@ -447,3 +447,9 @@
 - Hook actual successful new Flash Sale, Price Cut and Group Deal confirmations, covering product-level, batch and footer wizard entry points. Do not emit for edit/update, cancellation or rejected validation. Count unique successfully submitted product IDs; use “a product” for one and “N products” for multiple, with the corresponding promotion name.
 - Dismiss after 3 seconds; a newer success replaces the previous toast and restarts its lifetime. Clean up event listeners/timeouts on unmount.
 - Preserve all 32 flows and 256 captures; add one wait for the new success Toast to the existing primary creation flow. Build and 288 DOM/CSS/interaction checks pass, including six success events across all three types and single/multiple counts. Native browser checks confirm exact top/height/font/centering and auto-dismiss for Flash Sale (1), Group Deal (2) and Price Cut (1). Final screenshot visually reviewed. Full Flow replay deferred.
+
+## v1.71 · Uploaded TikTok Sans countdown font and white Toast
+- Embed the user's TikTokSans12pt-Bold.ttf as losslessly converted WOFF2 (actual family TikTok Sans 12pt, Bold 700). Scope it to Group Deal and Price Cut thumbnail countdowns at 13px / 130% line-height (16.9px).
+- Vertically center Group countdown against the uploaded badge's gradient strip (y=9..27, midpoint 18px); center Price Cut countdown in a container matching the actual gradient image height. Keep both original horizontal offsets unchanged.
+- Change promotion-success Toast to white (#fff) with black (#000) text; preserve the green success icon, top 50px, height 36px, 14px text, counts and 3-second dismissal.
+- Build passes; native browser confirms the uploaded face loaded, actual 13px/700/16.9px, center and horizontal-anchor errors below 0.02px, and both Toast colors/geometry. Both Pin close-ups and the full white-Toast screenshot reviewed. Other font assignments and complete Flow remain unchanged.
