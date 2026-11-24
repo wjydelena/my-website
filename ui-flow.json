@@ -127,6 +127,32 @@
           "action": "click",
           "target": {
             "role": "button",
+            "name": "Expand LIVE tools"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": ".live-tools-section.is-expanded"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Collapse LIVE tools"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": ".live-tools-section:not(.is-expanded)"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
             "name": "Expand or collapse promotions for added product 1"
           }
         },

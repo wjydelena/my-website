@@ -475,3 +475,10 @@
 - Use “available promotions” in both created-product and preset-product summaries, before and during LIVE. Replace the remaining Rush rewards “Unstarted” tab and accessible label with “Available”, retaining its existing status-filter behavior. No Unstarted text remains in application source or Flow targets.
 - Build and 294 DOM/CSS/interaction regression checks pass. Native checks cover single ended Flash, Group and Price Cut counts, collapsed/expanded headings, Price Cut natural expiry, Restart exclusion and count persistence after 3.5-second automatic Unpin. The single-ended-item screenshot was reviewed.
 - Preserve the pinned styling, 3.5-second video exit, all other interactions, and all 32 flows / 256 captures. Full replay deferred.
+
+## v1.75 · Keep the LIVE video height independent of LIVE tools
+- Root cause: the balanced-layout alignment effect continued setting video height to LIVE tools + Analytics after Go LIVE; a tools toggle changed the actual video from 257px to 334px at 1440×900.
+- Keep the existing default initialization at Go LIVE, but run it only once for the live Video component. Later tools folding/unfolding and Analytics adjustments do not overwrite the video height. Manual pointer/keyboard video resizing remains functional and its chosen height is retained. Pre-LIVE keeps its existing follow-alignment behavior.
+- Native verification: repeated tools toggles kept both video container and actual video at 257px; a real +80px pointer drag changed both to 337px, and repeated toggles retained 337px. Analytics resize no longer altered video. A 1120×768 viewport retained the selected height across tools toggles. Reviewed the expanded-tools screenshot after manual resize.
+- Build and 297 DOM/CSS/interaction checks passed, including unchanged Pre-LIVE alignment, new LIVE default/manual-height retention, Available counts and promotion lifecycle regression.
+- Preserve all 32 flows / 256 captures and add expanded/collapsed LIVE tools checks to the existing Go LIVE journey. Full replay deferred.
