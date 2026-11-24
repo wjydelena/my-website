@@ -14,6 +14,8 @@
 .console-shell .active-video-promotion.group-video-pin{left:16px;right:16px;bottom:16px;height:93px;padding:9px 8px;gap:8px;border-radius:10px;box-shadow:none;align-items:center;box-sizing:border-box}
 .group-video-thumbnail{position:relative;width:74px;height:74px;flex:none;background:#fafafa;border-radius:8px}
 .group-video-thumbnail>img{display:block;width:100%;height:100%;object-fit:contain;border-radius:8px}
+.group-video-ended-badge{position:absolute;top:0;left:0;padding:2px 8px;border-radius:4px;background:#ededed;color:#666;font-size:10px;font-weight:500;line-height:14px;white-space:nowrap}
+.group-video-ended-message{font-size:12px;line-height:24px;color:#737373}
 .group-video-countdown{position:absolute;top:-8px;left:-6px;width:78px;height:30px;white-space:nowrap}
 .group-video-countdown>img{display:block;width:78px;height:30px;max-width:none;object-fit:contain;border-radius:0}
 /* The uploaded 30px-tall badge has its gradient strip at y=9..27: center y=18. */

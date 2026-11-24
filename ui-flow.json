@@ -166,6 +166,32 @@
           "action": "click",
           "target": {
             "role": "button",
+            "name": "Unpin added product 1"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": "body:not(:has(.active-video-promotion)):not(:has(.prompter-video-product))"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Pin added product 1"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": "[data-price-cut-state=ended]"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
             "name": "Restart price cut 1 for added product 1"
           }
         },
@@ -179,6 +205,19 @@
           "action": "waitFor",
           "target": {
             "css": "[data-price-cut-state=ended]"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Unpin added product 1"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": "body:not(:has(.active-video-promotion)):not(:has(.prompter-video-product))"
           }
         }
       ]

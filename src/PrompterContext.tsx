@@ -1,6 +1,6 @@
 import React, {createContext, useCallback, useContext, useEffect, useRef, useState} from 'react';
 
-export type PrompterProduct = {id:number;image:string;name:string;price:string;activePromotion?:{entry:import('./usePromotionLifecycle').PromotionEntry;seconds:number;startedOrder:number};endedPriceCut?:{entry:Extract<import('./usePromotionLifecycle').PromotionEntry,{kind:'cut'}>;startedOrder:number}};
+export type PrompterProduct = {id:number;image:string;name:string;price:string;activePromotion?:{entry:import('./usePromotionLifecycle').PromotionEntry;seconds:number;startedOrder:number};endedPromotion?:{entry:Extract<import('./usePromotionLifecycle').PromotionEntry,{kind:'cut'|'group'}>;startedOrder:number}};
 type PrompterState = {
   layoutCompleted:boolean;
   setLayoutCompleted:React.Dispatch<React.SetStateAction<boolean>>;
@@ -35,6 +35,7 @@ export function PrompterProvider({children}:{children:React.ReactNode}){
   const [layoutCompleted,setLayoutCompleted]=useState(false);
   const [products,setProducts]=useState<PrompterProduct[]>([]);
   const [pinned,setPinnedState]=useState<number|null>(null);
+  useEffect(()=>{if(pinned!==null&&!products.some(product=>product.id===pinned))setPinnedState(null)},[products,pinned]);
   const [videoPreviewVisible,setVideoPreviewVisible]=useState(true);
   const setPinned=useCallback((value:React.SetStateAction<number|null>)=>{
     setPinnedState(value);setVideoPreviewVisible(true);
