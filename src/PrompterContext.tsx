@@ -1,7 +1,7 @@
 import React, {createContext, useCallback, useContext, useEffect, useRef, useState} from 'react';
 
 export const PROMOTION_PIN_GRACE_MS=3500;
-export type PrompterProduct = {id:number;image:string;name:string;price:string;activePromotion?:{entry:import('./usePromotionLifecycle').PromotionEntry;seconds:number;startedOrder:number};endedPromotion?:{entry:import('./usePromotionLifecycle').PromotionEntry;startedOrder:number;finishedAt:number}};
+export type PrompterProduct = {id:number;image:string;name:string;price:string;stock?:string;activePromotion?:{entry:import('./usePromotionLifecycle').PromotionEntry;seconds:number;startedOrder:number};endedPromotion?:{entry:import('./usePromotionLifecycle').PromotionEntry;startedOrder:number;finishedAt:number}};
 export const isEndedPinVisible=(product:PrompterProduct)=>!!product.endedPromotion&&product.endedPromotion.entry.kind!=='flash'&&Date.now()<product.endedPromotion.finishedAt+PROMOTION_PIN_GRACE_MS;
 type PrompterState = {
   layoutCompleted:boolean;

@@ -120,6 +120,146 @@
           "action": "click",
           "target": {
             "role": "button",
+            "name": "Open Billboard LIVE tool"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": ".bb-drawer"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Edit Hot selling"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": ".bb-editor"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Select product"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": ".bb-picker"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "radio",
+            "name": "Select billboard product 1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Confirm"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": ".bb-selected-product"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "radio",
+            "name": "Free shipping"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "radio",
+            "name": "Use code: TESTTTSGIF1"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Save"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": "[aria-label=\"Display Hot selling\"]:not(:disabled)"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Display Hot selling"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": ".prelive-video .bb-video-stage"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Open Billboard LIVE tool"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Edit Hot selling"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "radio",
+            "name": "Free shipping"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Cancel"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
+            "name": "Close Billboards"
+          }
+        },
+        {
+          "action": "waitFor",
+          "target": {
+            "css": ".prelive-video .bb-video-stage"
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "role": "button",
             "name": "Go LIVE now"
           }
         },
