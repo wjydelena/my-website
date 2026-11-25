@@ -7,3 +7,7 @@ test-results/
 .env
 .env.*
 !.env.example
+
+# 本地部署凭据（含 token/密码，禁止提交）
+.surge-credentials.txt
+.surge-domain.txt
